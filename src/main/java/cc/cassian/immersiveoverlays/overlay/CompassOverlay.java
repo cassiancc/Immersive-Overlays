@@ -8,12 +8,11 @@ import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-
 //? if >1.20 {
-import net.minecraft.client.gui.GuiGraphics;
-//?} else {
-/*import net.minecraft.client.gui.GuiComponent;
-*///?}
+/*import net.minecraft.client.gui.GuiGraphics;
+*///?} else {
+import net.minecraft.client.gui.GuiComponent;
+//?}
 import net.minecraft.core.BlockPos;
 import org.apache.commons.lang3.StringUtils;
 
@@ -24,10 +23,10 @@ public class CompassOverlay {
     public static boolean hasDepthGauge = false;
 
     //? if >1.20 {
-    public static void renderGameOverlayEvent(GuiGraphics poseStack) {
-    //?} else {
-    /*    public static void renderGameOverlayEvent(PoseStack poseStack) {
-     *///?}
+    /*public static void renderGameOverlayEvent(GuiGraphics poseStack) {
+    *///?} else {
+        public static void renderGameOverlayEvent(PoseStack poseStack) {
+     //?}
         if (!hasCompass && !hasDepthGauge)
             return;
         if (!ModConfig.get().overlay_compass_enable)
@@ -35,7 +34,7 @@ public class CompassOverlay {
         if (ModCompat.MAP_ATLASES && MapAtlasesCompat.showingCoords())
             return;
         var mc = Minecraft.getInstance();
-        if (mc.options.renderDebug && !mc.options.reducedDebugInfo().get())
+        if (OverlayHelpers.debug(mc))
             return;
 
         ArrayList<String> coords = new ArrayList<>();
@@ -86,16 +85,17 @@ public class CompassOverlay {
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth);
+        //? if <1.20
         RenderSystem.setShaderTexture(0, OverlayHelpers.TEXTURE);
         // render background
         OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize);
         // render text
         for (String text : coords) {
             //? if >1.20 {
-            poseStack.drawString(mc.font, text, xPlacement-xOffset, yPlacement, 14737632);
-            //?} else {
-            /*GuiComponent.drawString(poseStack, mc.font, text, xPlacement-xOffset, yPlacement, 14737632);
-             *///?}
+            /*poseStack.drawString(mc.font, text, xPlacement-xOffset, yPlacement, 14737632);
+            *///?} else {
+            GuiComponent.drawString(poseStack, mc.font, text, xPlacement-xOffset, yPlacement, 14737632);
+             //?}
             yPlacement += mc.font.lineHeight;
         }
     }

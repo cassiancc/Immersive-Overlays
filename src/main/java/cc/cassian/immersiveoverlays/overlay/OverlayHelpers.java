@@ -8,10 +8,10 @@ import cc.cassian.immersiveoverlays.config.ModConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
-import net.minecraft.client.gui.GuiGraphics;
-//?} else {
-/*import net.minecraft.client.gui.GuiComponent;
- *///?}
+/*import net.minecraft.client.gui.GuiGraphics;
+*///?} else {
+import net.minecraft.client.gui.GuiComponent;
+ //?}
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +20,12 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+//? if >1.20.5 {
+/*import net.minecraft.world.item.component.BundleContents;
+import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.core.component.DataComponents;
+*///?}
+
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -29,29 +35,29 @@ public class OverlayHelpers {
     public static final ResourceLocation TEXTURE = ModClient.locate("textures/gui/overlay.png");
 
     //? if >1.20 {
-    public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
-    //?} else {
-    /*    public static void renderBackground(PoseStack poseStack, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
-    *///?}
+    /*public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
+    *///?} else {
+        public static void renderBackground(PoseStack poseStack, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
+    //?}
         if (ModConfig.get().overlay_renderBackground) {
             final int yPlacementWithOffset = yPlacement-4;
             final int endCapOffset = 197;
             // render background
             //? if >1.20 {
-            guiGraphics.blit(TEXTURE,
-            //?} else {
-            /*   GuiComponent.blit(poseStack,
-             *///?}
+            /*guiGraphics.blit(TEXTURE,
+            *///?} else {
+               GuiComponent.blit(poseStack,
+             //?}
                     xPlacement-xOffset-4, yPlacementWithOffset,
                     0, 0,
                     textureOffset, fontWidth+xOffset+4, tooltipSize,
                     OverlayHelpers.textureSize, OverlayHelpers.textureSize);
             // render endcap
             //? if >1.20 {
-            guiGraphics.blit(TEXTURE,
-            //?} else {
-            /*   GuiComponent.blit(poseStack,
-             *///?}
+            /*guiGraphics.blit(TEXTURE,
+            *///?} else {
+               GuiComponent.blit(poseStack,
+             //?}
                     OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth), yPlacementWithOffset,
                     0, endCapOffset,
                     textureOffset, 3, tooltipSize,
@@ -72,14 +78,22 @@ public class OverlayHelpers {
         return !player.getActiveEffects().isEmpty();
     }
 
+    public static boolean debug(Minecraft mc) {
+        //? if >1.21 {
+        /*var debug = mc.getDebugOverlay().showDebugScreen();
+        *///?} else {
+        var debug = mc.options.renderDebug;
+         //?}
+        return debug && !mc.options.reducedDebugInfo().get();
+    }
+
     public static void checkInventoryForItems(Player player) {
         if (player == null)
             return;
         if (ModConfig.get().overlay_compass_enable || ModConfig.get().overlay_clock_enable) {
-            // Altimeters exist. Might put this back if we drop supplementaries.
-            //var y = RaspberryTags.SHOWS_Y;
-            //if (!ModCompat.SPELUNKERY && !ModCompat.CAVERNS_AND_CHASMS && !ModCompat.SUPPLEMENTARIES)
-            //    y = RaspberryTags.SHOWS_XZ;
+            var y = ModTags.SHOWS_Y;
+            if (!ModCompat.SPELUNKERY && !ModCompat.CAVERNS_AND_CHASMS && !ModCompat.SUPPLEMENTARIES)
+                y = ModTags.SHOWS_XZ;
             var barometer = ModTags.SHOWS_WEATHER;
             if (!ModCompat.CAVERNS_AND_CHASMS) {
                 barometer = ModTags.SHOWS_TIME;
@@ -89,12 +103,12 @@ public class OverlayHelpers {
                 var main = player.getMainHandItem();
                 var offhand = player.getOffhandItem();
                 CompassOverlay.hasCompass = main.is(ModTags.SHOWS_XZ) || offhand.is(ModTags.SHOWS_XZ);
-                CompassOverlay.hasDepthGauge = main.is(ModTags.SHOWS_Y) || offhand.is(ModTags.SHOWS_Y);
+                CompassOverlay.hasDepthGauge = main.is(y) || offhand.is(y);
                 ClockOverlay.hasClock = main.is(ModTags.SHOWS_TIME) || offhand.is(ModTags.SHOWS_TIME);
                 ClockOverlay.hasBarometer = main.is(barometer) || offhand.is(barometer);
             } else {
                 CompassOverlay.hasCompass = checkInventoryForItem(inventory, ModTags.SHOWS_XZ);
-                CompassOverlay.hasDepthGauge = checkInventoryForItem(inventory, ModTags.SHOWS_Y);
+                CompassOverlay.hasDepthGauge = checkInventoryForItem(inventory, y);
                 ClockOverlay.hasClock = checkInventoryForItem(inventory, ModTags.SHOWS_TIME);
                 ClockOverlay.hasBarometer = checkInventoryForItem(inventory, barometer);
             }
@@ -105,6 +119,17 @@ public class OverlayHelpers {
     }
 
     public static Stream<ItemStack> getContents(ItemStack stack) {
+        //? if >1.20.5 {
+        /*var components = stack.getComponents();
+        if (components.has(DataComponents.BUNDLE_CONTENTS)) {
+            BundleContents bundleContents = components.get(DataComponents.BUNDLE_CONTENTS);
+            return bundleContents.itemCopyStream();
+        }
+        else if (components.has(DataComponents.CONTAINER)) {
+            ItemContainerContents containerContents = components.get(DataComponents.CONTAINER);
+            return containerContents.stream();
+        }
+        *///?} else {
         CompoundTag compoundtag = stack.getTag();
         if (compoundtag == null) {
             return Stream.empty();
@@ -119,6 +144,7 @@ public class OverlayHelpers {
                 return listtag.stream().map(CompoundTag.class::cast).map(ItemStack::of);
             }
         }
+        //?}
         return Stream.empty();
     }
 

@@ -40,11 +40,9 @@ public final class ImmersiveOverlaysNeoForge {
     }
 
     @SubscribeEvent
-    public static void checkInventoryForOverlays(ClientTickEvent event){
+    public static void checkInventoryForOverlays(ClientTickEvent.Post event){
         OverlayHelpers.checkInventoryForOverlays(Minecraft.getInstance());
     }
-
-
 
     //Integrate Cloth Config screen (if mod present) with NeoForge mod menu.
     public void registerModsPage() {

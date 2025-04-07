@@ -1,7 +1,9 @@
 package cc.cassian.immersiveoverlays;
 
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+//? if >1.20 {
+/*import net.minecraft.core.registries.BuiltInRegistries;
+ */
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
@@ -17,10 +19,10 @@ public class ModTags {
 
     private static TagKey<Item> createItemTag(String id) {
         //? if >1.20 {
-        var registry = BuiltInRegistries.ITEM.key();
-        //?} else {
-        /* var registry = Registry.ITEM.key();
-        *///?}
+        /*var registry = BuiltInRegistries.ITEM.key();
+        *///?} else {
+         var registry = Registry.ITEM.key();
+        //?}
         return TagKey.create(registry, locate(id));
     }
 }
