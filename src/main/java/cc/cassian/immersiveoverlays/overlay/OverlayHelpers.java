@@ -7,7 +7,11 @@ import cc.cassian.immersiveoverlays.ModTags;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
+//? if >1.20 {
+import net.minecraft.client.gui.GuiGraphics;
+//?} else {
+/*import net.minecraft.client.gui.GuiComponent;
+ *///?}
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
@@ -24,18 +28,30 @@ public class OverlayHelpers {
     public static final int textureSize = 256;
     public static final ResourceLocation TEXTURE = ModClient.locate("textures/gui/overlay.png");
 
-    public static void renderBackground(PoseStack poseStack, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
+    //? if >1.20 {
+    public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
+    //?} else {
+    /*    public static void renderBackground(PoseStack poseStack, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
+    *///?}
         if (ModConfig.get().overlay_renderBackground) {
             final int yPlacementWithOffset = yPlacement-4;
             final int endCapOffset = 197;
             // render background
-            GuiComponent.blit(poseStack,
+            //? if >1.20 {
+            guiGraphics.blit(TEXTURE,
+            //?} else {
+            /*   GuiComponent.blit(poseStack,
+             *///?}
                     xPlacement-xOffset-4, yPlacementWithOffset,
                     0, 0,
                     textureOffset, fontWidth+xOffset+4, tooltipSize,
                     OverlayHelpers.textureSize, OverlayHelpers.textureSize);
             // render endcap
-            GuiComponent.blit(poseStack,
+            //? if >1.20 {
+            guiGraphics.blit(TEXTURE,
+            //?} else {
+            /*   GuiComponent.blit(poseStack,
+             *///?}
                     OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth), yPlacementWithOffset,
                     0, endCapOffset,
                     textureOffset, 3, tooltipSize,

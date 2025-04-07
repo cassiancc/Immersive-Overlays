@@ -32,8 +32,13 @@ public final class ImmersiveOverlaysForge {
 
     @SubscribeEvent
     public static void renderGameOverlayEvent(CustomizeGuiOverlayEvent.DebugText event) {
-        CompassOverlay.renderGameOverlayEvent(event.getPoseStack());
-        ClockOverlay.renderGameOverlayEvent(event.getPoseStack());
+        //? if >1.20 {
+        var graphics = event.getGuiGraphics();
+        //?} else {
+        /* var graphics = event.getPoseStack()
+         *///?}
+        CompassOverlay.renderGameOverlayEvent(graphics);
+        ClockOverlay.renderGameOverlayEvent(graphics);
     }
 
     @SubscribeEvent

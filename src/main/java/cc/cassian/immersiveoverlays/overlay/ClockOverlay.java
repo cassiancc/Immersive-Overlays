@@ -4,16 +4,26 @@ import cc.cassian.immersiveoverlays.config.ModConfig;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
+//? if >1.20 {
+import net.minecraft.client.gui.GuiGraphics;
+//?} else {
+/*import net.minecraft.client.gui.GuiComponent;
+ *///?}
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.biome.Biome;
+
+import static cc.cassian.immersiveoverlays.overlay.OverlayHelpers.TEXTURE;
 
 public class ClockOverlay {
     public static boolean hasClock = false;
     public static boolean hasBarometer = false;
 
 
-    public static void renderGameOverlayEvent(PoseStack poseStack) {
+    //? if >1.20 {
+    public static void renderGameOverlayEvent(GuiGraphics poseStack) {
+    //?} else {
+    /*    public static void renderGameOverlayEvent(PoseStack poseStack) {
+     *///?}
         if (!hasBarometer && !hasClock)
             return;
         if (!ModConfig.get().overlay_clock_enable)
@@ -50,16 +60,24 @@ public class ClockOverlay {
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth);
-        RenderSystem.setShaderTexture(0, OverlayHelpers.TEXTURE);
+        RenderSystem.setShaderTexture(0, TEXTURE);
         OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize);
         if (hasClock) {
             // render text
-            GuiComponent.drawString(poseStack, mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
+            //? if >1.20 {
+            poseStack.drawString(mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
+            //?} else {
+            /*GuiComponent.drawString(poseStack, mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
+             *///?}
         }
         if (hasBarometer) {
             var spriteOffset = getWeather(mc.player);
-            RenderSystem.setShaderTexture(0, OverlayHelpers.TEXTURE);
-            GuiComponent.blit(poseStack,
+            RenderSystem.setShaderTexture(0, TEXTURE);
+            //? if >1.20 {
+            poseStack.blit(TEXTURE,
+            //?} else {
+            /*   GuiComponent.blit(poseStack,
+             *///?}
                     xPlacement-xOffset-1, yPlacement,
                     0, spriteOffset,
                     95, 16, 16,
@@ -68,16 +86,25 @@ public class ClockOverlay {
     }
 
     public static int getWeather(Player player) {
-        var level = player.level;
+        //? if >1.20 {
+        var level = player.level();
+        //?} else {
+        /*  var level = player.level;
+        *///?}
         var biome = level.getBiome(player.blockPosition()).value();
+        //? if >1.20 {
+        var precipitation = biome.getPrecipitationAt(player.blockPosition());
+        //?} else {
+        /* var precipitation = biome.getPrecipitation();
+        *///?}
         if (!level.dimensionType().natural()) return 124; // Netherlike
         else if (level.isThundering()) {
             if (biome.coldEnoughToSnow(player.blockPosition())) return 92; // Snowing
-            if (biome.getPrecipitation().equals(Biome.Precipitation.NONE)) return 108; // Sandstorming
+            if (precipitation.equals(Biome.Precipitation.NONE)) return 108; // Sandstorming
             return 76; // Thundering
         } else if (level.isRaining()) {
             if (biome.coldEnoughToSnow(player.blockPosition())) return 92; // Snowing
-            if (biome.getPrecipitation().equals(Biome.Precipitation.NONE)) return 108; // Sandstorming
+            if (precipitation.equals(Biome.Precipitation.NONE)) return 108; // Sandstorming
             return 60; // Raining
         }
         return 0; // Sunny

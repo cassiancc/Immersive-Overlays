@@ -8,7 +8,12 @@ import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
+
+//? if >1.20 {
+import net.minecraft.client.gui.GuiGraphics;
+//?} else {
+/*import net.minecraft.client.gui.GuiComponent;
+*///?}
 import net.minecraft.core.BlockPos;
 import org.apache.commons.lang3.StringUtils;
 
@@ -18,8 +23,11 @@ public class CompassOverlay {
     public static boolean hasCompass = false;
     public static boolean hasDepthGauge = false;
 
-
-    public static void renderGameOverlayEvent(PoseStack poseStack) {
+    //? if >1.20 {
+    public static void renderGameOverlayEvent(GuiGraphics poseStack) {
+    //?} else {
+    /*    public static void renderGameOverlayEvent(PoseStack poseStack) {
+     *///?}
         if (!hasCompass && !hasDepthGauge)
             return;
         if (!ModConfig.get().overlay_compass_enable)
@@ -83,7 +91,11 @@ public class CompassOverlay {
         OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize);
         // render text
         for (String text : coords) {
-            GuiComponent.drawString(poseStack, mc.font, text, xPlacement-xOffset, yPlacement, 14737632);
+            //? if >1.20 {
+            poseStack.drawString(mc.font, text, xPlacement-xOffset, yPlacement, 14737632);
+            //?} else {
+            /*GuiComponent.drawString(poseStack, mc.font, text, xPlacement-xOffset, yPlacement, 14737632);
+             *///?}
             yPlacement += mc.font.lineHeight;
         }
     }
