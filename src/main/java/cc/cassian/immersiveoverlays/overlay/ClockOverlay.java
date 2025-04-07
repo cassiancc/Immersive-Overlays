@@ -6,6 +6,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 //?} else {
 /*import net.minecraft.client.gui.GuiComponent;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.systems.RenderSystem;
  *///?}
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.biome.Biome;

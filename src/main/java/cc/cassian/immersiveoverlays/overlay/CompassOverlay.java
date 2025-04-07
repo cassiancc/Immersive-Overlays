@@ -10,6 +10,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 //?} else {
 /*import net.minecraft.client.gui.GuiComponent;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.systems.RenderSystem;
 *///?}
 import net.minecraft.core.BlockPos;
 import org.apache.commons.lang3.StringUtils;
@@ -29,8 +31,7 @@ public class CompassOverlay {
             return;
         if (!ModConfig.get().compass_enable)
             return;
-        if (ModConfig.get().compass_hide_when_similar_mods_present && ModCompat.MAP_ATLASES && MapAtlasesCompat.showingCoords())
-            return;
+
         var mc = Minecraft.getInstance();
         if (OverlayHelpers.debug(mc))
             return;
@@ -40,6 +41,8 @@ public class CompassOverlay {
         BlockPos pos;
         if (mc.player != null) pos = mc.player.blockPosition();
         else return;
+        if (ModConfig.get().compass_hide_when_similar_mods_present && ModCompat.MAP_ATLASES && MapAtlasesCompat.showingCoords(mc.player))
+            return;
 
         String x = String.format("%d", pos.getX());
         String y = String.format("%d", pos.getY());

@@ -5,11 +5,13 @@ import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.ModCompat;
 import cc.cassian.immersiveoverlays.ModTags;
 import cc.cassian.immersiveoverlays.config.ModConfig;
+
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
 //?} else {
 /*import net.minecraft.client.gui.GuiComponent;
+import com.mojang.blaze3d.vertex.PoseStack;
  *///?}
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
