@@ -6,10 +6,13 @@ import cc.cassian.immersiveoverlays.overlay.ClockOverlay;
 import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 import net.minecraft.client.Minecraft;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 
+import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
@@ -23,7 +26,7 @@ import static cc.cassian.immersiveoverlays.helpers.ModHelpers.clothConfigInstall
 
 @Mod(MOD_ID)
 public final class ImmersiveOverlaysNeoForge {
-    public ImmersiveOverlaysNeoForge() {
+    public ImmersiveOverlaysNeoForge(IEventBus eventBus, ModContainer modContainer) {
         // Load config.
         ModClient.init();
         //Register config screen.
@@ -34,7 +37,7 @@ public final class ImmersiveOverlaysNeoForge {
     }
 
     @SubscribeEvent
-    public static void renderGameOverlayEvent(CustomizeGuiOverlayEvent.DebugText event) {
+    public static void renderGameOverlayEvent(CustomizeGuiOverlayEvent.Chat event) {
         CompassOverlay.renderGameOverlayEvent(event.getGuiGraphics());
         ClockOverlay.renderGameOverlayEvent(event.getGuiGraphics());
     }

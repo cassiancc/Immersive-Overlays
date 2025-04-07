@@ -8,10 +8,10 @@ import cc.cassian.immersiveoverlays.config.ModConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
-/*import net.minecraft.client.gui.GuiGraphics;
-*///?} else {
-import net.minecraft.client.gui.GuiComponent;
- //?}
+import net.minecraft.client.gui.GuiGraphics;
+//?} else {
+/*import net.minecraft.client.gui.GuiComponent;
+ *///?}
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
@@ -21,10 +21,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 //? if >1.20.5 {
-/*import net.minecraft.world.item.component.BundleContents;
+import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.core.component.DataComponents;
-*///?}
+//?}
 
 
 import java.util.List;
@@ -35,29 +35,29 @@ public class OverlayHelpers {
     public static final ResourceLocation TEXTURE = ModClient.locate("textures/gui/overlay.png");
 
     //? if >1.20 {
-    /*public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
-    *///?} else {
-        public static void renderBackground(PoseStack poseStack, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
-    //?}
+    public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
+    //?} else {
+        /*public static void renderBackground(PoseStack poseStack, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
+    *///?}
         if (ModConfig.get().overlay_renderBackground) {
             final int yPlacementWithOffset = yPlacement-4;
             final int endCapOffset = 197;
             // render background
             //? if >1.20 {
-            /*guiGraphics.blit(TEXTURE,
-            *///?} else {
-               GuiComponent.blit(poseStack,
-             //?}
+            guiGraphics.blit(TEXTURE,
+            //?} else {
+               /*GuiComponent.blit(poseStack,
+             *///?}
                     xPlacement-xOffset-4, yPlacementWithOffset,
                     0, 0,
                     textureOffset, fontWidth+xOffset+4, tooltipSize,
                     OverlayHelpers.textureSize, OverlayHelpers.textureSize);
             // render endcap
             //? if >1.20 {
-            /*guiGraphics.blit(TEXTURE,
-            *///?} else {
-               GuiComponent.blit(poseStack,
-             //?}
+            guiGraphics.blit(TEXTURE,
+            //?} else {
+               /*GuiComponent.blit(poseStack,
+             *///?}
                     OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth), yPlacementWithOffset,
                     0, endCapOffset,
                     textureOffset, 3, tooltipSize,
@@ -80,10 +80,10 @@ public class OverlayHelpers {
 
     public static boolean debug(Minecraft mc) {
         //? if >1.21 {
-        /*var debug = mc.getDebugOverlay().showDebugScreen();
-        *///?} else {
-        var debug = mc.options.renderDebug;
-         //?}
+        var debug = mc.getDebugOverlay().showDebugScreen();
+        //?} else {
+        /*var debug = mc.options.renderDebug;
+         *///?}
         return debug && !mc.options.reducedDebugInfo().get();
     }
 
@@ -120,7 +120,7 @@ public class OverlayHelpers {
 
     public static Stream<ItemStack> getContents(ItemStack stack) {
         //? if >1.20.5 {
-        /*var components = stack.getComponents();
+        var components = stack.getComponents();
         if (components.has(DataComponents.BUNDLE_CONTENTS)) {
             BundleContents bundleContents = components.get(DataComponents.BUNDLE_CONTENTS);
             return bundleContents.itemCopyStream();
@@ -129,8 +129,8 @@ public class OverlayHelpers {
             ItemContainerContents containerContents = components.get(DataComponents.CONTAINER);
             return containerContents.stream();
         }
-        *///?} else {
-        CompoundTag compoundtag = stack.getTag();
+        //?} else {
+        /*CompoundTag compoundtag = stack.getTag();
         if (compoundtag == null) {
             return Stream.empty();
         } else {
@@ -144,7 +144,7 @@ public class OverlayHelpers {
                 return listtag.stream().map(CompoundTag.class::cast).map(ItemStack::of);
             }
         }
-        //?}
+        *///?}
         return Stream.empty();
     }
 
