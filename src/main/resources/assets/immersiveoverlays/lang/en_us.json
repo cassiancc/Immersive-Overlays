@@ -1,0 +1,14 @@
+{
+  "config.immersiveoverlays.overlay": "Overlay",
+  "config.immersiveoverlays.config.overlay_compass_enable": "Enable coordinate overlay",
+  "config.immersiveoverlays.config.overlay_clock_enable": "Enable clock overlay",
+  "config.immersiveoverlays.config.overlay_searchContainers": "Allow items in bundles/containers",
+  "config.immersiveoverlays.config.overlay_requireItemInHand": "Require item in hand",
+  "config.immersiveoverlays.config.overlay_x_colour": "X Color",
+  "config.immersiveoverlays.config.overlay_y_colour": "Y Color",
+  "config.immersiveoverlays.config.overlay_z_colour": "Z Color",
+  "config.immersiveoverlays.config.overlay_position_compass_vertical": "Compass overlay position",
+  "config.immersiveoverlays.config.overlay_position_clock_vertical": "Clock overlay position",
+  "config.immersiveoverlays.config.overlay_leftalign": "Align overlay to the left edge",
+  "config.immersiveoverlays.config.overlay_renderBackground": "Show background"
+}
