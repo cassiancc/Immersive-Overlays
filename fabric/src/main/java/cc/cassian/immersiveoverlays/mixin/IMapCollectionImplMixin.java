@@ -11,6 +11,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import pepjebs.mapatlases.MapAtlasesMod;
 import pepjebs.mapatlases.map_collection.MapCollection;
+//? if <1.21 {
+
+
 import pepjebs.mapatlases.map_collection.fabric.IMapCollectionImpl;
 
 import java.util.List;
@@ -18,7 +21,11 @@ import java.util.Optional;
 
 @Pseudo
 @Mixin(IMapCollectionImpl.class)
+//?} else {
+/*@Mixin(MapCollection.class)
+*///?}
 public class IMapCollectionImplMixin {
+//? if <1.21 {
 
     @ModifyArg(
             method = "get",
@@ -37,4 +44,5 @@ public class IMapCollectionImplMixin {
         }
         return provider;
     }
+    //?}
 }
