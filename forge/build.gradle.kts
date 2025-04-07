@@ -42,6 +42,7 @@ repositories {
     maven ( "https://maven.shedaniel.me/" )
     maven ( "https://maven.terraformersmc.com/releases/" )
     maven ( "https://api.modrinth.com/maven")
+    maven ( "https://cursemaven.com" )
 }
 
 val mcVersion = stonecutter.current.project.substringBeforeLast('-')
@@ -70,6 +71,7 @@ dependencies {
 
     // Cloth Config
     modApi("me.shedaniel.cloth:cloth-config-forge:${common.mod.dep("cloth_version")}")
+    modImplementation("curse.maven:map-atlases-forge-519759:${common.mod.dep("map_atlases_forge")}")
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionForge")) { isTransitive = false }

@@ -1,10 +1,11 @@
 package cc.cassian.immersiveoverlays;
 
-import net.minecraft.core.Registry;
+
 //? if >1.20 {
-/*import net.minecraft.core.registries.BuiltInRegistries;
- */
 import net.minecraft.core.registries.BuiltInRegistries;
+ //?} else {
+/*import net.minecraft.core.Registry;
+*///?}
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 

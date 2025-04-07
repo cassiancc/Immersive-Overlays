@@ -44,6 +44,8 @@ repositories {
     maven ( "https://maven.shedaniel.me/" )
     maven ( "https://maven.terraformersmc.com/releases/" )
     maven ( "https://api.modrinth.com/maven")
+    maven ("https://maven.parchmentmc.org")
+
 }
 
 dependencies {
@@ -71,6 +73,15 @@ dependencies {
 
     // Mod Menu
     modApi("com.terraformersmc:modmenu:${common.mod.dep("modmenu_version")}")
+
+    modCompileOnly("maven.modrinth:map-atlases:${common.mod.dep("map_atlases_fabric")}")
+    if (stonecutter.eval(mcVersion, "=1.19.2")) {
+        modImplementation("maven.modrinth:moonlight:${common.mod.dep("moonlight")}-fabric")
+    }
+    else {
+        modImplementation("maven.modrinth:moonlight:fabric_${common.mod.dep("moonlight")}")
+    }
+
 
 
     // Stonecutter/Arch
