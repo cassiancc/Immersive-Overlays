@@ -1,8 +1,6 @@
 package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -26,7 +24,7 @@ public class ClockOverlay {
      *///?}
         if (!hasBarometer && !hasClock)
             return;
-        if (!ModConfig.get().overlay_clock_enable)
+        if (!ModConfig.get().clock_enable)
             return;
         var mc = Minecraft.getInstance();
 
@@ -34,13 +32,16 @@ public class ClockOverlay {
         if (time.length() == 4) {
             time = " " + time;
         }
+        if (hasClock && !ModConfig.get().clock_require_weather_item) {
+            hasBarometer = true;
+        }
 
         int xOffset = 3;
         // The amount of offset needed to display the barometer icons, if visible.
         int iconOffset = 0;
         int textureOffset = 7;
         int tooltipSize = 16;
-        int yPlacement = ModConfig.get().overlay_position_clock_vertical;
+        int yPlacement = ModConfig.get().clock_vertical_position;
         int textYPlacement = yPlacement;
         if (hasBarometer) {
             if (hasClock) {
@@ -119,7 +120,7 @@ public class ClockOverlay {
         int m = (int)((float)time % 1000.0F / 1000.0F * 60.0F);
         int h = time / 1000;
         String a = "";
-        if (!(Boolean) ModConfig.get().overlay_24hour) {
+        if (!(Boolean) ModConfig.get().clock_24_hour) {
             a = time < 12000 ? " AM" : " PM";
             h %= 12;
             if (h == 0) {

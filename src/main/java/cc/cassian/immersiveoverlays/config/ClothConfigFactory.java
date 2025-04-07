@@ -6,12 +6,27 @@ import me.shedaniel.clothconfig2.api.ConfigCategory;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
+import java.lang.reflect.Field;
+import java.util.Locale;
+
 import static cc.cassian.immersiveoverlays.helpers.ModHelpers.*;
 
 
 public class ClothConfigFactory {
 
     private static final ModConfig DEFAULT_VALUES = new ModConfig();
+
+    private static ConfigCategory createCategory(String section, ConfigBuilder builder) {
+        if (section == null) {
+            section = "";
+        } else {
+            section += "_";
+        }
+        return builder.getOrCreateCategory(Component.translatable("config.immersiveoverlays.%stitle".formatted(section)));    }
+
+    private static boolean is(Field field, String name) {
+        return field.getName().toLowerCase(Locale.ROOT).contains(name);
+    }
 
     public static Screen create(Screen parent) {
         final var builder = ConfigBuilder.create()
@@ -20,11 +35,17 @@ public class ClothConfigFactory {
 
         final var entryBuilder = builder.entryBuilder();
         final var configInstance = ModConfig.get();
-        final var generalCategory = builder.getOrCreateCategory(Component.translatable("config.immersiveoverlays.title"));
+        final var generalCategory = createCategory(null, builder);
+        final var compassCategory = createCategory("compass", builder);
+        final var clockCategory = createCategory("clock", builder);
 
 
         for (var field : ModConfig.class.getFields()) {
-            ConfigCategory category  = generalCategory;
+            ConfigCategory category;
+            if (is(field, "compass")) category = compassCategory;
+            else if (is(field,"clock")) category = clockCategory;
+            else category = generalCategory;
+
             if (field.getType() == boolean.class) {
                 category.addEntry(entryBuilder.startBooleanToggle(fieldName(field), fieldGet(configInstance, field))
                         .setSaveConsumer(fieldSetter(configInstance, field))

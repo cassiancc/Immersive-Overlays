@@ -5,8 +5,6 @@ import cc.cassian.immersiveoverlays.ModCompat;
 import cc.cassian.immersiveoverlays.compat.MapAtlasesCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModHelpers;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -29,9 +27,9 @@ public class CompassOverlay {
      *///?}
         if (!hasCompass && !hasDepthGauge)
             return;
-        if (!ModConfig.get().overlay_compass_enable)
+        if (!ModConfig.get().compass_enable)
             return;
-        if (ModCompat.MAP_ATLASES && MapAtlasesCompat.showingCoords())
+        if (ModConfig.get().compass_hide_when_similar_mods_present && ModCompat.MAP_ATLASES && MapAtlasesCompat.showingCoords())
             return;
         var mc = Minecraft.getInstance();
         if (OverlayHelpers.debug(mc))
@@ -52,21 +50,27 @@ public class CompassOverlay {
         y = StringUtils.leftPad(y, width);
         z = StringUtils.leftPad(z, width);
         int xOffset = 3;
-        int yPlacement = ModConfig.get().overlay_position_compass_vertical;
+        int yPlacement = ModConfig.get().compass_vertical_position;
         int fontWidth = mc.font.width(StringUtils.repeat("a", width+2));
 
         if (hasCompass) {
-            coords.add("§%sX:§f %s".formatted(ModHelpers.getColour(ModConfig.get().overlay_x_colour), x));
-            if (hasDepthGauge) {
-                coords.add("§%sY:§f %s".formatted(ModHelpers.getColour(ModConfig.get().overlay_y_colour), y));
+            if (!ModConfig.get().compass_require_y_item) {
+                hasDepthGauge = true;
             }
-            coords.add("§%sZ:§f %s".formatted(ModHelpers.getColour(ModConfig.get().overlay_z_colour), z));
+            coords.add("§%sX:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_x_colour), x));
+            if (hasDepthGauge) {
+                coords.add("§%sY:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
+            }
+            coords.add("§%sZ:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_z_colour), z));
         }
         else if (hasDepthGauge) {
-            coords.add("§%sY:§f %s".formatted(ModHelpers.getColour(ModConfig.get().overlay_y_colour), y));
+            coords.add("§%sY:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
         }
-        if (!ClockOverlay.hasClock || !ModConfig.get().overlay_clock_enable) {
+        if (!ClockOverlay.hasClock || !ModConfig.get().clock_enable) {
             yPlacement = yPlacement - 15;
+        }
+        if (ClockOverlay.hasBarometer) {
+            yPlacement = yPlacement + 9;
         }
         if (OverlayHelpers.playerHasPotions(mc.player)) {
             yPlacement = yPlacement + 16;

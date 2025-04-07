@@ -1,14 +1,22 @@
 {
-  "config.immersiveoverlays.overlay": "Overlay",
-  "config.immersiveoverlays.config.overlay_compass_enable": "Enable coordinate overlay",
-  "config.immersiveoverlays.config.overlay_clock_enable": "Enable clock overlay",
-  "config.immersiveoverlays.config.overlay_searchContainers": "Allow items in bundles/containers",
-  "config.immersiveoverlays.config.overlay_requireItemInHand": "Require item in hand",
-  "config.immersiveoverlays.config.overlay_x_colour": "X Color",
-  "config.immersiveoverlays.config.overlay_y_colour": "Y Color",
-  "config.immersiveoverlays.config.overlay_z_colour": "Z Color",
-  "config.immersiveoverlays.config.overlay_position_compass_vertical": "Compass overlay position",
-  "config.immersiveoverlays.config.overlay_position_clock_vertical": "Clock overlay position",
-  "config.immersiveoverlays.config.overlay_leftalign": "Align overlay to the left edge",
-  "config.immersiveoverlays.config.overlay_renderBackground": "Show background"
+  "config.immersiveoverlays.compass_title": "Compass",
+  "config.immersiveoverlays.clock_title": "Clock",
+  "config.immersiveoverlays.title": "Immersive Overlays",
+  "config.immersiveoverlays.config.compass_enable": "Enable coordinate overlay",
+  "config.immersiveoverlays.config.clock_enable": "Enable clock overlay",
+  "config.immersiveoverlays.config.search_containers": "Allow items in bundles/containers",
+  "config.immersiveoverlays.config.require_item_in_hand": "Require item in hand",
+  "config.immersiveoverlays.config.compass_x_colour": "X Color",
+  "config.immersiveoverlays.config.compass_y_colour": "Y Color",
+  "config.immersiveoverlays.config.compass_z_colour": "Z Color",
+  "config.immersiveoverlays.config.compass_vertical_position": "Compass overlay position",
+  "config.immersiveoverlays.config.clock_vertical_position": "Clock overlay position",
+  "config.immersiveoverlays.config.align_left": "Align overlay to the left edge",
+  "config.immersiveoverlays.config.render_background": "Show background",
+  "config.immersiveoverlays.config.clock_24_hour": "24 Hour Clock",
+  "config.immersiveoverlays.config.compass_hide_when_similar_mods_present": "Hide when other mods overlays are present",
+  "config.immersiveoverlays.config.compass_require_y_item": "Require a different item for depth",
+  "config.immersiveoverlays.config.clock_require_weather_item": "Require a different item for weather"
+
+
 }

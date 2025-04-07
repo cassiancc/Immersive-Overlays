@@ -19,18 +19,22 @@ public class ModConfig {
 
     private static ModConfig INSTANCE = new ModConfig();
     //General settings
-    public boolean overlay_compass_enable = true;
-    public boolean overlay_clock_enable = true;
-    public int overlay_position_compass_vertical = 105;
-    public int overlay_position_clock_vertical = 90;
-    public boolean overlay_requireItemInHand = false;
-    public boolean overlay_searchContainers = true;
-    public String overlay_x_colour = "Red";
-    public String overlay_y_colour = "Green";
-    public String overlay_z_colour = "Blue";
-    public boolean overlay_leftalign = false;
-    public boolean overlay_renderBackground = true;
-    public boolean overlay_24hour = true;
+    public boolean compass_enable = true;
+    public int compass_vertical_position = 105;
+    public boolean compass_require_y_item = true;
+    public boolean compass_hide_when_similar_mods_present = true;
+    public String compass_x_colour = "Red";
+    public String compass_y_colour = "Green";
+    public String compass_z_colour = "Blue";
+    public boolean clock_enable = true;
+    public int clock_vertical_position = 90;
+    public boolean clock_require_weather_item = true;
+    public boolean clock_24_hour = true;
+    public boolean require_item_in_hand = false;
+    public boolean search_containers = true;
+    public boolean render_background = true;
+    public boolean align_left = false;
+
 
 
     public static void load() {
