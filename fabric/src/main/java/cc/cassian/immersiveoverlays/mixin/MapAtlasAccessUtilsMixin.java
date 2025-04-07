@@ -15,10 +15,19 @@ import pepjebs.mapatlases.utils.MapAtlasesAccessUtils;
 @Pseudo
 @Mixin(MapAtlasesAccessUtils.class)
 public class MapAtlasAccessUtilsMixin {
+    //? if >1.20 {
     @Inject(method = "getAtlasFromInventory", at = @At(value = "RETURN"), remap = false, cancellable = true)
     private static void mixin(Inventory inventory, boolean onlyHotbar, CallbackInfoReturnable<ItemStack> cir) {
         if (cir.getReturnValue().equals(ItemStack.EMPTY)) {
             cir.setReturnValue(OverlayHelpers.checkInventoryForStack(inventory, null, MapAtlasesMod.MAP_ATLAS.get()));
         }
     }
+    //?} else {
+    /*@Inject(method = "getAtlasFromInventory", at = @At(value = "RETURN"), remap = false, cancellable = true)
+    private static void mixin(Inventory inventory, CallbackInfoReturnable<ItemStack> cir) {
+        if (cir.getReturnValue() == null) {
+            cir.setReturnValue(OverlayHelpers.checkInventoryForStack(inventory, null, MapAtlasesMod.MAP_ATLAS));
+        }
+    }
+    *///?}
 }
