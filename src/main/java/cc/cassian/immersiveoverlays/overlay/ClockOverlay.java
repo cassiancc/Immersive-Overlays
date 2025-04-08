@@ -98,6 +98,7 @@ public class ClockOverlay {
           /*var level = player.level;
         *///?}
         var biome = level.getBiome(player.blockPosition()).value();
+        var time = level.getDayTime() % 24000;
         //? if >1.20 {
         var precipitation = biome.getPrecipitationAt(player.blockPosition());
         //?} else {
@@ -113,10 +114,16 @@ public class ClockOverlay {
             if (precipitation.equals(Biome.Precipitation.NONE)) return 108; // Sandstorming
             return 60; // Raining
         }
+        else if (time >= 12500 && time <= 13500) return 30; // Sunset
+        else if (time >= 13500 && time <= 22500) return 46; // Night
+        else if (time >= 23000) return 15; // Morning
         return 0; // Sunny
     }
 
-    // CODE COPY - Supplementaries ClockBlock
+    // This code was originally authored by MehVadVukaar for Supplementaries.
+    // It is adapted here for our clock overlay as authorized by the
+    // Supplementaries Team License, as Immersive Overlays is not designed
+    // to compete with Supplementaries.
     public static String getTime(float dayTime) {
         int time = (int)(dayTime + 6000L) % 24000;
         int m = (int)((float)time % 1000.0F / 1000.0F * 60.0F);
