@@ -16,7 +16,12 @@
   "config.immersiveoverlays.config.clock_24_hour": "24 Hour Clock",
   "config.immersiveoverlays.config.compass_hide_when_similar_mods_present": "Hide when other mods overlays are present",
   "config.immersiveoverlays.config.compass_require_y_item": "Require a different item for depth",
-  "config.immersiveoverlays.config.clock_require_weather_item": "Require a different item for weather"
+  "config.immersiveoverlays.config.clock_require_weather_item": "Require a different item for weather",
+  "tag.item.immersiveoverlays.shows_xz": "Shows X/Z Coordinates",
+  "tag.item.immersiveoverlays.shows_y": "Shows Y Coordinates",
+  "tag.item.immersiveoverlays.shows_time": "Shows Time",
+  "tag.item.immersiveoverlays.shows_weather": "Shows Weather",
+  "tag.item.immersiveoverlays.container": "Containers"
 
 
 }
