@@ -83,7 +83,7 @@ public class CompassOverlay {
         int tooltipSize = 16;  // only depth gauge
         if (hasCompass & (hasDepthGauge)) { // depth gauge and compass
             textureOffset = 51;
-            tooltipSize = 33;
+            tooltipSize = 35;
         }
         else if (hasCompass) { // only compass
             textureOffset = 25;
