@@ -74,12 +74,13 @@ dependencies {
     // Mod Menu
     modApi("com.terraformersmc:modmenu:${common.mod.dep("modmenu_version")}")
 
-    modImplementation("maven.modrinth:map-atlases:${common.mod.dep("map_atlases_fabric")}")
+    modCompileOnly("maven.modrinth:map-atlases:${common.mod.dep("map_atlases_fabric")}")
     if (stonecutter.eval(mcVersion, "=1.19.2")) {
         modImplementation("maven.modrinth:moonlight:${common.mod.dep("moonlight")}-fabric")
     }
-    else {
+    else if (stonecutter.eval(mcVersion, "<1.21.2")) {
         modImplementation("maven.modrinth:moonlight:fabric_${common.mod.dep("moonlight")}")
+        modRuntimeOnly("maven.modrinth:map-atlases:${common.mod.dep("map_atlases_fabric")}")
     }
 
     if (stonecutter.eval(mcVersion, "=1.20.1")) {

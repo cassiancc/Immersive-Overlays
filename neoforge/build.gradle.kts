@@ -69,8 +69,14 @@ dependencies {
 
     // Cloth Config
     modApi("me.shedaniel.cloth:cloth-config-neoforge:${common.mod.dep("cloth_version")}")
-    modImplementation("curse.maven:map-atlases-forge-519759:${common.mod.dep("map_atlases_forge")}")
-    modImplementation("maven.modrinth:moonlight:neoforge_${common.mod.dep("moonlight")}")
+    if (stonecutter.eval(mcVersion, "<1.21.2")) {
+        modImplementation("curse.maven:map-atlases-forge-519759:${common.mod.dep("map_atlases_forge")}")
+        modImplementation("maven.modrinth:moonlight:neoforge_${common.mod.dep("moonlight")}")
+    }
+    else {
+        modCompileOnly("curse.maven:map-atlases-forge-519759:${common.mod.dep("map_atlases_forge")}")
+        modCompileOnly("maven.modrinth:moonlight:neoforge_${common.mod.dep("moonlight")}")
+    }
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionNeoForge")) { isTransitive = false }

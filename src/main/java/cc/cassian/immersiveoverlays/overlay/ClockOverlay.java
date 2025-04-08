@@ -9,6 +9,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
  *///?}
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.biome.Biome;
 
@@ -77,7 +78,9 @@ public class ClockOverlay {
         if (hasBarometer) {
             var spriteOffset = getWeather(mc.player);
 
-            //? if >1.20 {
+            //? if >1.21.2 {
+            /*poseStack.blit(RenderType::guiTexturedOverlay, TEXTURE,
+            *///?} else if >1.20 {
             poseStack.blit(TEXTURE,
             //?} else {
 
@@ -99,18 +102,25 @@ public class ClockOverlay {
         *///?}
         var biome = level.getBiome(player.blockPosition()).value();
         var time = level.getDayTime() % 24000;
-        //? if >1.20 {
+        //? if >1.21.2 {
+        /*var precipitation = biome.getPrecipitationAt(player.blockPosition(), level.getSeaLevel());
+        *///?} else if >1.20 {
         var precipitation = biome.getPrecipitationAt(player.blockPosition());
         //?} else {
          /*var precipitation = biome.getPrecipitation();
         *///?}
+        //? if >1.21.2 {
+        /*var snows = biome.coldEnoughToSnow(player.blockPosition(), level.getSeaLevel());
+        *///?} else {
+        var snows = biome.coldEnoughToSnow(player.blockPosition());
+         //?}
         if (!level.dimensionType().natural()) return 124; // Netherlike
         else if (level.isThundering()) {
-            if (biome.coldEnoughToSnow(player.blockPosition())) return 92; // Snowing
+            if (snows) return 92; // Snowing
             if (precipitation.equals(Biome.Precipitation.NONE)) return 108; // Sandstorming
             return 76; // Thundering
         } else if (level.isRaining()) {
-            if (biome.coldEnoughToSnow(player.blockPosition())) return 92; // Snowing
+            if (snows) return 92; // Snowing
             if (precipitation.equals(Biome.Precipitation.NONE)) return 108; // Sandstorming
             return 60; // Raining
         }

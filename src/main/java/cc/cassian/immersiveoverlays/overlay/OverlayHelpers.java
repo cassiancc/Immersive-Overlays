@@ -13,6 +13,7 @@ import net.minecraft.client.gui.GuiGraphics;
 /*import net.minecraft.client.gui.GuiComponent;
 import com.mojang.blaze3d.vertex.PoseStack;
  *///?}
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
@@ -44,7 +45,9 @@ public class OverlayHelpers {
             final int yPlacementWithOffset = yPlacement-4;
             final int endCapOffset = 197;
             // render background
-            //? if >1.20 {
+            //? if >1.21.2 {
+            /*guiGraphics.blit(RenderType::guiTexturedOverlay, TEXTURE,
+            *///?} else if >1.20 {
             guiGraphics.blit(TEXTURE,
             //?} else {
                /*GuiComponent.blit(poseStack,
@@ -54,10 +57,12 @@ public class OverlayHelpers {
                     textureOffset, fontWidth+xOffset+4, tooltipSize,
                     OverlayHelpers.textureSize, OverlayHelpers.textureSize);
             // render endcap
-            //? if >1.20 {
+            //? if >1.21.2 {
+            /*guiGraphics.blit(RenderType::guiTexturedOverlay, TEXTURE,
+            *///?} else if >1.20 {
             guiGraphics.blit(TEXTURE,
             //?} else {
-               /*GuiComponent.blit(poseStack,
+           /*GuiComponent.blit(poseStack,
              *///?}
                     OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth), yPlacementWithOffset,
                     0, endCapOffset,
