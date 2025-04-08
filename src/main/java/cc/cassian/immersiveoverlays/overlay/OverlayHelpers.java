@@ -92,26 +92,19 @@ public class OverlayHelpers {
         if (player == null)
             return;
         if (ModConfig.get().compass_enable || ModConfig.get().clock_enable) {
-            var y = ModTags.SHOWS_Y;
-            if (!ModCompat.SPELUNKERY && !ModCompat.CAVERNS_AND_CHASMS && !ModCompat.SUPPLEMENTARIES)
-                y = ModTags.SHOWS_XZ;
-            var barometer = ModTags.SHOWS_WEATHER;
-            if (!ModCompat.CAVERNS_AND_CHASMS) {
-                barometer = ModTags.SHOWS_TIME;
-            }
             var inventory = player.getInventory();
             if (ModConfig.get().require_item_in_hand) {
                 var main = player.getMainHandItem();
                 var offhand = player.getOffhandItem();
                 CompassOverlay.hasCompass = main.is(ModTags.SHOWS_XZ) || offhand.is(ModTags.SHOWS_XZ);
-                CompassOverlay.hasDepthGauge = main.is(y) || offhand.is(y);
+                CompassOverlay.hasDepthGauge = main.is(ModTags.SHOWS_Y) || offhand.is(ModTags.SHOWS_Y);
                 ClockOverlay.hasClock = main.is(ModTags.SHOWS_TIME) || offhand.is(ModTags.SHOWS_TIME);
-                ClockOverlay.hasBarometer = main.is(barometer) || offhand.is(barometer);
+                ClockOverlay.hasBarometer = main.is(ModTags.SHOWS_WEATHER) || offhand.is(ModTags.SHOWS_WEATHER);
             } else {
                 CompassOverlay.hasCompass = checkInventoryForItem(inventory, ModTags.SHOWS_XZ);
-                CompassOverlay.hasDepthGauge = checkInventoryForItem(inventory, y);
+                CompassOverlay.hasDepthGauge = checkInventoryForItem(inventory, ModTags.SHOWS_Y);
                 ClockOverlay.hasClock = checkInventoryForItem(inventory, ModTags.SHOWS_TIME);
-                ClockOverlay.hasBarometer = checkInventoryForItem(inventory, barometer);
+                ClockOverlay.hasBarometer = checkInventoryForItem(inventory, ModTags.SHOWS_WEATHER);
             }
         } else {
             CompassOverlay.hasCompass = false;

@@ -49,9 +49,9 @@ public class ClockOverlay {
             if (hasClock) {
                 iconOffset = 20;
             }
-            textureOffset = 27;
-            tooltipSize = 23;
-            textYPlacement += 3;
+            textureOffset = 111;
+            tooltipSize = 21;
+            textYPlacement += 2;
         }
 
         int fontWidth = mc.font.width(time)+iconOffset;
@@ -84,7 +84,7 @@ public class ClockOverlay {
             /*RenderSystem.setShaderTexture(0, TEXTURE);
                GuiComponent.blit(poseStack,
              *///?}
-                    xPlacement-xOffset-1, yPlacement,
+                    xPlacement-xOffset-1, yPlacement-1,
                     0, spriteOffset,
                     95, 16, 16,
                     OverlayHelpers.textureSize, OverlayHelpers.textureSize);
@@ -116,7 +116,7 @@ public class ClockOverlay {
         }
         else if (time >= 12500 && time <= 13500) return 30; // Sunset
         else if (time >= 13500 && time <= 22500) return 46; // Night
-        else if (time >= 23000) return 15; // Morning
+        else if (time >= 23000 || time <= 300) return 15; // Morning
         return 0; // Sunny
     }
 

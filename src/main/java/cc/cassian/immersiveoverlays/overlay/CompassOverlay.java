@@ -72,7 +72,7 @@ public class CompassOverlay {
         if (!ClockOverlay.hasClock || !ModConfig.get().clock_enable) {
             yPlacement = yPlacement - 15;
         }
-        if (ClockOverlay.hasBarometer) {
+        if (ClockOverlay.hasBarometer || (ClockOverlay.hasClock && !ModConfig.get().clock_require_weather_item)) {
             yPlacement = yPlacement + 9;
         }
         if (OverlayHelpers.playerHasPotions(mc.player)) {
@@ -81,13 +81,13 @@ public class CompassOverlay {
 
         int textureOffset = 7;  // only depth gauge
         int tooltipSize = 16;  // only depth gauge
-        if (hasCompass & hasDepthGauge) { // depth gauge and compass
+        if (hasCompass & (hasDepthGauge)) { // depth gauge and compass
             textureOffset = 51;
             tooltipSize = 33;
         }
         else if (hasCompass) { // only compass
-            textureOffset = 27;
-            tooltipSize = 23;
+            textureOffset = 25;
+            tooltipSize = 25;
         }
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();
