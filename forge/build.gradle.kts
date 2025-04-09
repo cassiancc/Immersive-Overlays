@@ -72,6 +72,11 @@ dependencies {
     // Cloth Config
     modApi("me.shedaniel.cloth:cloth-config-forge:${common.mod.dep("cloth_version")}")
     modImplementation("curse.maven:map-atlases-forge-519759:${common.mod.dep("map_atlases_forge")}")
+    if (stonecutter.eval(mcVersion, "=1.19.2")) {
+        modImplementation("maven.modrinth:moonlight:${common.mod.dep("moonlight")}-forge")
+    } else {
+        modImplementation("maven.modrinth:moonlight:forge_${common.mod.dep("moonlight")}")
+    }
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionForge")) { isTransitive = false }

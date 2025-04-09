@@ -6,7 +6,7 @@ license = "MIT"
 modId = "immersiveoverlays"
 version = "${version}"
 displayName = "Immersive Overlays"
-authors = "cassiancc"
+authors = "cassiancc, noelledotjpg"
 description = '''
 Overlays useful info like coordinates and the time - as long as you have the right item.
 '''

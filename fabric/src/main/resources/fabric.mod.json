@@ -5,7 +5,8 @@
   "name": "Immersive Overlays",
   "description": "Overlays useful info like coordinates and the time - as long as you have the right item.",
   "authors": [
-    "cassiancc"
+    "cassiancc",
+    "noelledotjpg"
   ],
   "contact": {
     "repo": "https://github.com/cassiancc/Immersive-Overlays",
