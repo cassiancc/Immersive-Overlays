@@ -46,7 +46,7 @@ public class OverlayHelpers {
             final int endCapOffset = 197;
             // render background
             //? if >1.21.2 {
-            /*guiGraphics.blit(RenderType::guiTexturedOverlay, TEXTURE,
+            /*guiGraphics.blit(RenderType::guiTextured, TEXTURE,
             *///?} else if >1.20 {
             guiGraphics.blit(TEXTURE,
             //?} else {
@@ -58,7 +58,7 @@ public class OverlayHelpers {
                     OverlayHelpers.textureSize, OverlayHelpers.textureSize);
             // render endcap
             //? if >1.21.2 {
-            /*guiGraphics.blit(RenderType::guiTexturedOverlay, TEXTURE,
+            /*guiGraphics.blit(RenderType::guiTextured, TEXTURE,
             *///?} else if >1.20 {
             guiGraphics.blit(TEXTURE,
             //?} else {

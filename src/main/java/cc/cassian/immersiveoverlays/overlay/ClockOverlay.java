@@ -79,7 +79,7 @@ public class ClockOverlay {
             var spriteOffset = getWeather(mc.player);
 
             //? if >1.21.2 {
-            /*poseStack.blit(RenderType::guiTexturedOverlay, TEXTURE,
+            /*poseStack.blit(RenderType::guiTextured, TEXTURE,
             *///?} else if >1.20 {
             poseStack.blit(TEXTURE,
             //?} else {
