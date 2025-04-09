@@ -16,6 +16,10 @@
     {
       "id": "supplementaries:altimeter",
       "required": false
+    },
+    {
+      "id": "additionaladditions:depth_meter",
+      "required": false
     }
   ]
 }
