@@ -19,15 +19,15 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 
 public class CompassOverlay {
-    public static boolean hasCompass = false;
-    public static boolean hasDepthGauge = false;
+    public static boolean showXZ = false;
+    public static boolean showY = false;
 
     //? if >1.20 {
     public static void renderGameOverlayEvent(GuiGraphics poseStack) {
     //?} else {
         /*public static void renderGameOverlayEvent(PoseStack poseStack) {
      *///?}
-        if (!hasCompass && !hasDepthGauge)
+        if (!showXZ && !showY)
             return;
         if (!ModConfig.get().compass_enable)
             return;
@@ -56,23 +56,23 @@ public class CompassOverlay {
         int yPlacement = ModConfig.get().compass_vertical_position;
         int fontWidth = mc.font.width(StringUtils.repeat("a", width+2));
 
-        if (hasCompass) {
+        if (showXZ) {
             if (!ModConfig.get().compass_require_y_item) {
-                hasDepthGauge = true;
+                showY = true;
             }
             coords.add("§%sX:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_x_colour), x));
-            if (hasDepthGauge) {
+            if (showY) {
                 coords.add("§%sY:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
             }
             coords.add("§%sZ:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_z_colour), z));
         }
-        else if (hasDepthGauge) {
+        else if (showY) {
             coords.add("§%sY:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
         }
-        if (!ClockOverlay.hasClock || !ModConfig.get().clock_enable) {
+        if (!ClockOverlay.showTime || !ModConfig.get().clock_enable) {
             yPlacement = yPlacement - 15;
         }
-        if (ClockOverlay.hasBarometer || (ClockOverlay.hasClock && !ModConfig.get().clock_require_weather_item)) {
+        if (ClockOverlay.showWeather || (ClockOverlay.showTime && !ModConfig.get().clock_require_weather_item)) {
             yPlacement = yPlacement + 9;
         }
         if (OverlayHelpers.playerHasPotions(mc.player)) {
@@ -81,11 +81,11 @@ public class CompassOverlay {
 
         int textureOffset = 7;  // only depth gauge
         int tooltipSize = 16;  // only depth gauge
-        if (hasCompass & (hasDepthGauge)) { // depth gauge and compass
+        if (showXZ & (showY)) { // depth gauge and compass
             textureOffset = 51;
             tooltipSize = 35;
         }
-        else if (hasCompass) { // only compass
+        else if (showXZ) { // only compass
             textureOffset = 25;
             tooltipSize = 25;
         }

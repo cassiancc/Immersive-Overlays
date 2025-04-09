@@ -16,8 +16,8 @@ import net.minecraft.world.level.biome.Biome;
 import static cc.cassian.immersiveoverlays.overlay.OverlayHelpers.TEXTURE;
 
 public class ClockOverlay {
-    public static boolean hasClock = false;
-    public static boolean hasBarometer = false;
+    public static boolean showTime = false;
+    public static boolean showWeather = false;
 
 
     //? if >1.20 {
@@ -25,7 +25,7 @@ public class ClockOverlay {
     //?} else {
         /*public static void renderGameOverlayEvent(PoseStack poseStack) {
      *///?}
-        if (!hasBarometer && !hasClock)
+        if (!showWeather && !showTime)
             return;
         if (!ModConfig.get().clock_enable)
             return;
@@ -35,8 +35,8 @@ public class ClockOverlay {
         if (time.length() == 4) {
             time = " " + time;
         }
-        if (hasClock && !ModConfig.get().clock_require_weather_item) {
-            hasBarometer = true;
+        if (showTime && !ModConfig.get().clock_require_weather_item) {
+            showWeather = true;
         }
 
         int xOffset = 3;
@@ -46,8 +46,8 @@ public class ClockOverlay {
         int tooltipSize = 16;
         int yPlacement = ModConfig.get().clock_vertical_position;
         int textYPlacement = yPlacement;
-        if (hasBarometer) {
-            if (hasClock) {
+        if (showWeather) {
+            if (showTime) {
                 iconOffset = 20;
             }
             textureOffset = 111;
@@ -67,7 +67,7 @@ public class ClockOverlay {
         //? if <1.20
         /*RenderSystem.setShaderTexture(0, OverlayHelpers.TEXTURE);*/
         OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize);
-        if (hasClock) {
+        if (showTime) {
             // render text
             //? if >1.20 {
             poseStack.drawString(mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
@@ -75,7 +75,7 @@ public class ClockOverlay {
             /*GuiComponent.drawString(poseStack, mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
              *///?}
         }
-        if (hasBarometer) {
+        if (showWeather) {
             var spriteOffset = getWeather(mc.player);
 
             //? if >1.21.2 {
