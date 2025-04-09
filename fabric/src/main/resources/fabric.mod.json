@@ -34,7 +34,6 @@
     "modmenu": "*"
   },
   "suggests": {
-    "jade": "*",
-    "limelight": "*"
+    "map_atlases": "*"
   }
 }
