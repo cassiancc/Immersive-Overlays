@@ -20,6 +20,10 @@
     {
       "id": "additionaladditions:depth_meter",
       "required": false
+    },
+    {
+      "id": "depthmeter:depthmeter",
+      "required": false
     }
   ]
 }
