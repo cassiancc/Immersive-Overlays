@@ -185,17 +185,24 @@ public class OverlayHelpers {
     }
 
     public static ItemStack checkInventoryForStack(Inventory inventory, TagKey<Item> key, Item item) {
-        if (ModConfig.get().search_containers && inventory.contains(ModTags.CONTAINERS)) {
-            for (ItemStack stack : inventory.items) {
-                if (stack.is(ModTags.CONTAINERS)) {
-                    List<ItemStack> contents = getContents(stack).toList();
-                    for (ItemStack content : contents) {
-                        if (key != null && content.is(key))
-                            return stack;
-                        else if (item != null && content.is(item))
-                            return stack;
-                    }
+        if (ModConfig.get().search_containers) {
+            if (inventory.contains(ModTags.CONTAINERS)) {
+                for (ItemStack stack : inventory.items) {
+                    return checkInventoryForStack(stack, key, item);
                 }
+            }
+        }
+        return ItemStack.EMPTY;
+    }
+
+    public static ItemStack checkInventoryForStack(ItemStack stack, TagKey<Item> key, Item item) {
+        if (stack.is(ModTags.CONTAINERS)) {
+            List<ItemStack> contents = getContents(stack).toList();
+            for (ItemStack content : contents) {
+                if (key != null && content.is(key))
+                    return stack;
+                else if (item != null && content.is(item))
+                    return stack;
             }
         }
         return ItemStack.EMPTY;
