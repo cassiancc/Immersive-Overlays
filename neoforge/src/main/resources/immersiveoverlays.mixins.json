@@ -6,9 +6,11 @@
   "client": [
   ],
   "injectors": {
-	"defaultRequire": 1
+    "defaultRequire": 1
   },
   "mixins": [
-	"MiscMixin"
+    "IMapCollectionImplMixin",
+    "MapAtlasAccessUtilsMixin",
+    "MiscMixin"
   ]
 }
