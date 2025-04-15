@@ -77,6 +77,7 @@ dependencies {
         modCompileOnly("curse.maven:map-atlases-forge-519759:${common.mod.dep("map_atlases_forge")}")
         modCompileOnly("maven.modrinth:moonlight:neoforge_${common.mod.dep("moonlight")}")
     }
+    modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_NeoForge_${common.mod.dep("xaeros_mc")}")
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionNeoForge")) { isTransitive = false }

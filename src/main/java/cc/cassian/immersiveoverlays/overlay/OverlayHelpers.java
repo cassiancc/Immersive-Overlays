@@ -174,6 +174,12 @@ public class OverlayHelpers {
         else return checkInventoryForStack(inventory, item, null) != ItemStack.EMPTY;
     }
 
+    public static boolean checkInventoryForItem(Inventory inventory, Item item, boolean value) {
+        if (value) return true;
+        if (inventory.contains(item.getDefaultInstance())) return true;
+        else return checkInventoryForStack(inventory, null, item) != ItemStack.EMPTY;
+    }
+
     public static ItemStack checkInventoryForStack(Inventory inventory, TagKey<Item> key, Item item) {
         if (ModConfig.get().search_containers && inventory.contains(ModTags.CONTAINERS)) {
             for (ItemStack stack : inventory.items) {

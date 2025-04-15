@@ -10,6 +10,7 @@
   },
   "mixins": [
 	"IMapCollectionImplMixin",
-	"MapAtlasAccessUtilsMixin"
+	"MapAtlasAccessUtilsMixin",
+	"MiscMixin"
   ]
 }

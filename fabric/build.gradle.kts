@@ -83,6 +83,10 @@ dependencies {
         modRuntimeOnly("maven.modrinth:map-atlases:${common.mod.dep("map_atlases_fabric")}")
     }
 
+
+    modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_Fabric_${common.mod.dep("xaeros_mc")}")
+
+
     if (stonecutter.eval(mcVersion, "=1.20.1")) {
         modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${common.mod.dep("cca")}")
         modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-item:${common.mod.dep("cca")}")

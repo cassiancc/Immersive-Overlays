@@ -17,6 +17,7 @@
   "config.immersiveoverlays.config.compass_hide_when_similar_mods_present": "Hide when other mods overlays are present",
   "config.immersiveoverlays.config.compass_require_y_item": "Require a different item for depth",
   "config.immersiveoverlays.config.clock_require_weather_item": "Require a different item for weather",
+  "config.immersiveoverlays.config.map_atlases": "Map Atlases compat (Experimental!)",
   "tag.item.immersiveoverlays.shows_xz": "Shows X/Z Coordinates",
   "tag.item.immersiveoverlays.shows_y": "Shows Y Coordinates",
   "tag.item.immersiveoverlays.shows_time": "Shows Time",

@@ -1,6 +1,7 @@
 package cc.cassian.immersiveoverlays.mixin;
 
 import cc.cassian.immersiveoverlays.ModTags;
+import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -29,12 +30,14 @@ public class IMapCollectionImplMixin {
             at = @At(value = "INVOKE", target = "Ldev/onyxstudios/cca/api/v3/component/ComponentKey;maybeGet(Ljava/lang/Object;)Ljava/util/Optional;")
     )
     private static Object mixin(@Nullable Object provider) {
-        if (provider instanceof ItemStack stack) {
-            if (stack.is(ModTags.CONTAINERS)) {
-                List<ItemStack> contents = OverlayHelpers.getContents(stack).toList();
-                for (ItemStack content : contents) {
-                    if (content.is(MapAtlasesMod.MAP_ATLAS.get())) {
-                        return content;
+        if (ModConfig.get().map_atlases) {
+            if (provider instanceof ItemStack stack) {
+                if (stack.is(ModTags.CONTAINERS)) {
+                    List<ItemStack> contents = OverlayHelpers.getContents(stack).toList();
+                    for (ItemStack content : contents) {
+                        if (content.is(MapAtlasesMod.MAP_ATLAS.get())) {
+                            return content;
+                        }
                     }
                 }
             }

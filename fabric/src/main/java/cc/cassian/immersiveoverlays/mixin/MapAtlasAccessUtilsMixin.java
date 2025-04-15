@@ -1,6 +1,7 @@
 package cc.cassian.immersiveoverlays.mixin;
 
 
+import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -18,8 +19,10 @@ public class MapAtlasAccessUtilsMixin {
     //? if >1.20 {
     @Inject(method = "getAtlasFromInventory", at = @At(value = "RETURN"), remap = false, cancellable = true)
     private static void mixin(Inventory inventory, boolean onlyHotbar, CallbackInfoReturnable<ItemStack> cir) {
-        if (cir.getReturnValue().equals(ItemStack.EMPTY)) {
-            cir.setReturnValue(OverlayHelpers.checkInventoryForStack(inventory, null, MapAtlasesMod.MAP_ATLAS.get()));
+        if (ModConfig.get().map_atlases) {
+            if (cir.getReturnValue().equals(ItemStack.EMPTY)) {
+                cir.setReturnValue(OverlayHelpers.checkInventoryForStack(inventory, null, MapAtlasesMod.MAP_ATLAS.get()));
+            }
         }
     }
     //?} else {

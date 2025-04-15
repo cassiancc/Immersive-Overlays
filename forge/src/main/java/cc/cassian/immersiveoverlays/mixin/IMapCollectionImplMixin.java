@@ -1,6 +1,7 @@
 package cc.cassian.immersiveoverlays.mixin;
 
 import cc.cassian.immersiveoverlays.ModTags;
+import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -22,19 +23,21 @@ import java.util.Optional;
 public class IMapCollectionImplMixin {
     @Inject(method = "get", at = @At(value = "HEAD"), remap = false, cancellable = true)
     private static void mixin(ItemStack stack, Level level, CallbackInfoReturnable<IMapCollection> cir) {
-        if (stack.is(ModTags.CONTAINERS)) {
-            List<ItemStack> contents = OverlayHelpers.getContents(stack).toList();
-            for (ItemStack content : contents) {
-                if (content.is(MapAtlasesMod.MAP_ATLAS.get())) {
-                    Optional<IMapCollectionImpl> resolve = content.getCapability(CapStuff.ATLAS_CAP_TOKEN, null).resolve();
-                    if (resolve.isEmpty()) {
-                        throw new AssertionError("Map Atlas capability was empty. How is this possible? Culprit itemstack " + stack);
-                    } else {
-                        IMapCollectionImpl cap = resolve.get();
-                        if (!cap.isInitialized()) {
-                            cap.initialize(level);
+        if (ModConfig.get().map_atlases) {
+            if (stack.is(ModTags.CONTAINERS)) {
+                List<ItemStack> contents = OverlayHelpers.getContents(stack).toList();
+                for (ItemStack content : contents) {
+                    if (content.is(MapAtlasesMod.MAP_ATLAS.get())) {
+                        Optional<IMapCollectionImpl> resolve = content.getCapability(CapStuff.ATLAS_CAP_TOKEN, null).resolve();
+                        if (resolve.isEmpty()) {
+                            throw new AssertionError("Map Atlas capability was empty. How is this possible? Culprit itemstack " + stack);
+                        } else {
+                            IMapCollectionImpl cap = resolve.get();
+                            if (!cap.isInitialized()) {
+                                cap.initialize(level);
+                            }
+                            cir.setReturnValue(cap);
                         }
-                        cir.setReturnValue(cap);
                     }
                 }
             }

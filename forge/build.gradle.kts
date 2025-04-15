@@ -77,6 +77,8 @@ dependencies {
     } else {
         modImplementation("maven.modrinth:moonlight:forge_${common.mod.dep("moonlight")}")
     }
+    modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_Forge_${common.mod.dep("xaeros_mc")}")
+
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionForge")) { isTransitive = false }
