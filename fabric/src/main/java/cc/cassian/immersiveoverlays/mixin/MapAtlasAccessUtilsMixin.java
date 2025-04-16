@@ -29,7 +29,7 @@ public class MapAtlasAccessUtilsMixin {
     /*@Inject(method = "getAtlasFromInventory", at = @At(value = "RETURN"), remap = false, cancellable = true)
     private static void mixin(Inventory inventory, CallbackInfoReturnable<ItemStack> cir) {
         if (cir.getReturnValue() == null) {
-            cir.setReturnValue(OverlayHelpers.checkInventoryForStack(inventory, null, MapAtlasesMod.MAP_ATLAS));
+            cir.setReturnValue(OverlayHelpers.checkInventoryForStack(inventory, MapAtlasesMod.MAP_ATLAS));
         }
     }
     *///?}

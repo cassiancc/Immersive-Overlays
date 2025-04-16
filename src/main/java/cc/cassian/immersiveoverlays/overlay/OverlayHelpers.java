@@ -178,12 +178,10 @@ public class OverlayHelpers {
         //? if >1.20.5 {
         /*var components = stack.getComponents();
         if (components.has(DataComponents.BUNDLE_CONTENTS)) {
-            BundleContents bundleContents = components.get(DataComponents.BUNDLE_CONTENTS);
-            return bundleContents.itemCopyStream();
+            return true;
         }
         else if (components.has(DataComponents.CONTAINER)) {
-            ItemContainerContents containerContents = components.get(DataComponents.CONTAINER);
-            return containerContents.stream();
+            return true;
         }
         *///?} else {
         CompoundTag compoundtag = stack.getTag();

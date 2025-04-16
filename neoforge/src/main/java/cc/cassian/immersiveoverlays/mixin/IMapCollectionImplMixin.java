@@ -23,7 +23,7 @@ public class IMapCollectionImplMixin {
     private static void mixin(ItemStack stack, Level level, CallbackInfoReturnable<MapCollection> cir) {
         if (ModConfig.get().map_atlases) {
             if (stack.is(ModTags.CONTAINERS)) {
-                List<ItemStack> contents = OverlayHelpers.getContents(stack).toList();
+                List<ItemStack> contents = OverlayHelpers.getContainerContents(stack).toList();
                 for (ItemStack content : contents) {
                     if (content.is(MapAtlasesMod.MAP_ATLAS.get())) {
                         cir.setReturnValue(MapAtlasItem.getMaps(content, level));
