@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    {
-      "id": "caverns_and_chasms:barometer",
-      "required": false
-    }
-  ]
-}

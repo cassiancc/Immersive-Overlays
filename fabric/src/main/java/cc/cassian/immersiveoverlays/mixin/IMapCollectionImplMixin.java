@@ -1,13 +1,11 @@
 package cc.cassian.immersiveoverlays.mixin;
 
-import cc.cassian.immersiveoverlays.ModTags;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import pepjebs.mapatlases.MapAtlasesMod;
@@ -15,7 +13,6 @@ import pepjebs.mapatlases.MapAtlasesMod;
 import pepjebs.mapatlases.map_collection.fabric.IMapCollectionImpl;
 
 import java.util.List;
-import java.util.Optional;
 
 @Pseudo
 @Mixin(IMapCollectionImpl.class)
@@ -32,8 +29,8 @@ public class IMapCollectionImplMixin {
     private static Object mixin(@Nullable Object provider) {
         if (ModConfig.get().map_atlases) {
             if (provider instanceof ItemStack stack) {
-                if (stack.is(ModTags.CONTAINERS)) {
-                    List<ItemStack> contents = OverlayHelpers.getContents(stack).toList();
+                if (OverlayHelpers.isContainer(stack)) {
+                    List<ItemStack> contents = OverlayHelpers.getContainerContents(stack).toList();
                     for (ItemStack content : contents) {
                         if (content.is(MapAtlasesMod.MAP_ATLAS.get())) {
                             return content;

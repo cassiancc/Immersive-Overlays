@@ -1,6 +1,5 @@
 package cc.cassian.immersiveoverlays.mixin;
 
-import cc.cassian.immersiveoverlays.ModTags;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 import net.minecraft.world.item.ItemStack;
@@ -24,8 +23,8 @@ public class IMapCollectionImplMixin {
     @Inject(method = "get", at = @At(value = "HEAD"), remap = false, cancellable = true)
     private static void mixin(ItemStack stack, Level level, CallbackInfoReturnable<IMapCollection> cir) {
         if (ModConfig.get().map_atlases) {
-            if (stack.is(ModTags.CONTAINERS)) {
-                List<ItemStack> contents = OverlayHelpers.getContents(stack).toList();
+            if (OverlayHelpers.isContainer(stack)) {
+                List<ItemStack> contents = OverlayHelpers.getContainerContents(stack).toList();
                 for (ItemStack content : contents) {
                     if (content.is(MapAtlasesMod.MAP_ATLAS.get())) {
                         Optional<IMapCollectionImpl> resolve = content.getCapability(CapStuff.ATLAS_CAP_TOKEN, null).resolve();

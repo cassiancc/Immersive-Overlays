@@ -57,9 +57,6 @@ public class CompassOverlay {
         int fontWidth = mc.font.width(StringUtils.repeat("a", width+2));
 
         if (showXZ) {
-            if (!ModConfig.get().compass_require_y_item) {
-                showY = true;
-            }
             coords.add("§%sX:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_x_colour), x));
             if (showY) {
                 coords.add("§%sY:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
@@ -72,7 +69,7 @@ public class CompassOverlay {
         if (!ClockOverlay.showTime || !ModConfig.get().clock_enable) {
             yPlacement = yPlacement - 15;
         }
-        if (ClockOverlay.showWeather || (ClockOverlay.showTime && !ModConfig.get().clock_require_weather_item)) {
+        if (ClockOverlay.showWeather) {
             yPlacement = yPlacement + 9;
         }
         if (OverlayHelpers.playerHasPotions(mc.player)) {

@@ -18,7 +18,7 @@ public final class ImmersiveOverlaysFabricClient implements ClientModInitializer
             CompassOverlay.renderGameOverlayEvent(matrixStack);
             ClockOverlay.renderGameOverlayEvent(matrixStack);
         }));
-        ClientTickEvents.START_CLIENT_TICK.register(OverlayHelpers::checkInventoryForOverlays);
+        ClientTickEvents.END_CLIENT_TICK.register(OverlayHelpers::checkInventoryForOverlays);
     }
 
 }

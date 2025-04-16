@@ -2,6 +2,7 @@ package cc.cassian.immersiveoverlays.overlay;
 
 
 import cc.cassian.immersiveoverlays.ModClient;
+import cc.cassian.immersiveoverlays.ModLists;
 import cc.cassian.immersiveoverlays.ModTags;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 
@@ -91,53 +92,56 @@ public class OverlayHelpers {
         return debug && !mc.options.reducedDebugInfo().get();
     }
 
-    private static void getHandContainerContents(ItemStack handItem) {
-        List<ItemStack> list = getContents(handItem).toList();
+    private static void findImportantContainerContents(ItemStack container) {
+        List<ItemStack> list = getContainerContents(container).toList();
         for (ItemStack itemStack : list) {
-            if (itemStack.is(ModTags.SHOWS_XZ))
-                CompassOverlay.showXZ = true;
-            else if (itemStack.is(ModTags.SHOWS_Y))
-                CompassOverlay.showY = true;
-            else if (itemStack.is(ModTags.SHOWS_TIME))
-                ClockOverlay.showTime = true;
-            else if (itemStack.is(ModTags.SHOWS_WEATHER))
-                ClockOverlay.showWeather = true;
+            isImportantItem(itemStack);
         }
     }
 
+    private static void isImportantItem(ItemStack itemStack) {
+        if (itemStack.isEmpty())
+            return;
+        var item = itemStack.getItem();
+        if (ModLists.compass_items.contains(item)) {
+            CompassOverlay.showXZ = true;
+        }
+        if (ModLists.compass_depth_items.contains(item))
+            CompassOverlay.showY = true;
+        if (ModLists.clock_items.contains(item))
+            ClockOverlay.showTime = true;
+        if (ModLists.weather_items.contains(item))
+            ClockOverlay.showWeather = true;
+    }
+
     public static void checkInventoryForItems(Player player) {
+        CompassOverlay.showXZ = false;
+        CompassOverlay.showY = false;
+        ClockOverlay.showTime = false;
+        ClockOverlay.showWeather = false;
         if (player == null)
             return;
         if (ModConfig.get().compass_enable || ModConfig.get().clock_enable) {
             var inventory = player.getInventory();
             var mainhand = player.getMainHandItem();
             var offhand = player.getOffhandItem();
+            isImportantItem(offhand);
             if (ModConfig.get().require_item_in_hand) {
-                CompassOverlay.showXZ = mainhand.is(ModTags.SHOWS_XZ) || offhand.is(ModTags.SHOWS_XZ);
-                CompassOverlay.showY = mainhand.is(ModTags.SHOWS_Y) || offhand.is(ModTags.SHOWS_Y);
-                ClockOverlay.showTime = mainhand.is(ModTags.SHOWS_TIME) || offhand.is(ModTags.SHOWS_TIME);
-                ClockOverlay.showWeather = mainhand.is(ModTags.SHOWS_WEATHER) || offhand.is(ModTags.SHOWS_WEATHER);
-                if (mainhand.is(ModTags.CONTAINERS)) {
-                    getHandContainerContents(mainhand);
+                isImportantItem(mainhand);
+                if (isContainer(mainhand)) {
+                    findImportantContainerContents(mainhand);
                 }
             } else {
-                CompassOverlay.showXZ = checkInventoryForItem(inventory, ModTags.SHOWS_XZ, offhand.is(ModTags.SHOWS_XZ));
-                CompassOverlay.showY = checkInventoryForItem(inventory, ModTags.SHOWS_Y, offhand.is(ModTags.SHOWS_Y));
-                ClockOverlay.showTime = checkInventoryForItem(inventory, ModTags.SHOWS_TIME, offhand.is(ModTags.SHOWS_TIME));
-                ClockOverlay.showWeather = checkInventoryForItem(inventory, ModTags.SHOWS_WEATHER, offhand.is(ModTags.SHOWS_WEATHER));
+                checkInventoryForItem(inventory);
             }
-            if (offhand.is(ModTags.CONTAINERS)) {
-                getHandContainerContents(offhand);
+            if (isContainer(offhand)) {
+                findImportantContainerContents(offhand);
             }
-        } else {
-            CompassOverlay.showXZ = false;
-            CompassOverlay.showY = false;
-            ClockOverlay.showWeather = false;
-            ClockOverlay.showTime = false;
         }
     }
 
-    public static Stream<ItemStack> getContents(ItemStack stack) {
+    public static Stream<ItemStack> getContainerContents(ItemStack stack) {
+        if (!isContainer(stack)) return Stream.empty();
         //? if >1.20.5 {
         /*var components = stack.getComponents();
         if (components.has(DataComponents.BUNDLE_CONTENTS)) {
@@ -167,30 +171,67 @@ public class OverlayHelpers {
         return Stream.empty();
     }
 
+    public static boolean isContainer(ItemStack stack) {
+        if (!ModConfig.get().search_containers) return false;
+        if (stack.isEmpty()) return false;
+        if (stack.is(ModTags.CONTAINERS)) return true;
+        //? if >1.20.5 {
+        /*var components = stack.getComponents();
+        if (components.has(DataComponents.BUNDLE_CONTENTS)) {
+            BundleContents bundleContents = components.get(DataComponents.BUNDLE_CONTENTS);
+            return bundleContents.itemCopyStream();
+        }
+        else if (components.has(DataComponents.CONTAINER)) {
+            ItemContainerContents containerContents = components.get(DataComponents.CONTAINER);
+            return containerContents.stream();
+        }
+        *///?} else {
+        CompoundTag compoundtag = stack.getTag();
+        if (compoundtag == null) {
+            return false;
+        } else {
+            if (compoundtag.contains("Items")) {
+                return true;
+            }
+        }
+        //?}
+        return true;
+    }
+
+    public static void checkInventoryForItem(Inventory inventory) {
+        checkInventoryForStack(inventory);
+    }
 
     public static boolean checkInventoryForItem(Inventory inventory, TagKey<Item> item, boolean value) {
         if (value) return true;
-        if (inventory.contains(item)) return true;
-        else return checkInventoryForStack(inventory, item, null) != ItemStack.EMPTY;
+        else return checkInventoryForStack(inventory, null) != ItemStack.EMPTY;
     }
 
     public static boolean checkInventoryForItem(Inventory inventory, Item item, boolean value) {
         if (value) return true;
-        if (inventory.contains(item.getDefaultInstance())) return true;
-        else return checkInventoryForStack(inventory, null, item) != ItemStack.EMPTY;
+        else return checkInventoryForStack(inventory, item) != ItemStack.EMPTY;
     }
 
-    public static ItemStack checkInventoryForStack(Inventory inventory, TagKey<Item> key, Item item) {
-        if (ModConfig.get().search_containers && inventory.contains(ModTags.CONTAINERS)) {
-            for (ItemStack stack : inventory.items) {
-                if (stack.is(ModTags.CONTAINERS)) {
-                    List<ItemStack> contents = getContents(stack).toList();
-                    for (ItemStack content : contents) {
-                        if (key != null && content.is(key))
-                            return stack;
-                        else if (item != null && content.is(item))
-                            return stack;
-                    }
+    public static void checkInventoryForStack(Inventory inventory) {
+        for (ItemStack stack : inventory.items) {
+            isImportantItem(stack);
+            if (isContainer(stack)) {
+                System.out.println(stack);
+                findImportantContainerContents(stack);
+            }
+        }
+    }
+
+    public static ItemStack checkInventoryForStack(Inventory inventory, Item item) {
+        for (ItemStack stack : inventory.items) {
+            if (stack.is(item)) return stack;
+            else if (item != null && stack.is(item))
+                return stack;
+            else if (isContainer(stack)) {
+                List<ItemStack> contents = getContainerContents(stack).toList();
+                for (ItemStack content : contents) {
+                    if (item != null && content.is(item))
+                        return content;
                 }
             }
         }

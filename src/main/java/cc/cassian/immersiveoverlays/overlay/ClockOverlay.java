@@ -35,9 +35,6 @@ public class ClockOverlay {
         if (time.length() == 4) {
             time = " " + time;
         }
-        if (showTime && !ModConfig.get().clock_require_weather_item) {
-            showWeather = true;
-        }
 
         int xOffset = 3;
         // The amount of offset needed to display the barometer icons, if visible.

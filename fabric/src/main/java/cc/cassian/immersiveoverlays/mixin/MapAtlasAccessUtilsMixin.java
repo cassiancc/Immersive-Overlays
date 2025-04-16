@@ -21,7 +21,7 @@ public class MapAtlasAccessUtilsMixin {
     private static void mixin(Inventory inventory, boolean onlyHotbar, CallbackInfoReturnable<ItemStack> cir) {
         if (ModConfig.get().map_atlases) {
             if (cir.getReturnValue().equals(ItemStack.EMPTY)) {
-                cir.setReturnValue(OverlayHelpers.checkInventoryForStack(inventory, null, MapAtlasesMod.MAP_ATLAS.get()));
+                cir.setReturnValue(OverlayHelpers.checkInventoryForStack(inventory, MapAtlasesMod.MAP_ATLAS.get()));
             }
         }
     }

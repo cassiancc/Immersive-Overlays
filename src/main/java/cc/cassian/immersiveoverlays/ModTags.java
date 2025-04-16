@@ -12,10 +12,6 @@ import net.minecraft.world.item.Item;
 import static cc.cassian.immersiveoverlays.ModClient.locate;
 
 public class ModTags {
-    public static final TagKey<Item> SHOWS_XZ = createItemTag("shows_xz");
-    public static final TagKey<Item> SHOWS_Y = createItemTag("shows_y");
-    public static final TagKey<Item> SHOWS_WEATHER = createItemTag("shows_weather");
-    public static final TagKey<Item> SHOWS_TIME = createItemTag("shows_time");
     public static final TagKey<Item> CONTAINERS = createItemTag("container");
 
 
