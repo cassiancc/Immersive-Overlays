@@ -56,7 +56,8 @@ public class ClockOverlay {
 
         if (mc.player == null) return;
         if (OverlayHelpers.playerHasPotions(mc.player)) {
-            yPlacement = yPlacement + 16;
+            yPlacement += 16;
+            textYPlacement += 16;
         }
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();

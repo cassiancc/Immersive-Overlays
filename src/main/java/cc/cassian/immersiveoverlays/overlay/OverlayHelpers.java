@@ -214,7 +214,6 @@ public class OverlayHelpers {
         for (ItemStack stack : inventory.items) {
             isImportantItem(stack);
             if (isContainer(stack)) {
-                System.out.println(stack);
                 findImportantContainerContents(stack);
             }
         }
