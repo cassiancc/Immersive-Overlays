@@ -32,7 +32,7 @@ public class ModLists {
             Optional<Item> item = BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(depthItem));
             item.ifPresent(value -> compass_depth_items.add(value));
         }
-        for (String weatherItem : ModConfig.get().weather_items) {
+        for (String weatherItem : ModConfig.get().clock_weather_items) {
             Optional<Item> item = BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(weatherItem));
             item.ifPresent(value -> weather_items.add(value));
         }

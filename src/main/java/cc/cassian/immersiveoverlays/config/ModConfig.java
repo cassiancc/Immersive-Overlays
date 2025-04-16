@@ -2,7 +2,6 @@ package cc.cassian.immersiveoverlays.config;
 
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.ModLists;
-import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,12 +22,16 @@ public class ModConfig {
     private static ModConfig INSTANCE = new ModConfig();
     //General settings
     public boolean compass_enable = true;
+    public List<String> compass_items = List.of("minecraft:compass", "minecraft:recovery_compass", "spelunkery:magnetic_compass");
+    public List<String> compass_depth_items = List.of("spelunkery:depth_gauge","caverns_and_chasms:depth_gauge","additionaladditions:depth_meter","supplementaries:altimeter","depthmeter:depthmeter");
     public int compass_vertical_position = 105;
     public boolean compass_hide_when_similar_mods_present = true;
     public String compass_x_colour = "Red";
     public String compass_y_colour = "Green";
     public String compass_z_colour = "Blue";
     public boolean clock_enable = true;
+    public List<String> clock_items = List.of("minecraft:clock");
+    public List<String> clock_weather_items = List.of("caverns_and_chasms:barometer");
     public int clock_vertical_position = 90;
     public boolean clock_24_hour = true;
     public boolean require_item_in_hand = false;
@@ -36,10 +39,6 @@ public class ModConfig {
     public boolean render_background = true;
     public boolean align_left = false;
     public boolean map_atlases = false;
-    public List<String> compass_items = List.of("minecraft:compass", "minecraft:recovery_compass", "spelunkery:magnetic_compass");
-    public List<String> clock_items = List.of("minecraft:clock");
-    public List<String> weather_items = List.of("caverns_and_chasms:barometer");
-    public List<String> compass_depth_items = List.of("spelunkery:depth_gauge","caverns_and_chasms:depth_gauge","additionaladditions:depth_meter","supplementaries:altimeter","depthmeter:depthmeter");
 
 
     public static void load() {
