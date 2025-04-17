@@ -191,6 +191,11 @@ public class OverlayHelpers {
             if (compoundtag.contains("Items")) {
                 return true;
             }
+            else if (compoundtag.contains("BlockEntityTag")) {
+                if (compoundtag.getCompound("BlockEntityTag").contains("Items")) {
+                    return true;
+                }
+            }
         }
         //?}
         return true;
