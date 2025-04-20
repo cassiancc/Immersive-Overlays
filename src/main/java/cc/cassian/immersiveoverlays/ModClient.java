@@ -13,7 +13,6 @@ public class ModClient {
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
     public static void init() {
         ModConfig.load();
-        ModLists.loadLists();
     }
 
     public static ResourceLocation locate(String s) {

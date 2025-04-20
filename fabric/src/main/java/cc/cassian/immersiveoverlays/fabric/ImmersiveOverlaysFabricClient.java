@@ -2,6 +2,7 @@ package cc.cassian.immersiveoverlays.fabric;
 
 
 import cc.cassian.immersiveoverlays.ModClient;
+import cc.cassian.immersiveoverlays.ModLists;
 import cc.cassian.immersiveoverlays.overlay.ClockOverlay;
 import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
@@ -14,6 +15,7 @@ public final class ImmersiveOverlaysFabricClient implements ClientModInitializer
     public void onInitializeClient() {
         // This entrypoint is suitable for setting up client-specific logic, such as rendering.
         ModClient.init();
+        ModLists.loadLists();
         HudRenderCallback.EVENT.register(((matrixStack, tickDelta) -> {
             CompassOverlay.renderGameOverlayEvent(matrixStack);
             ClockOverlay.renderGameOverlayEvent(matrixStack);

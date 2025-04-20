@@ -1,6 +1,7 @@
 package cc.cassian.immersiveoverlays.neoforge;
 
 import cc.cassian.immersiveoverlays.ModClient;
+import cc.cassian.immersiveoverlays.ModLists;
 import cc.cassian.immersiveoverlays.config.neoforge.ModConfigFactory;
 import cc.cassian.immersiveoverlays.overlay.ClockOverlay;
 import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
@@ -12,6 +13,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent;
@@ -33,7 +35,13 @@ public final class ImmersiveOverlaysNeoForge {
         registerModsPage();
         NeoForge.EVENT_BUS.addListener(ImmersiveOverlaysNeoForge::checkInventoryForOverlays);
         NeoForge.EVENT_BUS.addListener(ImmersiveOverlaysNeoForge::renderGameOverlayEvent);
+        eventBus.addListener(ImmersiveOverlaysNeoForge::loadComplete);
 
+    }
+
+    @SubscribeEvent
+    public static void loadComplete(FMLClientSetupEvent event) {
+        ModLists.loadLists();
     }
 
     @SubscribeEvent
