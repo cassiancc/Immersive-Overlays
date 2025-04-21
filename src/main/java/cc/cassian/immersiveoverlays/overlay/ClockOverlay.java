@@ -1,5 +1,6 @@
 package cc.cassian.immersiveoverlays.overlay;
 
+import cc.cassian.immersiveoverlays.compat.MapAtlasesCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
@@ -56,8 +57,8 @@ public class ClockOverlay {
 
         if (mc.player == null) return;
         if (OverlayHelpers.playerHasPotions(mc.player)) {
-            yPlacement += 16;
-            textYPlacement += 16;
+            yPlacement += OverlayHelpers.moveBy(mc.player);
+            textYPlacement += OverlayHelpers.moveBy(mc.player);
         }
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();

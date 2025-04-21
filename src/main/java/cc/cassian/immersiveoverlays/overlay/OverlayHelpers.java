@@ -2,8 +2,10 @@ package cc.cassian.immersiveoverlays.overlay;
 
 
 import cc.cassian.immersiveoverlays.ModClient;
+import cc.cassian.immersiveoverlays.ModCompat;
 import cc.cassian.immersiveoverlays.ModLists;
 import cc.cassian.immersiveoverlays.ModTags;
+import cc.cassian.immersiveoverlays.compat.MapAtlasesCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 
 import net.minecraft.client.Minecraft;
@@ -77,10 +79,32 @@ public class OverlayHelpers {
     }
 
     public static boolean playerHasPotions(Player player) {
+        if (!ModConfig.get().moved_by_effects) return false;
         // Technically, we should check whether these are ambient,
         // but Map Atlases doesn't and still covers our overlay.
         // return Player.areAllEffectsAmbient(player.getActiveEffects());
         return !player.getActiveEffects().isEmpty();
+    }
+
+    public static int moveBy(Player player) {
+        //? if >1.21 {
+        /*boolean hasBeneficial =
+                player.getActiveEffects().stream().anyMatch(p -> p.getEffect().value().isBeneficial());
+        boolean hasNegative =
+                player.getActiveEffects().stream().anyMatch(p -> !p.getEffect().value().isBeneficial());
+        *///?} else {
+        boolean hasBeneficial =
+                player.getActiveEffects().stream().anyMatch(p -> p.getEffect().isBeneficial());
+        boolean hasNegative =
+                player.getActiveEffects().stream().anyMatch(p -> !p.getEffect().isBeneficial());
+    
+        //?}
+        if (hasNegative) {
+            return 42;
+        } else if (hasBeneficial) {
+            return 16;
+        }
+        else return 0;
     }
 
     public static boolean debug(Minecraft mc) {

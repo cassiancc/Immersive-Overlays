@@ -73,7 +73,7 @@ public class CompassOverlay {
             yPlacement = yPlacement + 9;
         }
         if (OverlayHelpers.playerHasPotions(mc.player)) {
-            yPlacement += 16;
+            yPlacement += OverlayHelpers.moveBy(mc.player);
         }
 
         int textureOffset = 7;  // only depth gauge

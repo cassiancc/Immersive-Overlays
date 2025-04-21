@@ -38,6 +38,7 @@ public class ModConfig {
     public boolean search_containers = true;
     public boolean render_background = true;
     public boolean align_left = false;
+    public boolean moved_by_effects = true;
     public boolean map_atlases = false;
 
 
