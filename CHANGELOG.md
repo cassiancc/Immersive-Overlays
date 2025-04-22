@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-- Players with [Player Locator Plus](https://modrinth.com/mod/player-locator-plus) installed now require a compass item in the inventory to display the bar. This can be disabled in the config.
+- Players with [Player Locator Plus](https://modrinth.com/mod/player-locator-plus) or [Better Player Locator Bar](https://modrinth.com/mod/bplb) installed now require a compass item in the inventory to display the bar. This can be disabled in the config.
 
 ### Changed
 - Xaero's Minimap compat can now be disabled.

@@ -21,7 +21,7 @@ import java.util.List;
 public class IMapCollectionImplMixin {
     @Inject(method = "getMaps", at = @At(value = "HEAD"), remap = false, cancellable = true)
     private static void mixin(ItemStack stack, Level level, CallbackInfoReturnable<MapCollection> cir) {
-        if (ModConfig.get().map_atlases) {
+        if (ModConfig.get().compat_map_atlases) {
             if (stack.is(ModTags.CONTAINERS)) {
                 List<ItemStack> contents = OverlayHelpers.getContainerContents(stack).toList();
                 for (ItemStack content : contents) {

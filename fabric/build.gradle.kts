@@ -83,6 +83,7 @@ dependencies {
         modRuntimeOnly("maven.modrinth:map-atlases:${common.mod.dep("map_atlases_fabric")}")
     }
 
+    modCompileOnly("maven.modrinth:bplb:v1.0.0")
     modImplementation("maven.modrinth:player-locator-plus:${common.mod.dep("player_locator_plus")}")
     modRuntimeOnly("net.fabricmc:fabric-language-kotlin:1.13.2+kotlin.2.1.20")
     modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_Fabric_${common.mod.dep("xaeros_mc")}")

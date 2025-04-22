@@ -25,7 +25,7 @@
   "config.immersiveoverlays.config.compat_map_atlases": "Allow atlas in bundles (experimental)",
   "config.immersiveoverlays.config.compat_map_atlases.tooltip": "Requires Map Atlases. Experimental, causes issues when trying to write to the atlas.",
   "config.immersiveoverlays.config.moved_by_effects": "Status effects move overlays down",
-  "config.immersiveoverlays.config.compat_playerlocatorplus.tooltip": "Requires Player Locator Plus",
+  "config.immersiveoverlays.config.compat_playerlocatorplus.tooltip": "Requires Player Locator Plus or Better Player Locator Bar",
   "config.immersiveoverlays.config.compat_playerlocatorplus": "Require compass for locator bar",
   "config.immersiveoverlays.config.compat_xaeros": "Allow minimap items in containers",
   "config.immersiveoverlays.config.compat_xaeros.tooltip": "Requires Xaero's Minimap",
