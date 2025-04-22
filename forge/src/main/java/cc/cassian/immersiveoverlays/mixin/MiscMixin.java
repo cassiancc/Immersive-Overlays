@@ -1,5 +1,6 @@
 package cc.cassian.immersiveoverlays.mixin;
 
+import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -18,6 +19,7 @@ public class MiscMixin {
             at = @At(value = "RETURN"),
             cancellable = true, remap = false)
     private static void allowSpyglassesInBundles(Player player, Item item, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(OverlayHelpers.checkInventoryForItem(player.getInventory(), item, cir.getReturnValue()));
+        if (ModConfig.get().compat_xaeros && ModConfig.get().search_containers)
+            cir.setReturnValue(OverlayHelpers.checkInventoryForItem(player.getInventory(), item, cir.getReturnValue()));
     }
 }

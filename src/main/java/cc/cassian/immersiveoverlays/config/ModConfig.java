@@ -39,7 +39,9 @@ public class ModConfig {
     public boolean render_background = true;
     public boolean align_left = false;
     public boolean moved_by_effects = true;
-    public boolean map_atlases = false;
+    public boolean compat_playerlocatorplus = true;
+    public boolean compat_xaeros = true;
+    public boolean compat_map_atlases = false;
 
 
     public static void load() {

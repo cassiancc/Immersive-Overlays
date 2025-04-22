@@ -2,6 +2,7 @@ package cc.cassian.immersiveoverlays.helpers;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 
 import java.lang.reflect.Field;
@@ -35,6 +36,16 @@ public class ModHelpers {
                 throw new RuntimeException(e);
             }
         };
+    }
+
+    /**
+     * Automatically generate translation keys for config options.
+     */
+    public static Component fieldTooltip(Field field) {
+        var key = "config.%s.config.%s.tooltip".formatted(MOD_ID, field.getName());
+        if (I18n.exists("config.%s.config.%s.tooltip".formatted(MOD_ID, field.getName())))
+            return Component.translatable(key);
+        else return Component.empty();
     }
 
     /**

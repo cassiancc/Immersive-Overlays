@@ -229,11 +229,6 @@ public class OverlayHelpers {
         checkInventoryForStack(inventory);
     }
 
-    public static boolean checkInventoryForItem(Inventory inventory, TagKey<Item> item, boolean value) {
-        if (value) return true;
-        else return checkInventoryForStack(inventory, null) != ItemStack.EMPTY;
-    }
-
     public static boolean checkInventoryForItem(Inventory inventory, Item item, boolean value) {
         if (value) return true;
         else return checkInventoryForStack(inventory, item) != ItemStack.EMPTY;

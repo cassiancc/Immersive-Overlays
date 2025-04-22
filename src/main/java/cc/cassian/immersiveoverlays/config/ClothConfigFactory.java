@@ -39,37 +39,39 @@ public class ClothConfigFactory {
         final var generalCategory = createCategory(null, builder);
         final var compassCategory = createCategory("compass", builder);
         final var clockCategory = createCategory("clock", builder);
+        final var compatCategory = createCategory("compat", builder);
 
 
         for (var field : ModConfig.class.getFields()) {
             ConfigCategory category;
             if (is(field, "compass")) category = compassCategory;
             else if (is(field,"clock")) category = clockCategory;
+            else if (is(field,"compat")) category = compatCategory;
             else category = generalCategory;
 
             if (field.getType() == boolean.class) {
                 category.addEntry(entryBuilder.startBooleanToggle(fieldName(field), fieldGet(configInstance, field))
                         .setSaveConsumer(fieldSetter(configInstance, field))
-//                        .setTooltip(fieldTooltip(field))
+                        .setTooltip(fieldTooltip(field))
                         .setDefaultValue((boolean) fieldGet(DEFAULT_VALUES, field)).build());
 
             }
             else if (field.getType() == String.class) {
                 category.addEntry(entryBuilder.startStrField(fieldName(field), fieldGet(configInstance, field))
                         .setSaveConsumer(fieldSetter(configInstance, field))
-//                        .setTooltip(fieldTooltip(field))
+                        .setTooltip(fieldTooltip(field))
                         .setDefaultValue((String) fieldGet(DEFAULT_VALUES, field)).build());
             }
             else if (field.getType() == int.class) {
                 category.addEntry(entryBuilder.startIntField(fieldName(field), fieldGet(configInstance, field))
                         .setSaveConsumer(fieldSetter(configInstance, field))
-//                        .setTooltip(fieldTooltip(field))
+                        .setTooltip(fieldTooltip(field))
                         .setDefaultValue((int) fieldGet(DEFAULT_VALUES, field)).build());
             }
             else if (field.getType() == List.class) {
                 category.addEntry(entryBuilder.startStrList(fieldName(field), fieldGet(configInstance, field))
                         .setSaveConsumer(fieldSetter(configInstance, field))
-//                        .setTooltip(fieldTooltip(field))
+                        .setTooltip(fieldTooltip(field))
                         .setDefaultValue((List<String>) fieldGet(DEFAULT_VALUES, field)).build());
             }
         }

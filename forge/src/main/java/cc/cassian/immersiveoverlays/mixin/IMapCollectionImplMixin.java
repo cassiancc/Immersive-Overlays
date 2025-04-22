@@ -22,7 +22,7 @@ import java.util.Optional;
 public class IMapCollectionImplMixin {
     @Inject(method = "get", at = @At(value = "HEAD"), remap = false, cancellable = true)
     private static void mixin(ItemStack stack, Level level, CallbackInfoReturnable<IMapCollection> cir) {
-        if (ModConfig.get().map_atlases) {
+        if (ModConfig.get().compat_map_atlases) {
             if (OverlayHelpers.isContainer(stack)) {
                 List<ItemStack> contents = OverlayHelpers.getContainerContents(stack).toList();
                 for (ItemStack content : contents) {

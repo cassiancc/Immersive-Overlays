@@ -27,7 +27,7 @@ public class IMapCollectionImplMixin {
             at = @At(value = "INVOKE", target = "Ldev/onyxstudios/cca/api/v3/component/ComponentKey;maybeGet(Ljava/lang/Object;)Ljava/util/Optional;")
     )
     private static Object mixin(@Nullable Object provider) {
-        if (ModConfig.get().map_atlases) {
+        if (ModConfig.get().compat_map_atlases) {
             if (provider instanceof ItemStack stack) {
                 if (OverlayHelpers.isContainer(stack)) {
                     List<ItemStack> contents = OverlayHelpers.getContainerContents(stack).toList();

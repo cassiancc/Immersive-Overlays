@@ -4,6 +4,7 @@
   "package": "cc.cassian.immersiveoverlays.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
+	"PlayerLocatorPlusClientMixin"
   ],
   "injectors": {
 	"defaultRequire": 0
