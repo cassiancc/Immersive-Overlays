@@ -17,6 +17,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
@@ -45,7 +46,7 @@ public final class ImmersiveOverlaysNeoForge {
     }
 
     @SubscribeEvent
-    public static void renderGameOverlayEvent(CustomizeGuiOverlayEvent.Chat event) {
+    public static void renderGameOverlayEvent(RenderGuiLayerEvent.Post event) {
         CompassOverlay.renderGameOverlayEvent(event.getGuiGraphics());
         ClockOverlay.renderGameOverlayEvent(event.getGuiGraphics());
     }
