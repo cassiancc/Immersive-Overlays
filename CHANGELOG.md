@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Compat now has its own section in the config.
 - Xaero's Minimap compat can now be disabled.
+
+## Fixed
+- Registry code loading too early on Fabric.
 - No longer crashes on Forge and NeoForge servers.
 
 ## [1.0.1] - 04-20-2025
