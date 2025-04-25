@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Fixed
 - Registry code loading too early on Fabric.
 - No longer crashes on Forge and NeoForge servers.
+- Clipping issues with weather-only and coordinate overlays.
+- Map Atlases being installed no longer causes coordinate overlays to not display.
 
 ## [1.0.1] - 04-20-2025
 

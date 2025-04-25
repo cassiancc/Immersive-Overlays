@@ -17,7 +17,7 @@ public class MapAtlasesCompatImpl {
 
     public static boolean showingCoords(Player player) {
         //? if >1.20 {
-        return MapAtlasesClient.getCurrentActiveAtlas() != null && MapAtlasesClientConfig.drawMinimapCoords.get();
+        return !MapAtlasesClient.getCurrentActiveAtlas().isEmpty() && MapAtlasesClientConfig.drawMinimapCoords.get();
         //?} else {
         /*return !MapAtlasesAccessUtils.getAtlasFromPlayerByConfig(player).isEmpty() && MapAtlasesMod.CONFIG.drawMinimapCoords;
          *///?}

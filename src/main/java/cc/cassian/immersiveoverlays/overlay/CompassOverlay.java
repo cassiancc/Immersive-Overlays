@@ -66,7 +66,7 @@ public class CompassOverlay {
         else if (showY) {
             coords.add("§%sY:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
         }
-        if (!ClockOverlay.showTime || !ModConfig.get().clock_enable) {
+        if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable) {
             yPlacement = yPlacement - 15;
         }
         if (ClockOverlay.showWeather) {
