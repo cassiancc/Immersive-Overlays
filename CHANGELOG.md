@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+- Rendering issued with Raised on NeoForge.
+
+## [1.1] - 04-25-2025
+
 ### Added
 - Players with [Player Locator Plus](https://modrinth.com/mod/player-locator-plus) or [Better Player Locator Bar](https://modrinth.com/mod/bplb) installed now require a compass item in the inventory to display the bar. This can be disabled in the config.
 
@@ -14,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Compat now has its own section in the config.
 - Xaero's Minimap compat can now be disabled.
 
-## Fixed
+### Fixed
 - Registry code loading too early on Fabric.
 - No longer crashes on Forge and NeoForge servers.
 - Clipping issues with weather-only and coordinate overlays.
