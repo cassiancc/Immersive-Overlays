@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Support for overlays in backpacks and other armour slots.
+
+## [1.1.1] - 04-24-2025
+
 ### Fixed
 - Rendering issued with Raised on NeoForge.
 

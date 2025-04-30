@@ -146,21 +146,20 @@ public class OverlayHelpers {
         if (player == null)
             return;
         if (ModConfig.get().compass_enable || ModConfig.get().clock_enable) {
-            var inventory = player.getInventory();
-            var mainhand = player.getMainHandItem();
-            var offhand = player.getOffhandItem();
-            isImportantItem(offhand);
+            isImportantItemOrContainer(player.getOffhandItem());
             if (ModConfig.get().require_item_in_hand) {
-                isImportantItem(mainhand);
-                if (isContainer(mainhand)) {
-                    findImportantContainerContents(mainhand);
-                }
+                isImportantItemOrContainer(player.getMainHandItem());
             } else {
-                checkInventoryForItem(inventory);
+                player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
+                checkInventoryForItem(player.getInventory());
             }
-            if (isContainer(offhand)) {
-                findImportantContainerContents(offhand);
-            }
+        }
+    }
+
+    public static void isImportantItemOrContainer(ItemStack stack) {
+        isImportantItem(stack);
+        if (isContainer(stack)) {
+            findImportantContainerContents(stack);
         }
     }
 
