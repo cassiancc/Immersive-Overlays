@@ -6,18 +6,21 @@ import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.overlay.ClockOverlay;
 import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
-import cc.cassian.immersiveoverlays.overlay.OverlayLayer;
+//? if >1.21.2 {
+/*import cc.cassian.immersiveoverlays.overlay.OverlayLayer;
+import net.fabricmc.fabric.api.client.rendering.v1.HudLayerRegistrationCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.IdentifiedLayer;
+import net.minecraft.resources.ResourceLocation;
+*///?}
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.HudLayerRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.fabric.api.client.rendering.v1.IdentifiedLayer;
-import net.minecraft.resources.ResourceLocation;
 
 public final class ImmersiveOverlaysFabricClient implements ClientModInitializer {
-    public static final OverlayLayer LAYER = new OverlayLayer();
-
+    //? if >1.21.2 {
+    /*public static final OverlayLayer LAYER = new OverlayLayer();
+    *///?}
     @Override
     public void onInitializeClient() {
         // This entrypoint is suitable for setting up client-specific logic, such as rendering.
