@@ -19,6 +19,7 @@ architectury.common(stonecutter.tree.branches.mapNotNull {
 repositories {
     maven ( "https://api.modrinth.com/maven") // Modrinth
     maven ("https://maven.parchmentmc.org")
+    maven("https://maven.wispforest.io/releases")
 }
 
 dependencies {
@@ -42,7 +43,12 @@ dependencies {
     }
     modApi("me.shedaniel.cloth:cloth-config-fabric:${mod.dep("cloth_version")}")
     modCompileOnly("maven.modrinth:map-atlases:${mod.dep("map_atlases_fabric")}")
-
+    if (stonecutter.eval(mcVersion, ">1.19.2")) {
+        modCompileOnly("io.wispforest:accessories-common:${mod.dep("accessories")}+$minecraft")
+    }
+    if (stonecutter.eval(mcVersion, ">1.21")) {
+        modCompileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+$minecraft")
+    }
 }
 
 loom {

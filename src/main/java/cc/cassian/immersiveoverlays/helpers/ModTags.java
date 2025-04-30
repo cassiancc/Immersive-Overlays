@@ -1,4 +1,4 @@
-package cc.cassian.immersiveoverlays;
+package cc.cassian.immersiveoverlays.helpers;
 
 
 //? if >1.20 {

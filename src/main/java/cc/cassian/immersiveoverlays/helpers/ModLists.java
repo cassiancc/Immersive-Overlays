@@ -1,4 +1,4 @@
-package cc.cassian.immersiveoverlays;
+package cc.cassian.immersiveoverlays.helpers;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
 //? if >1.20 {

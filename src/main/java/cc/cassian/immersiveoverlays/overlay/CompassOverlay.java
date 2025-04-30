@@ -1,7 +1,7 @@
 package cc.cassian.immersiveoverlays.overlay;
 
 
-import cc.cassian.immersiveoverlays.ModCompat;
+import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.compat.MapAtlasesCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModHelpers;

@@ -2,7 +2,7 @@ package cc.cassian.immersiveoverlays.fabric;
 
 
 import cc.cassian.immersiveoverlays.ModClient;
-import cc.cassian.immersiveoverlays.ModLists;
+import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.overlay.ClockOverlay;
 import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;

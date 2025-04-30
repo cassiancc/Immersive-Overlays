@@ -46,6 +46,8 @@ repositories {
     maven ( "https://api.modrinth.com/maven")
     maven ("https://maven.parchmentmc.org")
     maven ("https://maven.ladysnake.org/releases")
+    maven("https://maven.wispforest.io/releases")
+
 }
 
 dependencies {
@@ -80,18 +82,31 @@ dependencies {
     }
     else if (stonecutter.eval(mcVersion, "<1.21.2")) {
         modImplementation("maven.modrinth:moonlight:fabric_${common.mod.dep("moonlight")}")
-        modRuntimeOnly("maven.modrinth:map-atlases:${common.mod.dep("map_atlases_fabric")}")
+//        modRuntimeOnly("maven.modrinth:map-atlases:${common.mod.dep("map_atlases_fabric")}")
     }
 
     modCompileOnly("maven.modrinth:bplb:v1.0.0")
     modImplementation("maven.modrinth:player-locator-plus:${common.mod.dep("player_locator_plus")}")
-    modRuntimeOnly("net.fabricmc:fabric-language-kotlin:1.13.2+kotlin.2.1.20")
+        runtimeOnly("com.akuleshov7:ktoml-core:0.5.2")
+        modRuntimeOnly("net.fabricmc:fabric-language-kotlin:1.13.2+kotlin.2.1.20")
     modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_Fabric_${common.mod.dep("xaeros_mc")}")
 
 
     if (stonecutter.eval(mcVersion, "=1.20.1")) {
         modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${common.mod.dep("cca")}")
         modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-item:${common.mod.dep("cca")}")
+    }
+
+    // Accessorify
+    if (stonecutter.eval(mcVersion, ">1.21")) {
+        modImplementation("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+$minecraft")
+    } else {
+        modCompileOnly("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+1.21.1")
+    }
+
+    // Accessories
+    if (stonecutter.eval(mcVersion, ">1.19.2")) {
+        modCompileOnly("io.wispforest:accessories-fabric:${common.mod.dep("accessories")}+$minecraft")
     }
 
     // Stonecutter/Arch

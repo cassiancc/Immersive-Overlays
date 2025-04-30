@@ -12,6 +12,7 @@
   },
   "mixins": [
 	"IMapCollectionImplMixin",
+	"InfoOverlaysMixin",
 	"MapAtlasAccessUtilsMixin",
 	"MiscMixin"
   ]

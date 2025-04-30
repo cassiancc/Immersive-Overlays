@@ -2,10 +2,10 @@ package cc.cassian.immersiveoverlays.overlay;
 
 
 import cc.cassian.immersiveoverlays.ModClient;
-import cc.cassian.immersiveoverlays.ModCompat;
-import cc.cassian.immersiveoverlays.ModLists;
-import cc.cassian.immersiveoverlays.ModTags;
-import cc.cassian.immersiveoverlays.compat.MapAtlasesCompat;
+import cc.cassian.immersiveoverlays.helpers.ModLists;
+import cc.cassian.immersiveoverlays.helpers.ModTags;
+import cc.cassian.immersiveoverlays.compat.AccessoriesCompat;
+import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 
 import net.minecraft.client.Minecraft;
@@ -18,7 +18,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -151,7 +150,9 @@ public class OverlayHelpers {
                 isImportantItemOrContainer(player.getMainHandItem());
             } else {
                 player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
-                checkInventoryForItem(player.getInventory());
+                if (ModCompat.ACCESSORIES)
+                    AccessoriesCompat.checkForImportantAccessories(player);
+                checkInventoryForStack(player.getInventory());
             }
         }
     }
@@ -222,10 +223,6 @@ public class OverlayHelpers {
         }
         //?}
         return true;
-    }
-
-    public static void checkInventoryForItem(Inventory inventory) {
-        checkInventoryForStack(inventory);
     }
 
     public static boolean checkInventoryForItem(Inventory inventory, Item item, boolean value) {

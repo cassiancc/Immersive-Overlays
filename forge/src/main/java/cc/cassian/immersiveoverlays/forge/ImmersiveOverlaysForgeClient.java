@@ -1,7 +1,7 @@
 package cc.cassian.immersiveoverlays.forge;
 
 import cc.cassian.immersiveoverlays.ModClient;
-import cc.cassian.immersiveoverlays.ModLists;
+import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.config.forge.ModConfigFactory;
 import cc.cassian.immersiveoverlays.overlay.ClockOverlay;
 import cc.cassian.immersiveoverlays.overlay.CompassOverlay;

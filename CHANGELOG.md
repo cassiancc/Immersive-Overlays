@@ -8,7 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-- Support for overlays in backpacks and other armour slots.
+- Support for overlay items in backpacks and other armour slots.
+- Support for overlay items in accessory slots from Accessories.
+- When Accessorify is present, Immersive Overlays will replace Accessorify overlays with Immersive Overlays. This can be disabled in the config.
 
 ## [1.1.1] - 04-24-2025
 

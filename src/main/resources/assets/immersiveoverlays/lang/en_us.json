@@ -29,6 +29,8 @@
   "config.immersiveoverlays.config.compat_playerlocatorplus": "Require compass for locator bar",
   "config.immersiveoverlays.config.compat_xaeros": "Allow minimap items in containers",
   "config.immersiveoverlays.config.compat_xaeros.tooltip": "Requires Xaero's Minimap",
+  "config.immersiveoverlays.config.compat_accessorify": "Replace Accessorify Overlays",
+  "config.immersiveoverlays.config.compat_accessorify.tooltip": "Requires Accessorify",
   "tag.item.immersiveoverlays.shows_xz": "Shows X/Z Coordinates",
   "tag.item.immersiveoverlays.shows_y": "Shows Y Coordinates",
   "tag.item.immersiveoverlays.shows_time": "Shows Time",

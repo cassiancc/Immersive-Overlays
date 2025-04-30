@@ -38,11 +38,15 @@ configurations {
 }
 
 repositories {
-    maven("https://maven.minecraftforge.net")
+    maven ( "https://maven.minecraftforge.net" )
     maven ( "https://maven.shedaniel.me/" )
     maven ( "https://maven.terraformersmc.com/releases/" )
     maven ( "https://api.modrinth.com/maven")
     maven ( "https://cursemaven.com" )
+    maven ( "https://maven.parchmentmc.org" )
+    maven ( "https://maven.wispforest.io/releases" )
+    maven ( "https://maven.su5ed.dev/releases" )
+
 }
 
 val mcVersion = stonecutter.current.project.substringBeforeLast('-')
@@ -71,14 +75,18 @@ dependencies {
 
     // Cloth Config
     modApi("me.shedaniel.cloth:cloth-config-forge:${common.mod.dep("cloth_version")}")
+
+    // Map Atlases
     modImplementation("curse.maven:map-atlases-forge-519759:${common.mod.dep("map_atlases_forge")}")
     if (stonecutter.eval(mcVersion, "=1.19.2")) {
         modImplementation("maven.modrinth:moonlight:${common.mod.dep("moonlight")}-forge")
     } else {
         modImplementation("maven.modrinth:moonlight:forge_${common.mod.dep("moonlight")}")
+        modImplementation("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+$minecraft")
     }
-    modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_Forge_${common.mod.dep("xaeros_mc")}")
 
+    // Xaero's Minimap
+    modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_Forge_${common.mod.dep("xaeros_mc")}")
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionForge")) { isTransitive = false }

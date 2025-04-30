@@ -45,6 +45,8 @@ repositories {
     maven ( "https://maven.terraformersmc.com/releases/" )
     maven ( "https://api.modrinth.com/maven")
     maven ( "https://cursemaven.com" )
+    maven ( "https://maven.wispforest.io/releases" )
+    maven ( "https://maven.su5ed.dev/releases" )
 }
 
 dependencies {
@@ -69,6 +71,8 @@ dependencies {
 
     // Cloth Config
     modApi("me.shedaniel.cloth:cloth-config-neoforge:${common.mod.dep("cloth_version")}")
+
+    // Map Atlases
     if (stonecutter.eval(mcVersion, "<1.21.2")) {
         modImplementation("curse.maven:map-atlases-forge-519759:${common.mod.dep("map_atlases_forge")}")
         modImplementation("maven.modrinth:moonlight:neoforge_${common.mod.dep("moonlight")}")
@@ -77,7 +81,16 @@ dependencies {
         modCompileOnly("curse.maven:map-atlases-forge-519759:${common.mod.dep("map_atlases_forge")}")
         modCompileOnly("maven.modrinth:moonlight:neoforge_${common.mod.dep("moonlight")}")
     }
+
+    // Xaero's Minimap
     modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_NeoForge_${common.mod.dep("xaeros_mc")}")
+
+    // Accessories
+    modImplementation("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+$minecraft")
+
+    // Accessorify
+    modImplementation("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+$minecraft")
+
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionNeoForge")) { isTransitive = false }

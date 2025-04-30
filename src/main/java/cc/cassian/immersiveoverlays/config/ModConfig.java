@@ -1,7 +1,7 @@
 package cc.cassian.immersiveoverlays.config;
 
 import cc.cassian.immersiveoverlays.ModClient;
-import cc.cassian.immersiveoverlays.ModLists;
+import cc.cassian.immersiveoverlays.helpers.ModLists;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -42,6 +42,7 @@ public class ModConfig {
     public boolean compat_playerlocatorplus = true;
     public boolean compat_xaeros = true;
     public boolean compat_map_atlases = false;
+    public boolean compat_accessorify = true;
 
 
     public static void load() {
