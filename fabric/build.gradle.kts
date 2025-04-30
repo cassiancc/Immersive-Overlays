@@ -106,7 +106,7 @@ dependencies {
 
     // Accessories
     if (stonecutter.eval(mcVersion, ">1.19.2")) {
-        modCompileOnly("io.wispforest:accessories-fabric:${common.mod.dep("accessories")}+$minecraft")
+        modImplementation("io.wispforest:accessories-fabric:${common.mod.dep("accessories")}+$minecraft")
     }
 
     // Stonecutter/Arch

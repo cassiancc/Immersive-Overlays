@@ -1,3 +1,4 @@
+//? if >1.20 {
 package cc.cassian.immersiveoverlays.compat;
 
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
@@ -18,3 +19,4 @@ public class AccessoriesCompat {
         }
     }
 }
+//?}

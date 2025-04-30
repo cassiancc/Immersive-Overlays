@@ -1,6 +1,6 @@
 package cc.cassian.immersiveoverlays.mixin;
 
-import cc.cassian.immersiveoverlays.ModTags;
+import cc.cassian.immersiveoverlays.helpers.ModTags;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 import net.minecraft.world.item.ItemStack;

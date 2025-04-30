@@ -4,17 +4,18 @@ package cc.cassian.immersiveoverlays.overlay;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.helpers.ModTags;
-import cc.cassian.immersiveoverlays.compat.AccessoriesCompat;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
+import cc.cassian.immersiveoverlays.compat.AccessoriesCompat;
 //?} else {
 /*import net.minecraft.client.gui.GuiComponent;
 import com.mojang.blaze3d.vertex.PoseStack;
  *///?}
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
@@ -23,7 +24,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 //? if >1.20.5 {
-/*import net.minecraft.world.item.component.BundleContents;
+/*import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.core.component.DataComponents;
 *///?}
@@ -150,8 +152,10 @@ public class OverlayHelpers {
                 isImportantItemOrContainer(player.getMainHandItem());
             } else {
                 player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
+                //? if >1.20 {
                 if (ModCompat.ACCESSORIES)
                     AccessoriesCompat.checkForImportantAccessories(player);
+                //?}
                 checkInventoryForStack(player.getInventory());
             }
         }
