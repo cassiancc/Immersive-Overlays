@@ -44,6 +44,8 @@ public class ModConfig {
     public boolean compat_xaeros = true;
     public boolean compat_map_atlases = false;
     public boolean compat_accessorify = true;
+    public boolean biome_enable = true;
+    public int biome_vertical_position = 150;
 
 
     public static void load() {

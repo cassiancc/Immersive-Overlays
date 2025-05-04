@@ -3,6 +3,7 @@ package cc.cassian.immersiveoverlays.fabric;
 
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
+import cc.cassian.immersiveoverlays.overlay.BiomeOverlay;
 import cc.cassian.immersiveoverlays.overlay.ClockOverlay;
 import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
@@ -31,6 +32,7 @@ public final class ImmersiveOverlaysFabricClient implements ClientModInitializer
         HudRenderCallback.EVENT.register(((matrixStack, tickDelta) -> {
             CompassOverlay.renderGameOverlayEvent(matrixStack);
             ClockOverlay.renderGameOverlayEvent(matrixStack);
+            BiomeOverlay.renderGameOverlayEvent(matrixStack);
         }));
         //?}
         ClientTickEvents.END_CLIENT_TICK.register(OverlayHelpers::checkInventoryForOverlays);
