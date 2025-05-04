@@ -66,14 +66,14 @@ public class CompassOverlay {
         int fontWidth = mc.font.width(StringUtils.repeat("a", width+2))+iconOffset;
 
         if (showXZ) {
-            coords.add("§%sX:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_x_colour), x));
+            coords.add("§%sX:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_x_colour), x));
             if (showY) {
-                coords.add("§%sY:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
+                coords.add("§%sY:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
             }
-            coords.add("§%sZ:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_z_colour), z));
+            coords.add("§%sZ:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_z_colour), z));
         }
         else if (showY) {
-            coords.add("§%sY:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
+            coords.add("§%sY:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
         }
         if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable) {
             yPlacement = yPlacement - 15;
