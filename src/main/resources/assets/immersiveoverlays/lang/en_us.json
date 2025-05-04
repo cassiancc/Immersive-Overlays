@@ -5,6 +5,7 @@
   "config.immersiveoverlays.title": "Immersive Overlays",
   "config.immersiveoverlays.config.compass_enable": "Enable coordinate overlay",
   "config.immersiveoverlays.config.clock_enable": "Enable clock overlay",
+  "config.immersiveoverlays.config.hide_from_debug": "Hide overlay from F3",
   "config.immersiveoverlays.config.compass_items": "Items that show X/Z coordinates",
   "config.immersiveoverlays.config.compass_depth_items": "Items that show Y coordinates",
   "config.immersiveoverlays.config.clock_items": "Items that show time overlay",

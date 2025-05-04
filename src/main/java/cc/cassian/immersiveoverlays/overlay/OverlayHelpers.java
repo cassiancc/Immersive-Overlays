@@ -109,12 +109,15 @@ public class OverlayHelpers {
     }
 
     public static boolean debug(Minecraft mc) {
-        //? if >1.21 {
-        /*var debug = mc.getDebugOverlay().showDebugScreen();
-        *///?} else {
-        var debug = mc.options.renderDebug;
-         //?}
-        return debug && !mc.options.reducedDebugInfo().get();
+        if (ModConfig.get().hide_from_debug) {
+            //? if >1.21 {
+            /*var debug = mc.getDebugOverlay().showDebugScreen();
+             *///?} else {
+            var debug = mc.options.renderDebug;
+            //?}
+            return debug && !mc.options.reducedDebugInfo().get();
+        }
+        return false;
     }
 
     private static void findImportantContainerContents(ItemStack container) {

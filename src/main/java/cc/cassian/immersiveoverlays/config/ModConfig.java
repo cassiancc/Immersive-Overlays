@@ -22,6 +22,7 @@ public class ModConfig {
     private static ModConfig INSTANCE = new ModConfig();
     //General settings
     public boolean compass_enable = true;
+    public boolean hide_from_debug = true;
     public int compass_vertical_position = 105;
     public List<String> compass_items = List.of("minecraft:compass", "minecraft:recovery_compass", "spelunkery:magnetic_compass");
     public List<String> compass_depth_items = List.of("spelunkery:depth_gauge","caverns_and_chasms:depth_gauge","additionaladditions:depth_meter","supplementaries:altimeter","depthmeter:depthmeter");
