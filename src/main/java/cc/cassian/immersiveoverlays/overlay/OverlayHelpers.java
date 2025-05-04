@@ -149,6 +149,7 @@ public class OverlayHelpers {
         CompassOverlay.showY = false;
         ClockOverlay.showTime = false;
         ClockOverlay.showWeather = false;
+        BiomeOverlay.showBiome = false;
         if (player == null)
             return;
         if (ModConfig.get().compass_enable || ModConfig.get().clock_enable) {

@@ -2,15 +2,19 @@ package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.client.Minecraft;
+//? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
+//?} else {
+/*import net.minecraft.client.gui.GuiComponent;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.systems.RenderSystem;
+ *///?}
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biomes;
 import org.apache.commons.lang3.text.WordUtils;
 
-import java.io.IOException;
 import java.util.Objects;
 
 import static cc.cassian.immersiveoverlays.ModClient.MOD_ID;
@@ -61,7 +65,7 @@ public class BiomeOverlay {
         //? if >1.20 {
         poseStack.drawString(mc.font, biomeText, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
         //?} else {
-        /*GuiComponent.drawString(poseStack, mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
+        /*GuiComponent.drawString(poseStack, mc.font, biomeText, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
          *///?}
         var sprite = getBiomeSprite(biome);
 

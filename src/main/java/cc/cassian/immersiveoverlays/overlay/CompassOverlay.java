@@ -30,6 +30,7 @@ public class CompassOverlay {
     //?} else {
         /*public static void renderGameOverlayEvent(PoseStack poseStack) {
      *///?}
+        boolean showBiomeIcon = ModConfig.get().biome_enable && BiomeOverlay.showBiome && ModConfig.get().biome_reduced_info;
         if (!showXZ && !showY)
             return;
         if (!ModConfig.get().compass_enable)
@@ -57,35 +58,21 @@ public class CompassOverlay {
         z = StringUtils.leftPad(z, width);
         int xOffset = 3;
         int yPlacement = ModConfig.get().compass_vertical_position;
-        int iconOffset = 0;
-        if (ModConfig.get().biome_enable) {
-            if (ModConfig.get().biome_reduced_info) {
-                iconOffset += 20;
-            }
+        int iconXOffset = 0;
+        int iconYOffset = 0;
+        if (showBiomeIcon) {
+            iconXOffset += 20;
         }
-        int fontWidth = mc.font.width(StringUtils.repeat("a", width+2))+iconOffset;
+        int fontWidth = mc.font.width(StringUtils.repeat("a", width+2))+iconXOffset;
 
-        if (showXZ) {
-            coords.add("§%sX:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_x_colour), x));
-            if (showY) {
-                coords.add("§%sY:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
-            }
-            coords.add("§%sZ:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_z_colour), z));
-        }
-        else if (showY) {
-            coords.add("§%sY:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
-        }
         if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable) {
             yPlacement = yPlacement - 15;
-        }
-        if (!ModConfig.get().biome_enable || !BiomeOverlay.showBiome || ModConfig.get().biome_reduced_info) {
-            yPlacement = yPlacement-20;
         }
         if (ClockOverlay.showWeather) {
             yPlacement = yPlacement + 9;
         }
-        if (!BiomeOverlay.showBiome || !ModConfig.get().biome_enable) {
-            yPlacement = yPlacement - 15;
+        if (!BiomeOverlay.showBiome || ModConfig.get().biome_reduced_info) {
+            yPlacement = yPlacement - 20;
         }
         if (OverlayHelpers.playerHasPotions(mc.player)) {
             yPlacement += OverlayHelpers.moveBy(mc.player);
@@ -93,13 +80,26 @@ public class CompassOverlay {
 
         int textureOffset = 7;  // only depth gauge
         int tooltipSize = 16;  // only depth gauge
-        if (showXZ & (showY)) { // depth gauge and compass
-            textureOffset = 51;
-            tooltipSize = 35;
-        }
-        else if (showXZ) { // only compass
-            textureOffset = 25;
-            tooltipSize = 25;
+        if (showXZ) {
+            coords.add("§%sX:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_x_colour), x));
+            if (showY) { // depth gauge and compass
+                coords.add("§%sY:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
+                textureOffset = 51;
+                tooltipSize = 35;
+                iconYOffset = 5;
+            } else { // only compass
+                textureOffset = 25;
+                tooltipSize = 25;
+                iconYOffset = 3;
+            }
+            coords.add("§%sZ:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_z_colour), z));
+        } else if (showY) {
+            coords.add("§%sY:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
+            if (showBiomeIcon) {
+                textureOffset = 25;
+                tooltipSize = 25;
+                iconYOffset = 3;
+            }
         }
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();
@@ -108,7 +108,7 @@ public class CompassOverlay {
         /*RenderSystem.setShaderTexture(0, OverlayHelpers.TEXTURE);*/
         // render background
         OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize);
-        if (ModConfig.get().biome_reduced_info  && ModConfig.get().biome_enable) {
+        if (showBiomeIcon) {
             var sprite = getBiomeSprite(getBiome(mc.player));
 
             //? if >1.21.2 {
@@ -120,7 +120,7 @@ public class CompassOverlay {
         /*RenderSystem.setShaderTexture(0, sprite);
            GuiComponent.blit(poseStack,
          *///?}
-                    xPlacement-xOffset-1, yPlacement+5,
+                    xPlacement-xOffset-1, yPlacement+iconYOffset,
                     0, 0,
                     0, 16, 16,
                     16, 16);
@@ -128,7 +128,7 @@ public class CompassOverlay {
         // render text
         for (String text : coords) {
             //? if >1.20 {
-            poseStack.drawString(mc.font, text, xPlacement-xOffset+iconOffset, yPlacement, 14737632);
+            poseStack.drawString(mc.font, text, xPlacement-xOffset+iconXOffset, yPlacement, 14737632);
             //?} else {
             /*GuiComponent.drawString(poseStack, mc.font, text, xPlacement-xOffset, yPlacement, 14737632);
              *///?}
