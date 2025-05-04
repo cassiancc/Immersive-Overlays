@@ -12,6 +12,8 @@
   "config.immersiveoverlays.config.compass_depth_items": "Items that show Y coordinates",
   "config.immersiveoverlays.config.clock_items": "Items that show time overlay",
   "config.immersiveoverlays.config.clock_weather_items": "Items that show weather overlay",
+  "config.immersiveoverlays.config.biome_items": "Items that show biome overlay",
+  "config.immersiveoverlays.config.biome_reduced_info": "Reduced Biome Info",
   "config.immersiveoverlays.config.search_containers": "Allow items in bundles/containers",
   "config.immersiveoverlays.config.require_item_in_hand": "Require item in hand",
   "config.immersiveoverlays.config.compass_x_colour": "X Color",

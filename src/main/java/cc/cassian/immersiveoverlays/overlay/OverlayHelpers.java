@@ -140,6 +140,8 @@ public class OverlayHelpers {
             ClockOverlay.showTime = true;
         if (ModLists.weather_items.contains(item))
             ClockOverlay.showWeather = true;
+        if (ModLists.biome_items.contains(item))
+            BiomeOverlay.showBiome = true;
     }
 
     public static void checkInventoryForItems(Player player) {

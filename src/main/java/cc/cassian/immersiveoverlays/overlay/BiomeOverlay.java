@@ -13,7 +13,7 @@ import org.apache.commons.lang3.text.WordUtils;
 import static cc.cassian.immersiveoverlays.ModClient.MOD_ID;
 
 public class BiomeOverlay {
-    public static boolean showBiome = true;
+    public static boolean showBiome = false;
 
 
     //? if >1.20 {
@@ -23,6 +23,9 @@ public class BiomeOverlay {
      *///?}
         if (!showBiome)
             return;
+        if (ModConfig.get().biome_reduced_info) {
+            return;
+        }
         if (!ModConfig.get().biome_enable)
             return;
         var mc = Minecraft.getInstance();
@@ -74,7 +77,7 @@ public class BiomeOverlay {
                 16, 16);
     }
 
-    private static ResourceLocation getBiomeSprite(ResourceLocation biome) {
+    public static ResourceLocation getBiomeSprite(ResourceLocation biome) {
         var key = ResourceLocation.tryBuild(biome.getNamespace(), "textures/immersiveoverlays/"+ biome.getPath() +".png");
         if (Minecraft.getInstance().getResourceManager().getResource(key).isPresent())
             return key;
@@ -82,7 +85,7 @@ public class BiomeOverlay {
             return ResourceLocation.tryBuild(MOD_ID, "textures/immersiveoverlays/undefined.png");
     }
 
-    private static ResourceLocation getBiome(LocalPlayer player) {
+    public static ResourceLocation getBiome(LocalPlayer player) {
         //? if >1.20 {
         var level = player.level();
         //?} else {

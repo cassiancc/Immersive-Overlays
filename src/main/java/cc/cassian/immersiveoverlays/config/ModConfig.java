@@ -45,7 +45,10 @@ public class ModConfig {
     public boolean compat_map_atlases = false;
     public boolean compat_accessorify = true;
     public boolean biome_enable = true;
+    public boolean biome_reduced_info = false;
     public int biome_vertical_position = 112;
+    public List<String> biome_items = List.of("minecraft:map", "minecraft:empty_map");
+
 
 
     public static void load() {

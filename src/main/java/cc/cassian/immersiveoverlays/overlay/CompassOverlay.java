@@ -18,6 +18,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 
+import static cc.cassian.immersiveoverlays.overlay.BiomeOverlay.getBiome;
+import static cc.cassian.immersiveoverlays.overlay.BiomeOverlay.getBiomeSprite;
+
 public class CompassOverlay {
     public static boolean showXZ = false;
     public static boolean showY = false;
@@ -54,7 +57,13 @@ public class CompassOverlay {
         z = StringUtils.leftPad(z, width);
         int xOffset = 3;
         int yPlacement = ModConfig.get().compass_vertical_position;
-        int fontWidth = mc.font.width(StringUtils.repeat("a", width+2));
+        int iconOffset = 0;
+        if (ModConfig.get().biome_enable) {
+            if (ModConfig.get().biome_reduced_info) {
+                iconOffset += 20;
+            }
+        }
+        int fontWidth = mc.font.width(StringUtils.repeat("a", width+2))+iconOffset;
 
         if (showXZ) {
             coords.add("§%sX:§f %s".formatted(ModHelpers.getColour(ModConfig.get().compass_x_colour), x));
@@ -69,8 +78,14 @@ public class CompassOverlay {
         if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable) {
             yPlacement = yPlacement - 15;
         }
+        if (!ModConfig.get().biome_enable || !BiomeOverlay.showBiome || ModConfig.get().biome_reduced_info) {
+            yPlacement = yPlacement-20;
+        }
         if (ClockOverlay.showWeather) {
             yPlacement = yPlacement + 9;
+        }
+        if (!BiomeOverlay.showBiome || !ModConfig.get().biome_enable) {
+            yPlacement = yPlacement - 15;
         }
         if (OverlayHelpers.playerHasPotions(mc.player)) {
             yPlacement += OverlayHelpers.moveBy(mc.player);
@@ -93,10 +108,27 @@ public class CompassOverlay {
         /*RenderSystem.setShaderTexture(0, OverlayHelpers.TEXTURE);*/
         // render background
         OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize);
+        if (ModConfig.get().biome_reduced_info  && ModConfig.get().biome_enable) {
+            var sprite = getBiomeSprite(getBiome(mc.player));
+
+            //? if >1.21.2 {
+            /*poseStack.blit(RenderType::guiTextured, sprite,
+             *///?} else if >1.20 {
+            poseStack.blit(sprite,
+                    //?} else {
+
+        /*RenderSystem.setShaderTexture(0, sprite);
+           GuiComponent.blit(poseStack,
+         *///?}
+                    xPlacement-xOffset-1, yPlacement+5,
+                    0, 0,
+                    0, 16, 16,
+                    16, 16);
+        }
         // render text
         for (String text : coords) {
             //? if >1.20 {
-            poseStack.drawString(mc.font, text, xPlacement-xOffset, yPlacement, 14737632);
+            poseStack.drawString(mc.font, text, xPlacement-xOffset+iconOffset, yPlacement, 14737632);
             //?} else {
             /*GuiComponent.drawString(poseStack, mc.font, text, xPlacement-xOffset, yPlacement, 14737632);
              *///?}
