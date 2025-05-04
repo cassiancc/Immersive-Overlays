@@ -23,7 +23,7 @@ public class ModConfig {
     //General settings
     public boolean compass_enable = true;
     public boolean hide_from_debug = true;
-    public int compass_vertical_position = 105;
+    public int compass_vertical_position = 125;
     public List<String> compass_items = List.of("minecraft:compass", "minecraft:recovery_compass", "spelunkery:magnetic_compass");
     public List<String> compass_depth_items = List.of("spelunkery:depth_gauge","caverns_and_chasms:depth_gauge","additionaladditions:depth_meter","supplementaries:altimeter","depthmeter:depthmeter");
     public boolean compass_hide_when_similar_mods_present = true;
@@ -45,7 +45,7 @@ public class ModConfig {
     public boolean compat_map_atlases = false;
     public boolean compat_accessorify = true;
     public boolean biome_enable = true;
-    public int biome_vertical_position = 150;
+    public int biome_vertical_position = 112;
 
 
     public static void load() {

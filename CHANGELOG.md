@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## Added
+- Biome overlays, displayed when a map is in the inventory, that show the current biome.
+- Option to show overlays when F3 is open.
+
+## [1.2.0] - 04-30-2025
+
 ### Added
 - Support for overlay items in backpacks and other armour slots.
 - Support for overlay items in accessory slots from Accessories.
