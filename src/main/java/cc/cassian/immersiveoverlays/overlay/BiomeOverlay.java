@@ -10,6 +10,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biomes;
 import org.apache.commons.lang3.text.WordUtils;
 
+import java.io.IOException;
+import java.util.Objects;
+
 import static cc.cassian.immersiveoverlays.ModClient.MOD_ID;
 
 public class BiomeOverlay {
@@ -78,11 +81,21 @@ public class BiomeOverlay {
     }
 
     public static ResourceLocation getBiomeSprite(ResourceLocation biome) {
-        var key = ResourceLocation.tryBuild(biome.getNamespace(), "textures/immersiveoverlays/"+ biome.getPath() +".png");
-        if (Minecraft.getInstance().getResourceManager().getResource(key).isPresent())
+        var manager = Minecraft.getInstance().getResourceManager();
+        var path = "textures/immersiveoverlays/"+ biome.getPath();
+        var key = ResourceLocation.tryBuild(biome.getNamespace(), "%s.png".formatted(path));
+        var redirect = ResourceLocation.tryBuild(biome.getNamespace(), "%s.txt".formatted(path));
+        if (manager.getResource(key).isPresent())
             return key;
-        else
+        else if (manager.getResource(redirect).isPresent()) {
+            try {
+                return getBiomeSprite(Objects.requireNonNull(ResourceLocation.tryParse(manager.openAsReader(redirect).lines().toList().get(0))));
+            } catch (Exception e) {
+                return ResourceLocation.tryBuild(MOD_ID, "textures/immersiveoverlays/undefined.png");
+            }
+        } else {
             return ResourceLocation.tryBuild(MOD_ID, "textures/immersiveoverlays/undefined.png");
+        }
     }
 
     public static ResourceLocation getBiome(LocalPlayer player) {
