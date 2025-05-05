@@ -74,7 +74,7 @@ public class OverlayHelpers {
     }
 
     public static void checkInventoryForOverlays(Minecraft minecraft){
-        if ((ModConfig.get().compass_enable || ModConfig.get().clock_enable) && minecraft.level != null) {
+        if ((ModConfig.get().compass_enable || ModConfig.get().clock_enable || ModConfig.get().biome_enable)  && minecraft.level != null) {
             OverlayHelpers.checkInventoryForItems(minecraft.player);
         }
     }
