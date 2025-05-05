@@ -39,7 +39,7 @@ public class OverlayHelpers {
     public static final ResourceLocation TEXTURE = ModClient.locate("textures/gui/overlay.png");
 
     //? if >1.20 {
-    public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
+    public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize, boolean leftAlign) {
     //?} else {
         /*public static void renderBackground(PoseStack poseStack, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
     *///?}
@@ -66,7 +66,7 @@ public class OverlayHelpers {
             //?} else {
            /*GuiComponent.blit(poseStack,
              *///?}
-                    OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth), yPlacementWithOffset,
+                    OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth, leftAlign), yPlacementWithOffset,
                     0, endCapOffset,
                     textureOffset, 3, tooltipSize,
                     OverlayHelpers.textureSize, OverlayHelpers.textureSize);
@@ -265,16 +265,16 @@ public class OverlayHelpers {
         return ItemStack.EMPTY;
     }
 
-   public static int getPlacement(int windowWidth, int fontWidth) {
-        if (ModConfig.get().align_left) {
+   public static int getPlacement(int windowWidth, int fontWidth, boolean leftAlign) {
+        if (leftAlign) {
             return 9;
         } else {
             return windowWidth-2-fontWidth;
         }
     }
 
-    public static int getEndCapPlacement(int windowWidth, int fontWidth) {
-        if (ModConfig.get().align_left) {
+    public static int getEndCapPlacement(int windowWidth, int fontWidth, boolean leftAlign) {
+        if (leftAlign) {
             return fontWidth+8;
         } else {
             return windowWidth-4;

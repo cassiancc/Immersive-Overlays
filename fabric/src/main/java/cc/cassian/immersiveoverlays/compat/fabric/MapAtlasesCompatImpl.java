@@ -27,10 +27,10 @@ public class MapAtlasesCompatImpl {
         //? if >1.20 {
         var anchoring = MapAtlasesClientConfig.miniMapAnchoring.get();
         if (anchoring.isUp) {
-            if (anchoring.isLeft && ModConfig.get().align_left) {
+            if (anchoring.isLeft && ModConfig.get().compass_horizontal_position_left) {
                 return true;
             }
-            if (!anchoring.isLeft && !ModConfig.get().align_left) {
+            if (!anchoring.isLeft && !ModConfig.get().compass_horizontal_position_left) {
                 return true;
             }
         }

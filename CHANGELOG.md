@@ -8,8 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ## Added
-- Biome overlays, displayed when a map is in the inventory, that show the current biome.
+- Biome overlays, displayed when a map is in the inventory, that show the current biome. Additional biomes can be added via resource packs, with support for all of Minecraft's biomes included.
 - Option to show overlays when F3 is open.
+- Individual options to left align particular overlays.
 
 ## [1.2.0] - 04-30-2025
 

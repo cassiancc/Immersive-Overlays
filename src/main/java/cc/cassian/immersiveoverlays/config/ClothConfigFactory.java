@@ -49,8 +49,8 @@ public class ClothConfigFactory {
             else if (is(field,"biome")) category = biomeCategory;
             else if (is(field,"compat")) category = compatCategory;
             else category = generalCategory;
-
-            if (field.getType() == boolean.class) {
+            if (is(field, "version")) {}
+            else if (field.getType() == boolean.class) {
                 category.addEntry(entryBuilder.startBooleanToggle(fieldName(field), fieldGet(configInstance, field))
                         .setSaveConsumer(fieldSetter(configInstance, field))
                         .setTooltip(fieldTooltip(field))

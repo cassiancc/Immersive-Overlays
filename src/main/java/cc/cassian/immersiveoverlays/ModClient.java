@@ -11,6 +11,7 @@ public class ModClient {
     public static final String MOD_ID = "immersiveoverlays";
     public static final String MOD_NAME = "Immersive Overlays";
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
+    public static final int CONFIG_VERSION = 0;
     public static void init() {
         ModConfig.load();
     }

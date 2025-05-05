@@ -62,10 +62,10 @@ public class ClockOverlay {
         }
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();
-        int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth);
+        int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().clock_horizontal_position_left);
         //? if <1.20
         /*RenderSystem.setShaderTexture(0, OverlayHelpers.TEXTURE);*/
-        OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize);
+        OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize, ModConfig.get().clock_horizontal_position_left);
         if (showTime) {
             // render text
             //? if >1.20 {

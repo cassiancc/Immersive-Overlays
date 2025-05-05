@@ -57,10 +57,10 @@ public class BiomeOverlay {
         }
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();
-        int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth);
+        int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().biome_horizontal_position_left);
         //? if <1.20
         /*RenderSystem.setShaderTexture(0, OverlayHelpers.TEXTURE);*/
-        OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize);
+        OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize, ModConfig.get().biome_horizontal_position_left);
         // render text
         //? if >1.20 {
         poseStack.drawString(mc.font, biomeText, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
