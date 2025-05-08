@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## Added
+### Added
 - Biome overlays, displayed when a map is in the inventory, that show the current biome. Additional biomes can be added via resource packs, with support for all of Minecraft's biomes included.
+  - Mod support is in the works - Atmospheric, Quark, and Nature's Spirit have biomes included in this release.
 - Option to show overlays when F3 is open.
 - Individual options to left align particular overlays.
+
+### Fixed
+- Weather overlays no longer move randomly.
 
 ## [1.2.0] - 04-30-2025
 

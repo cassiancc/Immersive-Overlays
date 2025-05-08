@@ -32,9 +32,12 @@ public class ClockOverlay {
             return;
         var mc = Minecraft.getInstance();
 
-        var time = getTime(mc.level.getDayTime());
-        if (time.length() == 4) {
-            time = " " + time;
+        String time = "Hi! ";
+        if (showTime) {
+            time = getTime(mc.level.getDayTime());
+            if (time.length() == 4) {
+                time = " " + time;
+            }
         }
 
         int xOffset = 3;
