@@ -41,7 +41,7 @@ public class OverlayHelpers {
     //? if >1.20 {
     public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize, boolean leftAlign) {
     //?} else {
-        /*public static void renderBackground(PoseStack poseStack, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
+        /*public static void renderBackground(PoseStack poseStack, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize, boolean leftAlign) {
     *///?}
         if (ModConfig.get().render_background) {
             final int yPlacementWithOffset = yPlacement-4;

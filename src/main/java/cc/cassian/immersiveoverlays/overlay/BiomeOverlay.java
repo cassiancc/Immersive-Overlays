@@ -97,7 +97,7 @@ public class BiomeOverlay {
             return key;
         else if (manager.getResource(redirect).isPresent()) {
             try {
-                return getBiomeSprite(Objects.requireNonNull(ResourceLocation.tryParse(manager.openAsReader(redirect).lines().toList().get(0))));
+                return Objects.requireNonNull(ResourceLocation.tryParse(manager.openAsReader(redirect).lines().toList().get(0)));
             } catch (Exception e) {
                 return ResourceLocation.tryBuild(MOD_ID, "textures/immersiveoverlays/undefined.png");
             }

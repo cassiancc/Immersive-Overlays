@@ -35,10 +35,10 @@ public class MapAtlasesCompatImpl {
             }
         }
         //?} else {
-        /*if (MapAtlasesMod.CONFIG.miniMapAnchoring.equals("TOP_RIGHT") && !ModConfig.get().align_left) {
+        /*if (MapAtlasesMod.CONFIG.miniMapAnchoring.equals("TOP_RIGHT") && !ModConfig.get().compass_horizontal_position_left) {
             return true;
         }
-        if (MapAtlasesMod.CONFIG.miniMapAnchoring.equals("TOP_LEFT") && ModConfig.get().align_left) {
+        if (MapAtlasesMod.CONFIG.miniMapAnchoring.equals("TOP_LEFT") && ModConfig.get().compass_horizontal_position_left) {
             return true;
         }
         *///?}
