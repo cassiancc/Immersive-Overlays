@@ -51,6 +51,10 @@ public class BiomeOverlay {
         int fontWidth = mc.font.width(biomeText)+iconOffset;
 
         if (mc.player == null) return;
+        if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable) {
+            yPlacement = yPlacement - 24;
+            textYPlacement = textYPlacement - 24;
+        }
         if (OverlayHelpers.playerHasPotions(mc.player)) {
             yPlacement += OverlayHelpers.moveBy(mc.player);
             textYPlacement += OverlayHelpers.moveBy(mc.player);
