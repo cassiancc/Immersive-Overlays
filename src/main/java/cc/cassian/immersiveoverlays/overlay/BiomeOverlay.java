@@ -21,6 +21,7 @@ import static cc.cassian.immersiveoverlays.ModClient.MOD_ID;
 
 public class BiomeOverlay {
     public static boolean showBiome = false;
+    public static ResourceLocation UNDEFINED = ResourceLocation.tryBuild(MOD_ID, "textures/immersiveoverlays/undefined.png");
 
 
     //? if >1.20 {
@@ -71,7 +72,7 @@ public class BiomeOverlay {
         //?} else {
         /*GuiComponent.drawString(poseStack, mc.font, biomeText, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
          *///?}
-        var sprite = getBiomeSprite(biome);
+        var sprite = getBiomeSprite(biome, true);
 
         //? if >1.21.2 {
         /*poseStack.blit(RenderType::guiTextured, sprite,
@@ -88,21 +89,23 @@ public class BiomeOverlay {
                 16, 16);
     }
 
-    public static ResourceLocation getBiomeSprite(ResourceLocation biome) {
+    public static ResourceLocation getBiomeSprite(ResourceLocation biome, boolean allowRedirect) {
         var manager = Minecraft.getInstance().getResourceManager();
         var path = "textures/immersiveoverlays/"+ biome.getPath();
         var key = ResourceLocation.tryBuild(biome.getNamespace(), "%s.png".formatted(path));
         var redirect = ResourceLocation.tryBuild(biome.getNamespace(), "%s.txt".formatted(path));
         if (manager.getResource(key).isPresent())
             return key;
-        else if (manager.getResource(redirect).isPresent()) {
-            try {
-                return Objects.requireNonNull(ResourceLocation.tryParse(manager.openAsReader(redirect).lines().toList().get(0)));
-            } catch (Exception e) {
-                return ResourceLocation.tryBuild(MOD_ID, "textures/immersiveoverlays/undefined.png");
+        else {
+            if (manager.getResource(redirect).isPresent() && allowRedirect) {
+                try {
+                    return getBiomeSprite(Objects.requireNonNull(ResourceLocation.tryParse(manager.openAsReader(redirect).lines().toList().get(0))), false);
+                } catch (Exception e) {
+                    return UNDEFINED;
+                }
+            } else {
+                return UNDEFINED;
             }
-        } else {
-            return ResourceLocation.tryBuild(MOD_ID, "textures/immersiveoverlays/undefined.png");
         }
     }
 

@@ -109,7 +109,7 @@ public class CompassOverlay {
         // render background
         OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize, ModConfig.get().compass_horizontal_position_left);
         if (showBiomeIcon) {
-            var sprite = getBiomeSprite(getBiome(mc.player));
+            var sprite = getBiomeSprite(getBiome(mc.player), true);
 
             //? if >1.21.2 {
             /*poseStack.blit(RenderType::guiTextured, sprite,
