@@ -131,11 +131,12 @@ public class OverlayHelpers {
         if (itemStack.isEmpty())
             return;
         var item = itemStack.getItem();
-        if (ModLists.compass_items.contains(item)) {
-            CompassOverlay.showXZ = true;
-        }
-        if (ModLists.compass_depth_items.contains(item))
+        if (ModLists.compass_x_items.contains(item))
+            CompassOverlay.showX = true;
+        if (ModLists.compass_y_items.contains(item))
             CompassOverlay.showY = true;
+        if (ModLists.compass_z_items.contains(item))
+            CompassOverlay.showZ = true;
         if (ModLists.clock_items.contains(item))
             ClockOverlay.showTime = true;
         if (ModLists.weather_items.contains(item))
@@ -145,11 +146,7 @@ public class OverlayHelpers {
     }
 
     public static void checkInventoryForItems(Player player) {
-        CompassOverlay.showXZ = false;
-        CompassOverlay.showY = false;
-        ClockOverlay.showTime = false;
-        ClockOverlay.showWeather = false;
-        BiomeOverlay.showBiome = false;
+        resetOverlays();
         if (player == null)
             return;
         if (ModConfig.get().compass_enable || ModConfig.get().clock_enable) {
@@ -165,6 +162,15 @@ public class OverlayHelpers {
                 checkInventoryForStack(player.getInventory());
             }
         }
+    }
+
+    private static void resetOverlays() {
+        CompassOverlay.showX = false;
+        CompassOverlay.showY = false;
+        CompassOverlay.showZ = false;
+        ClockOverlay.showTime = false;
+        ClockOverlay.showWeather = false;
+        BiomeOverlay.showBiome = false;
     }
 
     public static void isImportantItemOrContainer(ItemStack stack) {

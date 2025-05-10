@@ -19,7 +19,7 @@ public class BetterPlayerLocatorBarHudMixin {
     @Inject(method = "render", at = @At(value = "HEAD"), cancellable = true)
     private static void mixin(GuiGraphics context, CallbackInfo ci) {
         if (ModConfig.get().compat_playerlocatorplus) {
-            if (!CompassOverlay.showXZ) {
+            if (!CompassOverlay.showX) {
                 ci.cancel();
             }
         }

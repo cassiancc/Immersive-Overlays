@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Mod support is in the works - Atmospheric, Quark, and Nature's Spirit have biomes included in this release.
 - Option to show overlays when F3 is open.
 - Individual options to left align particular overlays.
+- X/Z overlay items can now be set independently.
 
 ### Fixed
 - Weather overlays no longer move randomly.

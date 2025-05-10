@@ -22,8 +22,9 @@ import static cc.cassian.immersiveoverlays.overlay.BiomeOverlay.getBiome;
 import static cc.cassian.immersiveoverlays.overlay.BiomeOverlay.getBiomeSprite;
 
 public class CompassOverlay {
-    public static boolean showXZ = false;
+    public static boolean showX = false;
     public static boolean showY = false;
+    public static boolean showZ = false;
 
     //? if >1.20 {
     public static void renderGameOverlayEvent(GuiGraphics poseStack) {
@@ -31,7 +32,7 @@ public class CompassOverlay {
         /*public static void renderGameOverlayEvent(PoseStack poseStack) {
      *///?}
         boolean showBiomeIcon = ModConfig.get().biome_enable && BiomeOverlay.showBiome && ModConfig.get().biome_reduced_info;
-        if (!showXZ && !showY)
+        if (!showX && !showY && !showZ)
             return;
         if (!ModConfig.get().compass_enable)
             return;
@@ -53,9 +54,18 @@ public class CompassOverlay {
         String z = String.format("%d", pos.getZ());
         var width = Integer.max(x.length(), z.length());
         width = Integer.max(width, y.length());
-        x = StringUtils.leftPad(x, width);
-        y = StringUtils.leftPad(y, width);
-        z = StringUtils.leftPad(z, width);
+        if (showX) {
+            x = StringUtils.leftPad(x, width);
+            coords.add("§%sX:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_x_colour), x));
+        }
+        if (showY) {
+            y = StringUtils.leftPad(y, width);
+            coords.add("§%sY:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
+        }
+        if (showZ) {
+            z = StringUtils.leftPad(z, width);
+            coords.add("§%sZ:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_z_colour), z));
+        }
         int xOffset = 3;
         int yPlacement = ModConfig.get().compass_vertical_position;
         int iconXOffset = 0;
@@ -80,26 +90,14 @@ public class CompassOverlay {
 
         int textureOffset = 7;  // only depth gauge
         int tooltipSize = 16;  // only depth gauge
-        if (showXZ) {
-            coords.add("§%sX:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_x_colour), x));
-            if (showY) { // depth gauge and compass
-                coords.add("§%sY:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
-                textureOffset = 51;
-                tooltipSize = 35;
-                iconYOffset = 5;
-            } else { // only compass
-                textureOffset = 25;
-                tooltipSize = 25;
-                iconYOffset = 3;
-            }
-            coords.add("§%sZ:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_z_colour), z));
-        } else if (showY) {
-            coords.add("§%sY:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
-            if (showBiomeIcon) {
-                textureOffset = 25;
-                tooltipSize = 25;
-                iconYOffset = 3;
-            }
+        if (coords.size() == 2 || (coords.size() == 1 && showBiomeIcon)) {
+            textureOffset = 25;
+            tooltipSize = 25;
+            iconYOffset = 3;
+        } else if (coords.size() == 3) {
+            textureOffset = 51;
+            tooltipSize = 35;
+            iconYOffset = 5;
         }
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();

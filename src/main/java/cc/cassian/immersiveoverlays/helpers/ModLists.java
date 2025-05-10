@@ -13,10 +13,11 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class ModLists {
-    public static ArrayList<Item> compass_items = new ArrayList<>();
+    public static ArrayList<Item> compass_x_items = new ArrayList<>();
+    public static ArrayList<Item> compass_y_items = new ArrayList<>();
+    public static ArrayList<Item> compass_z_items = new ArrayList<>();
     public static ArrayList<Item> clock_items = new ArrayList<>();
     public static ArrayList<Item> weather_items = new ArrayList<>();
-    public static ArrayList<Item> compass_depth_items = new ArrayList<>();
     public static ArrayList<Item> biome_items = new ArrayList<>();
 
 
@@ -26,14 +27,22 @@ public class ModLists {
         //?} else {
         /*var registry = Registry.ITEM;
          *///?}
-        compass_items = new ArrayList<>();
+        compass_x_items = new ArrayList<>();
         clock_items = new ArrayList<>();
         biome_items = new ArrayList<>();
         weather_items = new ArrayList<>();
-        compass_depth_items = new ArrayList<>();
-        for (String compassItem : ModConfig.get().compass_items) {
+        compass_y_items = new ArrayList<>();
+        for (String compassItem : ModConfig.get().compass_x_items) {
             Optional<Item> item = registry.getOptional(ResourceLocation.tryParse(compassItem));
-            item.ifPresent(value -> compass_items.add(value));
+            item.ifPresent(value -> compass_x_items.add(value));
+        }
+        for (String depthItem : ModConfig.get().compass_y_items) {
+            Optional<Item> item = registry.getOptional(ResourceLocation.tryParse(depthItem));
+            item.ifPresent(value -> compass_y_items.add(value));
+        }
+        for (String depthItem : ModConfig.get().compass_z_items) {
+            Optional<Item> item = registry.getOptional(ResourceLocation.tryParse(depthItem));
+            item.ifPresent(value -> compass_z_items.add(value));
         }
         for (String clockItem : ModConfig.get().clock_items) {
             Optional<Item> item = registry.getOptional(ResourceLocation.tryParse(clockItem));
@@ -43,10 +52,6 @@ public class ModLists {
             Optional<Item> item = registry.getOptional(ResourceLocation.tryParse(biomeItem));
             item.ifPresent(value -> biome_items.add(value));
         }
-        for (String depthItem : ModConfig.get().compass_depth_items) {
-            Optional<Item> item = registry.getOptional(ResourceLocation.tryParse(depthItem));
-            item.ifPresent(value -> compass_depth_items.add(value));
-        }
         for (String weatherItem : ModConfig.get().clock_weather_items) {
             Optional<Item> item = registry.getOptional(ResourceLocation.tryParse(weatherItem));
             item.ifPresent(value -> weather_items.add(value));
@@ -54,11 +59,14 @@ public class ModLists {
         if (weather_items.isEmpty()) {
             weather_items.addAll(clock_items);
         }
-        if (compass_depth_items.isEmpty()) {
-            compass_depth_items.addAll(compass_items);
+        if (compass_y_items.isEmpty()) {
+            compass_y_items.addAll(compass_x_items);
+        }
+        if (compass_z_items.isEmpty()) {
+            compass_z_items.addAll(compass_x_items);
         }
         if (biome_items.isEmpty()) {
-            biome_items.addAll(compass_items);
+            biome_items.addAll(compass_x_items);
         }
     }
 
