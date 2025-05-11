@@ -42,6 +42,7 @@ public class ModConfig {
     public List<String> clock_weather_items = List.of("caverns_and_chasms:barometer", "firmaciv:barometer");
     public boolean require_item_in_hand = false;
     public boolean search_containers = true;
+    public boolean search_containers_for_containers = true;
     public boolean render_background = true;
     public boolean moved_by_effects = true;
     public boolean compat_playerlocatorplus = true;

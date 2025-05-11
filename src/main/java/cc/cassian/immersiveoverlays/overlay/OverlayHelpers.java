@@ -123,7 +123,11 @@ public class OverlayHelpers {
     private static void findImportantContainerContents(ItemStack container) {
         List<ItemStack> list = getContainerContents(container).toList();
         for (ItemStack itemStack : list) {
-            isImportantItem(itemStack);
+            if (ModConfig.get().search_containers_for_containers) {
+                isImportantItemOrContainer(itemStack);
+            } else {
+                isImportantItem(itemStack);
+            }
         }
     }
 

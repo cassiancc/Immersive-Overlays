@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Option to show overlays when F3 is open.
 - Individual options to left align particular overlays.
 - X/Z overlay items can now be set independently.
+- New config option to allow compasses in bundles in Shulkers to function again.
 
 ### Fixed
 - Weather overlays no longer move randomly.
