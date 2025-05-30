@@ -40,34 +40,35 @@ public class OverlayHelpers {
 
     //? if >1.20 {
     public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize, boolean leftAlign) {
-    //?} else {
+        //?} else {
         /*public static void renderBackground(PoseStack poseStack, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize, boolean leftAlign) {
-    *///?}
+         *///?}
         if (ModConfig.get().render_background) {
             final int yPlacementWithOffset = yPlacement-4;
             final int endCapOffset = 197;
-            // render background
+            final int xPlacementWithOffset = xPlacement-xOffset-4;
+            final int endCapXPlacement = OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth, leftAlign);
+            final int uWidth = fontWidth+xOffset+4;
+
             //? if >1.21.2 {
-            /*guiGraphics.blit(RenderType::guiTextured, TEXTURE,
-            *///?} else if >1.20 {
-            guiGraphics.blit(TEXTURE,
-            //?} else {
-               /*GuiComponent.blit(poseStack,
-             *///?}
-                    xPlacement-xOffset-4, yPlacementWithOffset,
-                    0, 0,
-                    textureOffset, fontWidth+xOffset+4, tooltipSize,
+            /*guiGraphics.blit(RenderType::guiTextured, TEXTURE, xPlacementWithOffset, yPlacementWithOffset,
+             *///?} else if >1.20 {
+            guiGraphics.blit(TEXTURE, xPlacementWithOffset, yPlacementWithOffset, 0,
+                    //?} else {
+                    /*GuiComponent.blit(poseStack,
+                     *///?}
+                    0,
+                    textureOffset, uWidth, tooltipSize,
                     OverlayHelpers.textureSize, OverlayHelpers.textureSize);
             // render endcap
             //? if >1.21.2 {
-            /*guiGraphics.blit(RenderType::guiTextured, TEXTURE,
-            *///?} else if >1.20 {
-            guiGraphics.blit(TEXTURE,
-            //?} else {
-           /*GuiComponent.blit(poseStack,
-             *///?}
-                    OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth, leftAlign), yPlacementWithOffset,
-                    0, endCapOffset,
+            /*guiGraphics.blit(RenderType::guiTextured, TEXTURE, endCapXPlacement, yPlacementWithOffset,
+             *///?} else if >1.20 {
+            guiGraphics.blit(TEXTURE, endCapXPlacement, yPlacementWithOffset, 0
+                    //?} else {
+                    /*GuiComponent.blit(poseStack,
+                     *///?}
+                    endCapOffset,
                     textureOffset, 3, tooltipSize,
                     OverlayHelpers.textureSize, OverlayHelpers.textureSize);
         }
@@ -98,7 +99,7 @@ public class OverlayHelpers {
                 player.getActiveEffects().stream().anyMatch(p -> p.getEffect().isBeneficial());
         boolean hasNegative =
                 player.getActiveEffects().stream().anyMatch(p -> !p.getEffect().isBeneficial());
-    
+
         //?}
         if (hasNegative) {
             return 42;
@@ -275,7 +276,7 @@ public class OverlayHelpers {
         return ItemStack.EMPTY;
     }
 
-   public static int getPlacement(int windowWidth, int fontWidth, boolean leftAlign) {
+    public static int getPlacement(int windowWidth, int fontWidth, boolean leftAlign) {
         if (leftAlign) {
             return 9;
         } else {

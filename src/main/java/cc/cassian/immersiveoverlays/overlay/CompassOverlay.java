@@ -8,6 +8,7 @@ import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderType;
 //?} else {
 /*import net.minecraft.client.gui.GuiComponent;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -119,7 +120,10 @@ public class CompassOverlay {
            GuiComponent.blit(poseStack,
          *///?}
                     xPlacement-xOffset-1, yPlacement+iconYOffset,
-                    0, 0,
+                    //? if <1.21.2
+                    0,
+                    //?
+                    0,
                     0, 16, 16,
                     16, 16);
         }

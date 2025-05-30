@@ -10,6 +10,7 @@ public class OverlayLayer implements LayeredDraw.Layer {
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         CompassOverlay.renderGameOverlayEvent(guiGraphics);
         ClockOverlay.renderGameOverlayEvent(guiGraphics);
+        BiomeOverlay.renderGameOverlayEvent(guiGraphics);
     }
 }
 *///?}
