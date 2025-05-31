@@ -61,6 +61,7 @@ dependencies {
             "1.20.1" -> "1.20.1:2023.09.03"
             "1.21.1" -> "1.21.1:2024.11.17"
             "1.21.4" -> "1.21.4:2025.03.23"
+            "1.21.5" -> "1.21.5:2025.04.19"
             else -> ""
         }
         parchment("org.parchmentmc.data:parchment-$parchmentVersion@zip")
@@ -98,14 +99,14 @@ dependencies {
     }
 
     // Accessorify
-    if (stonecutter.eval(mcVersion, ">1.21")) {
+    if (stonecutter.eval(mcVersion, ">1.21") && stonecutter.eval(mcVersion, "<1.21.5")) {
         modImplementation("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+$minecraft")
     } else {
         modCompileOnly("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+1.21.1")
     }
 
     // Accessories
-    if (stonecutter.eval(mcVersion, ">1.19.2")) {
+    if (stonecutter.eval(mcVersion, ">1.19.2") && stonecutter.eval(mcVersion, "<1.21.5")) {
         modImplementation("io.wispforest:accessories-fabric:${common.mod.dep("accessories")}+$minecraft")
     }
 
