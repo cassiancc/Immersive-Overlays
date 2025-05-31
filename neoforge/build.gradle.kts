@@ -59,6 +59,7 @@ dependencies {
             "1.20.1" -> "1.20.1:2023.09.03"
             "1.21.1" -> "1.21.1:2024.11.17"
             "1.21.4" -> "1.21.4:2025.03.23"
+            "1.21.5" -> "1.21.5:2025.04.19"
             else -> ""
         }
         parchment("org.parchmentmc.data:parchment-$parchmentVersion@zip")
@@ -85,12 +86,18 @@ dependencies {
     // Xaero's Minimap
     modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_NeoForge_${common.mod.dep("xaeros_mc")}")
 
-    // Accessories
-    modImplementation("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+$minecraft")
+    if (stonecutter.eval(mcVersion, "<1.21.5")) {
+        // Accessories
+        modImplementation("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+$minecraft")
+        // Accessorify
+        modImplementation("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+$minecraft")
+    } else {
+        // Accessories
+        modCompileOnly("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+1.21.4")
+        // Accessorify
+        modCompileOnly("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+1.21.4")
 
-    // Accessorify
-    modImplementation("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+$minecraft")
-
+    }
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionNeoForge")) { isTransitive = false }

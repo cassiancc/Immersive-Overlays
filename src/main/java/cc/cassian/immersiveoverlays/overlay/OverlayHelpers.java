@@ -55,7 +55,7 @@ public class OverlayHelpers {
              *///?} else if >1.20 {
             guiGraphics.blit(TEXTURE, xPlacementWithOffset, yPlacementWithOffset, 0,
                     //?} else {
-                    /*GuiComponent.blit(poseStack,
+                    /*GuiComponent.blit(poseStack, xPlacementWithOffset, yPlacementWithOffset, 0,
                      *///?}
                     0,
                     textureOffset, uWidth, tooltipSize,
@@ -64,9 +64,9 @@ public class OverlayHelpers {
             //? if >1.21.2 {
             /*guiGraphics.blit(RenderType::guiTextured, TEXTURE, endCapXPlacement, yPlacementWithOffset,
              *///?} else if >1.20 {
-            guiGraphics.blit(TEXTURE, endCapXPlacement, yPlacementWithOffset, 0
+            guiGraphics.blit(TEXTURE, endCapXPlacement, yPlacementWithOffset, 0,
                     //?} else {
-                    /*GuiComponent.blit(poseStack,
+                    /*GuiComponent.blit(poseStack, endCapXPlacement, yPlacementWithOffset, 0,
                      *///?}
                     endCapOffset,
                     textureOffset, 3, tooltipSize,
@@ -159,7 +159,9 @@ public class OverlayHelpers {
             if (ModConfig.get().require_item_in_hand) {
                 isImportantItemOrContainer(player.getMainHandItem());
             } else {
+                //? if <1.21.5 {
                 player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
+                //?}
                 //? if >1.20 {
                 if (ModCompat.ACCESSORIES)
                     AccessoriesCompat.checkForImportantAccessories(player);
@@ -252,7 +254,13 @@ public class OverlayHelpers {
     }
 
     public static void checkInventoryForStack(Inventory inventory) {
-        for (ItemStack stack : inventory.items) {
+        for (ItemStack stack :
+            //? if <1.21.5 {
+             inventory.items
+            //?} else {
+                /*inventory.getNonEquipmentItems()
+            *///?}
+        ) {
             isImportantItem(stack);
             if (isContainer(stack)) {
                 findImportantContainerContents(stack);
@@ -261,7 +269,13 @@ public class OverlayHelpers {
     }
 
     public static ItemStack checkInventoryForStack(Inventory inventory, Item item) {
-        for (ItemStack stack : inventory.items) {
+        for (ItemStack stack :
+            //? if <1.21.5 {
+             inventory.items
+            //?} else {
+        /*inventory.getNonEquipmentItems()
+        *///?}
+        ) {
             if (stack.is(item)) return stack;
             else if (item != null && stack.is(item))
                 return stack;
