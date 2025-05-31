@@ -31,10 +31,16 @@ public class ClockOverlay {
         if (!ModConfig.get().clock_enable)
             return;
         var mc = Minecraft.getInstance();
+        if (mc.level == null) return;
 
         String time = "Hi! ";
         if (showTime) {
-            time = getTime(mc.level.getDayTime());
+            if (mc.level.dimensionType().natural()) {
+                time = getTime(mc.level.getDayTime());
+            } else {
+                time = "????";
+            }
+
             if (time.length() == 4) {
                 time = " " + time;
             }
