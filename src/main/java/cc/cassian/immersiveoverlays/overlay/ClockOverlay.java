@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.RenderType;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
  *///?}
+import net.minecraft.util.CommonColors;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.biome.Biome;
 
@@ -80,7 +81,7 @@ public class ClockOverlay {
         if (showTime) {
             // render text
             //? if >1.20 {
-            poseStack.drawString(mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
+            poseStack.drawString(mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, CommonColors.WHITE);
             //?} else {
             /*GuiComponent.drawString(poseStack, mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
              *///?}

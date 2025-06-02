@@ -17,6 +17,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 *///?}
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.CommonColors;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -134,7 +135,7 @@ public class CompassOverlay {
         // render text
         for (String text : coords) {
             //? if >1.20 {
-            poseStack.drawString(mc.font, text, xPlacement-xOffset+iconXOffset, yPlacement, 14737632);
+            poseStack.drawString(mc.font, text, xPlacement-xOffset+iconXOffset, yPlacement, CommonColors.WHITE);
             //?} else {
             /*GuiComponent.drawString(poseStack, mc.font, text, xPlacement-xOffset, yPlacement, 14737632);
              *///?}

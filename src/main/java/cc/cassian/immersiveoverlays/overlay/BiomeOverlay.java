@@ -1,7 +1,6 @@
 package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
-import com.mojang.blaze3d.pipeline.RenderPipeline;
 import net.minecraft.client.Minecraft;
 //? if >1.21.5
 import net.minecraft.client.renderer.RenderPipelines;
@@ -16,6 +15,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.CommonColors;
 import net.minecraft.world.level.biome.Biomes;
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -72,7 +72,7 @@ public class BiomeOverlay {
         OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize, ModConfig.get().biome_horizontal_position_left);
         // render text
         //? if >1.20 {
-        poseStack.drawString(mc.font, biomeText, xPlacement-xOffset+iconOffset, textYPlacement, 14737632, true);
+        poseStack.drawString(mc.font, biomeText, xPlacement-xOffset+iconOffset, textYPlacement, CommonColors.WHITE, true);
         //?} else {
         /*GuiComponent.drawString(poseStack, mc.font, biomeText, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
          *///?}
