@@ -6,7 +6,8 @@ import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.helpers.ModTags;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-
+//? if >1.21.5
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -15,7 +16,6 @@ import cc.cassian.immersiveoverlays.compat.AccessoriesCompat;
 /*import net.minecraft.client.gui.GuiComponent;
 import com.mojang.blaze3d.vertex.PoseStack;
  *///?}
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
@@ -24,11 +24,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 //? if >1.20.5 {
-/*import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.core.component.DataComponents;
-*///?}
+//?}
 
 
 import java.util.List;
@@ -50,22 +50,26 @@ public class OverlayHelpers {
             final int endCapXPlacement = OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth, leftAlign);
             final int uWidth = fontWidth+xOffset+4;
 
-            //? if >1.21.2 {
+            //? if >1.21.5 {
+            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, xPlacementWithOffset, yPlacementWithOffset,
+            //?} else if >1.21.2 {
             /*guiGraphics.blit(RenderType::guiTextured, TEXTURE, xPlacementWithOffset, yPlacementWithOffset,
              *///?} else if >1.20 {
-            guiGraphics.blit(TEXTURE, xPlacementWithOffset, yPlacementWithOffset, 0,
-                    //?} else {
+            /*guiGraphics.blit(TEXTURE, xPlacementWithOffset, yPlacementWithOffset, 0,
+                    *///?} else {
                     /*GuiComponent.blit(poseStack, xPlacementWithOffset, yPlacementWithOffset, 0,
                      *///?}
                     0,
                     textureOffset, uWidth, tooltipSize,
                     OverlayHelpers.textureSize, OverlayHelpers.textureSize);
             // render endcap
-            //? if >1.21.2 {
+            //? if >1.21.5 {
+            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, endCapXPlacement, yPlacementWithOffset,
+            //?} else if >1.21.2 {
             /*guiGraphics.blit(RenderType::guiTextured, TEXTURE, endCapXPlacement, yPlacementWithOffset,
              *///?} else if >1.20 {
-            guiGraphics.blit(TEXTURE, endCapXPlacement, yPlacementWithOffset, 0,
-                    //?} else {
+            /*guiGraphics.blit(TEXTURE, endCapXPlacement, yPlacementWithOffset, 0,
+                    *///?} else {
                     /*GuiComponent.blit(poseStack, endCapXPlacement, yPlacementWithOffset, 0,
                      *///?}
                     endCapOffset,
@@ -90,17 +94,17 @@ public class OverlayHelpers {
 
     public static int moveBy(Player player) {
         //? if >1.21 {
-        /*boolean hasBeneficial =
+        boolean hasBeneficial =
                 player.getActiveEffects().stream().anyMatch(p -> p.getEffect().value().isBeneficial());
         boolean hasNegative =
                 player.getActiveEffects().stream().anyMatch(p -> !p.getEffect().value().isBeneficial());
-        *///?} else {
-        boolean hasBeneficial =
+        //?} else {
+        /*boolean hasBeneficial =
                 player.getActiveEffects().stream().anyMatch(p -> p.getEffect().isBeneficial());
         boolean hasNegative =
                 player.getActiveEffects().stream().anyMatch(p -> !p.getEffect().isBeneficial());
 
-        //?}
+        *///?}
         if (hasNegative) {
             return 42;
         } else if (hasBeneficial) {
@@ -112,10 +116,10 @@ public class OverlayHelpers {
     public static boolean debug(Minecraft mc) {
         if (ModConfig.get().hide_from_debug) {
             //? if >1.21 {
-            /*var debug = mc.getDebugOverlay().showDebugScreen();
-             *///?} else {
-            var debug = mc.options.renderDebug;
-            //?}
+            var debug = mc.getDebugOverlay().showDebugScreen();
+             //?} else {
+            /*var debug = mc.options.renderDebug;
+            *///?}
             return debug && !mc.options.reducedDebugInfo().get();
         }
         return false;
@@ -160,8 +164,8 @@ public class OverlayHelpers {
                 isImportantItemOrContainer(player.getMainHandItem());
             } else {
                 //? if <1.21.5 {
-                player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
-                //?}
+                /*player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
+                *///?}
                 //? if >1.20 {
                 if (ModCompat.ACCESSORIES)
                     AccessoriesCompat.checkForImportantAccessories(player);
@@ -190,7 +194,7 @@ public class OverlayHelpers {
     public static Stream<ItemStack> getContainerContents(ItemStack stack) {
         if (!isContainer(stack)) return Stream.empty();
         //? if >1.20.5 {
-        /*var components = stack.getComponents();
+        var components = stack.getComponents();
         if (components.has(DataComponents.BUNDLE_CONTENTS)) {
             BundleContents bundleContents = components.get(DataComponents.BUNDLE_CONTENTS);
             return bundleContents.itemCopyStream();
@@ -199,8 +203,8 @@ public class OverlayHelpers {
             ItemContainerContents containerContents = components.get(DataComponents.CONTAINER);
             return containerContents.stream();
         }
-        *///?} else {
-        CompoundTag compoundtag = stack.getTag();
+        //?} else {
+        /*CompoundTag compoundtag = stack.getTag();
         if (compoundtag == null) {
             return Stream.empty();
         } else {
@@ -214,7 +218,7 @@ public class OverlayHelpers {
                 return listtag.stream().map(CompoundTag.class::cast).map(ItemStack::of);
             }
         }
-        //?}
+        *///?}
         return Stream.empty();
     }
 
@@ -223,15 +227,15 @@ public class OverlayHelpers {
         if (stack.isEmpty()) return false;
         if (stack.is(ModTags.CONTAINERS)) return true;
         //? if >1.20.5 {
-        /*var components = stack.getComponents();
+        var components = stack.getComponents();
         if (components.has(DataComponents.BUNDLE_CONTENTS)) {
             return true;
         }
         else if (components.has(DataComponents.CONTAINER)) {
             return true;
         }
-        *///?} else {
-        CompoundTag compoundtag = stack.getTag();
+        //?} else {
+        /*CompoundTag compoundtag = stack.getTag();
         if (compoundtag == null) {
             return false;
         } else {
@@ -244,7 +248,7 @@ public class OverlayHelpers {
                 }
             }
         }
-        //?}
+        *///?}
         return true;
     }
 
@@ -256,10 +260,10 @@ public class OverlayHelpers {
     public static void checkInventoryForStack(Inventory inventory) {
         for (ItemStack stack :
             //? if <1.21.5 {
-             inventory.items
-            //?} else {
-                /*inventory.getNonEquipmentItems()
-            *///?}
+             /*inventory.items
+            *///?} else {
+                inventory.getNonEquipmentItems()
+            //?}
         ) {
             isImportantItem(stack);
             if (isContainer(stack)) {
@@ -271,10 +275,10 @@ public class OverlayHelpers {
     public static ItemStack checkInventoryForStack(Inventory inventory, Item item) {
         for (ItemStack stack :
             //? if <1.21.5 {
-             inventory.items
-            //?} else {
-        /*inventory.getNonEquipmentItems()
-        *///?}
+             /*inventory.items
+            *///?} else {
+        inventory.getNonEquipmentItems()
+        //?}
         ) {
             if (stack.is(item)) return stack;
             else if (item != null && stack.is(item))

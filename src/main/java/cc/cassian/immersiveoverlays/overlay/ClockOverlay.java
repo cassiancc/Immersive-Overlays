@@ -2,6 +2,8 @@ package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.compat.MapAtlasesCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
+//? if >1.21.5
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -86,18 +88,20 @@ public class ClockOverlay {
         if (showWeather) {
             var spriteOffset = getWeather(mc.player);
 
-            //? if >1.21.2 {
+            //? if >1.21.5 {
+            poseStack.blit(RenderPipelines.GUI_TEXTURED, TEXTURE,
+            //?} else if >1.21.2 {
             /*poseStack.blit(RenderType::guiTextured, TEXTURE,
             *///?} else if >1.20 {
-            poseStack.blit(TEXTURE,
-            //?} else {
+            /*poseStack.blit(TEXTURE,
+            *///?} else {
 
             /*RenderSystem.setShaderTexture(0, TEXTURE);
                GuiComponent.blit(poseStack,
              *///?}
                     xPlacement-xOffset-1, yPlacement-1,
                     //? if <1.21.2
-                    0,
+                    /*0,*/
                     //?
                     spriteOffset,
                     95, 16, 16,
@@ -114,17 +118,17 @@ public class ClockOverlay {
         var biome = level.getBiome(player.blockPosition()).value();
         var time = level.getDayTime() % 24000;
         //? if >1.21.2 {
-        /*var precipitation = biome.getPrecipitationAt(player.blockPosition(), level.getSeaLevel());
-        *///?} else if >1.20 {
-        var precipitation = biome.getPrecipitationAt(player.blockPosition());
-        //?} else {
+        var precipitation = biome.getPrecipitationAt(player.blockPosition(), level.getSeaLevel());
+        //?} else if >1.20 {
+        /*var precipitation = biome.getPrecipitationAt(player.blockPosition());
+        *///?} else {
          /*var precipitation = biome.getPrecipitation();
         *///?}
         //? if >1.21.2 {
-        /*var snows = biome.coldEnoughToSnow(player.blockPosition(), level.getSeaLevel());
-        *///?} else {
-        var snows = biome.coldEnoughToSnow(player.blockPosition());
-         //?}
+        var snows = biome.coldEnoughToSnow(player.blockPosition(), level.getSeaLevel());
+        //?} else {
+        /*var snows = biome.coldEnoughToSnow(player.blockPosition());
+         *///?}
         if (!level.dimensionType().natural()) return 124; // Netherlike
         else if (level.isThundering()) {
             if (snows) return 92; // Snowing

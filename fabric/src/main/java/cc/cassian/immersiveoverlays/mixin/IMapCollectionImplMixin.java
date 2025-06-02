@@ -10,19 +10,19 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import pepjebs.mapatlases.MapAtlasesMod;
 //? if =1.20.1 {
-import pepjebs.mapatlases.map_collection.fabric.IMapCollectionImpl;
+/*import pepjebs.mapatlases.map_collection.fabric.IMapCollectionImpl;
 
 import java.util.List;
 
 @Pseudo
 @Mixin(IMapCollectionImpl.class)
-//?} else {
-/*@Mixin(MapAtlasesMod.class)
-*///?}
+*///?} else {
+@Mixin(MapAtlasesMod.class)
+//?}
 public class IMapCollectionImplMixin {
 //? if =1.20.1 {
 
-    @ModifyArg(
+    /*@ModifyArg(
             method = "get",
             at = @At(value = "INVOKE", target = "Ldev/onyxstudios/cca/api/v3/component/ComponentKey;maybeGet(Ljava/lang/Object;)Ljava/util/Optional;")
     )
@@ -41,5 +41,5 @@ public class IMapCollectionImplMixin {
         }
         return provider;
     }
-    //?}
+    *///?}
 }

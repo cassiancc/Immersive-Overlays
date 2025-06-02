@@ -6,6 +6,8 @@ import cc.cassian.immersiveoverlays.compat.MapAtlasesCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 import net.minecraft.client.Minecraft;
+//? if >1.21.5
+import net.minecraft.client.renderer.RenderPipelines;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderType;
@@ -110,18 +112,20 @@ public class CompassOverlay {
         if (showBiomeIcon) {
             var sprite = getBiomeSprite(getBiome(mc.player), true);
 
-            //? if >1.21.2 {
+            //? if >1.21.5 {
+            poseStack.blit(RenderPipelines.GUI_TEXTURED, sprite,
+            //?} else if >1.21.2 {
             /*poseStack.blit(RenderType::guiTextured, sprite,
              *///?} else if >1.20 {
-            poseStack.blit(sprite,
-                    //?} else {
+            /*poseStack.blit(sprite,
+                    *///?} else {
 
         /*RenderSystem.setShaderTexture(0, sprite);
            GuiComponent.blit(poseStack,
          *///?}
                     xPlacement-xOffset-1, yPlacement+iconYOffset,
                     //? if <1.21.2
-                    0,
+                    /*0,*/
                     //?
                     0,
                     0, 16, 16,
