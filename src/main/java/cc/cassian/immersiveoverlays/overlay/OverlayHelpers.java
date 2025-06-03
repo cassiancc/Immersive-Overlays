@@ -19,6 +19,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -165,7 +167,12 @@ public class OverlayHelpers {
             } else {
                 //? if <1.21.5 {
                 /*player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
-                *///?}
+                *///?} else {
+                isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.HEAD));
+                isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.CHEST));
+                isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.LEGS));
+                isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.FEET));
+                //?}
                 //? if >1.20 {
                 if (ModCompat.ACCESSORIES)
                     AccessoriesCompat.checkForImportantAccessories(player);
