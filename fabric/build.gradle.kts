@@ -90,7 +90,7 @@ dependencies {
     }
 
     if (stonecutter.eval(mcVersion, "=1.21.6")) {
-        modImplementation("local.fabric-api:fabric-rendering-v1-12.1.0+9a4a525ff4")
+        modImplementation("local.fabric-api:fabric-rendering-v1-12.1.0+5cae52def4")
     } else {
         modRuntimeOnly("maven.modrinth:player-locator-plus:${common.mod.dep("player_locator_plus")}")
             runtimeOnly("com.akuleshov7:ktoml-core:0.5.2")
