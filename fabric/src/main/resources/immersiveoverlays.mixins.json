@@ -4,16 +4,17 @@
   "package": "cc.cassian.immersiveoverlays.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-	"BetterPlayerLocatorBarHudMixin",
-	"PlayerLocatorPlusClientMixin"
+    "BetterPlayerLocatorBarHudMixin",
+    "GuiMixin",
+    "PlayerLocatorPlusClientMixin"
   ],
   "injectors": {
-	"defaultRequire": 0
+    "defaultRequire": 0
   },
   "mixins": [
-	"IMapCollectionImplMixin",
-	"InfoOverlaysMixin",
-	"MapAtlasAccessUtilsMixin",
-	"MiscMixin"
+    "IMapCollectionImplMixin",
+    "InfoOverlaysMixin",
+    "MapAtlasAccessUtilsMixin",
+    "MiscMixin"
   ]
 }

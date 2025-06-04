@@ -6,7 +6,8 @@ import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.helpers.ModTags;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-
+//? if >1.21.5
+/*import net.minecraft.client.renderer.RenderPipelines;*/
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -15,10 +16,10 @@ import cc.cassian.immersiveoverlays.compat.AccessoriesCompat;
 /*import net.minecraft.client.gui.GuiComponent;
 import com.mojang.blaze3d.vertex.PoseStack;
  *///?}
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -50,7 +51,9 @@ public class OverlayHelpers {
             final int endCapXPlacement = OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth);
             final int uWidth = fontWidth+xOffset+4;
 
-            //? if >1.21.2 {
+            //? if >1.21.5 {
+            /*guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, xPlacementWithOffset, yPlacementWithOffset,
+            *///?} else if >1.21.2 {
             /*guiGraphics.blit(RenderType::guiTextured, TEXTURE, xPlacementWithOffset, yPlacementWithOffset,
              *///?} else if >1.20 {
             guiGraphics.blit(TEXTURE, xPlacementWithOffset, yPlacementWithOffset, 0,
@@ -61,7 +64,9 @@ public class OverlayHelpers {
                     textureOffset, uWidth, tooltipSize,
                     OverlayHelpers.textureSize, OverlayHelpers.textureSize);
             // render endcap
-            //? if >1.21.2 {
+            //? if >1.21.5 {
+            /*guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, endCapXPlacement, yPlacementWithOffset,
+            *///?} else if >1.21.2 {
             /*guiGraphics.blit(RenderType::guiTextured, TEXTURE, endCapXPlacement, yPlacementWithOffset,
              *///?} else if >1.20 {
             guiGraphics.blit(TEXTURE, endCapXPlacement, yPlacementWithOffset, 0,
@@ -157,7 +162,12 @@ public class OverlayHelpers {
             } else {
                 //? if <1.21.5 {
                 player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
-                //?}
+                //?} else {
+                /*isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.HEAD));
+                isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.CHEST));
+                isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.LEGS));
+                isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.FEET));
+                *///?}
                 //? if >1.20 {
                 if (ModCompat.ACCESSORIES)
                     AccessoriesCompat.checkForImportantAccessories(player);
@@ -180,11 +190,13 @@ public class OverlayHelpers {
         /*var components = stack.getComponents();
         if (components.has(DataComponents.BUNDLE_CONTENTS)) {
             BundleContents bundleContents = components.get(DataComponents.BUNDLE_CONTENTS);
-            return bundleContents.itemCopyStream();
+            if (bundleContents != null)
+                return bundleContents.itemCopyStream();
         }
         else if (components.has(DataComponents.CONTAINER)) {
             ItemContainerContents containerContents = components.get(DataComponents.CONTAINER);
-            return containerContents.stream();
+            if (containerContents != null)
+                return containerContents.stream();
         }
         *///?} else {
         CompoundTag compoundtag = stack.getTag();
