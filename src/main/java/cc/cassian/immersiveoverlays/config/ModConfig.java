@@ -27,7 +27,6 @@ public class ModConfig {
     //? if >1.21.5
     /*public boolean locator_bar = true;*/
     public boolean hide_from_debug = true;
-    public boolean compass_enable = true;
     public int compass_vertical_position = 125;
     public boolean compass_horizontal_position_left = false;
     public List<String> compass_x_items = List.of("minecraft:compass", "minecraft:recovery_compass", "spelunkery:magnetic_compass", "firmaciv:nav_clock", "firmaciv:firmaciv_compass");
