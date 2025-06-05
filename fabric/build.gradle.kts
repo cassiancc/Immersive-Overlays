@@ -44,9 +44,10 @@ repositories {
     maven ( "https://maven.shedaniel.me/" )
     maven ( "https://maven.terraformersmc.com/releases/" )
     maven ( "https://api.modrinth.com/maven")
-    maven ("https://maven.parchmentmc.org")
-    maven ("https://maven.ladysnake.org/releases")
-    maven("https://maven.wispforest.io/releases")
+    maven ( "https://maven.parchmentmc.org")
+    maven ( "https://maven.ladysnake.org/releases")
+    maven ( "https://maven.wispforest.io/releases")
+    maven ( "https://repo.spongepowered.org/repository/maven-public/")
 }
 
 dependencies {
@@ -114,6 +115,13 @@ dependencies {
     } else {
         modCompileOnly("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+1.21.1")
     }
+
+    // todo runtime dep on serene seasons
+//    if (stonecutter.eval(mcVersion, ">1.20") && stonecutter.eval(mcVersion, "<1.21.6")) {
+//        modRuntimeOnly("maven.modrinth:serene-seasons:${common.mod.dep("serene_seasons")}-fabric")
+//        modRuntimeOnly("com.github.glitchfiend.GlitchCore-fabric:$minecraft-${common.mod.dep("glitchcore")}")
+//
+//    }
 
     // Accessories
     if (stonecutter.eval(mcVersion, ">1.19.2") && stonecutter.eval(mcVersion, "<1.21.5")) {

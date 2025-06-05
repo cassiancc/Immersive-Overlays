@@ -87,6 +87,9 @@ public class CompassOverlay {
         if (!BiomeOverlay.showBiome || ModConfig.get().biome_reduced_info) {
             yPlacement = yPlacement - 20;
         }
+        if (!BiomeOverlay.showSeason) {
+            yPlacement = yPlacement - 15;
+        }
         if (OverlayHelpers.playerHasPotions(mc.player)) {
             yPlacement += OverlayHelpers.moveBy(mc.player);
         }

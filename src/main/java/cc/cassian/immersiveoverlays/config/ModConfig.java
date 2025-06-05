@@ -27,7 +27,7 @@ public class ModConfig {
     //? if >1.21.5
     /*public boolean locator_bar = true;*/
     public boolean hide_from_debug = true;
-    public int compass_vertical_position = 125;
+    public int compass_vertical_position = 140;
     public boolean compass_horizontal_position_left = false;
     public List<String> compass_x_items = List.of("minecraft:compass", "minecraft:recovery_compass", "spelunkery:magnetic_compass", "firmaciv:nav_clock", "firmaciv:firmaciv_compass");
     public List<String> compass_y_items = List.of("spelunkery:depth_gauge","caverns_and_chasms:depth_gauge","additionaladditions:depth_meter","supplementaries:altimeter","depthmeter:depthmeter");
@@ -51,6 +51,7 @@ public class ModConfig {
     public boolean compat_xaeros = true;
     public boolean compat_map_atlases = false;
     public boolean compat_accessorify = true;
+    public boolean compat_seasons = true;
     public boolean biome_enable = true;
     public boolean biome_reduced_info = false;
     public int biome_vertical_position = 112;

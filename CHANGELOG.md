@@ -10,10 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Biome overlays, displayed when a map is in the inventory, that show the current biome. Additional biomes can be added via resource packs, with support for all of Minecraft's biomes included.
   - Mod support is in the works - Atmospheric, Quark, and Nature's Spirit have biomes included in this release.
+- Season overlays, displayed when a supported mod's calendar is in the inventory.
+  - Currently supports Serene Seasons.
 - Option to show overlays when F3 is open.
 - Individual options to left align particular overlays.
 - X/Z overlay items can now be set independently.
 - New config option to allow compasses in bundles in Shulkers to function again.
+
+### Changed
+- Clock overlays no longer function in the Nether.
 
 ### Fixed
 - Weather overlays no longer move randomly.

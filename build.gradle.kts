@@ -57,6 +57,10 @@ dependencies {
     else if (stonecutter.eval(mcVersion, ">=1.21.5")) {
         modCompileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+1.21.4")
     }
+    if (stonecutter.eval(mcVersion, ">1.20")) {
+        modCompileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-fabric")
+    }
+
 }
 
 loom {
