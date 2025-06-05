@@ -26,7 +26,8 @@ dependencies {
     minecraft("com.mojang:minecraft:$minecraft")
     mappings(loom.layered {
         officialMojangMappings()
-        val parchmentVersion = when (mcVersion) {
+        if (stonecutter.eval(mcVersion, "<1.21.6")) {
+            val parchmentVersion = when (mcVersion) {
             "1.18.2" -> "1.18.2:2022.11.06"
             "1.19.2" -> "1.19.2:2022.11.27"
             "1.20.1" -> "1.20.1:2023.09.03"
@@ -36,7 +37,7 @@ dependencies {
             else -> ""
         }
         parchment("org.parchmentmc.data:parchment-$parchmentVersion@zip")
-    })
+    }})
     modImplementation("net.fabricmc:fabric-loader:${mod.dep("fabric_loader")}")
     "io.github.llamalad7:mixinextras-common:${mod.dep("mixin_extras")}".let {
         annotationProcessor(it)

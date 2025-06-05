@@ -2,6 +2,8 @@ package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.compat.MapAtlasesCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
+//? if >1.21.5
+/*import net.minecraft.client.renderer.RenderPipelines;*/
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -78,7 +80,7 @@ public class ClockOverlay {
         if (showTime) {
             // render text
             //? if >1.20 {
-            poseStack.drawString(mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
+            poseStack.drawString(mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, -1);
             //?} else {
             /*GuiComponent.drawString(poseStack, mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
              *///?}
@@ -86,7 +88,9 @@ public class ClockOverlay {
         if (showWeather) {
             var spriteOffset = getWeather(mc.player);
 
-            //? if >1.21.2 {
+            //? if >1.21.5 {
+            /*poseStack.blit(RenderPipelines.GUI_TEXTURED, TEXTURE,
+            *///?} else if >1.21.2 {
             /*poseStack.blit(RenderType::guiTextured, TEXTURE,
             *///?} else if >1.20 {
             poseStack.blit(TEXTURE,

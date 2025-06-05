@@ -1,4 +1,4 @@
-//? if >1.21 {
+//? if >1.21 && <=1.21.5 {
 /*package cc.cassian.immersiveoverlays.overlay;
 
 import net.minecraft.client.DeltaTracker;

@@ -6,6 +6,8 @@ import cc.cassian.immersiveoverlays.compat.MapAtlasesCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 import net.minecraft.client.Minecraft;
+//? if >1.21.5
+/*import net.minecraft.client.renderer.RenderPipelines;*/
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderType;
@@ -110,7 +112,9 @@ public class CompassOverlay {
         if (showBiomeIcon) {
             var sprite = getBiomeSprite(getBiome(mc.player), true);
 
-            //? if >1.21.2 {
+            //? if >1.21.5 {
+            /*poseStack.blit(RenderPipelines.GUI_TEXTURED, sprite,
+            //? } else if >1.21.2 {
             /*poseStack.blit(RenderType::guiTextured, sprite,
              *///?} else if >1.20 {
             poseStack.blit(sprite,
@@ -130,9 +134,9 @@ public class CompassOverlay {
         // render text
         for (String text : coords) {
             //? if >1.20 {
-            poseStack.drawString(mc.font, text, xPlacement-xOffset+iconXOffset, yPlacement, 14737632);
+            poseStack.drawString(mc.font, text, xPlacement-xOffset+iconXOffset, yPlacement, -1);
             //?} else {
-            /*GuiComponent.drawString(poseStack, mc.font, text, xPlacement-xOffset, yPlacement, 14737632);
+            /*GuiComponent.drawString(poseStack, mc.font, text, xPlacement-xOffset, yPlacement, -1);
              *///?}
             yPlacement += mc.font.lineHeight;
         }

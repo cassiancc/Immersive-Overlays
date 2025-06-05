@@ -23,6 +23,9 @@ public class ModConfig {
     private static ModConfig INSTANCE = new ModConfig();
     //General settings
 
+    public boolean compass_enable = true;
+    //? if >1.21.5
+    /*public boolean locator_bar = true;*/
     public boolean hide_from_debug = true;
     public boolean compass_enable = true;
     public int compass_vertical_position = 125;
