@@ -21,8 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 
-import static cc.cassian.immersiveoverlays.overlay.BiomeOverlay.getBiome;
-import static cc.cassian.immersiveoverlays.overlay.BiomeOverlay.getBiomeSprite;
+import static cc.cassian.immersiveoverlays.overlay.BiomeOverlay.*;
 
 public class CompassOverlay {
     public static boolean showX = false;
@@ -87,7 +86,7 @@ public class CompassOverlay {
         if (!BiomeOverlay.showBiome || ModConfig.get().biome_reduced_info) {
             yPlacement = yPlacement - 20;
         }
-        if (!BiomeOverlay.showSeason) {
+        if (!shouldShowSeasons()) {
             yPlacement = yPlacement - 15;
         }
         if (OverlayHelpers.playerHasPotions(mc.player)) {

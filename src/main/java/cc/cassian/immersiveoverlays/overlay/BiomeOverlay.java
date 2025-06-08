@@ -1,6 +1,8 @@
 package cc.cassian.immersiveoverlays.overlay;
 
+import cc.cassian.immersiveoverlays.compat.FabricSeasonsCompat;
 import cc.cassian.immersiveoverlays.compat.SereneSeasonsCompat;
+import cc.cassian.immersiveoverlays.compat.SimpleSeasonsCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 import net.minecraft.client.Minecraft;
@@ -30,7 +32,7 @@ public class BiomeOverlay {
 
     public static boolean shouldShowSeasons() {
         if (ModConfig.get().compat_seasons && showSeason) {
-            return ModHelpers.isLoaded("sereneseasons");
+            return ModHelpers.isLoaded("sereneseasons") || ModHelpers.isLoaded("simple-seasons") || ModHelpers.isLoaded("seasons");
         }
         return false;
     }
@@ -162,8 +164,14 @@ public class BiomeOverlay {
 
     public static String getSeason(ClientLevel level) {
         if (ModConfig.get().compat_seasons && showSeason) {
-            if (ModHelpers.isLoaded("sereneseasons")) {
+            if (ModHelpers.isLoaded("seasons")) {
+                return FabricSeasonsCompat.getSeason(level);
+            }
+            else if (ModHelpers.isLoaded("sereneseasons")) {
                 return SereneSeasonsCompat.getSeason(level);
+            }
+            else if (ModHelpers.isLoaded("simple-seasons")) {
+                return SimpleSeasonsCompat.getSeason(level);
             }
         }
         return "";

@@ -125,7 +125,8 @@ dependencies {
 
     // Accessories
     if (stonecutter.eval(mcVersion, ">1.19.2") && stonecutter.eval(mcVersion, "<1.21.5")) {
-        modImplementation("io.wispforest:accessories-fabric:${common.mod.dep("accessories")}+$minecraft")
+        modRuntimeOnly("maven.modrinth:fabric-seasons:${common.mod.dep("fabric_seasons")}")
+        modRuntimeOnly("io.wispforest:accessories-fabric:${common.mod.dep("accessories")}+$minecraft")
     }
 
     // Stonecutter/Arch
@@ -136,6 +137,7 @@ dependencies {
 configurations.all {
     resolutionStrategy {
         force("net.fabricmc:fabric-loader:${mod.dep("fabric_loader")}")
+        force("net.fabricmc.fabric-api:fabric-api:${common.mod.dep("fabric_api")}")
     }
 }
 

@@ -60,6 +60,9 @@ dependencies {
     if (stonecutter.eval(mcVersion, ">1.20")) {
         modCompileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-fabric")
     }
+    modCompileOnly("maven.modrinth:fabric-seasons:${mod.dep("fabric_seasons")}")
+    modCompileOnly("maven.modrinth:simple-seasons:${mod.dep("simple_seasons")}")
+
 
 }
 
