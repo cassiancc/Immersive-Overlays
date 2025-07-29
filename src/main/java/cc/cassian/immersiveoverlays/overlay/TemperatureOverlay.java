@@ -3,12 +3,15 @@ package cc.cassian.immersiveoverlays.overlay;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.compat.OreganizedCompat;
+import cc.cassian.immersiveoverlays.compat.ToughAsNailsCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
+import org.apache.commons.lang3.text.WordUtils;
+import org.apache.http.util.TextUtils;
 import oshi.util.tuples.Pair;
 //? if >1.20 {
 
@@ -62,19 +65,25 @@ public class TemperatureOverlay {
             int temperature =  OreganizedCompat.getAmbientTemperatureFromThermometer(player);
             return new Pair<>(Component.translatable("tooltip.oreganized.heat_"+temperature), OreganizedCompat.getTemperatureColourFromThermometer(temperature));
         }
+        if (ModCompat.TOUGH_AS_NAILS && ModConfig.get().compat_tough_as_nails_temperature) {
+            if (ToughAsNailsCompat.isTemperatureEnabled()) {
+                String temperature = ToughAsNailsCompat.getAmbientTemperature(player);
+                return new Pair<>(Component.literal(WordUtils.capitalizeFully(temperature)), -1);
+            }
+        }
         //? if >1.20 {
         var level = player.level();
         //?} else {
         /*var level = player.level;
          *///?}
-        return new Pair<>(Component.translatable(getBiomeTemperature(level.getBiome(player.blockPosition()).value().getBaseTemperature())), -1);
+        return new Pair<>(getBiomeTemperature(level.getBiome(player.blockPosition()).value().getBaseTemperature()), -1);
     }
 
-    public static String getBiomeTemperature(float temperature) {
+    public static Component getBiomeTemperature(float temperature) {
         if (temperature >= 2) {
-            return I18n.get("tag.worldgen.biome.c.is_hot");
+            return Component.translatableWithFallback("tag.worldgen.biome.c.is_hot", "Hot");
         } else if (temperature < 0) {
-            return I18n.get("tag.worldgen.biome.c.is_cold");
-        } else return I18n.get("tag.worldgen.biome.c.is_temperate");
+            return Component.translatableWithFallback("tag.worldgen.biome.c.is_cold", "Cold");
+        } else return Component.translatableWithFallback("tag.worldgen.biome.c.is_temperate", "Temperate");
     }
 }

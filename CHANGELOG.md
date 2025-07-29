@@ -12,7 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Mod support is in the works - Atmospheric, Quark, and Nature's Spirit have biomes included in this release.
 - Temperature overlays, displayed when a thermometer is in the inventory, that show the current temperature.
   - In vanilla, this data is sourced from the biome's temperature.
-  - With [Oreganized](https://modrinth.com/mod/oreganized) installed, this data is sourced from the Thermometer.- Option to show overlays when F3 is open.
+  - With [Oreganized](https://modrinth.com/mod/oreganized) installed, this data is sourced from the Thermometer.
+  - With [Tough as Nails](https://modrinth.com/mod/tough-as-nails) installed, this data is sourced from the player's temperature.
+- Option to show overlays when F3 is open.
 - Individual options to left align particular overlays.
 - X/Z overlay items can now be set independently.
 - New config option to allow compasses in bundles in Shulkers to function again.

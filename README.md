@@ -26,6 +26,7 @@ An overlay displaying the current temperature is displayed whenever the player h
 
 - In vanilla, this data is sourced from the biome's temperature.
 - With [Oreganized](https://modrinth.com/mod/oreganized) installed, this data is sourced from the Thermometer.
+- With [Tough as Nails](https://modrinth.com/mod/tough-as-nails) installed, this data is sourced from the player's temperature.
 
 ## Mod Compatibility
 

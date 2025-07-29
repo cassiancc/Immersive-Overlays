@@ -56,6 +56,9 @@ dependencies {
     else if (stonecutter.eval(mcVersion, ">=1.21.5")) {
         modCompileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+1.21.4")
     }
+    if (stonecutter.eval(mcVersion, ">1.19.2")) {
+        modCompileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
+    }
 }
 
 loom {

@@ -54,6 +54,7 @@ public class ModConfig {
     public boolean compat_map_atlases = false;
     public boolean compat_accessorify = true;
     public boolean compat_oreganized_temperature = true;
+    public boolean compat_tough_as_nails_temperature = true;
     // biomes
     public boolean biome_enable = true;
     public boolean biome_reduced_info = false;
