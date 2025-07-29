@@ -180,6 +180,7 @@ public class OverlayHelpers {
         ClockOverlay.showTime = false;
         ClockOverlay.showWeather = false;
         BiomeOverlay.showBiome = false;
+        TemperatureOverlay.showTemperature = false;
     }
 
     public static void isImportantItemOrContainer(ItemStack stack) {
