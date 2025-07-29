@@ -23,7 +23,7 @@ public class ModConfig {
     private static ModConfig INSTANCE = new ModConfig();
     //General settings
 
-    public boolean hide_from_debug = true;
+    // coords
     public boolean compass_enable = true;
     public int compass_vertical_position = 125;
     public boolean compass_horizontal_position_left = false;
@@ -34,26 +34,38 @@ public class ModConfig {
     public String compass_x_colour = "Red";
     public String compass_y_colour = "Green";
     public String compass_z_colour = "Blue";
+    // time
     public boolean clock_enable = true;
     public boolean clock_24_hour = true;
     public int clock_vertical_position = 90;
     public boolean clock_horizontal_position_left = false;
     public List<String> clock_items = List.of("minecraft:clock");
     public List<String> clock_weather_items = List.of("caverns_and_chasms:barometer", "firmaciv:barometer");
+    // general
+    public boolean hide_from_debug = true;
     public boolean require_item_in_hand = false;
     public boolean search_containers = true;
     public boolean search_containers_for_containers = true;
     public boolean render_background = true;
     public boolean moved_by_effects = true;
+    // compat
     public boolean compat_playerlocatorplus = true;
     public boolean compat_xaeros = true;
     public boolean compat_map_atlases = false;
     public boolean compat_accessorify = true;
+    public boolean compat_oreganized_temperature = true;
+    // biomes
     public boolean biome_enable = true;
     public boolean biome_reduced_info = false;
     public int biome_vertical_position = 112;
     public boolean biome_horizontal_position_left = false;
     public List<String> biome_items = List.of("minecraft:map", "minecraft:empty_map");
+    // temperature
+    public boolean temperature_enable = true;
+    public boolean temperature_horizontal_position_left = true;
+    public List<String> temperature_items = List.of("oreganized:thermometer");
+    public int temperature_vertical_position = 112;
+    // version
     public int version = ModClient.CONFIG_VERSION;
 
 

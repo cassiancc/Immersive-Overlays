@@ -148,6 +148,8 @@ public class OverlayHelpers {
             ClockOverlay.showWeather = true;
         if (ModLists.biome_items.contains(item))
             BiomeOverlay.showBiome = true;
+        if (ModLists.temperature_items.contains(item))
+            TemperatureOverlay.showTemperature = true;
     }
 
     public static void checkInventoryForItems(Player player) {

@@ -8,7 +8,7 @@ plugins {
 
 val loader = prop("loom.platform")!!
 val minecraft: String = stonecutter.current.version
-val common: Project = requireNotNull(stonecutter.node.sibling("")) {
+val common: Project = requireNotNull(stonecutter.node.sibling("")?.project) {
     "No common project for $project"
 }
 
@@ -82,11 +82,17 @@ dependencies {
         modImplementation("maven.modrinth:moonlight:${common.mod.dep("moonlight")}-forge")
     } else {
         modImplementation("maven.modrinth:moonlight:forge_${common.mod.dep("moonlight")}")
-        modImplementation("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+$minecraft")
+        modCompileOnly("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+$minecraft")
     }
 
     // Xaero's Minimap
     modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_Forge_${common.mod.dep("xaeros_mc")}")
+
+    if (stonecutter.eval(mcVersion, "=1.20.1")) {
+        modImplementation("maven.modrinth:oreganized:${common.mod.dep("oreganized")}-forge")
+        modImplementation("maven.modrinth:blueprint:${common.mod.dep("blueprint")}")
+
+    }
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionForge")) { isTransitive = false }
