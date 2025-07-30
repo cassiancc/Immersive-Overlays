@@ -31,6 +31,8 @@ public class ClockOverlay {
         if (!ModConfig.get().clock_enable)
             return;
         var mc = Minecraft.getInstance();
+        if (OverlayHelpers.debug(mc))
+            return;
         if (mc.level == null) return;
 
         String time = "Hi! ";
@@ -65,7 +67,7 @@ public class ClockOverlay {
         int fontWidth = mc.font.width(time)+iconOffset;
 
         if (mc.player == null) return;
-        if (OverlayHelpers.playerHasPotions(mc.player)) {
+        if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().biome_horizontal_position_left)) {
             yPlacement += OverlayHelpers.moveBy(mc.player);
             textYPlacement += OverlayHelpers.moveBy(mc.player);
         }

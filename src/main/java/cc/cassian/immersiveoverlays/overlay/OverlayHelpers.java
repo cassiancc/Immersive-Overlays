@@ -80,8 +80,9 @@ public class OverlayHelpers {
         }
     }
 
-    public static boolean playerHasPotions(Player player) {
+    public static boolean playerHasPotions(Player player, boolean leftAlign) {
         if (!ModConfig.get().moved_by_effects) return false;
+        if (!leftAlign) return false;
         // Technically, we should check whether these are ambient,
         // but Map Atlases doesn't and still covers our overlay.
         // return Player.areAllEffectsAmbient(player.getActiveEffects());

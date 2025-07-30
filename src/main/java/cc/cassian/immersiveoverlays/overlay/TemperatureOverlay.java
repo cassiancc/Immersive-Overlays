@@ -32,6 +32,8 @@ public class TemperatureOverlay {
         if (!ModConfig.get().temperature_enable)
             return;
         var mc = Minecraft.getInstance();
+        if (OverlayHelpers.debug(mc))
+            return;
 
         Pair<Component, Integer> temperature = getTemperature(mc.player);
 

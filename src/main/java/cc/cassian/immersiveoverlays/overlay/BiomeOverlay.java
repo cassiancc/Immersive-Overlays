@@ -38,6 +38,8 @@ public class BiomeOverlay {
         if (!ModConfig.get().biome_enable)
             return;
         var mc = Minecraft.getInstance();
+        if (OverlayHelpers.debug(mc))
+            return;
 
         ResourceLocation biome = getBiome(mc.player);
         String biomeText = formatBiome(biome);
@@ -57,7 +59,7 @@ public class BiomeOverlay {
             yPlacement = yPlacement - 24;
             textYPlacement = textYPlacement - 24;
         }
-        if (OverlayHelpers.playerHasPotions(mc.player)) {
+        if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().biome_horizontal_position_left)) {
             yPlacement += OverlayHelpers.moveBy(mc.player);
             textYPlacement += OverlayHelpers.moveBy(mc.player);
         }

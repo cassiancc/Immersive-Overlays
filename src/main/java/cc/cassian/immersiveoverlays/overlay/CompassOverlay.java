@@ -76,16 +76,16 @@ public class CompassOverlay {
         }
         int fontWidth = mc.font.width(StringUtils.repeat("a", width+2))+iconXOffset;
 
-        if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable) {
+        if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable || (ModConfig.get().clock_horizontal_position_left != ModConfig.get().compass_horizontal_position_left)) {
             yPlacement = yPlacement - 15;
         }
-        if (ClockOverlay.showWeather) {
+        if (ClockOverlay.showWeather && (ModConfig.get().clock_horizontal_position_left == ModConfig.get().compass_horizontal_position_left)) {
             yPlacement = yPlacement + 9;
         }
-        if (!BiomeOverlay.showBiome || ModConfig.get().biome_reduced_info) {
+        if (!BiomeOverlay.showBiome || ModConfig.get().biome_reduced_info || (ModConfig.get().biome_horizontal_position_left != ModConfig.get().compass_horizontal_position_left)) {
             yPlacement = yPlacement - 20;
         }
-        if (OverlayHelpers.playerHasPotions(mc.player)) {
+        if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().compass_horizontal_position_left)) {
             yPlacement += OverlayHelpers.moveBy(mc.player);
         }
 

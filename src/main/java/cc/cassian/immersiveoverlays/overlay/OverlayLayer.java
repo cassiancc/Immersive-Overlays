@@ -11,6 +11,7 @@ public class OverlayLayer implements LayeredDraw.Layer {
         CompassOverlay.renderGameOverlayEvent(guiGraphics);
         ClockOverlay.renderGameOverlayEvent(guiGraphics);
         BiomeOverlay.renderGameOverlayEvent(guiGraphics);
+        TemperatureOverlay.renderGameOverlayEvent(guiGraphics);
     }
 }
 *///?}
