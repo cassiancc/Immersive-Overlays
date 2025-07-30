@@ -9,11 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Biome overlays, displayed when a map is in the inventory, that show the current biome. Additional biomes can be added via resource packs, with support for all of Minecraft's biomes included.
-  - Mod support is in the works - Atmospheric, Quark, and Nature's Spirit have biomes included in this release.
+  - Mod support is in the works - Atmospheric, Quark, and Nature's Spirit have biomes included in this release. Always looking for contributions, and more can be added by modpackers.
+  - Adding more biomes is simple. As an example, to add a texture to Dunes from Atmospheric (`atmospheric:dunes`), your resource pack should have a texture with the path `assets/atmospheric/textures/immersiveoverlays/dunes.png`.
+  - Immersive Overlays also has a system for redirects - allowing multiple biomes to use the same texture. To add a redirect to Flourishing Dunes from Atmospheric (`atmospheric:flourishing_dunes`) so that it reuses the texture of Dunes, your resource pack should have a text file with the path `assets/atmospheric/textures/immersiveoverlays/dunes.txt`, with the contents `atmospheric:dunes`.
 - Temperature overlays, displayed when a thermometer is in the inventory, that show the current temperature.
   - In vanilla, this data is sourced from the biome's temperature.
   - With [Oreganized](https://modrinth.com/mod/oreganized) installed, this data is sourced from the Thermometer.
   - With [Tough as Nails](https://modrinth.com/mod/tough-as-nails) installed, this data is sourced from the player's temperature.
+- Option to show the current day in the clock's overlay.
 - Option to show overlays without an item required.
 - Option to show overlays when F3 is open.
 - Option to fix overlays in a specific position.

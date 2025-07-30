@@ -4,7 +4,6 @@ import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
 //?} else {
 /*import net.minecraft.client.gui.GuiComponent;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -12,7 +11,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
  *///?}
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -36,14 +37,20 @@ public class BiomeOverlay {
         if (OverlayHelpers.debug(mc))
             return;
 
-        ResourceLocation biome = getBiome(mc.player);
-        String biomeText = formatBiome(biome);
+        if (mc.player == null) return;
+        Holder<Biome> biome = getBiome(mc.player);
+        ResourceLocation biomeId = getId(biome);
+        String biomeText = formatBiome(biomeId);
 
         int xOffset = 3;
         // The amount of offset needed to display the biome icons.
         int iconOffset = 0;
+        ResourceLocation sprite = UNDEFINED;
         if (ModConfig.get().biome_icons) {
-            iconOffset = 20;
+            sprite = getBiomeSprite(biomeId, true);
+            if (!sprite.equals(UNDEFINED)) {
+                iconOffset = 20;
+            }
         }
         int textureOffset = 111;
         int tooltipSize = 21;
@@ -52,7 +59,6 @@ public class BiomeOverlay {
 
         int fontWidth = mc.font.width(biomeText)+iconOffset;
 
-        if (mc.player == null) return;
         if (ModConfig.get().avoid_overlapping) {
             if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable) {
                 yPlacement = yPlacement - 24;
@@ -68,12 +74,17 @@ public class BiomeOverlay {
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().biome_horizontal_position_left);
         OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize, ModConfig.get().biome_horizontal_position_left);
         // render text
-        OverlayHelpers.drawString(guiGraphics, mc.font, biomeText, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
+        OverlayHelpers.drawString(guiGraphics, mc.font, biomeText, xPlacement-xOffset+iconOffset, textYPlacement, getTextColour(biome));
         // render biome icon
-        if (ModConfig.get().biome_icons) {
-            var sprite = getBiomeSprite(biome, true);
+        if (ModConfig.get().biome_icons && !sprite.equals(UNDEFINED)) {
             OverlayHelpers.blit(guiGraphics, sprite, xPlacement-xOffset-1, yPlacement-2, 0, 0, 16, 16, 16, 16);
         }
+    }
+
+    private static Integer getTextColour(Holder<Biome> biome) {
+        if (ModConfig.get().biome_text_tinted)
+            return TemperatureOverlay.getBiomeTemperature(biome.value()).getB();
+        return -1;
     }
 
     public static ResourceLocation getBiomeSprite(ResourceLocation biome, boolean allowRedirect) {
@@ -96,13 +107,17 @@ public class BiomeOverlay {
         }
     }
 
-    public static ResourceLocation getBiome(LocalPlayer player) {
+    public static Holder<Biome> getBiome(LocalPlayer player) {
         //? if >1.20 {
         var level = player.level();
         //?} else {
         /*var level = player.level;
          *///?}
-        return level.getBiome(player.blockPosition()).unwrapKey().orElse(Biomes.THE_VOID).location();
+        return level.getBiome(player.blockPosition());
+    }
+
+    public static ResourceLocation getId(Holder<Biome> biome) {
+        return biome.unwrapKey().orElse(Biomes.THE_VOID).location();
     }
 
     public static String formatBiome(ResourceLocation biome) {

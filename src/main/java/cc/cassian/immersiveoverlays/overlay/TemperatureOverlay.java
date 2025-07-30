@@ -5,16 +5,14 @@ import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.compat.OreganizedCompat;
 import cc.cassian.immersiveoverlays.compat.ToughAsNailsCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
+import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.biome.Biome;
 import org.apache.commons.lang3.text.WordUtils;
 import oshi.util.tuples.Pair;
-//? if >1.20 {
-
-//?} else {
-//?}
 
 public class TemperatureOverlay {
     public static boolean showTemperature = false;
@@ -54,7 +52,7 @@ public class TemperatureOverlay {
     }
 
     public static Pair<Component, Integer> getTemperature(LocalPlayer player) {
-        if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature && ModClient.loader.equals("forge")) {
+        if (ModCompat.OREGANIZED && SharedConstants.getCurrentVersion().getName().equals("1.20.1") && ModConfig.get().compat_oreganized_temperature && ModClient.loader.equals("forge")) {
             int temperature =  OreganizedCompat.getAmbientTemperatureFromThermometer(player);
             return new Pair<>(Component.translatable("tooltip.oreganized.heat_"+temperature), OreganizedCompat.getTemperatureColourFromThermometer(temperature));
         }
@@ -69,14 +67,18 @@ public class TemperatureOverlay {
         //?} else {
         /*var level = player.level;
          *///?}
-        return new Pair<>(getBiomeTemperature(level.getBiome(player.blockPosition()).value().getBaseTemperature()), -1);
+        return getBiomeTemperature(level.getBiome(player.blockPosition()).value());
     }
 
-    public static Component getBiomeTemperature(float temperature) {
+    public static Pair<Component, Integer> getBiomeTemperature(Biome biome) {
+        return getBiomeTemperature(biome.getBaseTemperature());
+    }
+
+    public static Pair<Component, Integer> getBiomeTemperature(float temperature) {
         if (temperature >= 2) {
-            return Component.translatableWithFallback("tag.worldgen.biome.c.is_hot", "Hot");
-        } else if (temperature < 0) {
-            return Component.translatableWithFallback("tag.worldgen.biome.c.is_cold", "Cold");
-        } else return Component.translatableWithFallback("tag.worldgen.biome.c.is_temperate", "Temperate");
+            return new Pair<>(Component.translatableWithFallback("tag.worldgen.biome.c.is_hot", "Hot"), 16755285);
+        } else if (temperature <= 0.2) {
+            return new Pair<>(Component.translatableWithFallback("tag.worldgen.biome.c.is_cold", "Cold"), 5636095);
+        } else return new Pair<>(Component.translatableWithFallback("tag.worldgen.biome.c.is_temperate", "Temperate"), -1);
     }
 }

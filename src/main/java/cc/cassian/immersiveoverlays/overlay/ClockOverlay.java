@@ -1,20 +1,17 @@
 package cc.cassian.immersiveoverlays.overlay;
 
-import cc.cassian.immersiveoverlays.compat.MapAtlasesCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
 //?} else {
 /*import net.minecraft.client.gui.GuiComponent;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
  *///?}
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.biome.Biome;
-
-import static cc.cassian.immersiveoverlays.overlay.OverlayHelpers.TEXTURE;
 
 public class ClockOverlay {
     public static boolean showTime = false;
@@ -84,10 +81,11 @@ public class ClockOverlay {
     }
 
     public static int getWeather(Player player) {
+        var level = player.level
         //? if >1.20 {
-        var level = player.level();
+        ();
         //?} else {
-          /*var level = player.level;
+        /*;
         *///?}
         var biome = level.getBiome(player.blockPosition()).value();
         var time = level.getDayTime() % 24000;
@@ -124,17 +122,28 @@ public class ClockOverlay {
     // Supplementaries Team License, as Immersive Overlays is not designed
     // to compete with Supplementaries.
     public static String getTime(float dayTime) {
-        int time = (int)(dayTime + 6000L) % 24000;
-        int m = (int)((float)time % 1000.0F / 1000.0F * 60.0F);
-        int h = time / 1000;
-        String a = "";
-        if (!(Boolean) ModConfig.get().clock_24_hour) {
-            a = time < 12000 ? " AM" : " PM";
-            h %= 12;
-            if (h == 0) {
-                h = 12;
-            }
+        StringBuilder currentTime = new StringBuilder();
+        if (ModConfig.get().clock_day_count) {
+            int day = (int) (dayTime/24000);
+           currentTime.append(I18n.get("gui.c.day", day));
+           if (ModConfig.get().clock_current_time) {
+               currentTime.append(", ");
+           }
         }
-        return (h + ":" + (m < 10 ? "0" : "") + m + a);
+        if (ModConfig.get().clock_current_time) {
+            int time = (int)(dayTime + 6000L) % 24000;
+            int m = (int)((float)time % 1000.0F / 1000.0F * 60.0F);
+            int hour = time / 1000;
+            String a = "";
+            if (!(Boolean) ModConfig.get().clock_24_hour) {
+                a = time < 12000 ? " AM" : " PM";
+                hour %= 12;
+                if (hour == 0) {
+                    hour = 12;
+                }
+            }
+            currentTime.append(hour).append(":").append(m < 10 ? "0" : "").append(m).append(a);
+        }
+        return currentTime.toString();
     }
 }

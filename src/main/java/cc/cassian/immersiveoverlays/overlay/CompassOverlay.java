@@ -19,8 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 
-import static cc.cassian.immersiveoverlays.overlay.BiomeOverlay.getBiome;
-import static cc.cassian.immersiveoverlays.overlay.BiomeOverlay.getBiomeSprite;
+import static cc.cassian.immersiveoverlays.overlay.BiomeOverlay.*;
 
 public class CompassOverlay {
     public static boolean showX = false;
@@ -108,7 +107,7 @@ public class CompassOverlay {
         // render background
         OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize, ModConfig.get().compass_horizontal_position_left);
         if (showBiomeIcon) {
-            var sprite = getBiomeSprite(getBiome(mc.player), true);
+            var sprite = getBiomeSprite(getId(getBiome(mc.player)), true);
             OverlayHelpers.blit(guiGraphics, sprite, xPlacement-xOffset-1, yPlacement+iconYOffset, 0, 0, 16, 16, 16, 16);
         }
         // render text

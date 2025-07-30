@@ -27,15 +27,18 @@ public class ModConfig {
     public boolean compass_enable = true;
     public int compass_vertical_position = 125;
     public boolean compass_horizontal_position_left = false;
-    public List<String> compass_x_items = List.of("minecraft:compass", "minecraft:recovery_compass", "spelunkery:magnetic_compass", "firmaciv:nav_clock", "firmaciv:firmaciv_compass");
-    public List<String> compass_y_items = List.of("spelunkery:depth_gauge","caverns_and_chasms:depth_gauge","additionaladditions:depth_meter","supplementaries:altimeter","depthmeter:depthmeter");
-    public List<String> compass_z_items = List.of("firmaciv:sextant");
-    public boolean compass_hide_when_similar_mods_present = true;
     public String compass_x_colour = "Red";
     public String compass_y_colour = "Green";
     public String compass_z_colour = "Blue";
+    public boolean compass_hide_when_similar_mods_present = true;
+    public List<String> compass_x_items = List.of("minecraft:compass", "minecraft:recovery_compass", "spelunkery:magnetic_compass", "firmaciv:nav_clock", "firmaciv:firmaciv_compass");
+    public List<String> compass_y_items = List.of("spelunkery:depth_gauge","caverns_and_chasms:depth_gauge","additionaladditions:depth_meter","supplementaries:altimeter","depthmeter:depthmeter");
+    public List<String> compass_z_items = List.of("firmaciv:sextant");
+
     // time
     public boolean clock_enable = true;
+    public boolean clock_current_time = true;
+    public boolean clock_day_count = false;
     public boolean clock_24_hour = true;
     public int clock_vertical_position = 90;
     public boolean clock_horizontal_position_left = false;
@@ -61,17 +64,17 @@ public class ModConfig {
     public boolean biome_enable = true;
     public boolean biome_icons = true;
     public boolean biome_reduced_info = false;
+    public boolean biome_text_tinted = true;
     public int biome_vertical_position = 112;
     public boolean biome_horizontal_position_left = false;
     public List<String> biome_items = List.of("minecraft:map", "minecraft:empty_map");
     // temperature
     public boolean temperature_enable = true;
     public boolean temperature_horizontal_position_left = true;
-    public List<String> temperature_items = List.of("oreganized:thermometer");
+    public List<String> temperature_items = List.of("oreganized:thermometer", "toughasnails:thermometer");
     public int temperature_vertical_position = 112;
     // version
     public int version = ModClient.CONFIG_VERSION;
-
 
 
     public static void load() {
