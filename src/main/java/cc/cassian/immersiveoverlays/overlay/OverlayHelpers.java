@@ -146,7 +146,7 @@ public class OverlayHelpers {
 
     public static void checkInventoryForItems(Player player) {
         if (ModConfig.get().require_item) {
-            resetOverlays();
+            setOverlays(false);
             if (player == null)
                 return;
             isImportantItemOrContainer(player.getOffhandItem());
@@ -169,28 +169,18 @@ public class OverlayHelpers {
                 checkInventoryForStack(player.getInventory());
             }
         } else {
-            enableOverlays();
+            setOverlays(true);
         }
     }
 
-    private static void resetOverlays() {
-        CompassOverlay.showX = false;
-        CompassOverlay.showY = false;
-        CompassOverlay.showZ = false;
-        ClockOverlay.showTime = false;
-        ClockOverlay.showWeather = false;
-        BiomeOverlay.showBiome = false;
-        TemperatureOverlay.showTemperature = false;
-    }
-
-    private static void enableOverlays() {
-        CompassOverlay.showX = true;
-        CompassOverlay.showY = true;
-        CompassOverlay.showZ = true;
-        ClockOverlay.showTime = true;
-        ClockOverlay.showWeather = true;
-        BiomeOverlay.showBiome = true;
-        TemperatureOverlay.showTemperature = true;
+    private static void setOverlays(boolean b) {
+        CompassOverlay.showX = b;
+        CompassOverlay.showY = b;
+        CompassOverlay.showZ = b;
+        ClockOverlay.showTime = b;
+        ClockOverlay.showWeather = b;
+        BiomeOverlay.showBiome = b;
+        TemperatureOverlay.showTemperature = b;
     }
 
     public static void isImportantItemOrContainer(ItemStack stack) {
