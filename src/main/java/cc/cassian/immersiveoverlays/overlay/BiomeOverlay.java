@@ -26,9 +26,9 @@ public class BiomeOverlay {
 
 
     //? if >1.20 {
-    public static void renderGameOverlayEvent(GuiGraphics poseStack) {
+    public static void renderGameOverlayEvent(GuiGraphics guiGraphics) {
     //?} else {
-        /*public static void renderGameOverlayEvent(PoseStack poseStack) {
+        /*public static void renderGameOverlayEvent(PoseStack guiGraphics) {
      *///?}
         if (!showBiome || ModConfig.get().biome_reduced_info || !ModConfig.get().biome_enable)
             return;
@@ -66,34 +66,13 @@ public class BiomeOverlay {
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().biome_horizontal_position_left);
-        //? if <1.20
-        /*RenderSystem.setShaderTexture(0, OverlayHelpers.TEXTURE);*/
-        OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize, ModConfig.get().biome_horizontal_position_left);
+        OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize, ModConfig.get().biome_horizontal_position_left);
         // render text
-        //? if >1.20 {
-        poseStack.drawString(mc.font, biomeText, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
-        //?} else {
-        /*GuiComponent.drawString(poseStack, mc.font, biomeText, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
-         *///?}
+        OverlayHelpers.drawString(guiGraphics, mc.font, biomeText, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
         // render biome icon
         if (ModConfig.get().biome_icons) {
             var sprite = getBiomeSprite(biome, true);
-            //? if >1.21.2 {
-            /*poseStack.blit(RenderType::guiTextured, sprite,
-             *///?} else if >1.20 {
-            poseStack.blit(sprite,
-                    //?} else {
-
-        /*RenderSystem.setShaderTexture(0, sprite);
-           GuiComponent.blit(poseStack,
-         *///?}
-                    xPlacement-xOffset-1, yPlacement-2,
-                    //? if <1.21.2
-                    0,
-                    //?
-                    0,
-                    0, 16, 16,
-                    16, 16);
+            OverlayHelpers.blit(guiGraphics, sprite, xPlacement-xOffset-1, yPlacement-2, 0, 0, 16, 16, 16, 16);
         }
     }
 

@@ -9,6 +9,7 @@ import cc.cassian.immersiveoverlays.config.ModConfig;
 
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import cc.cassian.immersiveoverlays.compat.AccessoriesCompat;
 //?} else {
@@ -18,6 +19,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -44,33 +46,16 @@ public class OverlayHelpers {
         /*public static void renderBackground(PoseStack poseStack, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize, boolean leftAlign) {
          *///?}
         if (ModConfig.get().render_background) {
+            //? if <1.20
+            /*RenderSystem.setShaderTexture(0, OverlayHelpers.TEXTURE);*/
             final int yPlacementWithOffset = yPlacement-4;
             final int endCapOffset = 197;
             final int xPlacementWithOffset = xPlacement-xOffset-4;
             final int endCapXPlacement = OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth, leftAlign);
             final int uWidth = fontWidth+xOffset+4;
-
-            //? if >1.21.2 {
-            /*guiGraphics.blit(RenderType::guiTextured, TEXTURE, xPlacementWithOffset, yPlacementWithOffset,
-             *///?} else if >1.20 {
-            guiGraphics.blit(TEXTURE, xPlacementWithOffset, yPlacementWithOffset, 0,
-                    //?} else {
-                    /*GuiComponent.blit(poseStack, xPlacementWithOffset, yPlacementWithOffset, 0,
-                     *///?}
-                    0,
-                    textureOffset, uWidth, tooltipSize,
-                    OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+            OverlayHelpers.blit(guiGraphics, xPlacementWithOffset, yPlacementWithOffset, 0, textureOffset, uWidth, tooltipSize, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
             // render endcap
-            //? if >1.21.2 {
-            /*guiGraphics.blit(RenderType::guiTextured, TEXTURE, endCapXPlacement, yPlacementWithOffset,
-             *///?} else if >1.20 {
-            guiGraphics.blit(TEXTURE, endCapXPlacement, yPlacementWithOffset, 0,
-                    //?} else {
-                    /*GuiComponent.blit(poseStack, endCapXPlacement, yPlacementWithOffset, 0,
-                     *///?}
-                    endCapOffset,
-                    textureOffset, 3, tooltipSize,
-                    OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+            OverlayHelpers.blit(guiGraphics, endCapXPlacement, yPlacementWithOffset, endCapOffset, textureOffset, 3, tooltipSize, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
         }
     }
 
@@ -165,7 +150,12 @@ public class OverlayHelpers {
                 } else {
                     //? if <1.21.5 {
                     player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
-                    //?}
+                    //?} else {
+                    /*isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.HEAD));
+                    isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.CHEST));
+                    isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.LEGS));
+                    isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.FEET));
+                    *///?}
                     //? if >1.20 {
                     if (ModCompat.ACCESSORIES)
                         AccessoriesCompat.checkForImportantAccessories(player);
@@ -322,5 +312,45 @@ public class OverlayHelpers {
         } else {
             return windowWidth-4;
         }
+    }
+
+    public static void drawString(GuiGraphics poseStack, Font font, Component text, int x, int y, Integer color) {
+        //? if >1.20 {
+        poseStack.drawString(font, text, x, y, color);
+        //?} else {
+        /*GuiComponent.drawString(poseStack, font, text, x, y, color);
+         *///?}
+    }
+
+    public static void drawString(GuiGraphics poseStack, Font font, String text, int x, int y, Integer color) {
+        //? if >1.20 {
+        poseStack.drawString(font, text, x, y, color);
+        //?} else {
+        /*GuiComponent.drawString(poseStack, font, text, x, y, color);
+         *///?}
+    }
+
+    public static void blit(GuiGraphics guiGraphics, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
+        OverlayHelpers.blit(guiGraphics, TEXTURE, x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
+    }
+
+    public static void blit(GuiGraphics guiGraphics, ResourceLocation texture, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
+        //? if >1.21.5 {
+        /*guiGraphics.blit(RenderPipelines.GUI_TEXTURED, texture,
+        *///?} else if >1.21.2{
+        /*guiGraphics.blit(RenderType::guiTextured, texture,
+         *///?} else if >1.20 {
+        guiGraphics.blit(texture,
+                //?} else {
+            /*RenderSystem.setShaderTexture(0, texture);
+               GuiComponent.blit(guiGraphics,
+             *///?}
+                x, y,
+                //? if <1.21.2
+                0, //z
+                //?
+                uOffset,
+                vOffset, uWidth, vHeight,
+                textureWidth, textureHeight);
     }
 }

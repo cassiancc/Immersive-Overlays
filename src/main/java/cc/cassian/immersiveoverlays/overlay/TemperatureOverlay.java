@@ -8,10 +8,8 @@ import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import org.apache.commons.lang3.text.WordUtils;
-import org.apache.http.util.TextUtils;
 import oshi.util.tuples.Pair;
 //? if >1.20 {
 
@@ -49,15 +47,10 @@ public class TemperatureOverlay {
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().temperature_horizontal_position_left);
-        //? if <1.20
-        /*RenderSystem.setShaderTexture(0, OverlayHelpers.TEXTURE);*/
+        // render background
         OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize, ModConfig.get().temperature_horizontal_position_left);
         // render text
-        //? if >1.20 {
-        poseStack.drawString(mc.font, temperature.getA(), xPlacement-xOffset+iconOffset, textYPlacement, temperature.getB());
-        //?} else {
-        /*GuiComponent.drawString(poseStack, mc.font, temperature, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
-         *///?}
+        OverlayHelpers.drawString(poseStack, mc.font, temperature.getA(), xPlacement-xOffset+iconOffset, textYPlacement, temperature.getB());
     }
 
     public static Pair<Component, Integer> getTemperature(LocalPlayer player) {

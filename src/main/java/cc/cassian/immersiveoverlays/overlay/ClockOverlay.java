@@ -22,9 +22,9 @@ public class ClockOverlay {
 
 
     //? if >1.20 {
-    public static void renderGameOverlayEvent(GuiGraphics poseStack) {
+    public static void renderGameOverlayEvent(GuiGraphics guiGraphics) {
     //?} else {
-        /*public static void renderGameOverlayEvent(PoseStack poseStack) {
+        /*public static void renderGameOverlayEvent(PoseStack guiGraphics) {
      *///?}
         if ((!showWeather && !showTime) || !ModConfig.get().clock_enable)
             return;
@@ -72,36 +72,14 @@ public class ClockOverlay {
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().clock_horizontal_position_left);
-        //? if <1.20
-        /*RenderSystem.setShaderTexture(0, OverlayHelpers.TEXTURE);*/
-        OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize, ModConfig.get().clock_horizontal_position_left);
+        OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize, ModConfig.get().clock_horizontal_position_left);
         if (showTime) {
             // render text
-            //? if >1.20 {
-            poseStack.drawString(mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
-            //?} else {
-            /*GuiComponent.drawString(poseStack, mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
-             *///?}
+            OverlayHelpers.drawString(guiGraphics, mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
         }
         if (showWeather) {
             var spriteOffset = getWeather(mc.player);
-
-            //? if >1.21.2 {
-            /*poseStack.blit(RenderType::guiTextured, TEXTURE,
-            *///?} else if >1.20 {
-            poseStack.blit(TEXTURE,
-            //?} else {
-
-            /*RenderSystem.setShaderTexture(0, TEXTURE);
-               GuiComponent.blit(poseStack,
-             *///?}
-                    xPlacement-xOffset-1, yPlacement-1,
-                    //? if <1.21.2
-                    0,
-                    //?
-                    spriteOffset,
-                    95, 16, 16,
-                    OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+            OverlayHelpers.blit(guiGraphics, xPlacement-xOffset-1, yPlacement-1, spriteOffset, 95, 16, 16, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
         }
     }
 
