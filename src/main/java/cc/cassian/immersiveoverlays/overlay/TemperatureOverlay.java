@@ -27,9 +27,7 @@ public class TemperatureOverlay {
     //?} else {
         /*public static void renderGameOverlayEvent(PoseStack poseStack) {
      *///?}
-        if (!showTemperature)
-            return;
-        if (!ModConfig.get().temperature_enable)
+        if (!showTemperature || !ModConfig.get().temperature_enable)
             return;
         var mc = Minecraft.getInstance();
         if (OverlayHelpers.debug(mc))

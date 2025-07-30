@@ -26,9 +26,7 @@ public class ClockOverlay {
     //?} else {
         /*public static void renderGameOverlayEvent(PoseStack poseStack) {
      *///?}
-        if (!showWeather && !showTime)
-            return;
-        if (!ModConfig.get().clock_enable)
+        if ((!showWeather && !showTime) || !ModConfig.get().clock_enable)
             return;
         var mc = Minecraft.getInstance();
         if (OverlayHelpers.debug(mc))

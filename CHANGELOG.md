@@ -14,7 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - In vanilla, this data is sourced from the biome's temperature.
   - With [Oreganized](https://modrinth.com/mod/oreganized) installed, this data is sourced from the Thermometer.
   - With [Tough as Nails](https://modrinth.com/mod/tough-as-nails) installed, this data is sourced from the player's temperature.
+- Option to show overlays without an item required.
 - Option to show overlays when F3 is open.
+- Option to fix overlays in a specific position.
 - Individual options to left align particular overlays.
 - X/Z overlay items can now be set independently.
 - New config option to allow compasses in bundles in Shulkers to function again.

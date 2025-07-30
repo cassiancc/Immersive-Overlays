@@ -32,7 +32,7 @@ public class CompassOverlay {
     //?} else {
         /*public static void renderGameOverlayEvent(PoseStack poseStack) {
      *///?}
-        boolean showBiomeIcon = ModConfig.get().biome_enable && BiomeOverlay.showBiome && ModConfig.get().biome_reduced_info;
+        boolean showBiomeIcon = ModConfig.get().biome_enable && BiomeOverlay.showBiome && ModConfig.get().biome_reduced_info && ModConfig.get().biome_icons;
         if (!showX && !showY && !showZ)
             return;
         if (!ModConfig.get().compass_enable)
@@ -76,14 +76,16 @@ public class CompassOverlay {
         }
         int fontWidth = mc.font.width(StringUtils.repeat("a", width+2))+iconXOffset;
 
-        if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable || (ModConfig.get().clock_horizontal_position_left != ModConfig.get().compass_horizontal_position_left)) {
-            yPlacement = yPlacement - 15;
-        }
-        if (ClockOverlay.showWeather && (ModConfig.get().clock_horizontal_position_left == ModConfig.get().compass_horizontal_position_left)) {
-            yPlacement = yPlacement + 9;
-        }
-        if (!BiomeOverlay.showBiome || ModConfig.get().biome_reduced_info || (ModConfig.get().biome_horizontal_position_left != ModConfig.get().compass_horizontal_position_left)) {
-            yPlacement = yPlacement - 20;
+        if (ModConfig.get().avoid_overlapping) {
+            if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable || (ModConfig.get().clock_horizontal_position_left != ModConfig.get().compass_horizontal_position_left)) {
+                yPlacement = yPlacement - 15;
+            }
+            if (ClockOverlay.showWeather && (ModConfig.get().clock_horizontal_position_left == ModConfig.get().compass_horizontal_position_left)) {
+                yPlacement = yPlacement + 9;
+            }
+            if (!BiomeOverlay.showBiome || ModConfig.get().biome_reduced_info || (ModConfig.get().biome_horizontal_position_left != ModConfig.get().compass_horizontal_position_left)) {
+                yPlacement = yPlacement - 20;
+            }
         }
         if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().compass_horizontal_position_left)) {
             yPlacement += OverlayHelpers.moveBy(mc.player);

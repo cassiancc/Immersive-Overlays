@@ -42,12 +42,14 @@ public class ModConfig {
     public List<String> clock_items = List.of("minecraft:clock");
     public List<String> clock_weather_items = List.of("caverns_and_chasms:barometer", "firmaciv:barometer");
     // general
-    public boolean hide_from_debug = true;
+    public boolean avoid_overlapping = true;
+    public boolean moved_by_effects = true;
+    public boolean require_item = true;
     public boolean require_item_in_hand = false;
     public boolean search_containers = true;
     public boolean search_containers_for_containers = true;
     public boolean render_background = true;
-    public boolean moved_by_effects = true;
+    public boolean hide_from_debug = true;
     // compat
     public boolean compat_playerlocatorplus = true;
     public boolean compat_xaeros = true;
@@ -57,6 +59,7 @@ public class ModConfig {
     public boolean compat_tough_as_nails_temperature = true;
     // biomes
     public boolean biome_enable = true;
+    public boolean biome_icons = true;
     public boolean biome_reduced_info = false;
     public int biome_vertical_position = 112;
     public boolean biome_horizontal_position_left = false;
@@ -68,6 +71,7 @@ public class ModConfig {
     public int temperature_vertical_position = 112;
     // version
     public int version = ModClient.CONFIG_VERSION;
+
 
 
     public static void load() {

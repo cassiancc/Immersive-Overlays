@@ -75,7 +75,7 @@ public class OverlayHelpers {
     }
 
     public static void checkInventoryForOverlays(Minecraft minecraft){
-        if ((ModConfig.get().compass_enable || ModConfig.get().clock_enable || ModConfig.get().biome_enable)  && minecraft.level != null) {
+        if ((ModConfig.get().compass_enable || ModConfig.get().clock_enable || ModConfig.get().biome_enable || ModConfig.get().temperature_enable)  && minecraft.level != null) {
             OverlayHelpers.checkInventoryForItems(minecraft.player);
         }
     }
@@ -154,23 +154,27 @@ public class OverlayHelpers {
     }
 
     public static void checkInventoryForItems(Player player) {
-        resetOverlays();
-        if (player == null)
-            return;
-        if (ModConfig.get().compass_enable || ModConfig.get().clock_enable) {
-            isImportantItemOrContainer(player.getOffhandItem());
-            if (ModConfig.get().require_item_in_hand) {
-                isImportantItemOrContainer(player.getMainHandItem());
-            } else {
-                //? if <1.21.5 {
-                player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
-                //?}
-                //? if >1.20 {
-                if (ModCompat.ACCESSORIES)
-                    AccessoriesCompat.checkForImportantAccessories(player);
-                //?}
-                checkInventoryForStack(player.getInventory());
+        if (ModConfig.get().require_item) {
+            resetOverlays();
+            if (player == null)
+                return;
+            if (ModConfig.get().compass_enable || ModConfig.get().clock_enable) {
+                isImportantItemOrContainer(player.getOffhandItem());
+                if (ModConfig.get().require_item_in_hand) {
+                    isImportantItemOrContainer(player.getMainHandItem());
+                } else {
+                    //? if <1.21.5 {
+                    player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
+                    //?}
+                    //? if >1.20 {
+                    if (ModCompat.ACCESSORIES)
+                        AccessoriesCompat.checkForImportantAccessories(player);
+                    //?}
+                    checkInventoryForStack(player.getInventory());
+                }
             }
+        } else {
+            enableOverlays();
         }
     }
 
@@ -182,6 +186,16 @@ public class OverlayHelpers {
         ClockOverlay.showWeather = false;
         BiomeOverlay.showBiome = false;
         TemperatureOverlay.showTemperature = false;
+    }
+
+    private static void enableOverlays() {
+        CompassOverlay.showX = true;
+        CompassOverlay.showY = true;
+        CompassOverlay.showZ = true;
+        ClockOverlay.showTime = true;
+        ClockOverlay.showWeather = true;
+        BiomeOverlay.showBiome = true;
+        TemperatureOverlay.showTemperature = true;
     }
 
     public static void isImportantItemOrContainer(ItemStack stack) {

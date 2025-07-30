@@ -30,12 +30,7 @@ public class BiomeOverlay {
     //?} else {
         /*public static void renderGameOverlayEvent(PoseStack poseStack) {
      *///?}
-        if (!showBiome)
-            return;
-        if (ModConfig.get().biome_reduced_info) {
-            return;
-        }
-        if (!ModConfig.get().biome_enable)
+        if (!showBiome || ModConfig.get().biome_reduced_info || !ModConfig.get().biome_enable)
             return;
         var mc = Minecraft.getInstance();
         if (OverlayHelpers.debug(mc))
@@ -46,7 +41,10 @@ public class BiomeOverlay {
 
         int xOffset = 3;
         // The amount of offset needed to display the biome icons.
-        int iconOffset = 20;
+        int iconOffset = 0;
+        if (ModConfig.get().biome_icons) {
+            iconOffset = 20;
+        }
         int textureOffset = 111;
         int tooltipSize = 21;
         int yPlacement = ModConfig.get().biome_vertical_position;
@@ -55,9 +53,11 @@ public class BiomeOverlay {
         int fontWidth = mc.font.width(biomeText)+iconOffset;
 
         if (mc.player == null) return;
-        if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable) {
-            yPlacement = yPlacement - 24;
-            textYPlacement = textYPlacement - 24;
+        if (ModConfig.get().avoid_overlapping) {
+            if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable) {
+                yPlacement = yPlacement - 24;
+                textYPlacement = textYPlacement - 24;
+            }
         }
         if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().biome_horizontal_position_left)) {
             yPlacement += OverlayHelpers.moveBy(mc.player);
@@ -75,24 +75,26 @@ public class BiomeOverlay {
         //?} else {
         /*GuiComponent.drawString(poseStack, mc.font, biomeText, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
          *///?}
-        var sprite = getBiomeSprite(biome, true);
-
-        //? if >1.21.2 {
-        /*poseStack.blit(RenderType::guiTextured, sprite,
-        *///?} else if >1.20 {
-        poseStack.blit(sprite,
-        //?} else {
+        // render biome icon
+        if (ModConfig.get().biome_icons) {
+            var sprite = getBiomeSprite(biome, true);
+            //? if >1.21.2 {
+            /*poseStack.blit(RenderType::guiTextured, sprite,
+             *///?} else if >1.20 {
+            poseStack.blit(sprite,
+                    //?} else {
 
         /*RenderSystem.setShaderTexture(0, sprite);
            GuiComponent.blit(poseStack,
          *///?}
-                xPlacement-xOffset-1, yPlacement-2,
-                //? if <1.21.2
-                0,
-                //?
-                0,
-                0, 16, 16,
-                16, 16);
+                    xPlacement-xOffset-1, yPlacement-2,
+                    //? if <1.21.2
+                    0,
+                    //?
+                    0,
+                    0, 16, 16,
+                    16, 16);
+        }
     }
 
     public static ResourceLocation getBiomeSprite(ResourceLocation biome, boolean allowRedirect) {
