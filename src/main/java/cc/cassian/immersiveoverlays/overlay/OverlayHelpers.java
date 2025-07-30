@@ -18,7 +18,10 @@ import cc.cassian.immersiveoverlays.compat.AccessoriesCompat;
 import net.minecraft.client.gui.GuiComponent;
 import com.mojang.blaze3d.vertex.PoseStack;
  *///?}
-
+//? if >1.21.6 {
+/*import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.util.ARGB;
+*///?}
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
@@ -149,7 +152,6 @@ public class OverlayHelpers {
             isImportantItemOrContainer(player.getOffhandItem());
             if (ModConfig.get().require_item_in_hand) {
                 isImportantItemOrContainer(player.getMainHandItem());
-                return;
             } else {
                 //? if <1.21.5 {
                 player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
@@ -324,6 +326,8 @@ public class OverlayHelpers {
           /*PoseStack
           *///?}
           poseStack, Font font, Component text, int x, int y, Integer color) {
+        //? if >1.21.6
+        /*color = ARGB.opaque(color);*/
         //? if >1.20 {
         poseStack.drawString(font, text, x, y, color);
         //?} else {
@@ -338,11 +342,26 @@ public class OverlayHelpers {
           /*PoseStack
           *///?}
          poseStack, Font font, String text, int x, int y, Integer color) {
+        //? if >1.21.6
+        /*color = ARGB.opaque(color);*/
         //? if >1.20 {
         poseStack.drawString(font, text, x, y, color);
         //?} else {
         /*GuiComponent.drawString(poseStack, font, text, x, y, color);
          *///?}
+    }
+
+    public static void renderOverlays(
+            //? if >1.20 {
+            GuiGraphics
+            //?} else {
+            /*PoseStack
+             *///?}
+                    hud) {
+        CompassOverlay.renderGameOverlayEvent(hud);
+        ClockOverlay.renderGameOverlayEvent(hud);
+        BiomeOverlay.renderGameOverlayEvent(hud);
+        TemperatureOverlay.renderGameOverlayEvent(hud);
     }
 
     public static void blit(

@@ -50,6 +50,7 @@
   "config.immersiveoverlays.config.compat_xaeros": "Allow minimap items in containers",
   "config.immersiveoverlays.config.compat_xaeros.tooltip": "Requires Xaero's Minimap",
   "config.immersiveoverlays.config.hide_from_debug": "Hide overlay from F3",
+  "config.immersiveoverlays.config.locator_bar": "Require compass for locator bar",
   "config.immersiveoverlays.config.moved_by_effects": "Status effects move overlays down",
   "config.immersiveoverlays.config.render_background": "Show background",
   "config.immersiveoverlays.config.require_item": "Require item",

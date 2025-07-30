@@ -33,6 +33,7 @@ dependencies {
             "1.21.1" -> "1.21.1:2024.11.17"
             "1.21.4" -> "1.21.4:2025.03.23"
             "1.21.5" -> "1.21.5:2025.04.19"
+            "1.21.8" -> "1.21.6:2025.06.29"
             else -> ""
         }
         parchment("org.parchmentmc.data:parchment-$parchmentVersion@zip")

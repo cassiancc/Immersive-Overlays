@@ -5,7 +5,6 @@ import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.compat.OreganizedCompat;
 import cc.cassian.immersiveoverlays.compat.ToughAsNailsCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -56,10 +55,12 @@ public class TemperatureOverlay {
     }
 
     public static Pair<Component, Integer> getTemperature(LocalPlayer player) {
-        if (ModCompat.OREGANIZED && SharedConstants.getCurrentVersion().getName().equals("1.20.1") && ModConfig.get().compat_oreganized_temperature && ModClient.loader.equals("forge")) {
+        //? if =1.20.1 {
+        if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature && ModClient.loader.equals("forge")) {
             int temperature =  OreganizedCompat.getAmbientTemperatureFromThermometer(player);
             return new Pair<>(Component.translatable("tooltip.oreganized.heat_"+temperature), OreganizedCompat.getTemperatureColourFromThermometer(temperature));
         }
+        //?}
         if (ModCompat.TOUGH_AS_NAILS && ModConfig.get().compat_tough_as_nails_temperature) {
             if (ToughAsNailsCompat.isTemperatureEnabled()) {
                 String temperature = ToughAsNailsCompat.getAmbientTemperature(player);

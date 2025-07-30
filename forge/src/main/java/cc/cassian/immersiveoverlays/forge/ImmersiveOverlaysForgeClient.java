@@ -36,14 +36,11 @@ public class ImmersiveOverlaysForgeClient {
     @SubscribeEvent
     public static void renderGameOverlayEvent(CustomizeGuiOverlayEvent.DebugText event) {
         //? if >1.20 {
-        var graphics = event.getGuiGraphics();
+        var hud = event.getGuiGraphics();
         //?} else {
-        /*var graphics = event.getPoseStack();
+        /*var hud = event.getPoseStack();
          *///?}
-        CompassOverlay.renderGameOverlayEvent(graphics);
-        ClockOverlay.renderGameOverlayEvent(graphics);
-        BiomeOverlay.renderGameOverlayEvent(graphics);
-        TemperatureOverlay.renderGameOverlayEvent(graphics);
+        OverlayHelpers.renderOverlays(hud);
     }
 
     @SubscribeEvent

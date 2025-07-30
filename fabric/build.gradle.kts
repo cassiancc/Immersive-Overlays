@@ -62,6 +62,7 @@ dependencies {
             "1.21.1" -> "1.21.1:2024.11.17"
             "1.21.4" -> "1.21.4:2025.03.23"
             "1.21.5" -> "1.21.5:2025.04.19"
+            "1.21.8" -> "1.21.6:2025.06.29"
             else -> ""
         }
         parchment("org.parchmentmc.data:parchment-$parchmentVersion@zip")
@@ -87,7 +88,7 @@ dependencies {
     }
 
     modCompileOnly("maven.modrinth:bplb:v1.0.0")
-    modImplementation("maven.modrinth:player-locator-plus:${common.mod.dep("player_locator_plus")}")
+    modCompileOnly("maven.modrinth:player-locator-plus:${common.mod.dep("player_locator_plus")}")
         runtimeOnly("com.akuleshov7:ktoml-core:0.5.2")
         modRuntimeOnly("net.fabricmc:fabric-language-kotlin:1.13.2+kotlin.2.1.20")
     modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_Fabric_${common.mod.dep("xaeros_mc")}")
