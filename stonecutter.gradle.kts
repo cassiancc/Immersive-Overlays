@@ -7,21 +7,21 @@ plugins {
 stonecutter active "1.20.1" /* [SC] DO NOT EDIT */
 
 // Builds every version into `build/libs/{mod.version}/{loader}`
-//stonecutter registerChiseled tasks.register("chiseledBuild", stonecutter.chiseled) {
-//    group = "project"
-//    ofTask("buildAndCollect")
-//}
+stonecutter registerChiseled tasks.register("chiseledBuild", stonecutter.chiseled) {
+    group = "project"
+    ofTask("buildAndCollect")
+}
 
 // Builds loader-specific versions into `build/libs/{mod.version}/{loader}`
-//for (it in stonecutter.tree.branches) {
-//    if (it.id.isEmpty()) continue
-//    val loader = it.id.upperCaseFirst()
-//    stonecutter registerChiseled tasks.register("chiseledBuild$loader", stonecutter.chiseled) {
-//        group = "project"
-//        versions { branch, _ -> branch == it.id }
-//        ofTask("buildAndCollect")
-//    }
-//}
+for (it in stonecutter.tree.branches) {
+    if (it.id.isEmpty()) continue
+    val loader = it.id.upperCaseFirst()
+    stonecutter registerChiseled tasks.register("chiseledBuild$loader", stonecutter.chiseled) {
+        group = "project"
+        versions { branch, _ -> branch == it.id }
+        ofTask("buildAndCollect")
+    }
+}
 
 // Runs active versions for each loader
 //for (it in stonecutter.tree.nodes) {

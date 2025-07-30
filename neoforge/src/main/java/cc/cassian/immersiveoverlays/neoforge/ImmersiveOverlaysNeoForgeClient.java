@@ -24,7 +24,7 @@ public class ImmersiveOverlaysNeoForgeClient {
 
     public static void init(IEventBus eventBus, ModContainer modContainer) {
         // Load config.
-        ModClient.init();
+        ModClient.init("neoforge");
         //Register config screen.
         registerModsPage();
         NeoForge.EVENT_BUS.addListener(ImmersiveOverlaysNeoForgeClient::checkInventoryForOverlays);

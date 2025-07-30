@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - In vanilla, this data is sourced from the biome's temperature.
   - With [Oreganized](https://modrinth.com/mod/oreganized) installed, this data is sourced from the Thermometer.
   - With [Tough as Nails](https://modrinth.com/mod/tough-as-nails) installed, this data is sourced from the player's temperature.
+- Added support for detecting overlay items in Curios slots.
 - Option to show the current day in the clock's overlay.
 - Option to show overlays without an item required.
 - Option to show overlays when F3 is open.

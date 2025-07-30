@@ -46,6 +46,7 @@ repositories {
     maven ( "https://maven.parchmentmc.org" )
     maven ( "https://maven.wispforest.io/releases" )
     maven ( "https://maven.su5ed.dev/releases" )
+    maven ( "https://maven.theillusivec4.top/")
 
 }
 
@@ -91,7 +92,7 @@ dependencies {
     if (stonecutter.eval(mcVersion, "=1.20.1")) {
         modImplementation("maven.modrinth:oreganized:${common.mod.dep("oreganized")}-forge")
         modImplementation("maven.modrinth:blueprint:${common.mod.dep("blueprint")}")
-
+        modCompileOnly("top.theillusivec4.curios:curios-forge:${common.mod.dep("curios")}:api")
     }
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }

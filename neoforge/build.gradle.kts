@@ -47,6 +47,8 @@ repositories {
     maven ( "https://cursemaven.com" )
     maven ( "https://maven.wispforest.io/releases" )
     maven ( "https://maven.su5ed.dev/releases" )
+    maven ( "https://maven.theillusivec4.top/")
+
 }
 
 dependencies {
@@ -98,6 +100,7 @@ dependencies {
         modCompileOnly("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+1.21.4")
 
     }
+    compileOnly("top.theillusivec4.curios:curios-neoforge:${common.mod.dep("curios")}:api")
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionNeoForge")) { isTransitive = false }

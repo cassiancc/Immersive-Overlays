@@ -2,6 +2,7 @@ package cc.cassian.immersiveoverlays.overlay;
 
 
 import cc.cassian.immersiveoverlays.ModClient;
+import cc.cassian.immersiveoverlays.compat.CuriosCompat;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.helpers.ModTags;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
@@ -21,6 +22,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -143,25 +145,25 @@ public class OverlayHelpers {
             resetOverlays();
             if (player == null)
                 return;
-            if (ModConfig.get().compass_enable || ModConfig.get().clock_enable) {
-                isImportantItemOrContainer(player.getOffhandItem());
-                if (ModConfig.get().require_item_in_hand) {
-                    isImportantItemOrContainer(player.getMainHandItem());
-                } else {
-                    //? if <1.21.5 {
-                    player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
-                    //?} else {
-                    /*isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.HEAD));
-                    isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.CHEST));
-                    isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.LEGS));
-                    isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.FEET));
-                    *///?}
-                    //? if >1.20 {
-                    if (ModCompat.ACCESSORIES)
-                        AccessoriesCompat.checkForImportantAccessories(player);
-                    //?}
-                    checkInventoryForStack(player.getInventory());
+            isImportantItemOrContainer(player.getOffhandItem());
+            if (ModConfig.get().require_item_in_hand) {
+                isImportantItemOrContainer(player.getMainHandItem());
+                return;
+            } else {
+                //? if <1.21.5 {
+                player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
+                //?} else {
+                /*for (EquipmentSlot value : EquipmentSlot.values()) {
+                    isImportantItemOrContainer(player.getItemBySlot(value));
                 }
+                *///?}
+                //? if >1.20 {
+                if (ModCompat.ACCESSORIES)
+                    AccessoriesCompat.checkForImportantAccessories(player);
+                //?}
+                if (ModCompat.CURIOS)
+                    CuriosCompat.checkForImportantAccessories(player);
+                checkInventoryForStack(player.getInventory());
             }
         } else {
             enableOverlays();
@@ -337,7 +339,7 @@ public class OverlayHelpers {
     public static void blit(GuiGraphics guiGraphics, ResourceLocation texture, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
         //? if >1.21.5 {
         /*guiGraphics.blit(RenderPipelines.GUI_TEXTURED, texture,
-        *///?} else if >1.21.2{
+        *///?} else if >1.21.2 {
         /*guiGraphics.blit(RenderType::guiTextured, texture,
          *///?} else if >1.20 {
         guiGraphics.blit(texture,
