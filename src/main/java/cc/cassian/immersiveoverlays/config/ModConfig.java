@@ -70,9 +70,12 @@ public class ModConfig {
     public List<String> biome_items = List.of("minecraft:map", "minecraft:empty_map");
     // temperature
     public boolean temperature_enable = true;
+    public int temperature_hot_colour = 16755285;
+    public int temperature_cold_colour = 5636095;
+    public int temperature_temperate_colour = 16777215;
+    public int temperature_vertical_position = 112;
     public boolean temperature_horizontal_position_left = true;
     public List<String> temperature_items = List.of("oreganized:thermometer", "toughasnails:thermometer");
-    public int temperature_vertical_position = 112;
     // version
     public int version = ModClient.CONFIG_VERSION;
 

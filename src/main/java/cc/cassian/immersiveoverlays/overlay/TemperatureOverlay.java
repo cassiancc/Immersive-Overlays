@@ -76,9 +76,9 @@ public class TemperatureOverlay {
 
     public static Pair<Component, Integer> getBiomeTemperature(float temperature) {
         if (temperature >= 2) {
-            return new Pair<>(Component.translatableWithFallback("tag.worldgen.biome.c.is_hot", "Hot"), 16755285);
+            return new Pair<>(Component.translatableWithFallback("tag.worldgen.biome.c.is_hot", "Hot"), ModConfig.get().temperature_hot_colour);
         } else if (temperature <= 0.2) {
-            return new Pair<>(Component.translatableWithFallback("tag.worldgen.biome.c.is_cold", "Cold"), 5636095);
-        } else return new Pair<>(Component.translatableWithFallback("tag.worldgen.biome.c.is_temperate", "Temperate"), -1);
+            return new Pair<>(Component.translatableWithFallback("tag.worldgen.biome.c.is_cold", "Cold"), ModConfig.get().temperature_cold_colour);
+        } else return new Pair<>(Component.translatableWithFallback("tag.worldgen.biome.c.is_temperate", "Temperate"), ModConfig.get().temperature_temperate_colour);
     }
 }

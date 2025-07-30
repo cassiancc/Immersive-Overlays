@@ -5,6 +5,7 @@ import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextColor;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -64,6 +65,12 @@ public class ClothConfigFactory {
                         .setSaveConsumer(fieldSetter(configInstance, field))
                         .setTooltip(fieldTooltip(field))
                         .setDefaultValue((String) fieldGet(DEFAULT_VALUES, field)).build());
+            }
+            else if (field.getType() == int.class && field.getName().contains("colour")) {
+                category.addEntry(entryBuilder.startColorField(fieldName(field), (int) fieldGet(configInstance, field))
+                        .setSaveConsumer(fieldSetter(configInstance, field))
+                        .setTooltip(fieldTooltip(field))
+                        .setDefaultValue((int) fieldGet(DEFAULT_VALUES, field)).build());
             }
             else if (field.getType() == int.class) {
                 category.addEntry(entryBuilder.startIntField(fieldName(field), fieldGet(configInstance, field))
