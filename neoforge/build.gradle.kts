@@ -102,6 +102,7 @@ dependencies {
 
     }
     compileOnly("top.theillusivec4.curios:curios-neoforge:${common.mod.dep("curios")}:api")
+    compileOnly("maven.modrinth:travelersbackpack:${common.mod.dep("travelers_backpack_neoforge")}-neoforge")
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionNeoForge")) { isTransitive = false }

@@ -25,9 +25,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(BetterPlayerLocatorBarHud.class)
 //?}
 public class BetterPlayerLocatorBarHudMixin {
-    //? if >1.20 {
-    @Inject(method = "render", at = @At(value = "HEAD"), cancellable = true)
+    //? if >1.21.5 {
+    /*@Inject(method = "render", at = @At(value = "HEAD"), cancellable = true)
     private void mixin(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+        if (ModConfig.get().compat_playerlocatorplus) {
+            if (!CompassOverlay.showX) {
+                ci.cancel();
+            }
+        }
+    }    *///?} else {
+    @Inject(method = "render", at = @At(value = "HEAD"), cancellable = true)
+    private static void mixin(GuiGraphics guiGraphics, CallbackInfo ci) {
         if (ModConfig.get().compat_playerlocatorplus) {
             if (!CompassOverlay.showX) {
                 ci.cancel();

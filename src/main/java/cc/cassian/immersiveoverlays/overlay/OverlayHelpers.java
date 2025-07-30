@@ -1,8 +1,7 @@
 package cc.cassian.immersiveoverlays.overlay;
 
-
 import cc.cassian.immersiveoverlays.ModClient;
-import cc.cassian.immersiveoverlays.compat.CuriosCompat;
+import cc.cassian.immersiveoverlays.compat.TravelersBackpackCompat;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.helpers.ModTags;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
@@ -10,7 +9,7 @@ import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
-
+import cc.cassian.immersiveoverlays.compat.CuriosCompat;
 import net.minecraft.client.gui.GuiGraphics;
 import cc.cassian.immersiveoverlays.compat.AccessoriesCompat;
 //?} else {
@@ -166,6 +165,8 @@ public class OverlayHelpers {
                 //?}
                 if (ModCompat.CURIOS)
                     CuriosCompat.checkForImportantAccessories(player);
+                if (ModCompat.TRAVELERS_BACKPACK)
+                    TravelersBackpackCompat.checkForImportantAccessories(player);
                 checkInventoryForStack(player.getInventory());
             }
         } else {

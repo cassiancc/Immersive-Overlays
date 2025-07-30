@@ -46,8 +46,8 @@ repositories {
     maven ( "https://api.modrinth.com/maven")
     maven ("https://maven.parchmentmc.org")
     maven ("https://maven.ladysnake.org/releases")
-    maven("https://maven.wispforest.io/releases")
-
+    maven ("https://maven.wispforest.io/releases")
+    maven ("https://maven.ladysnake.org/releases")
 }
 
 dependencies {
@@ -110,6 +110,9 @@ dependencies {
     if (stonecutter.eval(mcVersion, ">1.19.2") && stonecutter.eval(mcVersion, "<1.21.5")) {
         modImplementation("io.wispforest:accessories-fabric:${common.mod.dep("accessories")}+$minecraft")
     }
+
+    modCompileOnly("maven.modrinth:travelersbackpack:${common.mod.dep("travelers_backpack")}-fabric")
+    modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.2")
 
     // Stonecutter/Arch
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }

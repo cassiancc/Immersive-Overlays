@@ -95,6 +95,7 @@ dependencies {
         modImplementation("maven.modrinth:blueprint:${common.mod.dep("blueprint")}")
     }
     modCompileOnly("top.theillusivec4.curios:curios-forge:${common.mod.dep("curios")}:api")
+    modCompileOnly("maven.modrinth:travelersbackpack:${common.mod.dep("travelers_backpack")}-forge")
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionForge")) { isTransitive = false }

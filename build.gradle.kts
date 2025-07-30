@@ -60,6 +60,8 @@ dependencies {
     if (stonecutter.eval(mcVersion, ">1.19.2")) {
         modCompileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
     }
+    modCompileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}")
+
 }
 
 loom {
