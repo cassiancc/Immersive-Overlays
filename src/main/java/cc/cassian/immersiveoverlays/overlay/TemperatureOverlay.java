@@ -7,7 +7,11 @@ import cc.cassian.immersiveoverlays.compat.ToughAsNailsCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
+//? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
+//?} else {
+/*import com.mojang.blaze3d.vertex.PoseStack;
+*///?}
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.biome.Biome;
@@ -76,9 +80,9 @@ public class TemperatureOverlay {
 
     public static Pair<Component, Integer> getBiomeTemperature(float temperature) {
         if (temperature >= 2) {
-            return new Pair<>(Component.translatableWithFallback("tag.worldgen.biome.c.is_hot", "Hot"), ModConfig.get().temperature_hot_colour);
+            return new Pair<>(Component.translatable("gui.c.temperature.hot"), ModConfig.get().temperature_hot_colour);
         } else if (temperature <= 0.2) {
-            return new Pair<>(Component.translatableWithFallback("tag.worldgen.biome.c.is_cold", "Cold"), ModConfig.get().temperature_cold_colour);
-        } else return new Pair<>(Component.translatableWithFallback("tag.worldgen.biome.c.is_temperate", "Temperate"), ModConfig.get().temperature_temperate_colour);
+            return new Pair<>(Component.translatable("gui.c.temperature.cold"), ModConfig.get().temperature_cold_colour);
+        } else return new Pair<>(Component.translatable("gui.c.temperature.temperate"), ModConfig.get().temperature_temperate_colour);
     }
 }

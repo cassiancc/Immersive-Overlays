@@ -1,3 +1,5 @@
+//? if >1.20 {
+
 package cc.cassian.immersiveoverlays.compat.forge;
 
 import galena.oreganized.client.tooltips.ClientThermometerTooltip;
@@ -13,3 +15,4 @@ public class OreganizedCompatImpl {
         return ClientThermometerTooltip.getColor(temperature);
     }
 }
+//?}

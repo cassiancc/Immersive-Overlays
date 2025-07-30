@@ -8,11 +8,8 @@ import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
 //?} else {
-/*import net.minecraft.client.gui.GuiComponent;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.systems.RenderSystem;
+/*import com.mojang.blaze3d.vertex.PoseStack;
 *///?}
 import net.minecraft.core.BlockPos;
 import org.apache.commons.lang3.StringUtils;

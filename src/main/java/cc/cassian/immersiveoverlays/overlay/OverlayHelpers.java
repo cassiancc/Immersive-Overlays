@@ -7,14 +7,15 @@ import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.helpers.ModTags;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
-import net.minecraft.client.gui.Font;
+
 import net.minecraft.client.gui.GuiGraphics;
 import cc.cassian.immersiveoverlays.compat.AccessoriesCompat;
 //?} else {
-/*import net.minecraft.client.gui.GuiComponent;
+/*import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.gui.GuiComponent;
 import com.mojang.blaze3d.vertex.PoseStack;
  *///?}
 
@@ -45,7 +46,7 @@ public class OverlayHelpers {
     //? if >1.20 {
     public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize, boolean leftAlign) {
         //?} else {
-        /*public static void renderBackground(PoseStack poseStack, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize, boolean leftAlign) {
+        /*public static void renderBackground(PoseStack guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize, boolean leftAlign) {
          *///?}
         if (ModConfig.get().render_background) {
             //? if <1.20
@@ -316,7 +317,13 @@ public class OverlayHelpers {
         }
     }
 
-    public static void drawString(GuiGraphics poseStack, Font font, Component text, int x, int y, Integer color) {
+    public static void drawString(
+           //? if >1.20 {
+          GuiGraphics
+          //?} else {
+          /*PoseStack
+          *///?}
+          poseStack, Font font, Component text, int x, int y, Integer color) {
         //? if >1.20 {
         poseStack.drawString(font, text, x, y, color);
         //?} else {
@@ -324,7 +331,13 @@ public class OverlayHelpers {
          *///?}
     }
 
-    public static void drawString(GuiGraphics poseStack, Font font, String text, int x, int y, Integer color) {
+    public static void drawString(
+          //? if >1.20 {
+          GuiGraphics
+          //?} else {
+          /*PoseStack
+          *///?}
+         poseStack, Font font, String text, int x, int y, Integer color) {
         //? if >1.20 {
         poseStack.drawString(font, text, x, y, color);
         //?} else {
@@ -332,11 +345,23 @@ public class OverlayHelpers {
          *///?}
     }
 
-    public static void blit(GuiGraphics guiGraphics, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
+    public static void blit(
+           //? if >1.20 {
+          GuiGraphics
+          //?} else {
+          /*PoseStack
+          *///?}
+          guiGraphics, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
         OverlayHelpers.blit(guiGraphics, TEXTURE, x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
-    public static void blit(GuiGraphics guiGraphics, ResourceLocation texture, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
+    public static void blit(
+           //? if >1.20 {
+          GuiGraphics
+          //?} else {
+          /*PoseStack
+          *///?}
+          guiGraphics, ResourceLocation texture, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
         //? if >1.21.5 {
         /*guiGraphics.blit(RenderPipelines.GUI_TEXTURED, texture,
         *///?} else if >1.21.2 {

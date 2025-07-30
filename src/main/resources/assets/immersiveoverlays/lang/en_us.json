@@ -68,5 +68,9 @@
   "config.immersiveoverlays.config.temperature_vertical_position": "Temperature overlay position",
   "config.immersiveoverlays.temperature_title": "Temperature",
   "config.immersiveoverlays.title": "Immersive Overlays",
-  "gui.c.day": "Day %s"
+  "gui.c.day": "Day %s",
+  "gui.c.temperature.hot": "Hot",
+  "gui.c.temperature.cold": "Cold",
+  "gui.c.temperature.temperate": "Temperate"
+
 }
