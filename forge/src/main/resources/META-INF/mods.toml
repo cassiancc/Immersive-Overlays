@@ -14,7 +14,7 @@ logoFile = "icon.png"
 issueTrackerURL = "https://github.com/cassiancc/Immersive-Overlays/issues"
 displayURL="https://modrinth.com/mod/immersive-overlays"
 modURL="https://modrinth.com/mod/immersive-overlays"
-
+credits = "Additional sprites from ProbablyEkho, Crabbarition, and Kelpiesaurus"
 
 [[dependencies.immersiveoverlays]]
 modId = "forge"
