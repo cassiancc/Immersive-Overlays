@@ -26,6 +26,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - X/Z overlay items can now be set independently.
 - New config option to allow compasses in bundles in Shulkers to function again.
 
+### Changed
+- Clock overlays no longer function in the Nether.
+
 ### Fixed
 - Weather overlays no longer move randomly.
 - Backpacks function again (1.21.5).

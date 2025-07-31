@@ -6,6 +6,8 @@ import cc.cassian.immersiveoverlays.compat.MapAtlasesCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 import net.minecraft.client.Minecraft;
+//? if >1.21.5
+/*import net.minecraft.client.renderer.RenderPipelines;*/
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
 //?} else {
@@ -81,9 +83,12 @@ public class CompassOverlay {
             }
             if (!BiomeOverlay.showBiome || ModConfig.get().biome_reduced_info || (ModConfig.get().biome_horizontal_position_left != ModConfig.get().compass_horizontal_position_left)) {
                 yPlacement = yPlacement - 20;
-            }
+            }        
+            if (!shouldShowSeasons()) {
+                yPlacement = yPlacement - 15;
+            } 
         }
-        if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().compass_horizontal_position_left)) {
+        if (OverlayHelpers.playerHasPotions(mc.player)) {
             yPlacement += OverlayHelpers.moveBy(mc.player);
         }
 

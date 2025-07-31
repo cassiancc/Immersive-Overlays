@@ -1,6 +1,8 @@
 package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
+//? if >1.21.5
+/*import net.minecraft.client.renderer.RenderPipelines;*/
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;

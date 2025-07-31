@@ -25,7 +25,10 @@ public class ModConfig {
 
     // coords
     public boolean compass_enable = true;
-    public int compass_vertical_position = 125;
+    //? if >1.21.5
+    /*public boolean locator_bar = true;*/
+    public boolean hide_from_debug = true;
+    public int compass_vertical_position = 140;
     public boolean compass_horizontal_position_left = false;
     public String compass_x_colour = "Red";
     public String compass_y_colour = "Green";

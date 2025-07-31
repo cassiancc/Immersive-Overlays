@@ -47,7 +47,7 @@ repositories {
     maven ("https://maven.parchmentmc.org")
     maven ("https://maven.ladysnake.org/releases")
     maven ("https://maven.wispforest.io/releases")
-    maven ("https://maven.ladysnake.org/releases")
+    maven ( "https://repo.spongepowered.org/repository/maven-public/")
 }
 
 dependencies {
@@ -73,10 +73,10 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${common.mod.dep("fabric_api")}")
 
     // Cloth Config
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${common.mod.dep("cloth_version")}")
+    modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:${common.mod.dep("cloth_version")}")
 
     // Mod Menu
-    modApi("com.terraformersmc:modmenu:${common.mod.dep("modmenu_version")}")
+    modCompileOnly("com.terraformersmc:modmenu:${common.mod.dep("modmenu_version")}")
 
     modCompileOnly("maven.modrinth:map-atlases:${common.mod.dep("map_atlases_fabric")}")
     if (stonecutter.eval(mcVersion, "=1.19.2")) {
@@ -85,6 +85,18 @@ dependencies {
     else if (stonecutter.eval(mcVersion, "<1.21.2")) {
         modImplementation("maven.modrinth:moonlight:fabric_${common.mod.dep("moonlight")}")
 //        modRuntimeOnly("maven.modrinth:map-atlases:${common.mod.dep("map_atlases_fabric")}")
+    }
+
+    if (stonecutter.eval(mcVersion, "=1.21.6")) {
+    } else {
+        modRuntimeOnly("maven.modrinth:player-locator-plus:${common.mod.dep("player_locator_plus")}")
+            runtimeOnly("com.akuleshov7:ktoml-core:0.5.2")
+            modRuntimeOnly("net.fabricmc:fabric-language-kotlin:1.13.2+kotlin.2.1.20")
+        // Cloth Config
+        modRuntimeOnly("me.shedaniel.cloth:cloth-config-fabric:${common.mod.dep("cloth_version")}")
+
+        // Mod Menu
+        modRuntimeOnly("com.terraformersmc:modmenu:${common.mod.dep("modmenu_version")}")
     }
 
     modCompileOnly("maven.modrinth:bplb:v1.0.0")
@@ -106,9 +118,17 @@ dependencies {
         modCompileOnly("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+1.21.1")
     }
 
+    // todo runtime dep on serene seasons
+//    if (stonecutter.eval(mcVersion, ">1.20") && stonecutter.eval(mcVersion, "<1.21.6")) {
+//        modRuntimeOnly("maven.modrinth:serene-seasons:${common.mod.dep("serene_seasons")}-fabric")
+//        modRuntimeOnly("com.github.glitchfiend.GlitchCore-fabric:$minecraft-${common.mod.dep("glitchcore")}")
+//
+//    }
+
     // Accessories
     if (stonecutter.eval(mcVersion, ">1.19.2") && stonecutter.eval(mcVersion, "<1.21.5")) {
-        modImplementation("io.wispforest:accessories-fabric:${common.mod.dep("accessories")}+$minecraft")
+        modRuntimeOnly("maven.modrinth:fabric-seasons:${common.mod.dep("fabric_seasons")}")
+        modRuntimeOnly("io.wispforest:accessories-fabric:${common.mod.dep("accessories")}+$minecraft")
     }
 
     modCompileOnly("maven.modrinth:travelersbackpack:${common.mod.dep("travelers_backpack")}-fabric")
@@ -122,6 +142,7 @@ dependencies {
 configurations.all {
     resolutionStrategy {
         force("net.fabricmc:fabric-loader:${mod.dep("fabric_loader")}")
+        force("net.fabricmc.fabric-api:fabric-api:${common.mod.dep("fabric_api")}")
     }
 }
 

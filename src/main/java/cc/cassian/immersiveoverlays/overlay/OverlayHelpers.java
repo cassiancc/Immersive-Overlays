@@ -197,11 +197,13 @@ public class OverlayHelpers {
         /*var components = stack.getComponents();
         if (components.has(DataComponents.BUNDLE_CONTENTS)) {
             BundleContents bundleContents = components.get(DataComponents.BUNDLE_CONTENTS);
-            return bundleContents.itemCopyStream();
+            if (bundleContents != null)
+                return bundleContents.itemCopyStream();
         }
         else if (components.has(DataComponents.CONTAINER)) {
             ItemContainerContents containerContents = components.get(DataComponents.CONTAINER);
-            return containerContents.stream();
+            if (containerContents != null)
+                return containerContents.stream();
         }
         *///?} else {
         CompoundTag compoundtag = stack.getTag();
