@@ -84,7 +84,7 @@ public class CompassOverlay {
             if (!BiomeOverlay.showBiome || ModConfig.get().biome_reduced_info || (ModConfig.get().biome_horizontal_position_left != ModConfig.get().compass_horizontal_position_left)) {
                 yPlacement = yPlacement - 20;
             }        
-            if (!shouldShowSeasons()) {
+            if (!ClockOverlay.shouldShowSeasons()) {
                 yPlacement = yPlacement - 15;
             } 
         }

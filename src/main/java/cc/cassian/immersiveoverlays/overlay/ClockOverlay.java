@@ -1,8 +1,12 @@
 package cc.cassian.immersiveoverlays.overlay;
 
+import cc.cassian.immersiveoverlays.compat.FabricSeasonsCompat;
+import cc.cassian.immersiveoverlays.compat.SereneSeasonsCompat;
+import cc.cassian.immersiveoverlays.compat.SimpleSeasonsCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 //? if >1.21.5
 /*import net.minecraft.client.renderer.RenderPipelines;*/
+import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -11,13 +15,16 @@ import net.minecraft.client.gui.GuiGraphics;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
  *///?}
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.biome.Biome;
+import org.apache.commons.lang3.text.WordUtils;
 
 public class ClockOverlay {
     public static boolean showTime = false;
     public static boolean showWeather = false;
+    public static boolean showSeason = false;
 
 
     //? if >1.20 {
@@ -25,7 +32,7 @@ public class ClockOverlay {
     //?} else {
         /*public static void renderGameOverlayEvent(PoseStack guiGraphics) {
      *///?}
-        if ((!showWeather && !showTime) || !ModConfig.get().clock_enable)
+        if ((!showWeather && !showTime  && !ClockOverlay.showSeason) || !ModConfig.get().clock_enable)
             return;
         var mc = Minecraft.getInstance();
         if (OverlayHelpers.debug(mc))
@@ -47,38 +54,54 @@ public class ClockOverlay {
 
         int xOffset = 3;
         // The amount of offset needed to display the barometer icons, if visible.
-        int iconOffset = 0;
+        int iconXOffset = 0;
         int textureOffset = 7;
         int tooltipSize = 16;
-        int yPlacement = ModConfig.get().clock_vertical_position;
-        int textYPlacement = yPlacement;
+        int iconYPlacement = ModConfig.get().clock_vertical_position;
+        int textYPlacement = iconYPlacement;
         if (showWeather) {
             if (showTime) {
-                iconOffset = 20;
+                iconXOffset = 20;
             }
             textureOffset = 111;
             tooltipSize = 21;
             textYPlacement += 2;
         }
+        if (showSeason) {
+            if (showTime) {
+                textYPlacement = iconYPlacement+5;
+                iconYPlacement += 5;
+                textureOffset = 51;
+                tooltipSize = 35;
+                textYPlacement += 2;
+            }
+        }
 
-        int fontWidth = mc.font.width(time)+iconOffset;
+        var seasonText = ClockOverlay.getSeason(mc.level);
+        int fontWidth = Integer.max(mc.font.width(time), mc.font.width(seasonText))+iconXOffset;
 
         if (mc.player == null) return;
         if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().biome_horizontal_position_left)) {
-            yPlacement += OverlayHelpers.moveBy(mc.player);
+            iconYPlacement += OverlayHelpers.moveBy(mc.player);
             textYPlacement += OverlayHelpers.moveBy(mc.player);
         }
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().clock_horizontal_position_left);
-        OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize, ModConfig.get().clock_horizontal_position_left);
+        OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, iconYPlacement, textureOffset, tooltipSize, ModConfig.get().clock_horizontal_position_left);
         if (showTime) {
             // render text
-            OverlayHelpers.drawString(guiGraphics, mc.font, time, xPlacement-xOffset+iconOffset, textYPlacement, 14737632);
+            OverlayHelpers.drawString(guiGraphics, mc.font, time, xPlacement-xOffset+iconXOffset, textYPlacement, 14737632);
         }
         if (showWeather) {
             var spriteOffset = getWeather(mc.player);
-            OverlayHelpers.blit(guiGraphics, xPlacement-xOffset-1, yPlacement-1, spriteOffset, 95, 16, 16, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+            OverlayHelpers.blit(guiGraphics, xPlacement-xOffset-1, iconYPlacement-1, spriteOffset, 95, 16, 16, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+        }
+        if (ClockOverlay.shouldShowSeasons()) {
+            int seasonTextYPlacement = textYPlacement;
+            if (showTime)
+                seasonTextYPlacement+=13;
+            OverlayHelpers.drawString(guiGraphics, mc.font, seasonText, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, 14737632);
         }
     }
 
@@ -147,5 +170,28 @@ public class ClockOverlay {
             currentTime.append(hour).append(":").append(m < 10 ? "0" : "").append(m).append(a);
         }
         return currentTime.toString();
+    }
+
+    public static boolean shouldShowSeasons() {
+        if (ModConfig.get().compat_seasons && showSeason) {
+            return ModHelpers.isLoaded("sereneseasons") || ModHelpers.isLoaded("simple-seasons") || ModHelpers.isLoaded("seasons");
+        }
+        return false;
+    }
+
+    public static String getSeason(ClientLevel level) {
+        String season = "";
+        if (ModConfig.get().compat_seasons && showSeason) {
+            if (ModHelpers.isLoaded("seasons")) {
+                season = FabricSeasonsCompat.getSeason(level);
+            }
+            else if (ModHelpers.isLoaded("sereneseasons")) {
+                season = SereneSeasonsCompat.getSeason(level);
+            }
+            else if (ModHelpers.isLoaded("simple-seasons")) {
+                season = SimpleSeasonsCompat.getSeason(level);
+            }
+        }
+        return WordUtils.capitalizeFully(season);
     }
 }

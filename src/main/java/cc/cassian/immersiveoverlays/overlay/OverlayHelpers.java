@@ -25,7 +25,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -140,7 +139,7 @@ public class OverlayHelpers {
         if (ModLists.biome_items.contains(item))
             BiomeOverlay.showBiome = true;
         if (ModLists.season_items.contains(item))
-            BiomeOverlay.showSeason = true;
+            ClockOverlay.showSeason = true;
         if (ModLists.temperature_items.contains(item))
             TemperatureOverlay.showTemperature = true;
     }
@@ -183,7 +182,7 @@ public class OverlayHelpers {
         ClockOverlay.showTime = b;
         ClockOverlay.showWeather = b;
         BiomeOverlay.showBiome = b;
-        BiomeOverlay.showSeason = b;
+        ClockOverlay.showSeason = b;
         TemperatureOverlay.showTemperature = b;
     }
 
