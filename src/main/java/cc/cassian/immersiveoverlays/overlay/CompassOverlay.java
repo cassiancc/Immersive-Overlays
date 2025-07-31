@@ -88,7 +88,7 @@ public class CompassOverlay {
                 yPlacement = yPlacement - 15;
             } 
         }
-        if (OverlayHelpers.playerHasPotions(mc.player)) {
+        if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().compass_horizontal_position_left)) {
             yPlacement += OverlayHelpers.moveBy(mc.player);
         }
 

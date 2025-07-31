@@ -27,7 +27,6 @@ public class ModConfig {
     public boolean compass_enable = true;
     //? if >1.21.5
     /*public boolean locator_bar = true;*/
-    public boolean hide_from_debug = true;
     public int compass_vertical_position = 140;
     public boolean compass_horizontal_position_left = false;
     public String compass_x_colour = "Red";
@@ -64,6 +63,7 @@ public class ModConfig {
     public boolean compat_accessorify = true;
     public boolean compat_oreganized_temperature = true;
     public boolean compat_tough_as_nails_temperature = true;
+    public boolean compat_seasons = true;
     // biomes
     public boolean biome_enable = true;
     public boolean biome_icons = true;

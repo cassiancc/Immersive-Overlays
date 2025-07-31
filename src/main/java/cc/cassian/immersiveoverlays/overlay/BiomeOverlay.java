@@ -13,6 +13,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
  *///?}
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Holder;
@@ -63,7 +64,14 @@ public class BiomeOverlay {
         int textYPlacement = yPlacement+2;
         int xOffset = 3;
         // The amount of offset needed to display the biome icons.
-        int iconXOffset = 20;
+        int iconXOffset = 0;
+        ResourceLocation sprite = UNDEFINED;
+        if (ModConfig.get().biome_icons) {
+            sprite = getBiomeSprite(biomeId, true);
+            if (!sprite.equals(UNDEFINED)) {
+                iconXOffset = 20;
+            }
+        }
         int iconYPlacement = yPlacement-2;
         int textureOffset = 111;
         int tooltipSize = 21;
@@ -73,8 +81,8 @@ public class BiomeOverlay {
             tooltipSize = 35;
         }
 
-
-        int fontWidth = mc.font.width(biomeText)+iconXOffset;
+        var seasonText = getSeason(mc.level);
+        int fontWidth = Integer.max(mc.font.width(biomeText), mc.font.width(seasonText))+iconXOffset;
 
         if (ModConfig.get().avoid_overlapping) {
             if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable) {
@@ -92,40 +100,21 @@ public class BiomeOverlay {
         OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize, ModConfig.get().biome_horizontal_position_left);
         // render text
         if (showBiome) {
-            //? if >1.20 {
-            poseStack.drawString(mc.font, biomeText, xPlacement-xOffset+iconXOffset, textYPlacement, -1);
-            //?} else {
-            /*GuiComponent.drawString(poseStack, mc.font, biomeText, xPlacement-xOffset+iconXOffset, textYPlacement, -1);
-             *///?}
-            var sprite = getBiomeSprite(biome, true);
-
-            //? if >1.21.2 {
-            /*poseStack.blit(RenderType::guiTextured, sprite,
-             *///?} else if >1.20 {
-            poseStack.blit(sprite,
-                    //?} else {
-
-        /*RenderSystem.setShaderTexture(0, sprite);
-           GuiComponent.blit(poseStack,
-         *///?}
-                    xPlacement-xOffset-1, iconYPlacement,
-                    //? if <1.21.2
-                    0,
-                    //?
-                    0,
-                    0, 16, 16,
-                    16, 16);
+            OverlayHelpers.drawString(guiGraphics, mc.font, biomeText, xPlacement-xOffset+iconXOffset, textYPlacement, getTextColour(biome));
+            if (ModConfig.get().biome_icons && !sprite.equals(UNDEFINED))
+                OverlayHelpers.blit(guiGraphics, sprite, xPlacement-xOffset-1, iconYPlacement, 0,0, 16, 16, 16, 16);
         }
         if (shouldShowSeasons()) {
-            var seasonText = getSeason(mc.level);
-            int seasonTextYPlacement = textYPlacement+13;
-            //? if >1.20 {
-            poseStack.drawString(mc.font, seasonText, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, -1);
-            //?} else {
-            /*GuiComponent.drawString(poseStack, mc.font, seasonText, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, -1);
-             *///?}
-        }
 
+            int seasonTextYPlacement = textYPlacement+13;
+            OverlayHelpers.drawString(guiGraphics, mc.font, seasonText, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, 16777215);
+        }
+    }
+
+    private static Integer getTextColour(Holder<Biome> biome) {
+        if (ModConfig.get().biome_text_tinted)
+            return TemperatureOverlay.getBiomeTemperature(biome.value()).getB();
+        return 16777215;
     }
 
     public static ResourceLocation getBiomeSprite(ResourceLocation biome, boolean allowRedirect) {
@@ -171,17 +160,18 @@ public class BiomeOverlay {
     }
 
     public static String getSeason(ClientLevel level) {
+        String season = "";
         if (ModConfig.get().compat_seasons && showSeason) {
             if (ModHelpers.isLoaded("seasons")) {
-                return FabricSeasonsCompat.getSeason(level);
+                season = FabricSeasonsCompat.getSeason(level);
             }
             else if (ModHelpers.isLoaded("sereneseasons")) {
-                return SereneSeasonsCompat.getSeason(level);
+                season = SereneSeasonsCompat.getSeason(level);
             }
             else if (ModHelpers.isLoaded("simple-seasons")) {
-                return SimpleSeasonsCompat.getSeason(level);
+                season = SimpleSeasonsCompat.getSeason(level);
             }
         }
-        return "";
+        return WordUtils.capitalizeFully(season);
     }
 }

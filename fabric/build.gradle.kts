@@ -132,7 +132,14 @@ dependencies {
     }
 
     modCompileOnly("maven.modrinth:travelersbackpack:${common.mod.dep("travelers_backpack")}-fabric")
-    modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.2")
+    if (stonecutter.eval(mcVersion, ">1.21")) {
+        modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.2")
+        modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-base:6.1.2")
+    } else {
+        modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.3")
+        modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.3")
+    }
+
 
     // Stonecutter/Arch
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
