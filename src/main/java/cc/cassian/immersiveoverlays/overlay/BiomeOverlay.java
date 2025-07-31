@@ -28,7 +28,7 @@ import static cc.cassian.immersiveoverlays.ModClient.MOD_ID;
 
 public class BiomeOverlay {
     public static boolean showBiome = false;
-    public static boolean showSeason = true;
+    public static boolean showSeason = false;
     public static ResourceLocation UNDEFINED = ResourceLocation.tryBuild(MOD_ID, "textures/immersiveoverlays/undefined.png");
 
 

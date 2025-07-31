@@ -19,6 +19,7 @@ public class ModLists {
     public static ArrayList<Item> clock_items = new ArrayList<>();
     public static ArrayList<Item> weather_items = new ArrayList<>();
     public static ArrayList<Item> biome_items = new ArrayList<>();
+    public static ArrayList<Item> season_items = new ArrayList<>();
     public static ArrayList<Item> temperature_items = new ArrayList<>();
 
 
@@ -31,6 +32,7 @@ public class ModLists {
         compass_x_items = new ArrayList<>();
         clock_items = new ArrayList<>();
         biome_items = new ArrayList<>();
+        season_items = new ArrayList<>();
         weather_items = new ArrayList<>();
         compass_y_items = new ArrayList<>();
         temperature_items = new ArrayList<>();
@@ -57,6 +59,10 @@ public class ModLists {
         for (String weatherItem : ModConfig.get().clock_weather_items) {
             Optional<Item> item = registry.getOptional(ResourceLocation.tryParse(weatherItem));
             item.ifPresent(value -> weather_items.add(value));
+        }
+        for (String weatherItem : ModConfig.get().season_items) {
+            Optional<Item> item = registry.getOptional(ResourceLocation.tryParse(weatherItem));
+            item.ifPresent(value -> season_items.add(value));
         }
         for (String weatherItem : ModConfig.get().temperature_items) {
             Optional<Item> item = registry.getOptional(ResourceLocation.tryParse(weatherItem));

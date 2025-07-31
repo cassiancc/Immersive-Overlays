@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - In vanilla, this data is sourced from the biome's temperature.
   - With [Oreganized](https://modrinth.com/mod/oreganized) installed, this data is sourced from the Thermometer.
   - With [Tough as Nails](https://modrinth.com/mod/tough-as-nails) installed, this data is sourced from the player's temperature.
+- Season overlays, displayed when a calendar is in the inventory, that show the current season.
+  - Supports Serene Seasons, Fabric Seasons, and Simple Seasons.
 - Added support for detecting overlay items in Curios slots (1.20+).
 - Added support for detecting overlay items in Traveler's Backpacks.
 - Option to show the current day in the clock's overlay.
