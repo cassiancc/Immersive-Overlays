@@ -25,8 +25,6 @@ public class ModConfig {
 
     // coords
     public boolean compass_enable = true;
-    //? if >1.21.5
-    /*public boolean locator_bar = true;*/
     public int compass_vertical_position = 140;
     public boolean compass_horizontal_position_left = false;
     public String compass_x_colour = "Red";
@@ -47,6 +45,7 @@ public class ModConfig {
     public List<String> clock_items = List.of("minecraft:clock");
     public List<String> clock_weather_items = List.of("caverns_and_chasms:barometer", "firmaciv:barometer");
     // general
+    //? if >1.21.5
     public boolean locator_bar = true;
     public boolean avoid_overlapping = true;
     public boolean moved_by_effects = true;

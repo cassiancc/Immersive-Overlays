@@ -73,7 +73,11 @@ public class ClockOverlay {
                 iconYPlacement += 6;
                 tooltipSize = 36;
                 textYPlacement += 4;
+            } else {
+                tooltipSize = 21;
+                textYPlacement += 2;
             }
+            iconXOffset = 20;
         }
 
         var seasonText = ClockOverlay.getSeason(mc.level);
