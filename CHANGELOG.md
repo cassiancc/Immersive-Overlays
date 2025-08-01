@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Clock overlays no longer function in the Nether.
 
 ### Fixed
+- Overlays are now properly hidden by F1.
 - Weather overlays no longer move randomly.
 - Backpacks function again (1.21.5).
 

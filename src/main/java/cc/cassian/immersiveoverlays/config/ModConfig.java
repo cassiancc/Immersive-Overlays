@@ -46,7 +46,7 @@ public class ModConfig {
     public List<String> clock_weather_items = List.of("caverns_and_chasms:barometer", "firmaciv:barometer");
     // general
     //? if >1.21.5
-    public boolean locator_bar = true;
+    /*public boolean locator_bar = true;*/
     public boolean avoid_overlapping = true;
     public boolean moved_by_effects = true;
     public boolean require_item = true;

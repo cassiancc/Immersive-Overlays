@@ -37,7 +37,7 @@ public class BiomeOverlay {
             return;
         }
         var mc = Minecraft.getInstance();
-        if (OverlayHelpers.debug(mc))
+        if (OverlayHelpers.shouldCancelRender(mc))
             return;
 
         if (mc.player == null) return;

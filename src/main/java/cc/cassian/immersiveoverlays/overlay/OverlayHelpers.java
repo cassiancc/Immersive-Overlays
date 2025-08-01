@@ -21,8 +21,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 /*import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.util.ARGB;
 *///?}
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -30,8 +28,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 //? if >1.20.5 {
-/*import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.item.component.BundleContents;
+/*import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.core.component.DataComponents;
 *///?}
@@ -115,14 +112,15 @@ public class OverlayHelpers {
         else return 0;
     }
 
-    public static boolean debug(Minecraft mc) {
+    public static boolean shouldCancelRender(Minecraft mc) {
+        if (mc.options.hideGui) return true;
         if (ModConfig.get().hide_from_debug) {
             //? if >1.21 {
             /*var debug = mc.getDebugOverlay().showDebugScreen();
              *///?} else {
             var debug = mc.options.renderDebug;
             //?}
-            return debug && !mc.options.reducedDebugInfo().get();
+            return debug;
         }
         return false;
     }

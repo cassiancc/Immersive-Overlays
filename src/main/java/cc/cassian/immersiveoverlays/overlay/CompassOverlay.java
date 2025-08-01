@@ -37,7 +37,7 @@ public class CompassOverlay {
             return;
 
         var mc = Minecraft.getInstance();
-        if (OverlayHelpers.debug(mc))
+        if (OverlayHelpers.shouldCancelRender(mc))
             return;
 
         ArrayList<String> coords = new ArrayList<>();

@@ -37,7 +37,7 @@ public class ClockOverlay {
         if ((!showWeather && !showTime  && !ClockOverlay.showSeason) || !ModConfig.get().clock_enable)
             return;
         var mc = Minecraft.getInstance();
-        if (OverlayHelpers.debug(mc))
+        if (OverlayHelpers.shouldCancelRender(mc))
             return;
         if (mc.level == null) return;
 
