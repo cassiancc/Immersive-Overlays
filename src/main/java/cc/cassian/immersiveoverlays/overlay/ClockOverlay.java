@@ -21,6 +21,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.biome.Biome;
 import org.apache.commons.lang3.text.WordUtils;
 
+import java.util.Locale;
+
 public class ClockOverlay {
     public static boolean showTime = false;
     public static boolean showWeather = false;
@@ -55,7 +57,6 @@ public class ClockOverlay {
         int xOffset = 3;
         // The amount of offset needed to display the barometer icons, if visible.
         int iconXOffset = 0;
-        int textureOffset = 7;
         int tooltipSize = 16;
         int iconYPlacement = ModConfig.get().clock_vertical_position;
         int textYPlacement = iconYPlacement;
@@ -63,17 +64,15 @@ public class ClockOverlay {
             if (showTime) {
                 iconXOffset = 20;
             }
-            textureOffset = 111;
             tooltipSize = 21;
             textYPlacement += 2;
         }
         if (showSeason) {
             if (showTime) {
                 textYPlacement = iconYPlacement+5;
-                iconYPlacement += 5;
-                textureOffset = 51;
-                tooltipSize = 35;
-                textYPlacement += 2;
+                iconYPlacement += 6;
+                tooltipSize = 36;
+                textYPlacement += 4;
             }
         }
 
@@ -88,7 +87,7 @@ public class ClockOverlay {
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().clock_horizontal_position_left);
-        OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, iconYPlacement, textureOffset, tooltipSize, ModConfig.get().clock_horizontal_position_left);
+        OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, iconYPlacement, tooltipSize, ModConfig.get().clock_horizontal_position_left);
         if (showTime) {
             // render text
             OverlayHelpers.drawString(guiGraphics, mc.font, time, xPlacement-xOffset+iconXOffset, textYPlacement, 14737632);
@@ -100,9 +99,21 @@ public class ClockOverlay {
         if (ClockOverlay.shouldShowSeasons()) {
             int seasonTextYPlacement = textYPlacement;
             if (showTime)
-                seasonTextYPlacement+=13;
+                seasonTextYPlacement+=15;
             OverlayHelpers.drawString(guiGraphics, mc.font, seasonText, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, 14737632);
+            var spriteOffset = getSprite(seasonText.toLowerCase(Locale.ROOT));
+            OverlayHelpers.blit(guiGraphics, xPlacement-xOffset-1, seasonTextYPlacement-3, spriteOffset, 207, 16, 14, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
         }
+    }
+
+    public static int getSprite(String season) {
+        return switch (season) {
+            case "spring" -> 112;
+            case "summer" -> 128;
+            case "fall" -> 144;
+            case "winter" -> 160;
+            default -> 0;
+        };
     }
 
     public static int getWeather(Player player) {

@@ -45,11 +45,12 @@ public class OverlayHelpers {
     public static final ResourceLocation TEXTURE = ModClient.locate("textures/gui/overlay.png");
 
     //? if >1.20 {
-    public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize, boolean leftAlign) {
+    public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int tooltipSize, boolean leftAlign) {
         //?} else {
-        /*public static void renderBackground(PoseStack guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize, boolean leftAlign) {
+        /*public static void renderBackground(PoseStack guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int tooltipSize, boolean leftAlign) {
          *///?}
         if (ModConfig.get().render_background) {
+            int textureOffset = OverlayHelpers.getTextureOffsetFromSize(tooltipSize);
             //? if <1.20
             /*RenderSystem.setShaderTexture(0, OverlayHelpers.TEXTURE);*/
             final int yPlacementWithOffset = yPlacement-4;
@@ -61,6 +62,21 @@ public class OverlayHelpers {
             // render endcap
             OverlayHelpers.blit(guiGraphics, endCapXPlacement, yPlacementWithOffset, endCapOffset, textureOffset, 3, tooltipSize, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
         }
+    }
+
+    public static int getTextureOffsetFromSize(int textureSize) {
+        if (textureSize == 16) {
+            return 7;
+        } else if (textureSize == 21) {
+            return 111;
+        } else if (textureSize == 25) {
+            return 25;
+        } else if (textureSize == 35) {
+            return 51;
+        } else if (textureSize == 36) {
+            return 131;
+        }
+        else return 0;
     }
 
     public static void checkInventoryForOverlays(Minecraft minecraft){
@@ -393,5 +409,15 @@ public class OverlayHelpers {
                 uOffset,
                 vOffset, uWidth, vHeight,
                 textureWidth, textureHeight);
+    }
+
+    public static void blitSprite(
+            //? if >1.20 {
+            GuiGraphics
+                    //?} else {
+                    /*PoseStack
+                     *///?}
+                    guiGraphics, ResourceLocation texture, int x, int y) {
+        blit(guiGraphics, texture, x, y, 0, 0, 16, 16, 16, 16);
     }
 }

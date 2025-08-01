@@ -92,14 +92,11 @@ public class CompassOverlay {
             yPlacement += OverlayHelpers.moveBy(mc.player);
         }
 
-        int textureOffset = 7;  // only depth gauge
         int tooltipSize = 16;  // only depth gauge
         if (coords.size() == 2 || (coords.size() == 1 && showBiomeIcon)) {
-            textureOffset = 25;
             tooltipSize = 25;
             iconYOffset = 3;
         } else if (coords.size() == 3) {
-            textureOffset = 51;
             tooltipSize = 35;
             iconYOffset = 5;
         }
@@ -107,7 +104,7 @@ public class CompassOverlay {
         int windowWidth = mc.getWindow().getGuiScaledWidth();
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().compass_horizontal_position_left);
         // render background
-        OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize, ModConfig.get().compass_horizontal_position_left);
+        OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().compass_horizontal_position_left);
         if (showBiomeIcon) {
             var sprite = getBiomeSprite(getId(getBiome(mc.player)), true);
             OverlayHelpers.blit(guiGraphics, sprite, xPlacement-xOffset-1, yPlacement+iconYOffset, 0, 0, 16, 16, 16, 16);

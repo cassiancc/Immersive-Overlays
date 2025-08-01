@@ -57,7 +57,6 @@ public class BiomeOverlay {
                 iconXOffset = 20;
             }
         }
-        int textureOffset = 111;
         int tooltipSize = 21;
 
         int fontWidth = mc.font.width(biomeText)+iconXOffset;
@@ -81,10 +80,10 @@ public class BiomeOverlay {
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().biome_horizontal_position_left);
         // render text
         if (showBiome) {
-            OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, textureOffset, tooltipSize, ModConfig.get().biome_horizontal_position_left);
+            OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().biome_horizontal_position_left);
             OverlayHelpers.drawString(guiGraphics, mc.font, biomeText, xPlacement-xOffset+iconXOffset, textYPlacement, getTextColour(biome));
             if (ModConfig.get().biome_icons && !sprite.equals(UNDEFINED))
-                OverlayHelpers.blit(guiGraphics, sprite, xPlacement-xOffset-1, textYPlacement-4, 0,0, 16, 16, 16, 16);
+                OverlayHelpers.blitSprite(guiGraphics, sprite, xPlacement-xOffset-1, textYPlacement-4);
         }
     }
 
