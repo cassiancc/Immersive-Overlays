@@ -80,9 +80,10 @@ public class ModConfig {
     public int temperature_temperate_colour = 16777215;
     public int temperature_vertical_position = 112;
     public boolean temperature_horizontal_position_left = true;
-    public List<String> temperature_items = List.of("oreganized:thermometer", "toughasnails:thermometer");
+    public List<String> temperature_items = List.of("oreganized:thermometer", "toughasnails:thermometer", "legendarysurvivaloverhaul:thermometer");
     // version
     public int version = ModClient.CONFIG_VERSION;
+    public boolean compat_legendary_survival_overhaul_temperature = true;
 
 
     public static void load() {

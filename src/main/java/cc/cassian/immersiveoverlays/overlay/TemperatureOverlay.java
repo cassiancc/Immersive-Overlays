@@ -1,6 +1,7 @@
 package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.ModClient;
+import cc.cassian.immersiveoverlays.compat.LegendarySurvivalOverhaulCompat;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.compat.OreganizedCompat;
 import cc.cassian.immersiveoverlays.compat.ToughAsNailsCompat;
@@ -65,6 +66,10 @@ public class TemperatureOverlay {
                 String temperature = ToughAsNailsCompat.getAmbientTemperature(player);
                 return new Pair<>(Component.literal(WordUtils.capitalizeFully(temperature)), -1);
             }
+        }
+        if (ModCompat.LEGENDARY_SURVIVAL_OVERHAUL && ModConfig.get().compat_legendary_survival_overhaul_temperature) {
+            String temperature = LegendarySurvivalOverhaulCompat.getAmbientTemperature(player);
+            return new Pair<>(Component.literal(WordUtils.capitalizeFully(temperature)), -1);
         }
         //? if >1.20 {
         var level = player.level();

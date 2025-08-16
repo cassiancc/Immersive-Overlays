@@ -93,6 +93,7 @@ dependencies {
     if (stonecutter.eval(mcVersion, "=1.20.1")) {
         modImplementation("maven.modrinth:oreganized:${common.mod.dep("oreganized")}-forge")
         modImplementation("maven.modrinth:blueprint:${common.mod.dep("blueprint")}")
+        modImplementation("curse.maven:legendary-survival-overhaul-840254:6834435")
     }
     modCompileOnly("top.theillusivec4.curios:curios-forge:${common.mod.dep("curios")}:api")
     modCompileOnly("maven.modrinth:travelersbackpack:${common.mod.dep("travelers_backpack")}-forge")
