@@ -14,6 +14,8 @@ import net.minecraft.client.gui.GuiGraphics;
 *///?}
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import org.apache.commons.lang3.text.WordUtils;
 import oshi.util.tuples.Pair;
@@ -38,6 +40,9 @@ public class TemperatureOverlay {
         int xOffset = 3;
         // The amount of offset needed to display the biome icons.
         int iconOffset = 0;
+        if (ModCompat.OREGANIZED && showTemperature) {
+            iconOffset = 17;
+        }
         int tooltipSize = 21;
         int yPlacement = ModConfig.get().temperature_vertical_position;
         int textYPlacement = yPlacement+2;
@@ -52,6 +57,10 @@ public class TemperatureOverlay {
         OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().temperature_horizontal_position_left);
         // render text
         OverlayHelpers.drawString(poseStack, mc.font, temperature.getA(), xPlacement-xOffset+iconOffset, textYPlacement, temperature.getB());
+        // render sprite
+        if (ModCompat.OREGANIZED && showTemperature && temperature.getA().getContents() instanceof TranslatableContents translatableContents) {
+            OverlayHelpers.blitSprite(poseStack, ResourceLocation.fromNamespaceAndPath(ModClient.MOD_ID, "textures/gui/"+translatableContents.getKey().replace("tooltip.oreganized.", "") + ".png"), xPlacement-xOffset-1, textYPlacement-3);
+        }
     }
 
     public static Pair<Component, Integer> getTemperature(LocalPlayer player) {
