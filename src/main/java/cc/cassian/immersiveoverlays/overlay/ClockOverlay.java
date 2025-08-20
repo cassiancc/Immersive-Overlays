@@ -67,7 +67,7 @@ public class ClockOverlay {
             tooltipSize = 21;
             textYPlacement += 2;
         }
-        if (showSeason) {
+        if (shouldShowSeasons()) {
             if (showTime) {
                 textYPlacement = iconYPlacement+5;
                 iconYPlacement += 6;

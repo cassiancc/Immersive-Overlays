@@ -55,8 +55,8 @@ public class TemperatureOverlay {
     }
 
     public static Pair<Component, Integer> getTemperature(LocalPlayer player) {
-        //? if =1.20.1 {
-        if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature && ModClient.loader.equals("forge")) {
+        //? if =1.20.1 || =1.21.1 {
+        if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature && ModClient.loader.contains("forge")) {
             int temperature =  OreganizedCompat.getAmbientTemperatureFromThermometer(player);
             return new Pair<>(Component.translatable("tooltip.oreganized.heat_"+temperature), OreganizedCompat.getTemperatureColourFromThermometer(temperature));
         }

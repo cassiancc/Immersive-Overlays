@@ -46,11 +46,11 @@ dependencies {
     }
     modApi("me.shedaniel.cloth:cloth-config-fabric:${mod.dep("cloth_version")}")
     modCompileOnly("maven.modrinth:map-atlases:${mod.dep("map_atlases_fabric")}")
-    if (stonecutter.eval(mcVersion, ">1.19.2") && stonecutter.eval(mcVersion, "<1.21.5")) {
+    if (stonecutter.eval(mcVersion, ">1.19.2")) {
         modCompileOnly("io.wispforest:accessories-common:${mod.dep("accessories")}+$minecraft")
     }
-    else if (stonecutter.eval(mcVersion, ">=1.21.5")) {
-        modCompileOnly("io.wispforest:accessories-common:${mod.dep("accessories")}+1.21.4")
+    else if (stonecutter.eval(mcVersion, ">1.21.8")) {
+        modCompileOnly("io.wispforest:accessories-common:${mod.dep("accessories")}+1.21.5")
     }
     if (stonecutter.eval(mcVersion, ">1.21") && stonecutter.eval(mcVersion, "<1.21.5")) {
         modCompileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+$minecraft")

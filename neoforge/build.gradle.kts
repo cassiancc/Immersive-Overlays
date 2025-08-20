@@ -48,7 +48,7 @@ repositories {
     maven ( "https://maven.wispforest.io/releases" )
     maven ( "https://maven.su5ed.dev/releases" )
     maven ( "https://maven.theillusivec4.top/")
-
+    maven ( "https://maven.teamabnormals.com")
 }
 
 dependencies {
@@ -89,20 +89,28 @@ dependencies {
     // Xaero's Minimap
     modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_NeoForge_${common.mod.dep("xaeros_mc")}")
 
-    if (stonecutter.eval(mcVersion, "<1.21.5")) {
-        // Accessories
-        modImplementation("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+$minecraft")
-        // Accessorify
-        modImplementation("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+$minecraft")
-    } else {
-        // Accessories
-        modCompileOnly("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+1.21.4")
-        // Accessorify
-        modCompileOnly("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+1.21.4")
 
+    if (stonecutter.eval(mcVersion, ">1.19.2")) {
+        modCompileOnly("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+$minecraft")
+    }
+    else if (stonecutter.eval(mcVersion, ">1.21.8")) {
+        modCompileOnly("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+1.21.5")
+    }
+    if (stonecutter.eval(mcVersion, ">1.21") && stonecutter.eval(mcVersion, "<1.21.5")) {
+        modCompileOnly("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+$minecraft")
+    }
+    else if (stonecutter.eval(mcVersion, ">=1.21.5")) {
+        modCompileOnly("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+1.21.4")
     }
     compileOnly("top.theillusivec4.curios:curios-neoforge:${common.mod.dep("curios")}:api")
     compileOnly("maven.modrinth:travelersbackpack:${common.mod.dep("travelers_backpack_neoforge")}-neoforge")
+
+    compileOnly("maven.modrinth:oreganized:5.0.0")
+    if (stonecutter.eval(mcVersion, "=1.21.1")) {
+        runtimeOnly("maven.modrinth:oreganized:5.0.0")
+        implementation("com.teamabnormals:blueprint:1.21.1-8.0.5")
+    }
+
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionNeoForge")) { isTransitive = false }

@@ -1,5 +1,5 @@
 //? if >1.21 && <=1.21.5 {
-/*package cc.cassian.immersiveoverlays.overlay;
+package cc.cassian.immersiveoverlays.overlay;
 
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
@@ -11,4 +11,4 @@ public class OverlayLayer implements LayeredDraw.Layer {
         OverlayHelpers.renderOverlays(guiGraphics);
     }
 }
-*///?}
+//?}

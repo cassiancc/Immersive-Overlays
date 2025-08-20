@@ -30,10 +30,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 //? if >1.20.5 {
-/*import net.minecraft.world.item.component.BundleContents;
+import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.core.component.DataComponents;
-*///?}
+//?}
 
 
 import java.util.List;
@@ -95,17 +95,17 @@ public class OverlayHelpers {
 
     public static int moveBy(Player player) {
         //? if >1.21 {
-        /*boolean hasBeneficial =
+        boolean hasBeneficial =
                 player.getActiveEffects().stream().anyMatch(p -> p.getEffect().value().isBeneficial());
         boolean hasNegative =
                 player.getActiveEffects().stream().anyMatch(p -> !p.getEffect().value().isBeneficial());
-        *///?} else {
-        boolean hasBeneficial =
+        //?} else {
+        /*boolean hasBeneficial =
                 player.getActiveEffects().stream().anyMatch(p -> p.getEffect().isBeneficial());
         boolean hasNegative =
                 player.getActiveEffects().stream().anyMatch(p -> !p.getEffect().isBeneficial());
 
-        //?}
+        *///?}
         if (hasNegative) {
             return 42;
         } else if (hasBeneficial) {
@@ -118,10 +118,10 @@ public class OverlayHelpers {
         if (mc.options.hideGui) return true;
         if (ModConfig.get().hide_from_debug) {
             //? if >1.21 {
-            /*var debug = mc.getDebugOverlay().showDebugScreen();
-             *///?} else {
-            var debug = mc.options.renderDebug;
-            //?}
+            var debug = mc.getDebugOverlay().showDebugScreen();
+             //?} else {
+            /*var debug = mc.options.renderDebug;
+            *///?}
             return debug;
         }
         return false;
@@ -212,7 +212,7 @@ public class OverlayHelpers {
     public static Stream<ItemStack> getContainerContents(ItemStack stack) {
         if (!isContainer(stack)) return Stream.empty();
         //? if >1.20.5 {
-        /*var components = stack.getComponents();
+        var components = stack.getComponents();
         if (components.has(DataComponents.BUNDLE_CONTENTS)) {
             BundleContents bundleContents = components.get(DataComponents.BUNDLE_CONTENTS);
             if (bundleContents != null)
@@ -223,8 +223,8 @@ public class OverlayHelpers {
             if (containerContents != null)
                 return containerContents.stream();
         }
-        *///?} else {
-        CompoundTag compoundtag = stack.getTag();
+        //?} else {
+        /*CompoundTag compoundtag = stack.getTag();
         if (compoundtag == null) {
             return Stream.empty();
         } else {
@@ -238,7 +238,7 @@ public class OverlayHelpers {
                 return listtag.stream().map(CompoundTag.class::cast).map(ItemStack::of);
             }
         }
-        //?}
+        *///?}
         return Stream.empty();
     }
 
@@ -247,15 +247,15 @@ public class OverlayHelpers {
         if (stack.isEmpty()) return false;
         if (stack.is(ModTags.CONTAINERS)) return true;
         //? if >1.20.5 {
-        /*var components = stack.getComponents();
+        var components = stack.getComponents();
         if (components.has(DataComponents.BUNDLE_CONTENTS)) {
             return true;
         }
         else if (components.has(DataComponents.CONTAINER)) {
             return true;
         }
-        *///?} else {
-        CompoundTag compoundtag = stack.getTag();
+        //?} else {
+        /*CompoundTag compoundtag = stack.getTag();
         if (compoundtag == null) {
             return false;
         } else {
@@ -268,7 +268,7 @@ public class OverlayHelpers {
                 }
             }
         }
-        //?}
+        *///?}
         return true;
     }
 
