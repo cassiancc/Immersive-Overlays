@@ -40,7 +40,7 @@ public class TemperatureOverlay {
         int xOffset = 3;
         // The amount of offset needed to display the biome icons.
         int iconOffset = 0;
-        if (ModCompat.OREGANIZED && showTemperature) {
+        if (ModConfig.get().temperature_icons) {
             iconOffset = 17;
         }
         int tooltipSize = 21;
@@ -58,8 +58,21 @@ public class TemperatureOverlay {
         // render text
         OverlayHelpers.drawString(poseStack, mc.font, temperature.getA(), xPlacement-xOffset+iconOffset, textYPlacement, temperature.getB());
         // render sprite
-        if (ModCompat.OREGANIZED && showTemperature && temperature.getA().getContents() instanceof TranslatableContents translatableContents) {
-            OverlayHelpers.blitSprite(poseStack, ResourceLocation.fromNamespaceAndPath(ModClient.MOD_ID, "textures/gui/"+translatableContents.getKey().replace("tooltip.oreganized.", "") + ".png"), xPlacement-xOffset-1, textYPlacement-3);
+        if (showTemperature && ModConfig.get().temperature_icons && temperature.getA().getContents() instanceof TranslatableContents translatableContents) {
+            ResourceLocation sprite;
+            if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature) {
+                sprite = ModClient.locate("textures/gui/"+translatableContents.getKey().replace("tooltip.oreganized.", "") + ".png");
+            } else {
+                var key = translatableContents.getKey().replace("gui.c.temperature.", "");
+                if (key.equals("hot")) {
+                    sprite = ModClient.locate("textures/gui/heat_4.png");
+                } else if (key.equals("cold")) {
+                    sprite = ModClient.locate("textures/gui/heat_0.png");
+                } else {
+                    sprite = ModClient.locate("textures/gui/heat_1.png");
+                }
+            }
+            OverlayHelpers.blitSprite(poseStack, sprite, xPlacement-xOffset-1, textYPlacement-3);
         }
     }
 

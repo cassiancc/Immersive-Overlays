@@ -40,7 +40,7 @@ public class ImmersiveOverlaysNeoForgeClient {
 
     @SubscribeEvent
     public static void renderGameOverlayEvent(RegisterGuiLayersEvent event) {
-        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(ModClient.MOD_ID, "overlay"), LAYER);
+        event.registerAboveAll(ModClient.locate("overlay"), LAYER);
     }
 
     @SubscribeEvent

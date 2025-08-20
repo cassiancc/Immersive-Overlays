@@ -75,6 +75,7 @@ public class ModConfig {
     public List<String> season_items = List.of("sereneseasons:calendar", "seasonsextras:season_calendar");
     // temperature
     public boolean temperature_enable = true;
+    public boolean temperature_icons = true;
     public int temperature_hot_colour = 16759694;
     public int temperature_cold_colour = 9371647;
     public int temperature_temperate_colour = 16777215;

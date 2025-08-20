@@ -64,6 +64,7 @@
   "config.immersiveoverlays.config.search_containers_for_containers.tooltip": "As an example, allows for a compass inside a bundle inside a Shulker Box to count.",
   "config.immersiveoverlays.config.season_items": "Items that show season overlay",
   "config.immersiveoverlays.config.temperature_enable": "Enable temperature overlay",
+  "config.immersiveoverlays.config.temperature_icons": "Show icons representing the temperature",
   "config.immersiveoverlays.config.temperature_hot_colour": "Hot Text Colour",
   "config.immersiveoverlays.config.temperature_cold_colour": "Cold Text Colour",
   "config.immersiveoverlays.config.temperature_temperate_colour": "Temperate Text Colour",

@@ -1,5 +1,6 @@
 package cc.cassian.immersiveoverlays.overlay;
 
+import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
@@ -19,11 +20,9 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.Objects;
 
-import static cc.cassian.immersiveoverlays.ModClient.MOD_ID;
-
 public class BiomeOverlay {
     public static boolean showBiome = false;
-    public static ResourceLocation UNDEFINED = ResourceLocation.tryBuild(MOD_ID, "textures/immersiveoverlays/undefined.png");
+    public static ResourceLocation UNDEFINED = ModClient.locate("textures/immersiveoverlays/undefined.png");
 
 
     //? if >1.20 {
