@@ -88,7 +88,7 @@ public class BiomeOverlay {
 
     private static Integer getTextColour(Holder<Biome> biome) {
         if (ModConfig.get().biome_text_tinted)
-            return TemperatureOverlay.getBiomeTemperature(biome.value()).getB();
+            return TemperatureOverlay.getBiomeTemperature(biome.value()).color();
         return 14737632;
     }
 
@@ -113,12 +113,11 @@ public class BiomeOverlay {
     }
 
     public static Holder<Biome> getBiome(LocalPlayer player) {
+        return player.level
         //? if >1.20 {
-        var level = player.level();
-        //?} else {
-        /*var level = player.level;
-         *///?}
-        return level.getBiome(player.blockPosition());
+        ()
+        //?}
+        .getBiome(player.blockPosition());
     }
 
     public static ResourceLocation getId(Holder<Biome> biome) {
