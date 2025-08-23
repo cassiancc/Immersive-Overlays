@@ -35,6 +35,7 @@ public class TemperatureOverlay {
         if (OverlayHelpers.shouldCancelRender(mc))
             return;
 
+        if (mc.player == null) return;
         TemperaturePair temperature = getTemperature(mc.player);
 
         int xOffset = 3;
@@ -48,8 +49,6 @@ public class TemperatureOverlay {
         int textYPlacement = yPlacement+2;
 
         int fontWidth = mc.font.width(temperature.component)+iconOffset;
-
-        if (mc.player == null) return;
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().temperature_horizontal_position_left);

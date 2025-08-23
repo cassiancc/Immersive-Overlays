@@ -85,6 +85,13 @@ public class ModConfig {
     // version
     public int version = ModClient.CONFIG_VERSION;
     public boolean compat_legendary_survival_overhaul_temperature = true;
+    public boolean speed_enable = true;
+    public int speed_vertical_position = 140;
+    public boolean speed_horizontal_position_left = true;
+    public int speed_colour = 0xc7bf81;
+    public boolean compat_oreganized_speed = true;
+    public List<String> speed_items = List.of("oreganized:speedometer", "speedometer:speedometer");
+
 
 
     public static void load() {

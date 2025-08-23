@@ -21,8 +21,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 /*import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.util.ARGB;
 *///?}
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -158,6 +156,8 @@ public class OverlayHelpers {
             ClockOverlay.showSeason = true;
         if (ModLists.temperature_items.contains(item))
             TemperatureOverlay.showTemperature = true;
+        if (ModLists.speed_items.contains(item))
+            SpeedOverlay.showSpeed = true;
     }
 
     public static void checkInventoryForItems(Player player) {
@@ -200,6 +200,7 @@ public class OverlayHelpers {
         BiomeOverlay.showBiome = b;
         ClockOverlay.showSeason = b;
         TemperatureOverlay.showTemperature = b;
+        SpeedOverlay.showSpeed = b;
     }
 
     public static void isImportantItemOrContainer(ItemStack stack) {
@@ -373,6 +374,7 @@ public class OverlayHelpers {
         ClockOverlay.renderGameOverlayEvent(hud);
         BiomeOverlay.renderGameOverlayEvent(hud);
         TemperatureOverlay.renderGameOverlayEvent(hud);
+        SpeedOverlay.renderGameOverlayEvent(hud);
     }
 
     public static void blit(
@@ -418,6 +420,16 @@ public class OverlayHelpers {
                     /*PoseStack
                      *///?}
                     guiGraphics, ResourceLocation texture, int x, int y) {
-        blit(guiGraphics, texture, x, y, 0, 0, 16, 16, 16, 16);
+        blitSprite(guiGraphics, texture, x, y, 16);
+    }
+
+    public static void blitSprite(
+            //? if >1.20 {
+            GuiGraphics
+                    //?} else {
+                    /*PoseStack
+                     *///?}
+                    guiGraphics, ResourceLocation texture, int x, int y, int size) {
+        blit(guiGraphics, texture, x, y, 0, 0, size, size, size, size);
     }
 }

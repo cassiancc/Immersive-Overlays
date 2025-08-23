@@ -15,4 +15,9 @@ public class OreganizedCompat {
     public static int getTemperatureColourFromThermometer(int temperature) {
         throw new AssertionError();
     }
+
+    @ExpectPlatform
+    public static double getSpeed(LocalPlayer player) {
+        return 0;
+    }
 }
