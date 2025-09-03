@@ -45,8 +45,6 @@ public class CompassOverlay {
         BlockPos pos;
         if (mc.player != null) pos = mc.player.blockPosition();
         else return;
-        if (ModConfig.get().compass_hide_when_similar_mods_present && ModCompat.MAP_ATLASES && MapAtlasesCompat.showingCoords(mc.player))
-            return;
 
         String x = String.format("%d", pos.getX());
         String y = String.format("%d", pos.getY());

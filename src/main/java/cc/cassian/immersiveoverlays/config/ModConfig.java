@@ -30,7 +30,6 @@ public class ModConfig {
     public String compass_x_colour = "Red";
     public String compass_y_colour = "Green";
     public String compass_z_colour = "Blue";
-    public boolean compass_hide_when_similar_mods_present = true;
     public List<String> compass_x_items = List.of("minecraft:compass", "minecraft:recovery_compass", "spelunkery:magnetic_compass", "firmaciv:nav_clock", "firmaciv:firmaciv_compass");
     public List<String> compass_y_items = List.of("spelunkery:depth_gauge","caverns_and_chasms:depth_gauge","additionaladditions:depth_meter","supplementaries:altimeter","depthmeter:depthmeter");
     public List<String> compass_z_items = List.of("firmaciv:sextant");
