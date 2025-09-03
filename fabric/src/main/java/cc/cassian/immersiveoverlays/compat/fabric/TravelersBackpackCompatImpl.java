@@ -27,9 +27,8 @@ public class TravelersBackpackCompatImpl {
                 for (int i =0; i < inventory.getContainerSize(); i++) {
                     OverlayHelpers.isImportantItemOrContainer(inventory.getItem(i));
                 }
-                //?
+                *///?}
             }
         }
     }
 }
-*/

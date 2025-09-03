@@ -55,18 +55,19 @@ dependencies {
     minecraft("com.mojang:minecraft:$minecraft")
     mappings(loom.layered {
         officialMojangMappings()
-        val parchmentVersion = when (mcVersion) {
-            "1.18.2" -> "1.18.2:2022.11.06"
-            "1.19.2" -> "1.19.2:2022.11.27"
-            "1.20.1" -> "1.20.1:2023.09.03"
-            "1.21.1" -> "1.21.1:2024.11.17"
-            "1.21.4" -> "1.21.4:2025.03.23"
-            "1.21.5" -> "1.21.5:2025.04.19"
-            "1.21.8" -> "1.21.6:2025.06.29"
-            else -> ""
-        }
-        parchment("org.parchmentmc.data:parchment-$parchmentVersion@zip")
-    })
+        if (stonecutter.eval(mcVersion, "<=1.21.8")) {
+            val parchmentVersion = when (mcVersion) {
+                "1.18.2" -> "1.18.2:2022.11.06"
+                "1.19.2" -> "1.19.2:2022.11.27"
+                "1.20.1" -> "1.20.1:2023.09.03"
+                "1.21.1" -> "1.21.1:2024.11.17"
+                "1.21.4" -> "1.21.4:2025.03.23"
+                "1.21.5" -> "1.21.5:2025.04.19"
+                "1.21.8" -> "1.21.8:2025.07.20"
+                else -> ""
+            }
+            parchment("org.parchmentmc.data:parchment-$parchmentVersion@zip")
+    }})
     "neoForge"("net.neoforged:neoforge:${common.mod.dep("neoforge_loader")}")
     "io.github.llamalad7:mixinextras-neoforge:${mod.dep("mixin_extras")}".let {
         implementation(it)
