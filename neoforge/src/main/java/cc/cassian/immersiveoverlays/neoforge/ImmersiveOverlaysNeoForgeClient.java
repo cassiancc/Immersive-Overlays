@@ -4,7 +4,11 @@ import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.config.neoforge.ModConfigFactory;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
+//? if >1.21.5 {
+/*import cc.cassian.immersiveoverlays.overlay.neoforge.OverlayLayer;
+*///?} else {
 import cc.cassian.immersiveoverlays.overlay.OverlayLayer;
+//?}
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;

@@ -22,7 +22,7 @@ stonecutter {
         versions("1.19.2", "1.20.1", "1.21.1", "1.21.4", "1.21.5", "1.21.8")
         branch("forge") {versions("1.19.2", "1.20.1")}
         branch("fabric") // Copies versions from root
-        branch("neoforge") { versions("1.21.1", "1.21.4", "1.21.5") }
+        branch("neoforge") { versions("1.21.1", "1.21.4", "1.21.5", "1.21.8") }
     }
 }
 

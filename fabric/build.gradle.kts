@@ -41,13 +41,15 @@ configurations {
 val mcVersion = stonecutter.current.project.substringBeforeLast('-')
 
 repositories {
-    maven ( "https://maven.shedaniel.me/" )
-    maven ( "https://maven.terraformersmc.com/releases/" )
-    maven ( "https://api.modrinth.com/maven")
-    maven ("https://maven.parchmentmc.org")
-    maven ("https://maven.ladysnake.org/releases")
-    maven ("https://maven.wispforest.io/releases")
-    maven ( "https://repo.spongepowered.org/repository/maven-public/")
+    maven("https://maven.shedaniel.me/")
+    maven("https://maven.terraformersmc.com/releases/")
+    maven("https://api.modrinth.com/maven")
+    maven("https://maven.parchmentmc.org")
+    maven("https://maven.ladysnake.org/releases")
+    maven("https://maven.wispforest.io/releases")
+    maven("https://repo.spongepowered.org/repository/maven-public/")
+    maven("https://mvn.devos.one/releases/" )
+    maven("https://maven.jamieswhiteshirt.com/libs-release")
 }
 
 dependencies {
@@ -131,6 +133,7 @@ dependencies {
         modRuntimeOnly("io.wispforest:accessories-fabric:${common.mod.dep("accessories")}+$minecraft")
     }
 
+    // Traveler's Backpacks
     modCompileOnly("maven.modrinth:travelersbackpack:${common.mod.dep("travelers_backpack")}-fabric")
     if (stonecutter.eval(mcVersion, ">1.21")) {
         modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.2")
@@ -140,6 +143,13 @@ dependencies {
         modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.3")
     }
 
+    // Sophisticated Backpacks
+    modCompileOnly("maven.modrinth:9jxwkYQL:${common.mod.dep("sophisticated_core_fabric")}")
+    modCompileOnly("maven.modrinth:ouNrBQtq:${common.mod.dep("sophisticated_backpacks_fabric")}")
+    modCompileOnly("io.github.fabricators_of_create.Porting-Lib:transfer:2.3.9+1.20.1")
+    if (stonecutter.eval(mcVersion, "=1.19.2")) {
+        modCompileOnly("io.github.fabricators_of_create.Porting-Lib:extensions:2.3.9+1.20.1")
+    }
 
     // Stonecutter/Arch
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }

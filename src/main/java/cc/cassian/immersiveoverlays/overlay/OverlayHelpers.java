@@ -1,17 +1,14 @@
 package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.ModClient;
-import cc.cassian.immersiveoverlays.compat.TravelersBackpackCompat;
+import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.helpers.ModTags;
-import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
-import cc.cassian.immersiveoverlays.compat.CuriosCompat;
 import net.minecraft.client.gui.GuiGraphics;
-import cc.cassian.immersiveoverlays.compat.AccessoriesCompat;
 //?} else {
 /*import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiComponent;
@@ -25,6 +22,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -209,6 +207,9 @@ public class OverlayHelpers {
         isImportantItem(stack);
         if (isContainer(stack)) {
             findImportantContainerContents(stack);
+        }
+        if (ModCompat.SOPHISTICATED_BACKPACKS) {
+            SophisticatedBackpacksCompat.checkBackpackContents(stack);
         }
     }
 

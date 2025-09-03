@@ -5,12 +5,12 @@ import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.compat.OreganizedCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
 //? if >1.20 {
-
+import net.minecraft.client.gui.GuiGraphics;
 //?} else {
 /*import com.mojang.blaze3d.vertex.PoseStack;
  *///?}

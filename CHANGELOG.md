@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Supports Serene Seasons, Fabric Seasons, and Simple Seasons.
 - Added support for detecting overlay items in Curios slots (1.20+).
 - Added support for detecting overlay items in Traveler's Backpacks.
+- Added support for detecting overlay items in Sophisticated Backpacks.
 - Option to show the current day in the clock's overlay.
 - Option to show overlays without an item required.
 - Option to show overlays when F3 is open.

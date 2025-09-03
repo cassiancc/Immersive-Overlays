@@ -95,8 +95,9 @@ public class TemperatureOverlay {
         }
         var level = player.level
         //? if >1.20 {
-        ();
+        ()
         //?}
+        ;
         return getBiomeTemperature(level.getBiome(player.blockPosition()).value());
     }
 

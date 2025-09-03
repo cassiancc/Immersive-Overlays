@@ -98,6 +98,9 @@ dependencies {
     modCompileOnly("top.theillusivec4.curios:curios-forge:${common.mod.dep("curios")}:api")
     modCompileOnly("maven.modrinth:travelersbackpack:${common.mod.dep("travelers_backpack")}-forge")
 
+    compileOnly("maven.modrinth:sophisticated-core:${common.mod.dep("sophisticated_core")}")
+    compileOnly("maven.modrinth:sophisticated-backpacks:${common.mod.dep("sophisticated_backpacks")}")
+
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionForge")) { isTransitive = false }
 }

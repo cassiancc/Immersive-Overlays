@@ -111,6 +111,10 @@ dependencies {
         implementation("com.teamabnormals:blueprint:1.21.1-8.0.5")
     }
 
+    implementation("maven.modrinth:sophisticated-core:${common.mod.dep("sophisticated_core")}")
+    implementation("maven.modrinth:sophisticated-backpacks:${common.mod.dep("sophisticated_backpacks")}")
+
+
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionNeoForge")) { isTransitive = false }
