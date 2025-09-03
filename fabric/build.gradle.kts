@@ -107,6 +107,7 @@ dependencies {
         runtimeOnly("com.akuleshov7:ktoml-core:0.5.2")
         modRuntimeOnly("net.fabricmc:fabric-language-kotlin:1.13.2+kotlin.2.1.20")
     modCompileOnly("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_Fabric_${common.mod.dep("xaeros_mc")}")
+    modCompileOnly("maven.modrinth:xaeros-world-map:${common.mod.dep("xaeros_world_map")}_Fabric_${common.mod.dep("xaeros_mc")}")
 
 
     if (stonecutter.eval(mcVersion, "=1.20.1")) {

@@ -15,6 +15,7 @@
     "IMapCollectionImplMixin",
     "InfoOverlaysMixin",
     "MapAtlasAccessUtilsMixin",
-    "MiscMixin"
+    "XaerosMinimapMixin",
+    "XaerosWorldMapMixin"
   ]
 }

@@ -89,6 +89,7 @@ dependencies {
 
     // Xaero's Minimap
     modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_NeoForge_${common.mod.dep("xaeros_mc")}")
+    modImplementation("maven.modrinth:xaeros-world-map:${common.mod.dep("xaeros_world_map")}_NeoForge_${common.mod.dep("xaeros_mc")}")
 
 
     if (stonecutter.eval(mcVersion, ">1.19.2")) {

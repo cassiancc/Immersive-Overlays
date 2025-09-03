@@ -91,6 +91,7 @@ dependencies {
 
     // Xaero's Minimap
     modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_Forge_${common.mod.dep("xaeros_mc")}")
+    modImplementation("maven.modrinth:xaeros-world-map:${common.mod.dep("xaeros_world_map")}_Forge_${common.mod.dep("xaeros_mc")}")
 
     if (stonecutter.eval(mcVersion, "=1.20.1")) {
         modImplementation("maven.modrinth:oreganized:${common.mod.dep("oreganized")}-forge")
