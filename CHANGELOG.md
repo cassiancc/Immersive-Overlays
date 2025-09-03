@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Clock overlays no longer function in the Nether.
+- Overlays are now placed on individual layers, helping compatibility with mods like Raised.
 
 ### Fixed
 - Overlays are now properly hidden by F1.
