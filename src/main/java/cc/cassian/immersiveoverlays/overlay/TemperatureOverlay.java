@@ -1,10 +1,7 @@
 package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.ModClient;
-import cc.cassian.immersiveoverlays.compat.LegendarySurvivalOverhaulCompat;
-import cc.cassian.immersiveoverlays.compat.ModCompat;
-import cc.cassian.immersiveoverlays.compat.OreganizedCompat;
-import cc.cassian.immersiveoverlays.compat.ToughAsNailsCompat;
+import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
@@ -81,6 +78,9 @@ public class TemperatureOverlay {
                 };
                 return new TemperaturePair(Component.literal(WordUtils.capitalizeFully(temperature)), -1, sprite);
             }
+        }
+        if (ModCompat.COLD_SWEAT && ModConfig.get().compat_cold_sweat_temperature) {
+            return ColdSweatCompat.getTemperaturePair(player);
         }
         if (ModCompat.LEGENDARY_SURVIVAL_OVERHAUL && ModConfig.get().compat_legendary_survival_overhaul_temperature) {
             String temperature = LegendarySurvivalOverhaulCompat.getAmbientTemperature(player);

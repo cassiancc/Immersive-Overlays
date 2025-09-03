@@ -16,8 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - In vanilla, this data is sourced from the biome's temperature.
   - With [Oreganized](https://modrinth.com/mod/oreganized) installed, this data is sourced from the Thermometer.
   - With [Tough as Nails](https://modrinth.com/mod/tough-as-nails) installed, this data is sourced from the player's temperature.
+  - With [Cold Sweat](https://modrinth.com/mod/cold-sweat/) installed, this data is sourced from the player's temperature.
+  - With [Legendary Survival Overhaul](https://www.curseforge.com/minecraft/mc-mods/legendary-survival-overhaul) installed, this data is sourced from the player's temperature.
 - Season overlays, displayed when a calendar is in the inventory, that show the current season.
-  - Supports Serene Seasons, Fabric Seasons, and Simple Seasons.
+  - Supports [Serene Seasons](https://modrinth.com/mod/serene-seasons), [Fabric Seasons](https://modrinth.com/mod/fabric-seasons), and [Simple Seasons](https://modrinth.com/mod/simple-seasons).
 - Added support for detecting overlay items in Curios slots (1.20+).
 - Added support for detecting overlay items in Traveler's Backpacks.
 - Added support for detecting overlay items in Sophisticated Backpacks.

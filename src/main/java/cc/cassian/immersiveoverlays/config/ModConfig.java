@@ -62,6 +62,7 @@ public class ModConfig {
     public boolean compat_accessorify = true;
     public boolean compat_oreganized_temperature = true;
     public boolean compat_tough_as_nails_temperature = true;
+    public boolean compat_cold_sweat_temperature = true;
     public boolean compat_seasons = true;
     // biomes
     public boolean biome_enable = true;
@@ -81,7 +82,7 @@ public class ModConfig {
     public int temperature_temperate_colour = 16777215;
     public int temperature_vertical_position = 112;
     public boolean temperature_horizontal_position_left = true;
-    public List<String> temperature_items = List.of("oreganized:thermometer", "toughasnails:thermometer", "legendarysurvivaloverhaul:thermometer");
+    public List<String> temperature_items = List.of("oreganized:thermometer", "toughasnails:thermometer", "legendarysurvivaloverhaul:thermometer", "cold_sweat:thermometer");
     // version
     public int version = ModClient.CONFIG_VERSION;
     public boolean compat_legendary_survival_overhaul_temperature = true;
@@ -91,7 +92,6 @@ public class ModConfig {
     public int speed_colour = 0xc7bf81;
     public boolean compat_oreganized_speed = true;
     public List<String> speed_items = List.of("oreganized:speedometer", "speedometer:speedometer");
-
 
 
     public static void load() {

@@ -91,6 +91,9 @@ dependencies {
     modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_NeoForge_${common.mod.dep("xaeros_mc")}")
     modImplementation("maven.modrinth:xaeros-world-map:${common.mod.dep("xaeros_world_map")}_NeoForge_${common.mod.dep("xaeros_mc")}")
 
+    // Cold Sweat
+    modImplementation("maven.modrinth:cold-sweat:${common.mod.dep("cold_sweat")}")
+
 
     if (stonecutter.eval(mcVersion, ">1.19.2")) {
         modCompileOnly("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+$minecraft")

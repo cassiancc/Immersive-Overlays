@@ -14,4 +14,5 @@ public class ModCompat {
     public static final boolean TRAVELERS_BACKPACK = ModHelpers.isLoaded("travelersbackpack");
     public static final boolean LEGENDARY_SURVIVAL_OVERHAUL = ModHelpers.isLoaded("legendarysurvivaloverhaul");
     public static final boolean SOPHISTICATED_BACKPACKS = ModHelpers.isLoaded("sophisticatedbackpacks");
+    public static final boolean COLD_SWEAT = ModHelpers.isLoaded("cold_sweat");
 }
