@@ -31,11 +31,12 @@ public class ModLists {
         /*var registry = Registry.ITEM;
          *///?}
         compass_x_items = new ArrayList<>();
+        compass_y_items = new ArrayList<>();
+        compass_z_items = new ArrayList<>();
         clock_items = new ArrayList<>();
+        weather_items = new ArrayList<>();
         biome_items = new ArrayList<>();
         season_items = new ArrayList<>();
-        weather_items = new ArrayList<>();
-        compass_y_items = new ArrayList<>();
         temperature_items = new ArrayList<>();
         speed_items = new ArrayList<>();
         for (String compassItem : ModConfig.get().compass_x_items) {
