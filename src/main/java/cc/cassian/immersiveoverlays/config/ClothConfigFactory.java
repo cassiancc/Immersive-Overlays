@@ -5,6 +5,7 @@ import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextColor;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -39,17 +40,23 @@ public class ClothConfigFactory {
         final var generalCategory = createCategory(null, builder);
         final var compassCategory = createCategory("compass", builder);
         final var clockCategory = createCategory("clock", builder);
+        final var biomeCategory = createCategory("biome", builder);
+        final var temperatureCategory = createCategory("temperature", builder);
+        final var speedCategory = createCategory("speed", builder);
         final var compatCategory = createCategory("compat", builder);
-
 
         for (var field : ModConfig.class.getFields()) {
             ConfigCategory category;
             if (is(field, "compass")) category = compassCategory;
             else if (is(field,"clock")) category = clockCategory;
+            else if (is(field,"biome")) category = biomeCategory;
             else if (is(field,"compat")) category = compatCategory;
+            else if (is(field,"temperature")) category = temperatureCategory;
+            else if (is(field,"speed")) category = speedCategory;
+            else if (is(field,"season")) category = clockCategory;
             else category = generalCategory;
-
-            if (field.getType() == boolean.class) {
+            if (is(field, "version")) {}
+            else if (field.getType() == boolean.class) {
                 category.addEntry(entryBuilder.startBooleanToggle(fieldName(field), fieldGet(configInstance, field))
                         .setSaveConsumer(fieldSetter(configInstance, field))
                         .setTooltip(fieldTooltip(field))
@@ -61,6 +68,12 @@ public class ClothConfigFactory {
                         .setSaveConsumer(fieldSetter(configInstance, field))
                         .setTooltip(fieldTooltip(field))
                         .setDefaultValue((String) fieldGet(DEFAULT_VALUES, field)).build());
+            }
+            else if (field.getType() == int.class && field.getName().contains("colour")) {
+                category.addEntry(entryBuilder.startColorField(fieldName(field), (int) fieldGet(configInstance, field))
+                        .setSaveConsumer(fieldSetter(configInstance, field))
+                        .setTooltip(fieldTooltip(field))
+                        .setDefaultValue((int) fieldGet(DEFAULT_VALUES, field)).build());
             }
             else if (field.getType() == int.class) {
                 category.addEntry(entryBuilder.startIntField(fieldName(field), fieldGet(configInstance, field))

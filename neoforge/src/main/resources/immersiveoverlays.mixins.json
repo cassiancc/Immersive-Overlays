@@ -6,12 +6,13 @@
   "client": [
   ],
   "injectors": {
-	"defaultRequire": 1
+    "defaultRequire": 1
   },
   "mixins": [
-	"IMapCollectionImplMixin",
-	"InfoOverlaysMixin",
-	"MapAtlasAccessUtilsMixin",
-	"MiscMixin"
+    "IMapCollectionImplMixin",
+    "InfoOverlaysMixin",
+    "MapAtlasAccessUtilsMixin",
+    "XaerosMinimapMixin",
+    "XaerosWorldMapMixin"
   ]
 }

@@ -8,7 +8,7 @@ plugins {
 
 val loader = prop("loom.platform")!!
 val minecraft: String = stonecutter.current.version
-val common: Project = requireNotNull(stonecutter.node.sibling("")) {
+val common: Project = requireNotNull(stonecutter.node.sibling("")?.project) {
     "No common project for $project"
 }
 
@@ -47,13 +47,15 @@ repositories {
     maven ( "https://cursemaven.com" )
     maven ( "https://maven.wispforest.io/releases" )
     maven ( "https://maven.su5ed.dev/releases" )
+    maven ( "https://maven.theillusivec4.top/")
+    maven ( "https://maven.teamabnormals.com")
 }
 
 dependencies {
     minecraft("com.mojang:minecraft:$minecraft")
     mappings(loom.layered {
         officialMojangMappings()
-        if (stonecutter.eval(mcVersion, "<1.21.6")) {
+        if (stonecutter.eval(mcVersion, "<=1.21.8")) {
             val parchmentVersion = when (mcVersion) {
                 "1.18.2" -> "1.18.2:2022.11.06"
                 "1.19.2" -> "1.19.2:2022.11.27"
@@ -61,6 +63,7 @@ dependencies {
                 "1.21.1" -> "1.21.1:2024.11.17"
                 "1.21.4" -> "1.21.4:2025.03.23"
                 "1.21.5" -> "1.21.5:2025.04.19"
+                "1.21.8" -> "1.21.8:2025.07.20"
                 else -> ""
             }
             parchment("org.parchmentmc.data:parchment-$parchmentVersion@zip")
@@ -86,19 +89,37 @@ dependencies {
 
     // Xaero's Minimap
     modImplementation("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_NeoForge_${common.mod.dep("xaeros_mc")}")
+    modImplementation("maven.modrinth:xaeros-world-map:${common.mod.dep("xaeros_world_map")}_NeoForge_${common.mod.dep("xaeros_mc")}")
 
-    if (stonecutter.eval(mcVersion, "<1.21.5")) {
-        // Accessories
-        modImplementation("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+$minecraft")
-        // Accessorify
-        modImplementation("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+$minecraft")
-    } else {
-        // Accessories
-        modCompileOnly("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+1.21.4")
-        // Accessorify
-        modCompileOnly("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+1.21.4")
+    // Cold Sweat
+    modImplementation("maven.modrinth:cold-sweat:${common.mod.dep("cold_sweat")}")
 
+
+    if (stonecutter.eval(mcVersion, ">1.19.2")) {
+        modCompileOnly("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+$minecraft")
     }
+    else if (stonecutter.eval(mcVersion, ">1.21.8")) {
+        modCompileOnly("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+1.21.5")
+    }
+    if (stonecutter.eval(mcVersion, ">1.21") && stonecutter.eval(mcVersion, "<1.21.5")) {
+        modCompileOnly("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+$minecraft")
+    }
+    else if (stonecutter.eval(mcVersion, ">=1.21.5")) {
+        modCompileOnly("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+1.21.4")
+    }
+    compileOnly("top.theillusivec4.curios:curios-neoforge:${common.mod.dep("curios")}:api")
+    compileOnly("maven.modrinth:travelersbackpack:${common.mod.dep("travelers_backpack_neoforge")}-neoforge")
+
+    compileOnly("maven.modrinth:oreganized:5.0.0")
+    if (stonecutter.eval(mcVersion, "=1.21.1")) {
+        runtimeOnly("maven.modrinth:oreganized:5.0.0")
+        implementation("com.teamabnormals:blueprint:1.21.1-8.0.5")
+    }
+
+    implementation("maven.modrinth:sophisticated-core:${common.mod.dep("sophisticated_core")}")
+    implementation("maven.modrinth:sophisticated-backpacks:${common.mod.dep("sophisticated_backpacks")}")
+
+
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionNeoForge")) { isTransitive = false }

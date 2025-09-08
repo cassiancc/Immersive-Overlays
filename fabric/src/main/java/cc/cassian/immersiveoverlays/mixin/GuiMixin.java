@@ -17,7 +17,7 @@ public class GuiMixin {
     /*@WrapOperation(method = "nextContextualInfoState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/waypoints/ClientWaypointManager;hasWaypoints()Z"))
     private boolean mixin(ClientWaypointManager instance, Operation<Boolean> original) {
         if (ModConfig.get().locator_bar) {
-            if (!CompassOverlay.showXZ) {
+            if (!CompassOverlay.showX) {
                 return false;
             }
         }

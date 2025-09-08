@@ -9,7 +9,7 @@ plugins {
 
 val loader = prop("loom.platform")!!
 val minecraft: String = stonecutter.current.version
-val common: Project = requireNotNull(stonecutter.node.sibling("")) {
+val common: Project = requireNotNull(stonecutter.node.sibling("")?.project) {
     "No common project for $project"
 }
 
@@ -41,12 +41,16 @@ configurations {
 val mcVersion = stonecutter.current.project.substringBeforeLast('-')
 
 repositories {
-    maven ( "https://maven.shedaniel.me/" )
-    maven ( "https://maven.terraformersmc.com/releases/" )
-    maven ( "https://api.modrinth.com/maven")
-    maven ("https://maven.parchmentmc.org")
-    maven ("https://maven.ladysnake.org/releases")
+    maven("https://maven.shedaniel.me/")
+    maven("https://maven.terraformersmc.com/releases/")
+    maven("https://api.modrinth.com/maven")
+    maven("https://maven.parchmentmc.org")
+    maven("https://maven.ladysnake.org/releases")
     maven("https://maven.wispforest.io/releases")
+    maven("https://repo.spongepowered.org/repository/maven-public/")
+    maven("https://mvn.devos.one/releases/" )
+    maven("https://mvn.devos.one/snapshots/" )
+    maven("https://maven.jamieswhiteshirt.com/libs-release")
 }
 
 dependencies {
@@ -54,7 +58,7 @@ dependencies {
     minecraft("com.mojang:minecraft:$minecraft")
     mappings(loom.layered {
         officialMojangMappings()
-        if (stonecutter.eval(mcVersion, "<1.21.6")) {
+        if (stonecutter.eval(mcVersion, "<=1.21.8")) {
             val parchmentVersion = when (mcVersion) {
                 "1.18.2" -> "1.18.2:2022.11.06"
                 "1.19.2" -> "1.19.2:2022.11.27"
@@ -62,6 +66,7 @@ dependencies {
                 "1.21.1" -> "1.21.1:2024.11.17"
                 "1.21.4" -> "1.21.4:2025.03.23"
                 "1.21.5" -> "1.21.5:2025.04.19"
+                "1.21.8" -> "1.21.8:2025.07.20"
                 else -> ""
             }
             parchment("org.parchmentmc.data:parchment-$parchmentVersion@zip")
@@ -86,7 +91,7 @@ dependencies {
 //        modRuntimeOnly("maven.modrinth:map-atlases:${common.mod.dep("map_atlases_fabric")}")
     }
 
-    if (stonecutter.eval(mcVersion, "=1.21.6")) {
+    if (stonecutter.eval(mcVersion, ">1.21.8")) {
     } else {
         modRuntimeOnly("maven.modrinth:player-locator-plus:${common.mod.dep("player_locator_plus")}")
             runtimeOnly("com.akuleshov7:ktoml-core:0.5.2")
@@ -100,7 +105,10 @@ dependencies {
 
     modCompileOnly("maven.modrinth:bplb:v1.0.0")
     modCompileOnly("maven.modrinth:player-locator-plus:${common.mod.dep("player_locator_plus")}")
+        runtimeOnly("com.akuleshov7:ktoml-core:0.5.2")
+        modRuntimeOnly("net.fabricmc:fabric-language-kotlin:1.13.2+kotlin.2.1.20")
     modCompileOnly("maven.modrinth:xaeros-minimap:${common.mod.dep("xaeros")}_Fabric_${common.mod.dep("xaeros_mc")}")
+    modCompileOnly("maven.modrinth:xaeros-world-map:${common.mod.dep("xaeros_world_map")}_Fabric_${common.mod.dep("xaeros_mc")}")
 
 
     if (stonecutter.eval(mcVersion, "=1.20.1")) {
@@ -115,9 +123,35 @@ dependencies {
         modCompileOnly("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+1.21.1")
     }
 
+    // todo runtime dep on serene seasons
+//    if (stonecutter.eval(mcVersion, ">1.20") && stonecutter.eval(mcVersion, "<1.21.6")) {
+//        modRuntimeOnly("maven.modrinth:serene-seasons:${common.mod.dep("serene_seasons")}-fabric")
+//        modRuntimeOnly("com.github.glitchfiend.GlitchCore-fabric:$minecraft-${common.mod.dep("glitchcore")}")
+//
+//    }
+
     // Accessories
     if (stonecutter.eval(mcVersion, ">1.19.2") && stonecutter.eval(mcVersion, "<1.21.5")) {
-        modImplementation("io.wispforest:accessories-fabric:${common.mod.dep("accessories")}+$minecraft")
+        modRuntimeOnly("maven.modrinth:fabric-seasons:${common.mod.dep("fabric_seasons")}")
+        modRuntimeOnly("io.wispforest:accessories-fabric:${common.mod.dep("accessories")}+$minecraft")
+    }
+
+    // Traveler's Backpacks
+    modCompileOnly("maven.modrinth:travelersbackpack:${common.mod.dep("travelers_backpack")}-fabric")
+    if (stonecutter.eval(mcVersion, ">1.21")) {
+        modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.2")
+        modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-base:6.1.2")
+    } else {
+        modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.3")
+        modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.3")
+    }
+
+    // Sophisticated Backpacks
+    modCompileOnly("maven.modrinth:9jxwkYQL:${common.mod.dep("sophisticated_core_fabric")}")
+    modCompileOnly("maven.modrinth:ouNrBQtq:${common.mod.dep("sophisticated_backpacks_fabric")}")
+    modCompileOnly("io.github.fabricators_of_create.Porting-Lib:transfer:2.3.9+1.20.1")
+    if (stonecutter.eval(mcVersion, "=1.19.2")) {
+        modCompileOnly("io.github.fabricators_of_create.Porting-Lib:Porting-Lib:2.1.1453+1.19.2")
     }
 
     // Stonecutter/Arch
@@ -128,6 +162,7 @@ dependencies {
 configurations.all {
     resolutionStrategy {
         force("net.fabricmc:fabric-loader:${mod.dep("fabric_loader")}")
+        force("net.fabricmc.fabric-api:fabric-api:${common.mod.dep("fabric_api")}")
     }
 }
 

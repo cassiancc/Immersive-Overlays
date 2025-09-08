@@ -16,7 +16,7 @@ public class PlayerLocatorPlusClientMixin {
     @Inject(method = "isBarVisible", at = @At(value = "HEAD"), cancellable = true)
     private void mixin(Minecraft client, CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().compat_playerlocatorplus) {
-            if (!CompassOverlay.showXZ) {
+            if (!CompassOverlay.showX) {
                 cir.setReturnValue(false);
             }
         }

@@ -3,17 +3,17 @@ package cc.cassian.immersiveoverlays.fabric;
 
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
-import cc.cassian.immersiveoverlays.overlay.ClockOverlay;
-import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
-import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
+import cc.cassian.immersiveoverlays.overlay.*;
 import net.minecraft.resources.ResourceLocation;
 //? if >1.21.5 {
-/*import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElement;
+/*import cc.cassian.immersiveoverlays.layers.fabric.*;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElement;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 *///?} else if >1.21.2 {
-/*import cc.cassian.immersiveoverlays.overlay.OverlayLayer;
+
+/*import cc.cassian.immersiveoverlays.layers.*;
 import net.fabricmc.fabric.api.client.rendering.v1.HudLayerRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.IdentifiedLayer;
 *///?}
@@ -24,27 +24,27 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 
 
 public final class ImmersiveOverlaysFabricClient implements ClientModInitializer {
-    //? if >1.21.2 && <=1.21.5 {
-    /*public static final OverlayLayer LAYER = new OverlayLayer();
-    *///?}
     @Override
     public void onInitializeClient() {
         // This entrypoint is suitable for setting up client-specific logic, such as rendering.
-        ModClient.init();
+        ModClient.init("fabric");
         //? if >1.21.5 {
-        /*HudElementRegistry.addFirst(ResourceLocation.fromNamespaceAndPath(ModClient.MOD_ID, "overlay"), new HudElement() {
-            @Override
-            public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
-                CompassOverlay.renderGameOverlayEvent(guiGraphics);
-                ClockOverlay.renderGameOverlayEvent(guiGraphics);
-            }
-        });
+        /*HudElementRegistry.addFirst(ModClient.locate("biome"), new BiomeLayer());
+        HudElementRegistry.addFirst(ModClient.locate("clock"), new ClockLayer());
+        HudElementRegistry.addFirst(ModClient.locate("compass"), new CompassLayer());
+        HudElementRegistry.addFirst(ModClient.locate("speed"), new SpeedLayer());
+        HudElementRegistry.addFirst(ModClient.locate("temperature"), new TemperatureLayer());
         *///?} else if >1.21.2 {
-        /*HudLayerRegistrationCallback.EVENT.register((layeredDrawer -> layeredDrawer.addLayer(IdentifiedLayer.of(ResourceLocation.fromNamespaceAndPath(ModClient.MOD_ID, "overlay"), LAYER))));
-        *///?} else {
+        /*HudLayerRegistrationCallback.EVENT.register((layeredDrawer -> {
+            layeredDrawer.addLayer(IdentifiedLayer.of(ModClient.locate("biome"), new BiomeLayer()));
+            layeredDrawer.addLayer(IdentifiedLayer.of(ModClient.locate("clock"), new ClockLayer()));
+            layeredDrawer.addLayer(IdentifiedLayer.of(ModClient.locate("compass"), new CompassLayer()));
+            layeredDrawer.addLayer(IdentifiedLayer.of(ModClient.locate("speed"), new SpeedLayer()));
+            layeredDrawer.addLayer(IdentifiedLayer.of(ModClient.locate("temperature"), new TemperatureLayer()));
+        }));
+         *///?} else {
         HudRenderCallback.EVENT.register(((matrixStack, tickDelta) -> {
-            CompassOverlay.renderGameOverlayEvent(matrixStack);
-            ClockOverlay.renderGameOverlayEvent(matrixStack);
+            OverlayHelpers.renderOverlays(matrixStack);
         }));
         //?}
         ClientTickEvents.END_CLIENT_TICK.register(OverlayHelpers::checkInventoryForOverlays);

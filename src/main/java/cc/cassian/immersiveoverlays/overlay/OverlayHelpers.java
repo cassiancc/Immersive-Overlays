@@ -1,23 +1,27 @@
 package cc.cassian.immersiveoverlays.overlay;
 
-
 import cc.cassian.immersiveoverlays.ModClient;
+import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.helpers.ModTags;
-import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-//? if >1.21.5
-/*import net.minecraft.client.renderer.RenderPipelines;*/
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
-import cc.cassian.immersiveoverlays.compat.AccessoriesCompat;
+import net.minecraft.client.renderer.RenderType;
 //?} else {
-/*import net.minecraft.client.gui.GuiComponent;
+/*import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.gui.GuiComponent;
 import com.mojang.blaze3d.vertex.PoseStack;
  *///?}
+//? if >1.21.6 {
+/*import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.util.ARGB;
+*///?}
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
@@ -25,11 +29,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 //? if >1.20.5 {
-/*import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.core.component.DataComponents;
-*///?}
+//?}
 
 
 import java.util.List;
@@ -40,53 +43,49 @@ public class OverlayHelpers {
     public static final ResourceLocation TEXTURE = ModClient.locate("textures/gui/overlay.png");
 
     //? if >1.20 {
-    public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
-    //?} else {
-        /*public static void renderBackground(PoseStack poseStack, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int textureOffset, int tooltipSize) {
-    *///?}
+    public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int tooltipSize, boolean leftAlign) {
+        //?} else {
+        /*public static void renderBackground(PoseStack guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int tooltipSize, boolean leftAlign) {
+         *///?}
         if (ModConfig.get().render_background) {
+            int textureOffset = OverlayHelpers.getTextureOffsetFromSize(tooltipSize);
+            //? if <1.20
+            /*RenderSystem.setShaderTexture(0, OverlayHelpers.TEXTURE);*/
             final int yPlacementWithOffset = yPlacement-4;
             final int endCapOffset = 197;
             final int xPlacementWithOffset = xPlacement-xOffset-4;
-            final int endCapXPlacement = OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth);
+            final int endCapXPlacement = OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth, leftAlign);
             final int uWidth = fontWidth+xOffset+4;
-
-            //? if >1.21.5 {
-            /*guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, xPlacementWithOffset, yPlacementWithOffset,
-            *///?} else if >1.21.2 {
-            /*guiGraphics.blit(RenderType::guiTextured, TEXTURE, xPlacementWithOffset, yPlacementWithOffset,
-             *///?} else if >1.20 {
-            guiGraphics.blit(TEXTURE, xPlacementWithOffset, yPlacementWithOffset, 0,
-                    //?} else {
-                    /*GuiComponent.blit(poseStack, xPlacementWithOffset, yPlacementWithOffset, 0,
-                     *///?}
-                    0,
-                    textureOffset, uWidth, tooltipSize,
-                    OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+            OverlayHelpers.blit(guiGraphics, xPlacementWithOffset, yPlacementWithOffset, 0, textureOffset, uWidth, tooltipSize, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
             // render endcap
-            //? if >1.21.5 {
-            /*guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, endCapXPlacement, yPlacementWithOffset,
-            *///?} else if >1.21.2 {
-            /*guiGraphics.blit(RenderType::guiTextured, TEXTURE, endCapXPlacement, yPlacementWithOffset,
-             *///?} else if >1.20 {
-            guiGraphics.blit(TEXTURE, endCapXPlacement, yPlacementWithOffset, 0,
-                    //?} else {
-                    /*GuiComponent.blit(poseStack, endCapXPlacement, yPlacementWithOffset, 0,
-                     *///?}
-                    endCapOffset,
-                    textureOffset, 3, tooltipSize,
-                    OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+            OverlayHelpers.blit(guiGraphics, endCapXPlacement, yPlacementWithOffset, endCapOffset, textureOffset, 3, tooltipSize, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
         }
     }
 
+    public static int getTextureOffsetFromSize(int textureSize) {
+        if (textureSize == 16) {
+            return 7;
+        } else if (textureSize == 21) {
+            return 111;
+        } else if (textureSize == 25) {
+            return 25;
+        } else if (textureSize == 35) {
+            return 51;
+        } else if (textureSize == 36) {
+            return 131;
+        }
+        else return 0;
+    }
+
     public static void checkInventoryForOverlays(Minecraft minecraft){
-        if ((ModConfig.get().compass_enable || ModConfig.get().clock_enable) && minecraft.level != null) {
+        if ((ModConfig.get().compass_enable || ModConfig.get().clock_enable || ModConfig.get().biome_enable || ModConfig.get().temperature_enable)  && minecraft.level != null) {
             OverlayHelpers.checkInventoryForItems(minecraft.player);
         }
     }
 
-    public static boolean playerHasPotions(Player player) {
+    public static boolean playerHasPotions(Player player, boolean leftAlign) {
         if (!ModConfig.get().moved_by_effects) return false;
+        if (!leftAlign) return false;
         // Technically, we should check whether these are ambient,
         // but Map Atlases doesn't and still covers our overlay.
         // return Player.areAllEffectsAmbient(player.getActiveEffects());
@@ -95,17 +94,17 @@ public class OverlayHelpers {
 
     public static int moveBy(Player player) {
         //? if >1.21 {
-        /*boolean hasBeneficial =
+        boolean hasBeneficial =
                 player.getActiveEffects().stream().anyMatch(p -> p.getEffect().value().isBeneficial());
         boolean hasNegative =
                 player.getActiveEffects().stream().anyMatch(p -> !p.getEffect().value().isBeneficial());
-        *///?} else {
-        boolean hasBeneficial =
+        //?} else {
+        /*boolean hasBeneficial =
                 player.getActiveEffects().stream().anyMatch(p -> p.getEffect().isBeneficial());
         boolean hasNegative =
                 player.getActiveEffects().stream().anyMatch(p -> !p.getEffect().isBeneficial());
 
-        //?}
+        *///?}
         if (hasNegative) {
             return 42;
         } else if (hasBeneficial) {
@@ -114,14 +113,15 @@ public class OverlayHelpers {
         else return 0;
     }
 
-    public static boolean debug(Minecraft mc) {
+    public static boolean shouldCancelRender(Minecraft mc) {
+        if (mc.options.hideGui) return true;
         if (ModConfig.get().hide_from_debug) {
             //? if >1.21 {
-            /*var debug = mc.getDebugOverlay().showDebugScreen();
-             *///?} else {
-            var debug = mc.options.renderDebug;
-            //?}
-            return debug && !mc.options.reducedDebugInfo().get();
+            var debug = mc.getDebugOverlay().showDebugScreen();
+             //?} else {
+            /*var debug = mc.options.renderDebug;
+            *///?}
+            return debug;
         }
         return false;
     }
@@ -129,7 +129,11 @@ public class OverlayHelpers {
     private static void findImportantContainerContents(ItemStack container) {
         List<ItemStack> list = getContainerContents(container).toList();
         for (ItemStack itemStack : list) {
-            isImportantItem(itemStack);
+            if (ModConfig.get().search_containers_for_containers) {
+                isImportantItemOrContainer(itemStack);
+            } else {
+                isImportantItem(itemStack);
+            }
         }
     }
 
@@ -137,25 +141,31 @@ public class OverlayHelpers {
         if (itemStack.isEmpty())
             return;
         var item = itemStack.getItem();
-        if (ModLists.compass_items.contains(item)) {
-            CompassOverlay.showXZ = true;
-        }
-        if (ModLists.compass_depth_items.contains(item))
+        if (ModLists.compass_x_items.contains(item))
+            CompassOverlay.showX = true;
+        if (ModLists.compass_y_items.contains(item))
             CompassOverlay.showY = true;
+        if (ModLists.compass_z_items.contains(item))
+            CompassOverlay.showZ = true;
         if (ModLists.clock_items.contains(item))
             ClockOverlay.showTime = true;
         if (ModLists.weather_items.contains(item))
             ClockOverlay.showWeather = true;
+        if (ModLists.biome_items.contains(item))
+            BiomeOverlay.showBiome = true;
+        if (ModLists.season_items.contains(item))
+            ClockOverlay.showSeason = true;
+        if (ModLists.temperature_items.contains(item))
+            TemperatureOverlay.showTemperature = true;
+        if (ModLists.speed_items.contains(item))
+            SpeedOverlay.showSpeed = true;
     }
 
     public static void checkInventoryForItems(Player player) {
-        CompassOverlay.showXZ = false;
-        CompassOverlay.showY = false;
-        ClockOverlay.showTime = false;
-        ClockOverlay.showWeather = false;
-        if (player == null)
-            return;
-        if (ModConfig.get().compass_enable || ModConfig.get().clock_enable) {
+        if (ModConfig.get().require_item) {
+            setOverlays(false);
+            if (player == null)
+                return;
             isImportantItemOrContainer(player.getOffhandItem());
             if (ModConfig.get().require_item_in_hand) {
                 isImportantItemOrContainer(player.getMainHandItem());
@@ -163,18 +173,35 @@ public class OverlayHelpers {
                 //? if <1.21.5 {
                 player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
                 //?} else {
-                /*isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.HEAD));
-                isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.CHEST));
-                isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.LEGS));
-                isImportantItemOrContainer(player.getItemBySlot(EquipmentSlot.FEET));
+                /*for (EquipmentSlot value : EquipmentSlot.values()) {
+                    isImportantItemOrContainer(player.getItemBySlot(value));
+                }
                 *///?}
                 //? if >1.20 {
                 if (ModCompat.ACCESSORIES)
                     AccessoriesCompat.checkForImportantAccessories(player);
                 //?}
+                if (ModCompat.CURIOS)
+                    CuriosCompat.checkForImportantAccessories(player);
+                if (ModCompat.TRAVELERS_BACKPACK)
+                    TravelersBackpackCompat.checkForImportantAccessories(player);
                 checkInventoryForStack(player.getInventory());
             }
+        } else {
+            setOverlays(true);
         }
+    }
+
+    private static void setOverlays(boolean b) {
+        CompassOverlay.showX = b;
+        CompassOverlay.showY = b;
+        CompassOverlay.showZ = b;
+        ClockOverlay.showTime = b;
+        ClockOverlay.showWeather = b;
+        BiomeOverlay.showBiome = b;
+        ClockOverlay.showSeason = b;
+        TemperatureOverlay.showTemperature = b;
+        SpeedOverlay.showSpeed = b;
     }
 
     public static void isImportantItemOrContainer(ItemStack stack) {
@@ -182,12 +209,15 @@ public class OverlayHelpers {
         if (isContainer(stack)) {
             findImportantContainerContents(stack);
         }
+        if (ModCompat.SOPHISTICATED_BACKPACKS) {
+            SophisticatedBackpacksCompat.checkBackpackContents(stack);
+        }
     }
 
     public static Stream<ItemStack> getContainerContents(ItemStack stack) {
         if (!isContainer(stack)) return Stream.empty();
         //? if >1.20.5 {
-        /*var components = stack.getComponents();
+        var components = stack.getComponents();
         if (components.has(DataComponents.BUNDLE_CONTENTS)) {
             BundleContents bundleContents = components.get(DataComponents.BUNDLE_CONTENTS);
             if (bundleContents != null)
@@ -198,8 +228,8 @@ public class OverlayHelpers {
             if (containerContents != null)
                 return containerContents.stream();
         }
-        *///?} else {
-        CompoundTag compoundtag = stack.getTag();
+        //?} else {
+        /*CompoundTag compoundtag = stack.getTag();
         if (compoundtag == null) {
             return Stream.empty();
         } else {
@@ -213,7 +243,7 @@ public class OverlayHelpers {
                 return listtag.stream().map(CompoundTag.class::cast).map(ItemStack::of);
             }
         }
-        //?}
+        *///?}
         return Stream.empty();
     }
 
@@ -222,15 +252,15 @@ public class OverlayHelpers {
         if (stack.isEmpty()) return false;
         if (stack.is(ModTags.CONTAINERS)) return true;
         //? if >1.20.5 {
-        /*var components = stack.getComponents();
+        var components = stack.getComponents();
         if (components.has(DataComponents.BUNDLE_CONTENTS)) {
             return true;
         }
         else if (components.has(DataComponents.CONTAINER)) {
             return true;
         }
-        *///?} else {
-        CompoundTag compoundtag = stack.getTag();
+        //?} else {
+        /*CompoundTag compoundtag = stack.getTag();
         if (compoundtag == null) {
             return false;
         } else {
@@ -243,7 +273,7 @@ public class OverlayHelpers {
                 }
             }
         }
-        //?}
+        *///?}
         return true;
     }
 
@@ -289,19 +319,121 @@ public class OverlayHelpers {
         return ItemStack.EMPTY;
     }
 
-   public static int getPlacement(int windowWidth, int fontWidth) {
-        if (ModConfig.get().align_left) {
+    public static int getPlacement(int windowWidth, int fontWidth, boolean leftAlign) {
+        if (leftAlign) {
             return 9;
         } else {
             return windowWidth-2-fontWidth;
         }
     }
 
-    public static int getEndCapPlacement(int windowWidth, int fontWidth) {
-        if (ModConfig.get().align_left) {
+    public static int getEndCapPlacement(int windowWidth, int fontWidth, boolean leftAlign) {
+        if (leftAlign) {
             return fontWidth+8;
         } else {
             return windowWidth-4;
         }
+    }
+
+    public static void drawString(
+           //? if >1.20 {
+          GuiGraphics
+          //?} else {
+          /*PoseStack
+          *///?}
+          poseStack, Font font, Component text, int x, int y, Integer color) {
+        //? if >1.21.6
+        /*color = ARGB.opaque(color);*/
+        //? if >1.20 {
+        poseStack.drawString(font, text, x, y, color);
+        //?} else {
+        /*GuiComponent.drawString(poseStack, font, text, x, y, color);
+         *///?}
+    }
+
+    public static void drawString(
+          //? if >1.20 {
+          GuiGraphics
+          //?} else {
+          /*PoseStack
+          *///?}
+         poseStack, Font font, String text, int x, int y, Integer color) {
+        //? if >1.21.6
+        /*color = ARGB.opaque(color);*/
+        //? if >1.20 {
+        poseStack.drawString(font, text, x, y, color);
+        //?} else {
+        /*GuiComponent.drawString(poseStack, font, text, x, y, color);
+         *///?}
+    }
+
+    public static void renderOverlays(
+            //? if >1.20 {
+            GuiGraphics
+            //?} else {
+            /*PoseStack
+             *///?}
+                    hud) {
+        CompassOverlay.renderGameOverlayEvent(hud);
+        ClockOverlay.renderGameOverlayEvent(hud);
+        BiomeOverlay.renderGameOverlayEvent(hud);
+        TemperatureOverlay.renderGameOverlayEvent(hud);
+        SpeedOverlay.renderGameOverlayEvent(hud);
+    }
+
+    public static void blit(
+           //? if >1.20 {
+          GuiGraphics
+          //?} else {
+          /*PoseStack
+          *///?}
+          guiGraphics, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
+        OverlayHelpers.blit(guiGraphics, TEXTURE, x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
+    }
+
+    public static void blit(
+           //? if >1.20 {
+          GuiGraphics
+          //?} else {
+          /*PoseStack
+          *///?}
+          guiGraphics, ResourceLocation texture, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
+        //? if >1.21.5 {
+        /*guiGraphics.blit(RenderPipelines.GUI_TEXTURED, texture,
+        *///?} else if >1.21.2 {
+        /*guiGraphics.blit(RenderType::guiTextured, texture,
+         *///?} else if >1.20 {
+        guiGraphics.blit(texture,
+                //?} else {
+            /*RenderSystem.setShaderTexture(0, texture);
+               GuiComponent.blit(guiGraphics,
+             *///?}
+                x, y,
+                //? if <1.21.2
+                0, //z
+                //?
+                uOffset,
+                vOffset, uWidth, vHeight,
+                textureWidth, textureHeight);
+    }
+
+    public static void blitSprite(
+            //? if >1.20 {
+            GuiGraphics
+                    //?} else {
+                    /*PoseStack
+                     *///?}
+                    guiGraphics, ResourceLocation texture, int x, int y) {
+        blitSprite(guiGraphics, texture, x, y, 16);
+    }
+
+    public static void blitSprite(
+            //? if >1.20 {
+            GuiGraphics
+                    //?} else {
+                    /*PoseStack
+                     *///?}
+                    guiGraphics, ResourceLocation texture, int x, int y, int size) {
+        blit(guiGraphics, texture, x, y, 0, 0, size, size, size, size);
     }
 }
