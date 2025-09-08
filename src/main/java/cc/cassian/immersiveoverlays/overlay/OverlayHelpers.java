@@ -9,6 +9,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderType;
 //?} else {
 /*import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiComponent;

@@ -4,8 +4,6 @@ import cc.cassian.immersiveoverlays.overlay.TemperatureOverlay;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
-import toughasnails.api.temperature.TemperatureHelper;
-import toughasnails.api.temperature.TemperatureLevel;
 
 
 public class ColdSweatCompat {

@@ -12,8 +12,8 @@ import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 *///?} else if >1.21.2 {
-/*
-import cc.cassian.immersiveoverlays.layers.*;
+
+/*import cc.cassian.immersiveoverlays.layers.*;
 import net.fabricmc.fabric.api.client.rendering.v1.HudLayerRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.IdentifiedLayer;
 *///?}

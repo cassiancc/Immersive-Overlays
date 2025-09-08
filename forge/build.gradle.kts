@@ -104,6 +104,9 @@ dependencies {
     compileOnly("maven.modrinth:sophisticated-core:${common.mod.dep("sophisticated_core")}")
     compileOnly("maven.modrinth:sophisticated-backpacks:${common.mod.dep("sophisticated_backpacks")}")
 
+    modImplementation("maven.modrinth:cold-sweat:${common.mod.dep("cold_sweat")}")
+
+
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionForge")) { isTransitive = false }
 }

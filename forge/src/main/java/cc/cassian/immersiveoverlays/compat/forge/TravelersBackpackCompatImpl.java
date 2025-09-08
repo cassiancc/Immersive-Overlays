@@ -21,7 +21,7 @@ public class TravelersBackpackCompatImpl {
                  inventory; 
                 //?} else {
                 /*getHandler();
-                //?
+                *///?}
                 for (int i =0; i < inventory.getSlots(); i++) {
                     OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
                 }
@@ -29,4 +29,3 @@ public class TravelersBackpackCompatImpl {
         }
     }
 }
-*/

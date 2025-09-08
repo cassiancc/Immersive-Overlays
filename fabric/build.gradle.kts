@@ -49,6 +49,7 @@ repositories {
     maven("https://maven.wispforest.io/releases")
     maven("https://repo.spongepowered.org/repository/maven-public/")
     maven("https://mvn.devos.one/releases/" )
+    maven("https://mvn.devos.one/snapshots/" )
     maven("https://maven.jamieswhiteshirt.com/libs-release")
 }
 
@@ -150,7 +151,7 @@ dependencies {
     modCompileOnly("maven.modrinth:ouNrBQtq:${common.mod.dep("sophisticated_backpacks_fabric")}")
     modCompileOnly("io.github.fabricators_of_create.Porting-Lib:transfer:2.3.9+1.20.1")
     if (stonecutter.eval(mcVersion, "=1.19.2")) {
-        modCompileOnly("io.github.fabricators_of_create.Porting-Lib:extensions:2.3.9+1.20.1")
+        modCompileOnly("io.github.fabricators_of_create.Porting-Lib:Porting-Lib:2.1.1453+1.19.2")
     }
 
     // Stonecutter/Arch
