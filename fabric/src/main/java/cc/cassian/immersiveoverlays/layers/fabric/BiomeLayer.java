@@ -5,7 +5,6 @@ import cc.cassian.immersiveoverlays.overlay.BiomeOverlay;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElement;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
 
 public class BiomeLayer implements HudElement {
     @Override
