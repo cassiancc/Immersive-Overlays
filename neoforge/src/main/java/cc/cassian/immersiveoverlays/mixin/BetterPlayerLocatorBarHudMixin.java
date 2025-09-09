@@ -3,12 +3,11 @@ package cc.cassian.immersiveoverlays.mixin;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
 import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.gui.Gui;
 import org.spongepowered.asm.mixin.Mixin;
 //? if >1.21.5 {
 /*import net.minecraft.client.gui.contextualbar.LocatorBarRenderer;
-*///?} else {
-import net.bichal.bplb.client.BetterPlayerLocatorBarHud;
- //?}
+*///?}
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
 //?}
@@ -22,10 +21,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //? if >1.21.5 {
 /*@Mixin(LocatorBarRenderer.class)
 *///?} else {
-@Mixin(BetterPlayerLocatorBarHud.class)
+@Mixin(Gui.class)
 //?}
 public class BetterPlayerLocatorBarHudMixin {
-    //? if >1.20 {
+    //? if >1.21.5 {
     @Inject(method = "render", at = @At(value = "HEAD"), cancellable = true)
     private void mixin(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if (ModConfig.get().compat_playerlocatorplus) {
@@ -33,5 +32,6 @@ public class BetterPlayerLocatorBarHudMixin {
                 ci.cancel();
             }
         }
-    }    //?}
+    }
+    //?}
 }

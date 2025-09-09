@@ -4,6 +4,7 @@
   "package": "cc.cassian.immersiveoverlays.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "BetterPlayerLocatorBarHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1

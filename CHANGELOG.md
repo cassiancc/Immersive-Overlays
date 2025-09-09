@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- Support for biomes from No Man's Land, Abundant Atmosphere, and New World.
+
+### Fixed
+- Issues with locator bar support on NeoForge 1.21.8.
+
+
+## [1.3.0]
+
+### Added
 - Biome overlays, displayed when a map is in the inventory, that show the current biome. Additional biomes can be added via resource packs, with support for all of Minecraft's biomes included.
   - Mod support is in the works - Atmospheric, Quark, and Nature's Spirit have biomes included in this release. Always looking for contributions, and more can be added by modpackers.
   - Adding more biomes is simple. As an example, to add a texture to Dunes from Atmospheric (`atmospheric:dunes`), your resource pack should have a texture with the path `assets/atmospheric/textures/immersiveoverlays/dunes.png`.
