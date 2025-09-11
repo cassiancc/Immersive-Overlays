@@ -3,6 +3,7 @@ package cc.cassian.immersiveoverlays.overlay;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfig;
+import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -10,12 +11,10 @@ import net.minecraft.client.gui.GuiGraphics;
 /*import com.mojang.blaze3d.vertex.PoseStack;
 *///?}
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import org.apache.commons.lang3.text.WordUtils;
-import oshi.util.tuples.Pair;
 
 public class TemperatureOverlay {
     public static boolean showTemperature = false;
@@ -98,15 +97,17 @@ public class TemperatureOverlay {
         ()
         //?}
         ;
-        return getBiomeTemperature(level.getBiome(player.blockPosition()).value());
+        return getBiomeTemperature(level.getBiome(player.blockPosition()));
     }
 
     public record TemperaturePair(Component component, Integer color, String texture) {
 
     }
 
-    public static TemperaturePair getBiomeTemperature(Biome biome) {
-        return getBiomeTemperature(biome.getBaseTemperature());
+    public static TemperaturePair getBiomeTemperature(Holder<Biome> biome) {
+        if (ModClient.loader.equals("fabric"))
+            return ModHelpers.getBiomeTemperatureFromTag(biome);
+        return getBiomeTemperature(biome.value().getBaseTemperature());
     }
 
     public static TemperaturePair getBiomeTemperature(float temperature) {

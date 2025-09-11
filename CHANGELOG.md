@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Support for biomes from No Man's Land, Abundant Atmosphere, and New World.
+- Support for detecting temperature based off biome tags on Fabric.
 
 ### Fixed
 - Issues with locator bar support on NeoForge 1.21.8.

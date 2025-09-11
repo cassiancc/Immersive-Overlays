@@ -1,9 +1,12 @@
 package cc.cassian.immersiveoverlays.helpers;
 
+import cc.cassian.immersiveoverlays.overlay.TemperatureOverlay;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.biome.Biome;
 
 import java.lang.reflect.Field;
 import java.util.Objects;
@@ -90,6 +93,11 @@ public class ModHelpers {
      */
     @ExpectPlatform
     public static boolean clothConfigInstalled() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static TemperatureOverlay.TemperaturePair getBiomeTemperatureFromTag(Holder<Biome> biome) {
         throw new AssertionError();
     }
 }

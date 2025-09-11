@@ -88,7 +88,7 @@ public class BiomeOverlay {
 
     private static Integer getTextColour(Holder<Biome> biome) {
         if (ModConfig.get().biome_text_tinted)
-            return TemperatureOverlay.getBiomeTemperature(biome.value()).color();
+            return TemperatureOverlay.getBiomeTemperature(biome).color();
         return 14737632;
     }
 
