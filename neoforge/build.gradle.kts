@@ -119,6 +119,8 @@ dependencies {
     implementation("maven.modrinth:sophisticated-core:${common.mod.dep("sophisticated_core")}")
     implementation("maven.modrinth:sophisticated-backpacks:${common.mod.dep("sophisticated_backpacks")}")
 
+    // Jade
+    modImplementation("maven.modrinth:jade:${common.mod.dep("jade_version")}")
 
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }

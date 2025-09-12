@@ -106,6 +106,9 @@ dependencies {
 
     modImplementation("maven.modrinth:cold-sweat:${common.mod.dep("cold_sweat")}")
 
+    // Jade
+    modImplementation("maven.modrinth:jade:${common.mod.dep("jade_version")}")
+
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionForge")) { isTransitive = false }

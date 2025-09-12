@@ -154,6 +154,9 @@ dependencies {
         modCompileOnly("io.github.fabricators_of_create.Porting-Lib:Porting-Lib:2.1.1453+1.19.2")
     }
 
+    // Jade
+    modImplementation("maven.modrinth:jade:${common.mod.dep("jade_fabric_version")}")
+
     // Stonecutter/Arch
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionFabric")) { isTransitive = false }

@@ -91,6 +91,7 @@ public class ModConfig {
     public int speed_colour = 0xc7bf81;
     public boolean compat_oreganized_speed = true;
     public List<String> speed_items = List.of("oreganized:speedometer", "speedometer:speedometer");
+    public boolean compat_jade = false;
 
 
     public static void load() {
