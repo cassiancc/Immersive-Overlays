@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for detecting temperature based off biome tags on Fabric.
 - Support for disabling Jade's overlay until a Spyglass is the inventory.
 
+## Changed
+- Updated Accessorify support to 2.2.1.
+
 ### Fixed
 - Issues with locator bar support on NeoForge 1.21.8.
 
