@@ -1,4 +1,4 @@
-package cc.cassian.immersiveoverlays.mixin;
+package cc.cassian.immersiveoverlays.forge.mixin;
 
 
 import cc.cassian.immersiveoverlays.config.ModConfig;

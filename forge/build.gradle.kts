@@ -123,7 +123,9 @@ loom {
 
     forge.convertAccessWideners = true
     forge.mixinConfigs(
-        "immersiveoverlays.mixins.json"
+        "immersiveoverlays.mixins.json",
+        "immersiveoverlays-forge.mixins.json"
+
     )
 
 

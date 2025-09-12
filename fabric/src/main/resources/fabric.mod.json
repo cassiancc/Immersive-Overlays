@@ -21,7 +21,8 @@
   "license": "MIT",
   "icon": "assets/immersiveoverlays/icon.png",
   "environment": "client",
-  "mixins": ["immersiveoverlays.mixins.json"],
+  "mixins": [
+    "immersiveoverlays.mixins.json", "immersiveoverlays-fabric.mixins.json"],
   "entrypoints": {
     "client": [
       "cc.cassian.immersiveoverlays.fabric.ImmersiveOverlaysFabricClient"

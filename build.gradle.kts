@@ -52,7 +52,7 @@ dependencies {
     else if (stonecutter.eval(mcVersion, ">1.21.8")) {
         modCompileOnly("io.wispforest:accessories-common:${mod.dep("accessories")}+1.21.5")
     }
-    if (stonecutter.eval(mcVersion, ">1.21") && stonecutter.eval(mcVersion, "<1.21.5")) {
+    if (stonecutter.eval(mcVersion, ">1.20") && stonecutter.eval(mcVersion, "<1.21.5")) {
         modCompileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+$minecraft")
     }
     else if (stonecutter.eval(mcVersion, ">=1.21.5")) {
@@ -68,6 +68,12 @@ dependencies {
     modCompileOnly("maven.modrinth:fabric-seasons:${mod.dep("fabric_seasons")}")
     modCompileOnly("maven.modrinth:simple-seasons:${mod.dep("simple_seasons")}")
 
+    // Jade
+    modImplementation("maven.modrinth:jade:${mod.dep("jade_version")}")
+
+    //Xaero's
+    modCompileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros")}_Fabric_${mod.dep("xaeros_mc")}")
+    modCompileOnly("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}_Fabric_${mod.dep("xaeros_mc")}")
 
 }
 

@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "cc.cassian.immersiveoverlays.mixin",
+  "package": "cc.cassian.immersiveoverlays.forge.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
   ],
@@ -10,8 +10,6 @@
   },
   "mixins": [
     "IMapCollectionImplMixin",
-    "MapAtlasAccessUtilsMixin",
-    "XaerosMinimapMixin",
-    "XaerosWorldMapMixin"
+    "MapAtlasAccessUtilsMixin"
   ]
 }

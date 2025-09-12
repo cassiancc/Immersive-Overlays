@@ -1,4 +1,4 @@
-package cc.cassian.immersiveoverlays.mixin;
+package cc.cassian.immersiveoverlays.fabric.mixin;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.CompassOverlay;

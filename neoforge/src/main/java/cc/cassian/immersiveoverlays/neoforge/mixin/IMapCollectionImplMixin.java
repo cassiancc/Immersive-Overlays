@@ -1,7 +1,7 @@
-package cc.cassian.immersiveoverlays.mixin;
+package cc.cassian.immersiveoverlays.neoforge.mixin;
 
-import cc.cassian.immersiveoverlays.helpers.ModTags;
 import cc.cassian.immersiveoverlays.config.ModConfig;
+import cc.cassian.immersiveoverlays.helpers.ModTags;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;

@@ -14,7 +14,7 @@ import snownee.jade.overlay.OverlayRenderer;
 public class JadeMixin {
     @Inject(method = "shouldShow", remap = false, at = @At(value = "HEAD"), cancellable = true)
     private static void mixin(CallbackInfoReturnable<Boolean> cir) {
-        if (ModConfig.get().compat_jade) {
+        if (ModConfig.get().compat_jade && Minecraft.getInstance().player != null) {
             if (!OverlayHelpers.checkInventoryForItem(Minecraft.getInstance().player.getInventory(), Items.SPYGLASS, false)) {
                 cir.setReturnValue(false);
             }

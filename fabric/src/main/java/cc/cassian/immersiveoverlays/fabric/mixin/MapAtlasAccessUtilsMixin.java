@@ -1,4 +1,4 @@
-package cc.cassian.immersiveoverlays.mixin;
+package cc.cassian.immersiveoverlays.fabric.mixin;
 
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
@@ -16,6 +16,7 @@ import pepjebs.mapatlases.utils.MapAtlasesAccessUtils;
 @Pseudo
 @Mixin(MapAtlasesAccessUtils.class)
 public class MapAtlasAccessUtilsMixin {
+    //? if >1.20 {
     @Inject(method = "getAtlasFromInventory", at = @At(value = "RETURN"), remap = false, cancellable = true)
     private static void mixin(Inventory inventory, boolean onlyHotbar, CallbackInfoReturnable<ItemStack> cir) {
         if (ModConfig.get().compat_map_atlases) {
@@ -24,5 +25,12 @@ public class MapAtlasAccessUtilsMixin {
             }
         }
     }
-
+    //?} else {
+    /*@Inject(method = "getAtlasFromInventory", at = @At(value = "RETURN"), remap = false, cancellable = true)
+    private static void mixin(Inventory inventory, CallbackInfoReturnable<ItemStack> cir) {
+        if (cir.getReturnValue() == null) {
+            cir.setReturnValue(OverlayHelpers.checkInventoryForStack(inventory, MapAtlasesMod.MAP_ATLAS));
+        }
+    }
+    *///?}
 }

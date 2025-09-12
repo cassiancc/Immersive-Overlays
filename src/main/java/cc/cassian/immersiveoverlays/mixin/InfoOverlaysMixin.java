@@ -9,17 +9,17 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Pseudo
-@Mixin(InfoOverlays.InfoOverlay.class)
+@Mixin(InfoOverlays.class)
 public class InfoOverlaysMixin {
     @Inject(method = "prepareCompassOverlay", at = @At(value = "HEAD"), cancellable = true, remap = false)
-    private void disableCompass(CallbackInfo ci) {
+    private static void disableCompass(CallbackInfo ci) {
         if (ModConfig.get().compat_accessorify) {
             ci.cancel();
         }
     }
 
     @Inject(method = "prepareClockOverlay", at = @At(value = "HEAD"), cancellable = true, remap = false)
-    private void disableClock(CallbackInfo ci) {
+    private static void disableClock(CallbackInfo ci) {
         if (ModConfig.get().compat_accessorify) {
             ci.cancel();
         }

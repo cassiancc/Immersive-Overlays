@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "cc.cassian.immersiveoverlays.fabric.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "BetterPlayerLocatorBarHudMixin",
+    "PlayerLocatorPlusClientMixin",
+    "IMapCollectionImplMixin",
+    "MapAtlasAccessUtilsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}
