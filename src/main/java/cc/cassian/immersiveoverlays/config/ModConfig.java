@@ -70,7 +70,7 @@ public class ModConfig {
     public boolean biome_text_tinted = true;
     public int biome_vertical_position = 112;
     public boolean biome_horizontal_position_left = false;
-    public List<String> biome_items = List.of("minecraft:map", "minecraft:empty_map");
+    public List<String> biome_items = List.of("minecraft:map", "minecraft:empty_map", "map_atlases:atlas", "map_atlases:end_atlas", "map_atlases:nether_atlas");
     // seasons
     public List<String> season_items = List.of("sereneseasons:calendar", "seasonsextras:season_calendar");
     // temperature
