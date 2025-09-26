@@ -11,11 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Pseudo
-//? if >1.21.5 {
-/*@Mixin(LocatorBarRenderer.class)
- *///?} else {
 @Mixin(BetterPlayerLocatorBarHud.class)
-//?}
 public class BetterPlayerLocatorBarHudMixin {
     //? if >1.20 {
     @Inject(method = "render", at = @At(value = "HEAD"), cancellable = true)
