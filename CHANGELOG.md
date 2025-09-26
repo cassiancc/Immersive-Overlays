@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+- Missing config translation key.
+
+## [1.3.1] - 2025-09-26
+
 ### Added
 - Support for biomes from No Man's Land, Abundant Atmosphere, and New World.
 - Support for detecting temperature based off biome tags on Fabric.
