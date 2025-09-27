@@ -116,6 +116,12 @@ dependencies {
         implementation("com.teamabnormals:blueprint:1.21.1-8.0.5")
     }
 
+    compileOnly("maven.modrinth:terrafirmacraft:JCusAJHn")
+    if (stonecutter.eval(mcVersion, "=1.21.1")) {
+        runtimeOnly("maven.modrinth:terrafirmacraft:JCusAJHn")
+        runtimeOnly("maven.modrinth:patchouli:h6hKI2ob")
+    }
+
     implementation("maven.modrinth:sophisticated-core:${common.mod.dep("sophisticated_core")}")
     implementation("maven.modrinth:sophisticated-backpacks:${common.mod.dep("sophisticated_backpacks")}")
 

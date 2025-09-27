@@ -15,4 +15,8 @@ public class ModCompat {
     public static final boolean LEGENDARY_SURVIVAL_OVERHAUL = ModHelpers.isLoaded("legendarysurvivaloverhaul");
     public static final boolean SOPHISTICATED_BACKPACKS = ModHelpers.isLoaded("sophisticatedbackpacks");
     public static final boolean COLD_SWEAT = ModHelpers.isLoaded("cold_sweat");
+    public static final boolean SERENE_SEASONS = ModHelpers.isLoaded("sereneseasons");
+    public static final boolean SIMPLE_SEASONS = ModHelpers.isLoaded("simple-seasons");
+    public static final boolean SEASONS = ModHelpers.isLoaded("seasons");
+    public static final boolean TERRAFIRMACRAFT = ModHelpers.isLoaded("tfc");
 }

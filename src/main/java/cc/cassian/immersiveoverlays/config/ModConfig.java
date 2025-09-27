@@ -39,7 +39,8 @@ public class ModConfig {
     public boolean clock_current_time = true;
     public boolean clock_day_count = false;
     public boolean clock_24_hour = true;
-    public int clock_vertical_position = 90;
+    public boolean clock_seasons = true;
+    public int clock_vertical_position = 85;
     public boolean clock_horizontal_position_left = false;
     public List<String> clock_items = List.of("minecraft:clock");
     public List<String> clock_weather_items = List.of("caverns_and_chasms:barometer", "firmaciv:barometer");
@@ -62,7 +63,6 @@ public class ModConfig {
     public boolean compat_oreganized_temperature = true;
     public boolean compat_tough_as_nails_temperature = true;
     public boolean compat_cold_sweat_temperature = true;
-    public boolean compat_seasons = true;
     // biomes
     public boolean biome_enable = true;
     public boolean biome_icons = true;
@@ -92,6 +92,9 @@ public class ModConfig {
     public boolean compat_oreganized_speed = true;
     public List<String> speed_items = List.of("oreganized:speedometer", "speedometer:speedometer");
     public boolean compat_jade = false;
+    public boolean compat_serene_seasons = true;
+    public boolean compat_simple_seasons = true;
+    public boolean compat_tfc_seasons = true;
 
 
     public static void load() {

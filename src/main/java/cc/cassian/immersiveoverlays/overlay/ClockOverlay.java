@@ -1,12 +1,9 @@
 package cc.cassian.immersiveoverlays.overlay;
 
-import cc.cassian.immersiveoverlays.compat.FabricSeasonsCompat;
-import cc.cassian.immersiveoverlays.compat.SereneSeasonsCompat;
-import cc.cassian.immersiveoverlays.compat.SimpleSeasonsCompat;
+import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 //? if >1.21.5
 /*import net.minecraft.client.renderer.RenderPipelines;*/
-import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -188,23 +185,26 @@ public class ClockOverlay {
     }
 
     public static boolean shouldShowSeasons() {
-        if (ModConfig.get().compat_seasons && showSeason) {
-            return ModHelpers.isLoaded("sereneseasons") || ModHelpers.isLoaded("simple-seasons") || ModHelpers.isLoaded("seasons");
+        if (ModConfig.get().clock_seasons && showSeason) {
+            return ModCompat.SERENE_SEASONS || ModCompat.SIMPLE_SEASONS || ModCompat.SEASONS || ModCompat.TERRAFIRMACRAFT;
         }
         return false;
     }
 
     public static String getSeason(ClientLevel level) {
         String season = "";
-        if (ModConfig.get().compat_seasons && showSeason) {
-            if (ModHelpers.isLoaded("seasons")) {
+        if (ModConfig.get().clock_seasons && showSeason) {
+            if (ModCompat.SEASONS && ModConfig.get().compat_serene_seasons) {
                 season = FabricSeasonsCompat.getSeason(level);
             }
-            else if (ModHelpers.isLoaded("sereneseasons")) {
+            else if (ModCompat.SERENE_SEASONS && ModConfig.get().compat_serene_seasons) {
                 season = SereneSeasonsCompat.getSeason(level);
             }
-            else if (ModHelpers.isLoaded("simple-seasons")) {
+            else if (ModCompat.SIMPLE_SEASONS && ModConfig.get().compat_simple_seasons) {
                 season = SimpleSeasonsCompat.getSeason(level);
+            }
+            else if (ModCompat.TERRAFIRMACRAFT && ModConfig.get().compat_tfc_seasons) {
+                season = TerrafirmacraftCompat.getSeason(level);
             }
         }
         return WordUtils.capitalizeFully(season);
