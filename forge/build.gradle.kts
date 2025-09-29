@@ -109,6 +109,7 @@ dependencies {
     // Jade
     modImplementation("maven.modrinth:jade:${common.mod.dep("jade_version")}")
 
+    modCompileOnly("curse.maven:ecliptic-seasons-1118306:${common.mod.dep("ecliptic_seasons")}")
 
     commonBundle(project(common.path, "namedElements")) { isTransitive = false }
     shadowBundle(project(common.path, "transformProductionForge")) { isTransitive = false }

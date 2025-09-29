@@ -58,6 +58,8 @@
   "config.immersiveoverlays.config.compat_simple_seasons.tooltip": "Requires Simple Seasons",
   "config.immersiveoverlays.config.compat_tfc_seasons": "Use TFC for Seasons",
   "config.immersiveoverlays.config.compat_tfc_seasons.tooltip": "Requires TerraFirmaCraft",
+  "config.immersiveoverlays.config.compat_ecliptic_seasons": "Use Ecliptic Seasons for Seasons",
+  "config.immersiveoverlays.config.compat_ecliptic_seasons.tooltip": "Requires Ecliptic Seasons",
   "config.immersiveoverlays.config.compat_cold_sweat_temperature": "Use Cold Sweat for Temperature",
   "config.immersiveoverlays.config.compat_cold_sweat_temperature.tooltip": "Requires Cold Sweat",
   "config.immersiveoverlays.config.compat_tough_as_nails_temperature": "Use Tough as Nails for Temperature",

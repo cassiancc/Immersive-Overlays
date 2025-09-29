@@ -19,4 +19,5 @@ public class ModCompat {
     public static final boolean SIMPLE_SEASONS = ModHelpers.isLoaded("simple-seasons");
     public static final boolean SEASONS = ModHelpers.isLoaded("seasons");
     public static final boolean TERRAFIRMACRAFT = ModHelpers.isLoaded("tfc");
+    public static final boolean ECLIPTIC_SEASONS = ModHelpers.isLoaded("eclipticseasons");
 }

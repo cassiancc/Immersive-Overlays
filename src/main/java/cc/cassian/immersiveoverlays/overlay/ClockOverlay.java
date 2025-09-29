@@ -14,6 +14,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
  *///?}
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.biome.Biome;
 import org.apache.commons.lang3.text.WordUtils;
@@ -36,7 +37,7 @@ public class ClockOverlay {
         var mc = Minecraft.getInstance();
         if (OverlayHelpers.shouldCancelRender(mc))
             return;
-        if (mc.level == null) return;
+        if (mc.level == null || mc.player == null) return;
 
         String time = "Hi! ";
         if (showTime) {
@@ -77,10 +78,9 @@ public class ClockOverlay {
             iconXOffset = 20;
         }
 
-        var seasonText = ClockOverlay.getSeason(mc.level);
+        var seasonText = ClockOverlay.getSeason(mc.level, mc.player.blockPosition());
         int fontWidth = Integer.max(mc.font.width(time), mc.font.width(seasonText))+iconXOffset;
 
-        if (mc.player == null) return;
         if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().biome_horizontal_position_left)) {
             iconYPlacement += OverlayHelpers.moveBy(mc.player);
             textYPlacement += OverlayHelpers.moveBy(mc.player);
@@ -111,7 +111,7 @@ public class ClockOverlay {
         return switch (season) {
             case "spring" -> 112;
             case "summer" -> 128;
-            case "fall" -> 144;
+            case "fall", "autumn" -> 144;
             case "winter" -> 160;
             default -> 0;
         };
@@ -186,12 +186,12 @@ public class ClockOverlay {
 
     public static boolean shouldShowSeasons() {
         if (ModConfig.get().clock_seasons && showSeason) {
-            return ModCompat.SERENE_SEASONS || ModCompat.SIMPLE_SEASONS || ModCompat.SEASONS || ModCompat.TERRAFIRMACRAFT;
+            return ModCompat.SERENE_SEASONS || ModCompat.SIMPLE_SEASONS || ModCompat.SEASONS || ModCompat.TERRAFIRMACRAFT || ModCompat.ECLIPTIC_SEASONS;
         }
         return false;
     }
 
-    public static String getSeason(ClientLevel level) {
+    public static String getSeason(ClientLevel level, BlockPos pos) {
         String season = "";
         if (ModConfig.get().clock_seasons && showSeason) {
             if (ModCompat.SEASONS && ModConfig.get().compat_serene_seasons) {
@@ -205,6 +205,9 @@ public class ClockOverlay {
             }
             else if (ModCompat.TERRAFIRMACRAFT && ModConfig.get().compat_tfc_seasons) {
                 season = TerrafirmacraftCompat.getSeason(level);
+            }
+            else if (ModCompat.ECLIPTIC_SEASONS && ModConfig.get().compat_ecliptic_seasons) {
+                season = EclipticSeasonsCompat.getSeason(level, pos);
             }
         }
         return WordUtils.capitalizeFully(season);

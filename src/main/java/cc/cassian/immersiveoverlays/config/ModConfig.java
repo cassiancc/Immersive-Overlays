@@ -72,7 +72,7 @@ public class ModConfig {
     public boolean biome_horizontal_position_left = false;
     public List<String> biome_items = List.of("minecraft:map", "minecraft:empty_map", "map_atlases:atlas", "map_atlases:end_atlas", "map_atlases:nether_atlas");
     // seasons
-    public List<String> season_items = List.of("sereneseasons:calendar", "seasonsextras:season_calendar");
+    public List<String> season_items = List.of("sereneseasons:calendar", "seasonsextras:season_calendar", "eclipticseasons:calendar");
     // temperature
     public boolean temperature_enable = true;
     public boolean temperature_icons = true;
@@ -95,6 +95,7 @@ public class ModConfig {
     public boolean compat_serene_seasons = true;
     public boolean compat_simple_seasons = true;
     public boolean compat_tfc_seasons = true;
+    public boolean compat_ecliptic_seasons = true;
 
 
     public static void load() {
@@ -115,6 +116,7 @@ public class ModConfig {
         try (var input = Files.newInputStream(configPath())) {
             INSTANCE = GSON.fromJson(new InputStreamReader(input, StandardCharsets.UTF_8), ModConfig.class);
             if (INSTANCE.version != ModClient.CONFIG_VERSION) {
+                INSTANCE = new ModConfig();
                 save();
             }
         } catch (IOException e) {

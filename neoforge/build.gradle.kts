@@ -122,6 +122,11 @@ dependencies {
         runtimeOnly("maven.modrinth:patchouli:h6hKI2ob")
     }
 
+    compileOnly("curse.maven:ecliptic-seasons-1118306:7041469")
+    if (stonecutter.eval(mcVersion, "=1.21.1")) {
+        runtimeOnly("maven.modrinth:ecliptic-seasons-1118306:7041469")
+    }
+
     implementation("maven.modrinth:sophisticated-core:${common.mod.dep("sophisticated_core")}")
     implementation("maven.modrinth:sophisticated-backpacks:${common.mod.dep("sophisticated_backpacks")}")
 
