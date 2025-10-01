@@ -133,7 +133,7 @@ dependencies {
     // Accessories
     if (stonecutter.eval(mcVersion, ">1.19.2") && stonecutter.eval(mcVersion, "<1.21.5")) {
         modRuntimeOnly("maven.modrinth:fabric-seasons:${common.mod.dep("fabric_seasons")}")
-        modRuntimeOnly("io.wispforest:accessories-fabric:${common.mod.dep("accessories")}+$minecraft")
+        modRuntimeOnly("io.wispforest:accessories-fabric:${common.mod.dep("accessories")}")
     }
 
     // Traveler's Backpacks

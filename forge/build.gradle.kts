@@ -86,7 +86,7 @@ dependencies {
         modImplementation("maven.modrinth:moonlight:${common.mod.dep("moonlight")}-forge")
     } else {
         modImplementation("maven.modrinth:moonlight:forge_${common.mod.dep("moonlight")}")
-        modCompileOnly("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+$minecraft")
+        modCompileOnly("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}")
     }
 
     // Xaero's Minimap

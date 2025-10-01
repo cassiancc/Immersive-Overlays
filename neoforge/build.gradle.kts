@@ -96,10 +96,7 @@ dependencies {
 
 
     if (stonecutter.eval(mcVersion, ">1.19.2")) {
-        modCompileOnly("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+$minecraft")
-    }
-    else if (stonecutter.eval(mcVersion, ">1.21.8")) {
-        modCompileOnly("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}+1.21.5")
+        modCompileOnly("io.wispforest:accessories-neoforge:${common.mod.dep("accessories")}")
     }
     if (stonecutter.eval(mcVersion, ">1.21") && stonecutter.eval(mcVersion, "<1.21.5")) {
         modCompileOnly("maven.modrinth:accessorify:${common.mod.dep("accessorify")}+$minecraft")
@@ -124,7 +121,7 @@ dependencies {
 
     compileOnly("curse.maven:ecliptic-seasons-1118306:7041469")
     if (stonecutter.eval(mcVersion, "=1.21.1")) {
-        runtimeOnly("maven.modrinth:ecliptic-seasons-1118306:7041469")
+        runtimeOnly("curse.maven:ecliptic-seasons-1118306:7041469")
     }
 
     implementation("maven.modrinth:sophisticated-core:${common.mod.dep("sophisticated_core")}")

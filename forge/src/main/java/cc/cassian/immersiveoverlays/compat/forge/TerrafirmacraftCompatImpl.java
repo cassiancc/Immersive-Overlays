@@ -1,4 +1,4 @@
-package cc.cassian.immersiveoverlays.compat.neoforge;
+package cc.cassian.immersiveoverlays.compat.forge;
 
 import net.dries007.tfc.util.calendar.Calendars;
 import net.minecraft.client.multiplayer.ClientLevel;
