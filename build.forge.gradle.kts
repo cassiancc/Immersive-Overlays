@@ -111,10 +111,13 @@ dependencies {
     modImplementation("maven.modrinth:xaeros-minimap:${mod.dep("xaeros")}_Forge_${mod.dep("xaeros_mc")}")
     modImplementation("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}_Forge_${mod.dep("xaeros_mc")}")
 
+    compileOnly("maven.modrinth:terrafirmacraft:tzI7ngJN")
     if (stonecutter.eval(mcVersion, "=1.20.1")) {
         modImplementation("maven.modrinth:oreganized:${mod.dep("oreganized")}-forge")
         modImplementation("maven.modrinth:blueprint:${mod.dep("blueprint")}")
         modImplementation("curse.maven:legendary-survival-overhaul-840254:6834435")
+        runtimeOnly("maven.modrinth:terrafirmacraft:${mod.dep("tfc")}")
+        runtimeOnly("maven.modrinth:patchouli:8Qyw08ld")
     }
     modCompileOnly("top.theillusivec4.curios:curios-forge:${mod.dep("curios")}:api")
     modCompileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-forge")
