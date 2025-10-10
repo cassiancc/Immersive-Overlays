@@ -29,6 +29,7 @@ public class ModConfig {
     public boolean compass_enable = true;
     public int compass_vertical_position = 140;
     public boolean compass_horizontal_position_left = false;
+    public int compass_text_colour = 14737632;
     public String compass_x_colour = "Red";
     public String compass_y_colour = "Green";
     public String compass_z_colour = "Blue";
@@ -42,6 +43,7 @@ public class ModConfig {
     public boolean clock_day_count = false;
     public boolean clock_24_hour = true;
     public boolean clock_seasons = true;
+    public int clock_text_colour = 14737632;
     public int clock_vertical_position = 85;
     public boolean clock_horizontal_position_left = false;
     public List<String> clock_items = List.of("minecraft:clock");
@@ -70,6 +72,7 @@ public class ModConfig {
     public boolean biome_icons = true;
     public boolean biome_reduced_info = false;
     public boolean biome_text_tinted = true;
+    public int biome_text_colour = 14737632;
     public int biome_vertical_position = 112;
     public boolean biome_horizontal_position_left = false;
     public List<String> biome_items = List.of("minecraft:map", "minecraft:empty_map", "map_atlases:atlas", "map_atlases:end_atlas", "map_atlases:nether_atlas");

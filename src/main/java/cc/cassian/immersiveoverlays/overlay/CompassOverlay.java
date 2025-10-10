@@ -108,7 +108,7 @@ public class CompassOverlay {
         }
         // render text
         for (String text : coords) {
-            OverlayHelpers.drawString(guiGraphics, mc.font, text, xPlacement-xOffset, yPlacement, 14737632);
+            OverlayHelpers.drawString(guiGraphics, mc.font, text, xPlacement-xOffset, yPlacement, ModConfig.get().compass_text_colour);
             yPlacement += mc.font.lineHeight;
         }
     }

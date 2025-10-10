@@ -99,7 +99,7 @@ public class ClockOverlay {
             int seasonTextYPlacement = textYPlacement;
             if (showTime)
                 seasonTextYPlacement+=15;
-            OverlayHelpers.drawString(guiGraphics, mc.font, seasonText, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, 14737632);
+            OverlayHelpers.drawString(guiGraphics, mc.font, seasonText, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, ModConfig.get().clock_text_colour);
             var spriteOffset = getSprite(seasonText.toLowerCase(Locale.ROOT));
             OverlayHelpers.blit(guiGraphics, xPlacement-xOffset-1, seasonTextYPlacement-3, spriteOffset, 207, 16, 14, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
         }
