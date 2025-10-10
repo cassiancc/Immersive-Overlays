@@ -157,6 +157,12 @@ dependencies {
     modCompileOnly("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
 }
 
+configurations.all {
+    resolutionStrategy {
+        force("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
+    }
+}
+
 fabricApi {
     configureDataGeneration() {
         outputDirectory = file("$rootDir/src/main/generated")

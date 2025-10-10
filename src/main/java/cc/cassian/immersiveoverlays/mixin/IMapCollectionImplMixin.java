@@ -1,22 +1,28 @@
 package cc.cassian.immersiveoverlays.mixin;
 
+import cc.cassian.immersiveoverlays.config.ModConfig;
+import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import pepjebs.mapatlases.MapAtlasesMod;
 //? if neoforge {
-
 /*import pepjebs.mapatlases.item.MapAtlasItem;
 import pepjebs.mapatlases.map_collection.MapCollection;
 *///?} else if forge {
-
 /*import pepjebs.mapatlases.map_collection.IMapCollection;
 import pepjebs.mapatlases.map_collection.forge.CapStuff;
 import pepjebs.mapatlases.map_collection.forge.IMapCollectionImpl;
 *///?} else if fabric && =1.20.1 {
-/*import pepjebs.mapatlases.map_collection.fabric.IMapCollectionImpl;*/
-//?}
-
-
+/*import pepjebs.mapatlases.map_collection.fabric.IMapCollectionImpl;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+*///?}
+import java.util.List;
+import java.util.Optional;
 @Pseudo
 //? if (fabric && =1.20.1) || forge {
 /*@Mixin(IMapCollectionImpl.class)
@@ -30,7 +36,7 @@ public class IMapCollectionImplMixin {
     /*@Inject(method = "getMaps", at = @At(value = "HEAD"), remap = false, cancellable = true)
     private static void mixin(ItemStack stack, Level level, CallbackInfoReturnable<MapCollection> cir) {
         if (ModConfig.get().compat_map_atlases) {
-            if (stack.is(ModTags.CONTAINERS)) {
+            if (OverlayHelpers.isContainer(stack)) {
                 List<ItemStack> contents = OverlayHelpers.getContainerContents(stack).toList();
                 for (ItemStack content : contents) {
                     if (content.is(MapAtlasesMod.MAP_ATLAS.get())) {
@@ -71,7 +77,7 @@ public class IMapCollectionImplMixin {
             method = "get",
             at = @At(value = "INVOKE", target = "Ldev/onyxstudios/cca/api/v3/component/ComponentKey;maybeGet(Ljava/lang/Object;)Ljava/util/Optional;")
     )
-    private static Object mixin(@Nullable Object provider) {
+    private static Object mixin(Object provider) {
         if (ModConfig.get().compat_map_atlases) {
             if (provider instanceof ItemStack stack) {
                 if (OverlayHelpers.isContainer(stack)) {

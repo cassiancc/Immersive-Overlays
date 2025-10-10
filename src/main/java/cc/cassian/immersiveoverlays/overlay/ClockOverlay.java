@@ -8,10 +8,8 @@ import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
 //?} else {
-/*import net.minecraft.client.gui.GuiComponent;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.systems.RenderSystem;
- *///?}
+/*import com.mojang.blaze3d.vertex.PoseStack;
+*///?}
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
@@ -186,7 +184,7 @@ public class ClockOverlay {
 
     public static boolean shouldShowSeasons() {
         if (ModConfig.get().clock_seasons && showSeason) {
-            return ModCompat.SERENE_SEASONS || ModCompat.SIMPLE_SEASONS || ModCompat.SEASONS || ModCompat.TERRAFIRMACRAFT || ModCompat.ECLIPTIC_SEASONS;
+            return ModCompat.SERENE_SEASONS || ModCompat.SIMPLE_SEASONS || ModCompat.FABRIC_SEASONS || ModCompat.TERRAFIRMACRAFT || ModCompat.ECLIPTIC_SEASONS;
         }
         return false;
     }
@@ -194,21 +192,27 @@ public class ClockOverlay {
     public static String getSeason(ClientLevel level, BlockPos pos) {
         String season = "";
         if (ModConfig.get().clock_seasons && showSeason) {
-            if (ModCompat.SEASONS && ModConfig.get().compat_serene_seasons) {
-                season = FabricSeasonsCompat.getSeason(level);
+            if (ModCompat.FABRIC_SEASONS && ModConfig.get().compat_fabric_seasons) {
+                var fabricCompat = FabricSeasonsCompat.getSeason(level);
+                if (fabricCompat != null) season = fabricCompat;
             }
             else if (ModCompat.SERENE_SEASONS && ModConfig.get().compat_serene_seasons) {
                 season = SereneSeasonsCompat.getSeason(level);
             }
             else if (ModCompat.SIMPLE_SEASONS && ModConfig.get().compat_simple_seasons) {
-                season = SimpleSeasonsCompat.getSeason(level);
+                var simpleCompat = SimpleSeasonsCompat.getSeason(level);
+                if (simpleCompat != null) season = simpleCompat;
             }
             else if (ModCompat.TERRAFIRMACRAFT && ModConfig.get().compat_tfc_seasons) {
-                season = TerrafirmacraftCompat.getSeason(level);
+                var tfcCompat = TerrafirmacraftCompat.getSeason(level);
+                if (tfcCompat != null) season = tfcCompat;
             }
-            else if (ModCompat.ECLIPTIC_SEASONS && ModConfig.get().compat_ecliptic_seasons) {
-                season = EclipticSeasonsCompat.getSeason(level, pos);
+            //? if forge && >1.20 {
+            /*else if (ModCompat.ECLIPTIC_SEASONS && ModConfig.get().compat_ecliptic_seasons) {
+                var eclipticCompat = EclipticSeasonsCompat.getSeason(level, pos);
+                if (eclipticCompat != null) season = eclipticCompat;
             }
+            *///?}
         }
         return WordUtils.capitalizeFully(season);
     }

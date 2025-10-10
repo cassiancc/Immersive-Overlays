@@ -17,7 +17,7 @@ public class ModCompat {
     public static final boolean COLD_SWEAT = Platform.INSTANCE.isLoaded("cold_sweat");
     public static final boolean SERENE_SEASONS = Platform.INSTANCE.isLoaded("sereneseasons");
     public static final boolean SIMPLE_SEASONS = Platform.INSTANCE.isLoaded("simple-seasons");
-    public static final boolean SEASONS = Platform.INSTANCE.isLoaded("seasons");
+    public static final boolean FABRIC_SEASONS = Platform.INSTANCE.isLoaded("seasons");
     public static final boolean TERRAFIRMACRAFT = Platform.INSTANCE.isLoaded("tfc");
     public static final boolean ECLIPTIC_SEASONS = Platform.INSTANCE.isLoaded("eclipticseasons");
 }

@@ -37,19 +37,20 @@ public class SophisticatedBackpacksCompat {
     *///?}
     //? if >1.21 && fabric {
     Optional<IBackpackWrapper> backpackWrapper = BackpackWrapper.fromExistingData(stack);
-        if (backpackWrapper.isPresent()) {
+    if (backpackWrapper.isPresent()) {
         InventoryHandler inventory = backpackWrapper.get().getInventoryHandler();
         for (SingleSlotStorage<ItemVariant> slot : inventory.getSlots()) {
             OverlayHelpers.isImportantItemOrContainer(slot.getResource().toStack());
         }
     }
     //?} else if fabric {
-        /*if (stack.getItem() instanceof BackpackItem) {
-            IBackpackWrapper backpackWrapper = new BackpackWrapper(stack);
-            InventoryHandler inventory = backpackWrapper.getInventoryHandler();
-            for (int i =0; i < inventory.getBaseSlotLimit(); i++) {
-                OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
-            }
+    /*if (stack.getItem() instanceof BackpackItem) {
+        IBackpackWrapper backpackWrapper = new BackpackWrapper(stack);
+        InventoryHandler inventory = backpackWrapper.getInventoryHandler();
+        for (int i =0; i < inventory.getBaseSlotLimit(); i++) {
+            OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
+        }
+    }
     *///?} else if forge {
         /*if (stack.getItem() instanceof BackpackItem) {
             IBackpackWrapper backpackWrapper = new BackpackWrapper(stack);

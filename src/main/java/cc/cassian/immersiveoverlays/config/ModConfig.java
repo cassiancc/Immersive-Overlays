@@ -94,6 +94,7 @@ public class ModConfig {
     public boolean compat_oreganized_speed = true;
     public List<String> speed_items = List.of("oreganized:speedometer", "speedometer:speedometer");
     public boolean compat_jade = false;
+    public boolean compat_fabric_seasons = true;
     public boolean compat_serene_seasons = true;
     public boolean compat_simple_seasons = true;
     public boolean compat_tfc_seasons = true;

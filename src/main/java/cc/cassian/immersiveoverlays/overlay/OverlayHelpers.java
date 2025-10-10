@@ -17,6 +17,12 @@ import com.mojang.blaze3d.vertex.PoseStack;
 /*import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.util.ARGB;
 *///?}
+//? if <1.21 {
+/*import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+*///?}
+//? if 1.21.5
+/*import net.minecraft.client.renderer.RenderType;*/
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 //? if >1.21.4

@@ -1,7 +1,7 @@
 package cc.cassian.immersiveoverlays.compat;
 
 import net.minecraft.client.player.LocalPlayer;
-//? if forge || neoforge {
+//? if forge && >1.20 || neoforge {
 /*import galena.oreganized.client.tooltips.ClientThermometerTooltip;
 import galena.oreganized.content.item.ThermometerItem;
 import galena.oreganized.world.IMotionHolder;
@@ -10,7 +10,7 @@ import galena.oreganized.world.IMotionHolder;
 public class OreganizedCompat {
 
     public static int getAmbientTemperatureFromThermometer(LocalPlayer player) {
-        //? if forge || neoforge {
+        //? if forge && >1.20 || neoforge {
         /*return ThermometerItem.ambientMeasurement(player);
         *///?} else {
         return 0;
@@ -18,7 +18,7 @@ public class OreganizedCompat {
     }
 
     public static int getTemperatureColourFromThermometer(int temperature) {
-        //? if forge || neoforge {
+        //? if forge && >1.20 || neoforge {
         /*return ClientThermometerTooltip.getColor(temperature);
         *///?} else {
         return 0;
@@ -27,7 +27,7 @@ public class OreganizedCompat {
     }
 
     public static double getSpeed(LocalPlayer player) {
-        //? if forge || neoforge {
+        //? if forge && >1.20 || neoforge {
         /*if (player.getRootVehicle() instanceof IMotionHolder motionHolder) {
             return motionHolder.oreganised$getMotion();
         }

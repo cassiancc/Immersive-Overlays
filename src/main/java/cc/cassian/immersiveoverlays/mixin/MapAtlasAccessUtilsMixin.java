@@ -16,7 +16,7 @@ import pepjebs.mapatlases.utils.MapAtlasesAccessUtils;
 @Pseudo
 @Mixin(MapAtlasesAccessUtils.class)
 public class MapAtlasAccessUtilsMixin {
-    //? if >1.20 {
+    //? if >1.20 || forge {
     @Inject(method = "getAtlasFromInventory", at = @At(value = "RETURN"), remap = false, cancellable = true)
     private static void mixin(Inventory inventory, boolean onlyHotbar, CallbackInfoReturnable<ItemStack> cir) {
         if (ModConfig.get().compat_map_atlases) {
