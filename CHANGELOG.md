@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [1.3.2] - 2025-10-01
 
 ### Added
 - Support for seasons from Ecliptic Seasons and TerraFirmaCraft.
@@ -28,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Issues with locator bar support on NeoForge 1.21.8.
 
 
-## [1.3.0]
+## [1.3.0] - 2025-09-08
 
 ### Added
 - Biome overlays, displayed when a map is in the inventory, that show the current biome. Additional biomes can be added via resource packs, with support for all of Minecraft's biomes included.
@@ -66,19 +66,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Weather overlays no longer move randomly.
 - Backpacks function again (1.21.5).
 
-## [1.2.0] - 04-30-2025
+## [1.2.0] - 2025-04-30
 
 ### Added
 - Support for overlay items in backpacks and other armour slots.
 - Support for overlay items in accessory slots from Accessories.
 - When Accessorify is present, Immersive Overlays will replace Accessorify overlays with Immersive Overlays. This can be disabled in the config.
 
-## [1.1.1] - 04-24-2025
+## [1.1.1] - 2025-04-24
 
 ### Fixed
 - Rendering issued with Raised on NeoForge.
 
-## [1.1] - 04-25-2025
+## [1.1] - 2025-04-25
 
 ### Added
 - Players with [Player Locator Plus](https://modrinth.com/mod/player-locator-plus) or [Better Player Locator Bar](https://modrinth.com/mod/bplb) installed now require a compass item in the inventory to display the bar. This can be disabled in the config.
@@ -93,7 +93,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Clipping issues with weather-only and coordinate overlays.
 - Map Atlases being installed no longer causes coordinate overlays to not display.
 
-## [1.0.1] - 04-20-2025
+## [1.0.1] - 2025-04-20
 
 ### Added
 - Config option to disable effects moving overlays.
@@ -103,6 +103,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dyed sacks now show overlays correctly.
 - Registry code loading too early on Forge.
 
-## [1.0.0] - 04-17-2025
+## [1.0.0] - 2025-04-17
 
 Initial release.

@@ -2,7 +2,6 @@ package cc.cassian.immersiveoverlays.overlay;
 
 
 import cc.cassian.immersiveoverlays.compat.ModCompat;
-import cc.cassian.immersiveoverlays.compat.MapAtlasesCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 import net.minecraft.client.Minecraft;
@@ -12,7 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 //?} else {
 /*import com.mojang.blaze3d.vertex.PoseStack;
-*///?}
+ *///?}
 import net.minecraft.core.BlockPos;
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,9 +26,9 @@ public class CompassOverlay {
 
     //? if >1.20 {
     public static void renderGameOverlayEvent(GuiGraphics guiGraphics) {
-    //?} else {
+        //?} else {
         /*public static void renderGameOverlayEvent(PoseStack guiGraphics) {
-     *///?}
+         *///?}
         boolean showBiomeIcon = ModConfig.get().biome_enable && BiomeOverlay.showBiome && ModConfig.get().biome_reduced_info && ModConfig.get().biome_icons;
         if (!showX && !showY && !showZ)
             return;
@@ -81,10 +80,10 @@ public class CompassOverlay {
             }
             if (!BiomeOverlay.showBiome || !ModConfig.get().biome_enable || ModConfig.get().biome_reduced_info || (ModConfig.get().biome_horizontal_position_left != ModConfig.get().compass_horizontal_position_left)) {
                 yPlacement = yPlacement - 20;
-            }        
+            }
             if (!ClockOverlay.shouldShowSeasons()) {
                 yPlacement = yPlacement - 15;
-            } 
+            }
         }
         if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().compass_horizontal_position_left)) {
             yPlacement += OverlayHelpers.moveBy(mc.player);

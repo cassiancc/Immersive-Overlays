@@ -2,7 +2,7 @@ package cc.cassian.immersiveoverlays.compat;
 
 import net.minecraft.client.player.LocalPlayer;
 //? if >1.20 {
-    import toughasnails.api.temperature.TemperatureHelper;
+import toughasnails.api.temperature.TemperatureHelper;
 import toughasnails.api.temperature.TemperatureLevel;
 //?}
 

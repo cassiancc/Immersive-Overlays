@@ -1,7 +1,20 @@
 package cc.cassian.immersiveoverlays.helpers;
 
+import cc.cassian.immersiveoverlays.Platform;
+import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.TemperatureOverlay;
-import dev.architectury.injectables.annotations.ExpectPlatform;
+//? if fabric {
+import net.fabricmc.fabric.api.tag.client.v1.ClientTags;
+//? if >1.21 {
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
+//?} else {
+/*import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
+ *///?}
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.biome.Biome;
+//?}
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Holder;
@@ -79,25 +92,32 @@ public class ModHelpers {
 
         }
     }
-
-    /**
-     * Check if a mod is loaded
-     */
-    @ExpectPlatform
-    public static boolean isLoaded(String mod) {
-        throw new AssertionError();
-    }
-
     /**
      * Check if Cloth Config is installed and its configuration can be used.
      */
-    @ExpectPlatform
     public static boolean clothConfigInstalled() {
-        throw new AssertionError();
+        return Platform.INSTANCE.isLoaded("cloth-config") || Platform.INSTANCE.isLoaded("cloth_config");
     }
 
-    @ExpectPlatform
-    public static TemperatureOverlay.TemperaturePair getBiomeTemperatureFromTag(Holder<Biome> biome) {
-        throw new AssertionError();
+    public static TemperatureOverlay.TemperaturePair getBiomeTemperatureFromTag(Holder<Biome> biomeHolder) {
+        //? if fabric {
+        if (ClientTags.isInWithLocalFallback(
+                //? if >1.21
+                ConventionalBiomeTags.IS_HOT
+                //? if <1.21
+                /*ConventionalBiomeTags.CLIMATE_HOT*/
+                ,biomeHolder)) {
+            return new TemperatureOverlay.TemperaturePair(Component.translatable("gui.c.temperature.hot"), ModConfig.get().temperature_hot_colour, "heat_4");
+        } else if (ClientTags.isInWithLocalFallback(
+                //? if >1.21
+                ConventionalBiomeTags.IS_COLD
+                //? if <1.21
+                /*ConventionalBiomeTags.CLIMATE_COLD*/
+                , biomeHolder)) {
+            return new TemperatureOverlay.TemperaturePair(Component.translatable("gui.c.temperature.cold"), ModConfig.get().temperature_cold_colour, "heat_0");
+        } else return new TemperatureOverlay.TemperaturePair(Component.translatable("gui.c.temperature.temperate"), ModConfig.get().temperature_temperate_colour, "heat_1");
+        //?} else {
+        /*return null;
+        *///?}
     }
 }

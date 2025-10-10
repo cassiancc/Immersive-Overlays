@@ -2,7 +2,7 @@ package cc.cassian.immersiveoverlays.compat;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 //? if >1.20 {
-  import sereneseasons.api.season.SeasonHelper;
+import sereneseasons.api.season.SeasonHelper;
 //?}
 
 public class SereneSeasonsCompat {

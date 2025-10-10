@@ -1,23 +1,37 @@
 package cc.cassian.immersiveoverlays.compat;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.network.chat.Component;
+//? if forge || neoforge {
+/*import galena.oreganized.client.tooltips.ClientThermometerTooltip;
+import galena.oreganized.content.item.ThermometerItem;
+import galena.oreganized.world.IMotionHolder;
+*///?}
 
 public class OreganizedCompat {
 
-    @ExpectPlatform
     public static int getAmbientTemperatureFromThermometer(LocalPlayer player) {
-        throw new AssertionError();
+        //? if forge || neoforge {
+        /*return ThermometerItem.ambientMeasurement(player);
+        *///?} else {
+        return 0;
+        //?}
     }
 
-    @ExpectPlatform
     public static int getTemperatureColourFromThermometer(int temperature) {
-        throw new AssertionError();
+        //? if forge || neoforge {
+        /*return ClientThermometerTooltip.getColor(temperature);
+        *///?} else {
+        return 0;
+        //?}
+
     }
 
-    @ExpectPlatform
     public static double getSpeed(LocalPlayer player) {
+        //? if forge || neoforge {
+        /*if (player.getRootVehicle() instanceof IMotionHolder motionHolder) {
+            return motionHolder.oreganised$getMotion();
+        }
+        *///?}
         return 0;
     }
 }

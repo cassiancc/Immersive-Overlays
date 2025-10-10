@@ -1,10 +1,10 @@
 package cc.cassian.immersiveoverlays.compat;
 
 import cc.cassian.immersiveoverlays.overlay.TemperatureOverlay;
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
-
+//? if neoforge || forge
+/*import com.momosoftworks.coldsweat.client.gui.Overlays;*/
 
 public class ColdSweatCompat {
 
@@ -43,8 +43,11 @@ public class ColdSweatCompat {
         return new TemperatureOverlay.TemperaturePair(Component.literal(String.valueOf(temperature)), colour, sprite);
     }
 
-    @ExpectPlatform
     public static double getAmbientTemperature(LocalPlayer player) {
-        throw new AssertionError();
+        //? if forge || neoforge {
+        /*return Overlays.WORLD_TEMP;
+        *///?} else {
+        return 0;
+        //?}
     }
 }

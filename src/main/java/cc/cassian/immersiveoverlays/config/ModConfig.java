@@ -1,11 +1,11 @@
 package cc.cassian.immersiveoverlays.config;
 
 import cc.cassian.immersiveoverlays.ModClient;
+import cc.cassian.immersiveoverlays.Platform;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dev.architectury.injectables.annotations.ExpectPlatform;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,6 +15,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+
+import static cc.cassian.immersiveoverlays.ModClient.MOD_ID;
 
 public class ModConfig {
 
@@ -138,8 +140,8 @@ public class ModConfig {
         return INSTANCE;
     }
 
-    @ExpectPlatform
+
     static Path configPath() {
-        throw new AssertionError();
+        return Platform.INSTANCE.configPath().resolve(MOD_ID + ".json");
     }
 }

@@ -3,13 +3,11 @@ package cc.cassian.immersiveoverlays.overlay;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
-import cc.cassian.immersiveoverlays.helpers.ModTags;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
 //?} else {
 /*import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiComponent;
@@ -19,11 +17,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 /*import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.util.ARGB;
 *///?}
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
+//? if >1.21.4
+/*import net.minecraft.world.entity.EquipmentSlot;*/
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -250,7 +247,6 @@ public class OverlayHelpers {
     public static boolean isContainer(ItemStack stack) {
         if (!ModConfig.get().search_containers) return false;
         if (stack.isEmpty()) return false;
-        if (stack.is(ModTags.CONTAINERS)) return true;
         //? if >1.20.5 {
         var components = stack.getComponents();
         if (components.has(DataComponents.BUNDLE_CONTENTS)) {

@@ -1,11 +1,16 @@
 package cc.cassian.immersiveoverlays.compat;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
+//? if neoforge
+/*import net.dries007.tfc.util.calendar.Calendars;*/
 import net.minecraft.client.multiplayer.ClientLevel;
 
 public class TerrafirmacraftCompat {
-    @ExpectPlatform
+
     public static String getSeason(ClientLevel level) {
+        //? if neoforge {
+        /*return Calendars.get(true).getAbsoluteCalendarMonthOfYear().getSeason().getSerializedName();
+        *///?} else {
         return null;
+        //?}
     }
 }
