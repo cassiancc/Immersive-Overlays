@@ -153,6 +153,12 @@ dependencies {
         modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.3")
     }
 
+    if (stonecutter.eval(mcVersion, "<1.21.4")) {
+        modCompileOnly("dev.emi:trinkets:${mod.dep("trinkets")}")
+    } else {
+        modCompileOnly("maven.modrinth:trinkets-canary:${mod.dep("trinkets")}")
+    }
+
     modCompileOnly("maven.modrinth:bplb:v1.0.0")
     modCompileOnly("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
 }

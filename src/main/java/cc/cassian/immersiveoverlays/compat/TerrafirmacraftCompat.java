@@ -1,6 +1,6 @@
 package cc.cassian.immersiveoverlays.compat;
 
-//? if neoforge || (forge && 1.20)
+//? if neoforge || (forge && >1.20)
 /*import net.dries007.tfc.util.calendar.Calendars;*/
 import net.minecraft.client.multiplayer.ClientLevel;
 

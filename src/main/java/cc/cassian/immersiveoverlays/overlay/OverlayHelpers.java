@@ -186,6 +186,8 @@ public class OverlayHelpers {
                 //?}
                 if (ModCompat.CURIOS)
                     CuriosCompat.checkForImportantAccessories(player);
+                if (ModCompat.TRINKETS)
+                    TrinketsCompat.checkForImportantAccessories(player);
                 if (ModCompat.TRAVELERS_BACKPACK)
                     TravelersBackpackCompat.checkForImportantAccessories(player);
                 checkInventoryForStack(player.getInventory());
