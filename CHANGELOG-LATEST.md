@@ -11,3 +11,5 @@
 
 ### Fixed
 - Temperature overlay now shows correct information when Cold Sweat is configured to Celsius.
+- Reduced Biome Info overlapping with coordinates.
+- Time and Season overlay overlapping.

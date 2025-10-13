@@ -105,6 +105,7 @@ public class CompassOverlay {
         if (showBiomeIcon) {
             var sprite = getBiomeSprite(getId(getBiome(mc.player)), true);
             OverlayHelpers.blit(guiGraphics, sprite, xPlacement-xOffset-1, yPlacement+iconYOffset, 0, 0, 16, 16, 16, 16);
+            xOffset -= 16;
         }
         // render text
         for (String text : coords) {

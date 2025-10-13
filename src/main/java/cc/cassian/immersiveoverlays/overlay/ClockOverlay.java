@@ -54,8 +54,9 @@ public class ClockOverlay {
         // The amount of offset needed to display the barometer icons, if visible.
         int iconXOffset = 0;
         int tooltipSize = 16;
-        int iconYPlacement = ModConfig.get().clock_vertical_position;
-        int textYPlacement = iconYPlacement;
+        int yPlacement = ModConfig.get().clock_vertical_position;
+        int iconYPlacement = yPlacement;
+        int textYPlacement = yPlacement;
         if (showWeather) {
             if (showTime) {
                 iconXOffset = 20;
@@ -66,9 +67,7 @@ public class ClockOverlay {
         if (shouldShowSeasons()) {
             if (showTime) {
                 textYPlacement = iconYPlacement+5;
-                iconYPlacement += 6;
                 tooltipSize = 36;
-                textYPlacement += 4;
             } else {
                 tooltipSize = 21;
                 textYPlacement += 2;
@@ -86,10 +85,10 @@ public class ClockOverlay {
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().clock_horizontal_position_left);
-        OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, iconYPlacement, tooltipSize, ModConfig.get().clock_horizontal_position_left);
+        OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().clock_horizontal_position_left);
         if (showTime) {
             // render text
-            OverlayHelpers.drawString(guiGraphics, mc.font, time, xPlacement-xOffset+iconXOffset, textYPlacement, 14737632);
+            OverlayHelpers.drawString(guiGraphics, mc.font, time, xPlacement-xOffset+iconXOffset, textYPlacement, ModConfig.get().clock_text_colour);
         }
         if (showWeather) {
             var spriteOffset = getWeather(mc.player);
@@ -101,7 +100,7 @@ public class ClockOverlay {
                 seasonTextYPlacement+=15;
             OverlayHelpers.drawString(guiGraphics, mc.font, seasonText, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, ModConfig.get().clock_text_colour);
             var spriteOffset = getSprite(seasonText.toLowerCase(Locale.ROOT));
-            OverlayHelpers.blit(guiGraphics, xPlacement-xOffset-1, seasonTextYPlacement-3, spriteOffset, 207, 16, 14, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+            OverlayHelpers.blit(guiGraphics, xPlacement-xOffset-1, seasonTextYPlacement-4, spriteOffset, 207, 16, 14, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
         }
     }
 
