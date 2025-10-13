@@ -145,7 +145,19 @@ dependencies {
     modCompileOnly("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}_Fabric_${mod.dep("xaeros_mc")}")
 
 
-    if (stonecutter.eval(mcVersion, ">1.21")) {
+    if (hasProperty("deps.thermoo")) {
+        modCompileOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
+        modLocalRuntime("maven.modrinth:thermoo:${property("deps.thermoo")}")
+    } else {
+        modCompileOnly("maven.modrinth:thermoo:8.0.1")
+    }
+
+
+    if (hasProperty("deps.cardinal_components")) {
+        modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-entity:${mod.dep("cardinal_components")}")
+        modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-base:${mod.dep("cardinal_components")}")
+    }
+    else if (stonecutter.eval(mcVersion, ">1.21")) {
         modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.2")
         modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-base:6.1.2")
     } else {

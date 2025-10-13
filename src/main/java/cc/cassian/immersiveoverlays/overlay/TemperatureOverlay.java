@@ -96,6 +96,13 @@ public class TemperatureOverlay {
             return new TemperaturePair(Component.literal(WordUtils.capitalizeFully(temperature)), -1, sprite);
         }
         *///?}
+        //? if fabric {
+        if (ModCompat.THERMOO && ModConfig.get().compat_thermoo_temperature) {
+            TemperaturePair temperaturePair = ThermooCompat.getTemperaturePair(player);
+            if (temperaturePair != null)
+                return temperaturePair;
+        }
+        //?}
         var level = player.level
         //? if >1.20 {
         ()

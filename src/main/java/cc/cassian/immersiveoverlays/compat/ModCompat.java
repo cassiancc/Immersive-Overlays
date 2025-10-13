@@ -21,4 +21,5 @@ public class ModCompat {
     public static final boolean TERRAFIRMACRAFT = Platform.INSTANCE.isLoaded("tfc");
     public static final boolean ECLIPTIC_SEASONS = Platform.INSTANCE.isLoaded("eclipticseasons");
     public static final boolean TRINKETS = Platform.INSTANCE.isLoaded("trinkets");
+    public static final boolean THERMOO = Platform.INSTANCE.isLoaded("thermoo");
 }

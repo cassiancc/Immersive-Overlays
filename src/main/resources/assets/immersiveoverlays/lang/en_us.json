@@ -67,6 +67,8 @@
   "config.immersiveoverlays.config.compat_cold_sweat_temperature.tooltip": "Requires Cold Sweat",
   "config.immersiveoverlays.config.compat_tough_as_nails_temperature": "Use Tough as Nails for Temperature",
   "config.immersiveoverlays.config.compat_tough_as_nails_temperature.tooltip": "Requires Tough as Nails",
+  "config.immersiveoverlays.config.compat_thermoo_temperature": "Use Thermoo for Temperature",
+  "config.immersiveoverlays.config.compat_thermoo_temperature.tooltip": "Requires Thermoo",
   "config.immersiveoverlays.config.compat_xaeros": "Allow minimap items in containers",
   "config.immersiveoverlays.config.compat_xaeros.tooltip": "Requires Xaero's Minimap/World Map",
   "config.immersiveoverlays.config.compat_jade": "Require an item for Jade",
@@ -104,6 +106,7 @@
   "gui.c.day": "Day %s",
   "gui.c.temperature.hot": "Hot",
   "gui.c.temperature.cold": "Cold",
+  "gui.c.temperature.warm": "Warm",
   "gui.c.temperature.temperate": "Temperate"
 
 }
