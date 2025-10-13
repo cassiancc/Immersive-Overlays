@@ -3,6 +3,7 @@ package cc.cassian.immersiveoverlays.neoforge;
 //? if neoforge {
 
 /*import cc.cassian.immersiveoverlays.ModClient;
+import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.config.ModConfigFactory;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
@@ -22,7 +23,6 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 
 import static cc.cassian.immersiveoverlays.ModClient.MOD_ID;
-import static cc.cassian.immersiveoverlays.helpers.ModHelpers.clothConfigInstalled;
 
 @Mod(value = MOD_ID, dist = Dist.CLIENT)
 public class ImmersiveOverlaysNeoForgeClient {
@@ -59,7 +59,7 @@ public class ImmersiveOverlaysNeoForgeClient {
 
     //Integrate Cloth Config screen (if mod present) with NeoForge mod menu.
     public static void registerModsPage() {
-        if (clothConfigInstalled()) ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, ModConfigFactory::new);
+        if (ModCompat.CLOTH_CONFIG) ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, ModConfigFactory::new);
     }
 }
 

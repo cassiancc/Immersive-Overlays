@@ -141,7 +141,8 @@ dependencies {
     if (stonecutter.eval(mcVersion, ">1.20")) {
         modCompileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+$minecraft")
     }
-
+    modCompileOnly("dev.su5ed.sinytra.fabric-api:fabric-client-tags-api-v1:1.1.3+5d6761b877")
+    modCompileOnly("dev.su5ed.sinytra.fabric-api:fabric-convention-tags-v1:1.5.6+fa3d1c0177")
 
     modCompileOnly("io.github.llamalad7:mixinextras-common:0.5.0")
     implementation("io.github.llamalad7:mixinextras-forge:0.5.0")

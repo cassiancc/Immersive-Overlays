@@ -127,6 +127,8 @@ dependencies {
     if (stonecutter.eval(mcVersion, ">1.20")) {
         compileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-forge")
     }
+    compileOnly("org.sinytra.forgified-fabric-api:fabric-client-tags-api-v1:1.1.15+e053909619")
+    compileOnly("org.sinytra.forgified-fabric-api:fabric-convention-tags-v2:2.11.0+87e5848019")
 
     implementation("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
     implementation("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
