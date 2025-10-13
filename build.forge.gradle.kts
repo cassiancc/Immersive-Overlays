@@ -116,14 +116,14 @@ dependencies {
         modImplementation("maven.modrinth:oreganized:${mod.dep("oreganized")}-forge")
         modImplementation("maven.modrinth:blueprint:${mod.dep("blueprint")}")
         modImplementation("curse.maven:legendary-survival-overhaul-840254:6834435")
-        runtimeOnly("maven.modrinth:terrafirmacraft:${mod.dep("tfc")}")
-        runtimeOnly("maven.modrinth:patchouli:8Qyw08ld")
+        modRuntimeOnly("maven.modrinth:terrafirmacraft:${mod.dep("tfc")}")
+        modRuntimeOnly("maven.modrinth:patchouli:8Qyw08ld")
     }
     modCompileOnly("top.theillusivec4.curios:curios-forge:${mod.dep("curios")}:api")
     modCompileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-forge")
 
-    compileOnly("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
-    compileOnly("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
+    modCompileOnly("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
+    modCompileOnly("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
 
     modImplementation("maven.modrinth:cold-sweat:${mod.dep("cold_sweat")}")
 

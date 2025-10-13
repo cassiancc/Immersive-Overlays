@@ -16,7 +16,7 @@ public class CuriosCompat {
         if (capability.isPresent()) {
             IItemHandlerModifiable allEquipped = capability
                     //? if forge
-                    .resolve()
+                    /^.resolve()^/
                     .get().getEquippedCurios();
             for (int i = 0; i < allEquipped.getSlots(); i++) {
                 OverlayHelpers.isImportantItemOrContainer(allEquipped.getStackInSlot(i));

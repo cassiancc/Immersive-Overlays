@@ -64,9 +64,16 @@ public class ModConfig {
     public boolean compat_xaeros = true;
     public boolean compat_map_atlases = false;
     public boolean compat_accessorify = true;
-    public boolean compat_oreganized_temperature = true;
+    //? if (forge && =1.20.1) || (neoforge && =1.21.1) {
+    /*public boolean compat_oreganized_temperature = true;
+    *///?}
     public boolean compat_tough_as_nails_temperature = true;
-    public boolean compat_cold_sweat_temperature = true;
+    //? if forge || neoforge {
+    /*public boolean compat_cold_sweat_temperature = true;
+    *///?}
+    //? if forge {
+    /*public boolean compat_legendary_survival_overhaul_temperature = true;
+     *///?}
     // biomes
     public boolean biome_enable = true;
     public boolean biome_icons = true;
@@ -75,7 +82,7 @@ public class ModConfig {
     public int biome_text_colour = 14737632;
     public int biome_vertical_position = 112;
     public boolean biome_horizontal_position_left = false;
-    public List<String> biome_items = List.of("minecraft:map", "minecraft:empty_map", "map_atlases:atlas", "map_atlases:end_atlas", "map_atlases:nether_atlas");
+    public List<String> biome_items = List.of("minecraft:map", "minecraft:empty_map", "map_atlases:atlas", "map_atlases:end_atlas", "map_atlases:nether_atlas",  "naturescompass:naturescompass", "antiqueatlas:antique_atlas");
     // seasons
     public List<String> season_items = List.of("sereneseasons:calendar", "seasonsextras:season_calendar", "eclipticseasons:calendar");
     // temperature
@@ -89,7 +96,6 @@ public class ModConfig {
     public List<String> temperature_items = List.of("oreganized:thermometer", "toughasnails:thermometer", "legendarysurvivaloverhaul:thermometer", "cold_sweat:thermometer");
     // version
     public int version = ModClient.CONFIG_VERSION;
-    public boolean compat_legendary_survival_overhaul_temperature = true;
     public boolean speed_enable = true;
     public int speed_vertical_position = 140;
     public boolean speed_horizontal_position_left = true;
@@ -97,11 +103,16 @@ public class ModConfig {
     public boolean compat_oreganized_speed = true;
     public List<String> speed_items = List.of("oreganized:speedometer", "speedometer:speedometer");
     public boolean compat_jade = false;
-    public boolean compat_fabric_seasons = true;
+    public List<String> compat_waila_items = List.of("minecraft:spyglass", "create:goggles");
     public boolean compat_serene_seasons = true;
+    //? if fabric {
+    public boolean compat_fabric_seasons = true;
     public boolean compat_simple_seasons = true;
-    public boolean compat_tfc_seasons = true;
+    //?}
+    //? if forge || neoforge {
+    /*public boolean compat_tfc_seasons = true;
     public boolean compat_ecliptic_seasons = true;
+    *///?}
 
 
     public static void load() {

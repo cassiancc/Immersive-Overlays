@@ -59,12 +59,12 @@ public class TemperatureOverlay {
     }
 
     public static TemperaturePair getTemperature(LocalPlayer player) {
-        //? if =1.20.1 || =1.21.1 {
-        if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature && ModClient.loader.contains("forge")) {
+        //? if (forge && =1.20.1) || (neoforge && =1.21.1) {
+        /*if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature && ModClient.loader.contains("forge")) {
             int temperature =  OreganizedCompat.getAmbientTemperatureFromThermometer(player);
             return new TemperaturePair(Component.translatable("tooltip.oreganized.heat_"+temperature), OreganizedCompat.getTemperatureColourFromThermometer(temperature), "heat_"+temperature);
         }
-        //?}
+        *///?}
         if (ModCompat.TOUGH_AS_NAILS && ModConfig.get().compat_tough_as_nails_temperature) {
             if (ToughAsNailsCompat.isTemperatureEnabled()) {
                 String temperature = ToughAsNailsCompat.getAmbientTemperature(player);
@@ -78,10 +78,13 @@ public class TemperatureOverlay {
                 return new TemperaturePair(Component.literal(WordUtils.capitalizeFully(temperature)), -1, sprite);
             }
         }
-        if (ModCompat.COLD_SWEAT && ModConfig.get().compat_cold_sweat_temperature) {
+        //? if forge || neoforge {
+        /*if (ModCompat.COLD_SWEAT && ModConfig.get().compat_cold_sweat_temperature) {
             return ColdSweatCompat.getTemperaturePair(player);
         }
-        if (ModCompat.LEGENDARY_SURVIVAL_OVERHAUL && ModConfig.get().compat_legendary_survival_overhaul_temperature) {
+        *///?}
+        //? if forge {
+        /*if (ModCompat.LEGENDARY_SURVIVAL_OVERHAUL && ModConfig.get().compat_legendary_survival_overhaul_temperature) {
             String temperature = LegendarySurvivalOverhaulCompat.getAmbientTemperature(player);
             var sprite = switch (temperature) {
                 case "FROSTBITE" -> "heat_0";
@@ -92,6 +95,7 @@ public class TemperatureOverlay {
             };
             return new TemperaturePair(Component.literal(WordUtils.capitalizeFully(temperature)), -1, sprite);
         }
+        *///?}
         var level = player.level
         //? if >1.20 {
         ()

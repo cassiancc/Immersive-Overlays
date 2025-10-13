@@ -1,6 +1,7 @@
 package cc.cassian.immersiveoverlays.mixin;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
+import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.Items;
@@ -14,8 +15,9 @@ import snownee.jade.overlay.OverlayRenderer;
 public class JadeMixin {
     @Inject(method = "shouldShow", remap = false, at = @At(value = "HEAD"), cancellable = true)
     private static void mixin(CallbackInfoReturnable<Boolean> cir) {
+        System.out.println(ModLists.waila_items);
         if (ModConfig.get().compat_jade && Minecraft.getInstance().player != null) {
-            if (!OverlayHelpers.checkInventoryForItem(Minecraft.getInstance().player.getInventory(), Items.SPYGLASS, false)) {
+            if (!OverlayHelpers.showWaila) {
                 cir.setReturnValue(false);
             }
         }

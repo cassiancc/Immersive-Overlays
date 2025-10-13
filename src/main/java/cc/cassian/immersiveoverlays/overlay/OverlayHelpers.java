@@ -44,6 +44,7 @@ import java.util.stream.Stream;
 public class OverlayHelpers {
     public static final int textureSize = 256;
     public static final ResourceLocation TEXTURE = ModClient.locate("textures/gui/overlay.png");
+    public static boolean showWaila = false;
 
     //? if >1.20 {
     public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int tooltipSize, boolean leftAlign) {
@@ -162,6 +163,8 @@ public class OverlayHelpers {
             TemperatureOverlay.showTemperature = true;
         if (ModLists.speed_items.contains(item))
             SpeedOverlay.showSpeed = true;
+        if (ModLists.waila_items.contains(item))
+            showWaila = true;
     }
 
     public static void checkInventoryForItems(Player player) {
@@ -184,10 +187,14 @@ public class OverlayHelpers {
                 if (ModCompat.ACCESSORIES)
                     AccessoriesCompat.checkForImportantAccessories(player);
                 //?}
-                if (ModCompat.CURIOS)
+                //? if forge {
+                /*if (ModCompat.CURIOS)
                     CuriosCompat.checkForImportantAccessories(player);
+                *///?}
+                //? if fabric {
                 if (ModCompat.TRINKETS)
                     TrinketsCompat.checkForImportantAccessories(player);
+                //?}
                 if (ModCompat.TRAVELERS_BACKPACK)
                     TravelersBackpackCompat.checkForImportantAccessories(player);
                 checkInventoryForStack(player.getInventory());
@@ -207,6 +214,7 @@ public class OverlayHelpers {
         ClockOverlay.showSeason = b;
         TemperatureOverlay.showTemperature = b;
         SpeedOverlay.showSpeed = b;
+        showWaila = b;
     }
 
     public static void isImportantItemOrContainer(ItemStack stack) {

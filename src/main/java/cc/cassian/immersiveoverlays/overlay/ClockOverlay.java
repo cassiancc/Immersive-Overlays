@@ -192,21 +192,25 @@ public class ClockOverlay {
     public static String getSeason(ClientLevel level, BlockPos pos) {
         String season = "";
         if (ModConfig.get().clock_seasons && showSeason) {
-            if (ModCompat.FABRIC_SEASONS && ModConfig.get().compat_fabric_seasons) {
+            if (ModCompat.SERENE_SEASONS && ModConfig.get().compat_serene_seasons) {
+                season = SereneSeasonsCompat.getSeason(level);
+            }
+            //? if fabric {
+            else if (ModCompat.FABRIC_SEASONS && ModConfig.get().compat_fabric_seasons) {
                 var fabricCompat = FabricSeasonsCompat.getSeason(level);
                 if (fabricCompat != null) season = fabricCompat;
-            }
-            else if (ModCompat.SERENE_SEASONS && ModConfig.get().compat_serene_seasons) {
-                season = SereneSeasonsCompat.getSeason(level);
             }
             else if (ModCompat.SIMPLE_SEASONS && ModConfig.get().compat_simple_seasons) {
                 var simpleCompat = SimpleSeasonsCompat.getSeason(level);
                 if (simpleCompat != null) season = simpleCompat;
             }
-            else if (ModCompat.TERRAFIRMACRAFT && ModConfig.get().compat_tfc_seasons) {
+            //?}
+            //? if forge || neoforge {
+            /*else if (ModCompat.TERRAFIRMACRAFT && ModConfig.get().compat_tfc_seasons) {
                 var tfcCompat = TerrafirmacraftCompat.getSeason(level);
                 if (tfcCompat != null) season = tfcCompat;
             }
+            *///?}
             //? if forge && >1.20 {
             /*else if (ModCompat.ECLIPTIC_SEASONS && ModConfig.get().compat_ecliptic_seasons) {
                 var eclipticCompat = EclipticSeasonsCompat.getSeason(level, pos);
