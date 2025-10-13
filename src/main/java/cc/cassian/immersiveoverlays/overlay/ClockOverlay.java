@@ -1,5 +1,6 @@
 package cc.cassian.immersiveoverlays.overlay;
 
+import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 //? if >1.21.5
@@ -13,6 +14,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.biome.Biome;
 import org.apache.commons.lang3.text.WordUtils;
@@ -75,7 +78,12 @@ public class ClockOverlay {
             iconXOffset = 20;
         }
 
-        var seasonText = ClockOverlay.getSeason(mc.level, mc.player.blockPosition());
+        var seasonString = ClockOverlay.getSeason(mc.level, mc.player.blockPosition());
+        //? if >1.20 {
+        var seasonText = Component.translatableWithFallback("gui.c.season."+seasonString, WordUtils.capitalizeFully(seasonString.replace("_", " ")));
+        //?} else {
+        /*var seasonText = Component.literal(WordUtils.capitalizeFully(seasonString.replace("_", " ")));
+        *///?}
         int fontWidth = Integer.max(mc.font.width(time), mc.font.width(seasonText))+iconXOffset;
 
         if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().biome_horizontal_position_left)) {
@@ -96,22 +104,22 @@ public class ClockOverlay {
         }
         if (ClockOverlay.shouldShowSeasons()) {
             int seasonTextYPlacement = textYPlacement;
-            if (showTime)
+            int seasonIconYPlacement;
+            if (showTime) {
                 seasonTextYPlacement+=15;
+                seasonIconYPlacement = seasonTextYPlacement-5;
+            } else {
+                seasonIconYPlacement = seasonTextYPlacement-4;
+            }
             OverlayHelpers.drawString(guiGraphics, mc.font, seasonText, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, ModConfig.get().clock_text_colour);
-            var spriteOffset = getSprite(seasonText.toLowerCase(Locale.ROOT));
-            OverlayHelpers.blit(guiGraphics, xPlacement-xOffset-1, seasonTextYPlacement-4, spriteOffset, 207, 16, 14, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+            var sprite = getSprite(seasonString.toLowerCase(Locale.ROOT));
+            OverlayHelpers.blitSprite(guiGraphics, sprite, xPlacement-xOffset-1, seasonIconYPlacement);
         }
     }
 
-    public static int getSprite(String season) {
-        return switch (season) {
-            case "spring" -> 112;
-            case "summer" -> 128;
-            case "fall", "autumn" -> 144;
-            case "winter" -> 160;
-            default -> 0;
-        };
+    public static ResourceLocation getSprite(String season) {
+        var spriteText = season.replace("early_", "").replace("mid_", "").replace("mid_", "").replace("autumn", "fall");
+        return ModClient.locate("textures/gui/"+spriteText+".png");
     }
 
     public static int getWeather(Player player) {
@@ -191,17 +199,17 @@ public class ClockOverlay {
     public static String getSeason(ClientLevel level, BlockPos pos) {
         String season = "";
         if (ModConfig.get().clock_seasons && showSeason) {
+            //? if >1.20 {
             if (ModCompat.SERENE_SEASONS && ModConfig.get().compat_serene_seasons) {
-                season = SereneSeasonsCompat.getSeason(level);
+                season = SereneSeasonsCompat.getSeason(level, pos);
             }
+            //?}
             //? if fabric {
             else if (ModCompat.FABRIC_SEASONS && ModConfig.get().compat_fabric_seasons) {
-                var fabricCompat = FabricSeasonsCompat.getSeason(level);
-                if (fabricCompat != null) season = fabricCompat;
+                season = FabricSeasonsCompat.getSeason(level);
             }
             else if (ModCompat.SIMPLE_SEASONS && ModConfig.get().compat_simple_seasons) {
-                var simpleCompat = SimpleSeasonsCompat.getSeason(level);
-                if (simpleCompat != null) season = simpleCompat;
+                season = SimpleSeasonsCompat.getSeason(level);
             }
             //?}
             //? if forge || neoforge {

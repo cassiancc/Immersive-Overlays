@@ -107,6 +107,11 @@
   "gui.c.temperature.hot": "Hot",
   "gui.c.temperature.cold": "Cold",
   "gui.c.temperature.warm": "Warm",
-  "gui.c.temperature.temperate": "Temperate"
+  "gui.c.temperature.temperate": "Temperate",
+
+  "gui.c.season.spring": "Spring",
+  "gui.c.season.summer": "Summer",
+  "gui.c.season.fall": "Fall",
+  "gui.c.season.winter": "Winter"
 
 }
