@@ -78,6 +78,8 @@
   "config.immersiveoverlays.config.compat_waila_items": "Items that show Jade overlay.",
   "config.immersiveoverlays.config.compat_waila_items.tooltip": "Requires Jade",
   "config.immersiveoverlays.config.hide_from_debug": "Hide overlay from F3",
+  "config.immersiveoverlays.config.enabled": "Enabled",
+  "config.immersiveoverlays.config.enabled.tooltip": "Global toggle for Immersive Overlays. Can be toggled via the keybind.",
   "config.immersiveoverlays.config.locator_bar": "Require compass for locator bar",
   "config.immersiveoverlays.config.moved_by_effects": "Status effects move overlays down",
   "config.immersiveoverlays.config.render_background": "Show background",
@@ -114,6 +116,8 @@
   "gui.c.season.spring": "Spring",
   "gui.c.season.summer": "Summer",
   "gui.c.season.fall": "Fall",
-  "gui.c.season.winter": "Winter"
+  "gui.c.season.winter": "Winter",
+  "key.immersiveoverlays.toggle": "Toggle overlays",
+  "key.category.immersiveoverlays.keybinds": "Immersive Overlays"
 
 }

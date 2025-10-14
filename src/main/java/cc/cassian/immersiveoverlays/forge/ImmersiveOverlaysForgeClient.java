@@ -7,6 +7,7 @@ import cc.cassian.immersiveoverlays.overlay.*;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -26,14 +27,15 @@ public class ImmersiveOverlaysForgeClient {
         MinecraftForge.EVENT_BUS.addListener(ImmersiveOverlaysForgeClient::checkInventoryForOverlays);
         MinecraftForge.EVENT_BUS.addListener(ImmersiveOverlaysForgeClient::renderGameOverlayEvent);
         eventBus.addListener(ImmersiveOverlaysForgeClient::loadComplete);
+        eventBus.addListener(ImmersiveOverlaysForgeClient::registerKeybinds);
     }
 
-    @SubscribeEvent
+
     public static void loadComplete(FMLClientSetupEvent event) {
         ModLists.loadLists();
     }
 
-    @SubscribeEvent
+
     public static void renderGameOverlayEvent(CustomizeGuiOverlayEvent.DebugText event) {
         //? if >1.20 {
         var hud = event.getGuiGraphics();
@@ -43,7 +45,12 @@ public class ImmersiveOverlaysForgeClient {
         OverlayHelpers.renderOverlays(hud);
     }
 
-    @SubscribeEvent
+
+    public static void registerKeybinds(RegisterKeyMappingsEvent event){
+        event.register(ModClient.overlayToggle);
+    }
+
+
     public static void checkInventoryForOverlays(TickEvent.ClientTickEvent event){
         OverlayHelpers.checkInventoryForOverlays(Minecraft.getInstance());
     }

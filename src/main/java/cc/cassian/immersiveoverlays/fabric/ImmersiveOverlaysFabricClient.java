@@ -3,8 +3,10 @@ package cc.cassian.immersiveoverlays.fabric;
 //? if fabric {
 
 import cc.cassian.immersiveoverlays.ModClient;
+import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.overlay.*;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 //? if >1.21.5 {
 /*import cc.cassian.immersiveoverlays.layers.*;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElement;
@@ -47,10 +49,14 @@ public final class ImmersiveOverlaysFabricClient implements ClientModInitializer
             OverlayHelpers.renderOverlays(matrixStack);
         }));
         //?}
-        ClientTickEvents.END_CLIENT_TICK.register(OverlayHelpers::checkInventoryForOverlays);
+        ClientTickEvents.END_CLIENT_TICK.register(minecraft -> {
+            OverlayHelpers.checkInventoryForOverlays(minecraft);
+            OverlayHelpers.checkKeybind();
+        });
         ClientLifecycleEvents.CLIENT_STARTED.register((client -> {
             ModLists.loadLists();
         }));
+        KeyBindingHelper.registerKeyBinding(ModClient.overlayToggle);
     }
 
 }

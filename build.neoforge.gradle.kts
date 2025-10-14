@@ -3,7 +3,6 @@ plugins {
     id("dev.kikugie.postprocess.jsonlang")
     id("me.modmuss50.mod-publish-plugin")
     id("maven-publish")
-    id("org.sinytra.adapter.userdev")
 }
 
 val minecraft = stonecutter.current.version
@@ -180,7 +179,11 @@ dependencies {
 
     if (stonecutter.eval(mcVersion, "1.21.1")) {
         compileOnly("maven.local:antique-atlas:2.12.0+1.21_mapped_moj_1.21.1")
+        compileOnly("org.sinytra:forgified-fabric-loader:2.5.55+0.17.2+1.21.1")
     }
+
+    compileOnly("org.sinytra.forgified-fabric-api:fabric-convention-tags-v2:2.11.0+87e5848019")
+
 
     implementation("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
     implementation("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")

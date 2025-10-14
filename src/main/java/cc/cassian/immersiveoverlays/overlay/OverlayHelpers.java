@@ -119,6 +119,7 @@ public class OverlayHelpers {
 
     public static boolean shouldCancelRender(Minecraft mc) {
         if (mc.options.hideGui) return true;
+        if (!ModConfig.get().enabled) return true;
         if (ModConfig.get().hide_from_debug) {
             //? if >1.21 {
             var debug = mc.getDebugOverlay().showDebugScreen();
@@ -447,5 +448,18 @@ public class OverlayHelpers {
                      *///?}
                     guiGraphics, ResourceLocation texture, int x, int y, int size) {
         blit(guiGraphics, texture, x, y, 0, 0, size, size, size, size);
+    }
+
+    static boolean hasBeenToggled = false;
+
+    public static void checkKeybind() {
+        if (ModClient.overlayToggle.isDown()) {
+            if (!hasBeenToggled) {
+                ModConfig.get().enabled = !ModConfig.get().enabled;
+                hasBeenToggled = true;
+            }
+        } else {
+            hasBeenToggled = false;
+        }
     }
 }

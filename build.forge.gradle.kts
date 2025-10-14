@@ -146,6 +146,7 @@ dependencies {
     modCompileOnly("dev.su5ed.sinytra.fabric-api:fabric-convention-tags-v1:1.5.6+fa3d1c0177")
 
     modCompileOnly("maven.local:antique-atlas:2.12.0+1.20_mapped_srg_1.20.1")
+    modCompileOnly("dev.su5ed.sinytra:fabric-loader:2.7.11+0.16.5+1.20.1")
 
     modCompileOnly("io.github.llamalad7:mixinextras-common:0.5.0")
     implementation("io.github.llamalad7:mixinextras-forge:0.5.0")

@@ -25,7 +25,7 @@ public class LocatorBarRendererMixin {
     //? if >1.21.5 {
     /*@Inject(method = "render", at = @At(value = "HEAD"), cancellable = true)
     private void mixin(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
-        if (ModConfig.get().compat_playerlocatorplus) {
+        if (ModConfig.get().locator_bar) {
             if (!CompassOverlay.showX) {
                 ci.cancel();
             }

@@ -219,7 +219,7 @@ public class ClockOverlay {
             }
             *///?}
             //? if forge && >1.20 {
-            /* if (ModCompat.ECLIPTIC_SEASONS && ModConfig.get().compat_ecliptic_seasons) {
+             /*if (ModCompat.ECLIPTIC_SEASONS && ModConfig.get().compat_ecliptic_seasons) {
                 var eclipticCompat = EclipticSeasonsCompat.getSeason(level, pos);
                 if (eclipticCompat != null) season = eclipticCompat;
             }

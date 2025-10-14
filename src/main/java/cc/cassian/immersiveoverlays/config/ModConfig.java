@@ -24,7 +24,7 @@ public class ModConfig {
 
     private static ModConfig INSTANCE = new ModConfig();
     //General settings
-
+    public boolean enabled = true;
     // coords
     public boolean compass_enable = true;
     public int compass_vertical_position = 140;
