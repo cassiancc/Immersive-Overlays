@@ -57,6 +57,7 @@ repositories {
     maven ( "https://maven.theillusivec4.top/")
     maven ( "https://maven.teamabnormals.com")
     maven ( "https://cursemaven.com" )
+    flatDir { dirs("libs") }
 }
 
 legacyForge {
@@ -143,6 +144,8 @@ dependencies {
     }
     modCompileOnly("dev.su5ed.sinytra.fabric-api:fabric-client-tags-api-v1:1.1.3+5d6761b877")
     modCompileOnly("dev.su5ed.sinytra.fabric-api:fabric-convention-tags-v1:1.5.6+fa3d1c0177")
+
+    modCompileOnly("maven.local:antique-atlas:2.12.0+1.20_mapped_srg_1.20.1")
 
     modCompileOnly("io.github.llamalad7:mixinextras-common:0.5.0")
     implementation("io.github.llamalad7:mixinextras-forge:0.5.0")

@@ -2,9 +2,8 @@ package cc.cassian.immersiveoverlays.mixin;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
-//? if fabric {
+//? if 1.20.1 || 1.21.1 {
 import folk.sisby.antique_atlas.AntiqueAtlas;
-
 import static cc.cassian.immersiveoverlays.overlay.OverlayHelpers.getContainerContents;
 import static cc.cassian.immersiveoverlays.overlay.OverlayHelpers.isContainer;
 import static folk.sisby.antique_atlas.AntiqueAtlas.getHandheldAtlas;
@@ -22,13 +21,13 @@ import java.util.List;
 
 
 @Pseudo
-//? if fabric {
+//? if 1.20.1 || 1.21.1 {
 @Mixin(AntiqueAtlas.class)
 //?} else {
 /*@Mixin(Player.class)
 *///?}
 public abstract class AntiqueAtlasMixin {
-    //? if fabric && <1.21.2 {
+    //? if (1.20.1 || 1.21.1) {
 
     @Inject(
             method = "hasHandheldAtlas",

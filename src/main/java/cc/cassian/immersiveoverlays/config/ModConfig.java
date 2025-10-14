@@ -60,8 +60,10 @@ public class ModConfig {
     public boolean render_background = true;
     public boolean hide_from_debug = true;
     // compat
+    //? if fabric
     public boolean compat_playerlocatorplus = true;
     public boolean compat_xaeros = true;
+    public boolean compat_antique_atlas = true;
     public boolean compat_map_atlases = false;
     public boolean compat_accessorify = true;
     //? if (forge && =1.20.1) || (neoforge && =1.21.1) {
@@ -110,7 +112,6 @@ public class ModConfig {
     //? if fabric {
     public boolean compat_fabric_seasons = true;
     public boolean compat_simple_seasons = true;
-    public boolean compat_antique_atlas = true;
     //?}
     //? if forge || neoforge {
     /*public boolean compat_tfc_seasons = true;

@@ -1,2 +1,2 @@
 ### Added
-- Support for detecting Atlas items in Antique Atlas 4.
+- Support for detecting [Antique Atlas 4](https://modrinth.com/mod/antique-atlas-4) items in containers. This requires the mod to be configured to require an item, and will work when the mod is remapped by Sinytra Connector.

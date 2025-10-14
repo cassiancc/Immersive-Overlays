@@ -57,6 +57,7 @@ In addition, the following features are present when compatible mods are install
 - [Accessories](https://modrinth.com/mod/accessories): Items with overlays will work in accessory slots.
 - [Accessorify](https://modrinth.com/mod/accessorify): This mod's overlays will replace the ones from Accessorify.
 - [Curios](https://modrinth.com/mod/curios): Items with overlays will work in accessory slots.
+- [Trinkets](https://modrinth.com/mod/trinkets): Items with overlays will work in accessory slots.
 - [Traveler's Backpack](https://modrinth.com/mod/travelersbackpack/): Items with overlays will work in backpacks.
 - [Sophisticated Backpacks](https://modrinth.com/mod/sophisticated-backpacks/versions): Items with overlays will work in backpacks.
 - [Player Locator Plus](https://modrinth.com/mod/player-locator-plus): The locator bar is now only displayed when the player has a compass.
@@ -64,6 +65,7 @@ In addition, the following features are present when compatible mods are install
 - [Xaero's Minimap](https://modrinth.com/mod/xaeros-minimap): When a map item is set, it can be used inside a bundle.
 - [Xaero's World Map](https://modrinth.com/mod/xaeros-world-map): When a map item is set, it can be used inside a bundle.
 - [Map Atlases](https://modrinth.com/mod/map-atlases) (disabled by default, has issues): Atlases can be used inside a bundle.
+- [Antique Atlas 4](https://modrinth.com/mod/antique-atlas-4): When a map item is set, it can be used inside a bundle.
 
 ## Credits
 
@@ -74,3 +76,5 @@ Textures and mod icon are also by [nöelle](https://modrinth.com/user/noelledotj
 Textures for Temperature Overlays and Season Overlays by [ProbablyEkho](https://modrinth.com/user/ProbablyEkho).
 
 Textures for No Man's Land, Abundant Atmosphere, and New World biome overlays by KevBo.
+
+This repository contains remapped copies of [Antique Atlas 4](https://modrinth.com/mod/antique-atlas-4), as the Fabric version cannot be remapped by ModDevGradle.
