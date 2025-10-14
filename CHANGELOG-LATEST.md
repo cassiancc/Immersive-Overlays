@@ -4,3 +4,4 @@
 
 ### Fixed
 - Locator bar toggle now uses the correct config.
+- Issues with mod loading on NeoForge.

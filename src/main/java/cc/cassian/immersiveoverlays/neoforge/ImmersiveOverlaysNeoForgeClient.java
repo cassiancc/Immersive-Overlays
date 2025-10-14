@@ -31,7 +31,7 @@ import static cc.cassian.immersiveoverlays.ModClient.MOD_ID;
 @EventBusSubscriber(modid = MOD_ID)
 public class ImmersiveOverlaysNeoForgeClient {
 
-    public static void init(IEventBus eventBus, ModContainer modContainer) {
+    public ImmersiveOverlaysNeoForgeClient(IEventBus eventBus, ModContainer modContainer) {
         // Load config.
         ModClient.init("neoforge");
         //Register config screen.
