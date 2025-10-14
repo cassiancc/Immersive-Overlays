@@ -152,7 +152,7 @@ dependencies {
 
 tasks {
     processResources {
-        exclude("**/neoforge.mod.json", "**/*.accesswidener", "**/neoforge.mods.toml")
+        exclude("**/fabric.mod.json", "**/*.accesswidener", "**/neoforge.mods.toml")
     }
 
     named("createMinecraftArtifacts") {
