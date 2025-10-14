@@ -110,6 +110,7 @@ public class ModConfig {
     //? if fabric {
     public boolean compat_fabric_seasons = true;
     public boolean compat_simple_seasons = true;
+    public boolean compat_antique_atlas = true;
     //?}
     //? if forge || neoforge {
     /*public boolean compat_tfc_seasons = true;

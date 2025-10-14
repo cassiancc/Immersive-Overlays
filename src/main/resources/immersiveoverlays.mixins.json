@@ -17,6 +17,7 @@
     "defaultRequire": 1
   },
   "mixins": [
+    "AntiqueAtlasMixin",
     "IMapCollectionImplMixin",
     "MapAtlasAccessUtilsMixin"
   ]

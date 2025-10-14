@@ -178,6 +178,14 @@ dependencies {
         modCompileOnly("maven.modrinth:trinkets-canary:${mod.dep("trinkets")}")
     }
 
+    if (hasProperty("deps.antique_atlas")) {
+        modCompileOnly("maven.modrinth:antique-atlas-4:${mod.dep("antique_atlas")}")
+    } else {
+        modCompileOnly("maven.modrinth:antique-atlas-4:utFwd9ms")
+    }
+
+
+
     modCompileOnly("maven.modrinth:bplb:v1.0.0")
     modCompileOnly("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
 }
