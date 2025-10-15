@@ -76,7 +76,7 @@ public class OverlayHelpers {
         } else if (textureSize == 35) {
             return 51;
         } else if (textureSize == 36) {
-            return 131;
+            return 132;
         }
         else return 0;
     }

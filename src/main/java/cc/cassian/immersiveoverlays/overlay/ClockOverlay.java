@@ -70,7 +70,6 @@ public class ClockOverlay {
         }
         if (shouldShowSeasons()) {
             if (showTime) {
-                textYPlacement = iconYPlacement+5;
                 tooltipSize = 36;
             } else {
                 tooltipSize = 21;
@@ -79,13 +78,15 @@ public class ClockOverlay {
             iconXOffset = 20;
         }
 
-        var seasonString = ClockOverlay.getSeason(mc.level, mc.player.blockPosition());
-        //? if >1.20 {
-        var seasonText = Component.translatableWithFallback("gui.c.season."+seasonString, WordUtils.capitalizeFully(seasonString.replace("_", " ")));
-        //?} else {
-        /*var seasonText = TextHelpers.literal(WordUtils.capitalizeFully(seasonString.replace("_", " ")));
-        *///?}
-        int fontWidth = Integer.max(mc.font.width(time), mc.font.width(seasonText))+iconXOffset;
+        int fontWidth = mc.font.width(time)+iconXOffset;
+        Component seasonText = null;
+        String seasonString = null;
+
+        if (shouldShowSeasons()) {
+            seasonString = ClockOverlay.getSeason(mc.level, mc.player.blockPosition());
+            seasonText = TextHelpers.translatableWithFallback("gui.c.season."+seasonString, WordUtils.capitalizeFully(seasonString.replace("_", " ")));
+            fontWidth = Integer.max(mc.font.width(time), mc.font.width(seasonText))+iconXOffset;
+        }
 
         if (OverlayHelpers.playerHasPotions(mc.player, ModConfig.get().biome_horizontal_position_left)) {
             iconYPlacement += OverlayHelpers.moveBy(mc.player);
@@ -105,16 +106,13 @@ public class ClockOverlay {
         }
         if (ClockOverlay.shouldShowSeasons()) {
             int seasonTextYPlacement = textYPlacement;
-            int seasonIconYPlacement;
             if (showTime) {
                 seasonTextYPlacement+=15;
-                seasonIconYPlacement = seasonTextYPlacement-5;
-            } else {
-                seasonIconYPlacement = seasonTextYPlacement-4;
             }
             OverlayHelpers.drawString(guiGraphics, mc.font, seasonText, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, ModConfig.get().clock_text_colour);
+            assert seasonString != null;
             var sprite = getSprite(seasonString.toLowerCase(Locale.ROOT));
-            OverlayHelpers.blitSprite(guiGraphics, sprite, xPlacement-xOffset-1, seasonIconYPlacement);
+            OverlayHelpers.blitSprite(guiGraphics, sprite, xPlacement-xOffset-1, seasonTextYPlacement-4);
         }
     }
 
@@ -226,6 +224,6 @@ public class ClockOverlay {
             }
             *///?}
         }
-        return WordUtils.capitalizeFully(season);
+        return season;
     }
 }

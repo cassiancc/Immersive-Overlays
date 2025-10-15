@@ -5,7 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.4.0] - 2025-10-14
+## [1.4.1] - 2025-10-14
+
+### Added
+- Support for detecting [Antique Atlas 4](https://modrinth.com/mod/antique-atlas-4) items in containers. This requires the mod to be configured to require an item, and will work when the mod is remapped by Sinytra Connector.
+- A global "on/off" setting has been added to the config, which can be changed via a keybind (default binding is disabled).
+
+### Fixed
+- Locator bar toggle now uses the correct config.
+- Issues with mod loading on NeoForge.
+
+## [1.4.0] - 2025-10-13
 
 ### Added
 - Reworked buildscript to temporarily restore 1.19.2, 1.20.1 and 1.21.5 targets. This includes support for Ecliptic Seasons and TerraFirmaCraft on 1.20.1.
