@@ -37,6 +37,14 @@ public class ModClient {
     }
 
     public static ResourceLocation locate(String s) {
-        return ResourceLocation.tryBuild(MOD_ID, s);
+        return locate(MOD_ID, s);
+    }
+
+    public static ResourceLocation locate(String namespace, String path) {
+        //? if >1.21 {
+        return ResourceLocation.fromNamespaceAndPath(namespace, path);
+         //?} else {
+        /*return new ResourceLocation(namespace, path);
+        *///?}
     }
 }

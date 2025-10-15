@@ -43,7 +43,7 @@ public class SophisticatedBackpacksCompat {
             OverlayHelpers.isImportantItemOrContainer(slot.getResource().toStack());
         }
     }
-    //?} else if fabric {
+    //?} else if fabric && >1.19 {
     /*if (stack.getItem() instanceof BackpackItem) {
         IBackpackWrapper backpackWrapper = new BackpackWrapper(stack);
         InventoryHandler inventory = backpackWrapper.getInventoryHandler();

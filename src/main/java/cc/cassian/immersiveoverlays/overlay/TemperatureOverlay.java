@@ -4,6 +4,7 @@ import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModHelpers;
+import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -75,7 +76,7 @@ public class TemperatureOverlay {
                     case "HOT" -> "heat_6";
                     default -> "heat_2";
                 };
-                return new TemperaturePair(Component.literal(WordUtils.capitalizeFully(temperature)), -1, sprite);
+                return new TemperaturePair(TextHelpers.literal(WordUtils.capitalizeFully(temperature)), -1, sprite);
             }
         }
         //? if forge || neoforge {
@@ -116,16 +117,18 @@ public class TemperatureOverlay {
     }
 
     public static TemperaturePair getBiomeTemperature(Holder<Biome> biome) {
+        //? if >1.19 {
         if (ModCompat.FABRIC_API)
             return FabricCompat.getBiomeTemperatureFromTag(biome);
+        //?}
         return getBiomeTemperature(biome.value().getBaseTemperature());
     }
 
     public static TemperaturePair getBiomeTemperature(float temperature) {
         if (temperature >= 2) {
-            return new TemperaturePair(Component.translatable("gui.c.temperature.hot"), ModConfig.get().temperature_hot_colour, "heat_4");
+            return new TemperaturePair(TextHelpers.translatable("gui.c.temperature.hot"), ModConfig.get().temperature_hot_colour, "heat_4");
         } else if (temperature <= 0.2) {
-            return new TemperaturePair(Component.translatable("gui.c.temperature.cold"), ModConfig.get().temperature_cold_colour, "heat_0");
-        } else return new TemperaturePair(Component.translatable("gui.c.temperature.temperate"), ModConfig.get().temperature_temperate_colour, "heat_1");
+            return new TemperaturePair(TextHelpers.translatable("gui.c.temperature.cold"), ModConfig.get().temperature_cold_colour, "heat_0");
+        } else return new TemperaturePair(TextHelpers.translatable("gui.c.temperature.temperate"), ModConfig.get().temperature_temperate_colour, "heat_1");
     }
 }

@@ -5,6 +5,7 @@ import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 //? if >1.21.5
 /*import net.minecraft.client.renderer.RenderPipelines;*/
+import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -82,7 +83,7 @@ public class ClockOverlay {
         //? if >1.20 {
         var seasonText = Component.translatableWithFallback("gui.c.season."+seasonString, WordUtils.capitalizeFully(seasonString.replace("_", " ")));
         //?} else {
-        /*var seasonText = Component.literal(WordUtils.capitalizeFully(seasonString.replace("_", " ")));
+        /*var seasonText = TextHelpers.literal(WordUtils.capitalizeFully(seasonString.replace("_", " ")));
         *///?}
         int fontWidth = Integer.max(mc.font.width(time), mc.font.width(seasonText))+iconXOffset;
 

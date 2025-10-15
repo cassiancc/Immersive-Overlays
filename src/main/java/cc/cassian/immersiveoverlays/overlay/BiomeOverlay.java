@@ -18,6 +18,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import org.apache.commons.lang3.text.WordUtils;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class BiomeOverlay {
@@ -95,8 +96,9 @@ public class BiomeOverlay {
     public static ResourceLocation getBiomeSprite(ResourceLocation biome, boolean allowRedirect) {
         var manager = Minecraft.getInstance().getResourceManager();
         var path = "textures/immersiveoverlays/"+ biome.getPath();
-        var key = ResourceLocation.tryBuild(biome.getNamespace(), "%s.png".formatted(path));
-        var redirect = ResourceLocation.tryBuild(biome.getNamespace(), "%s.txt".formatted(path));
+        var key = ModClient.locate(biome.getNamespace(), "%s.png".formatted(path));
+        var redirect = ModClient.locate(biome.getNamespace(), "%s.txt".formatted(path));
+        //? if >1.19 {
         if (manager.getResource(key).isPresent())
             return key;
         else {
@@ -110,6 +112,17 @@ public class BiomeOverlay {
                 return UNDEFINED;
             }
         }
+        //?} else {
+        /*if (allowRedirect) {
+            try {
+                return getBiomeSprite(Objects.requireNonNull(ResourceLocation.tryParse(manager.getResource(redirect).getInputStream().toString())), false);
+            } catch (Exception e) {
+                return UNDEFINED;
+            }
+        } else {
+            return UNDEFINED;
+        }
+        *///?}
     }
 
     public static Holder<Biome> getBiome(LocalPlayer player) {

@@ -1,6 +1,7 @@
 package cc.cassian.immersiveoverlays.config;
 
 
+import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import net.minecraft.client.gui.screens.Screen;
@@ -24,7 +25,7 @@ public class ClothConfigFactory {
         } else {
             section += "_";
         }
-        return builder.getOrCreateCategory(Component.translatable("config.immersiveoverlays.%stitle".formatted(section)));    }
+        return builder.getOrCreateCategory(TextHelpers.translatable("config.immersiveoverlays.%stitle".formatted(section)));    }
 
     private static boolean is(Field field, String name) {
         return field.getName().toLowerCase(Locale.ROOT).contains(name);
@@ -33,7 +34,7 @@ public class ClothConfigFactory {
     public static Screen create(Screen parent) {
         final var builder = ConfigBuilder.create()
                 .setParentScreen(parent)
-                .setTitle(Component.translatable("config.immersiveoverlays.title"));
+                .setTitle(TextHelpers.translatable("config.immersiveoverlays.title"));
 
         final var entryBuilder = builder.entryBuilder();
         final var configInstance = ModConfig.get();
