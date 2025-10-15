@@ -15,10 +15,8 @@ public class ModClient {
     public static final int CONFIG_VERSION = 2;
     public static String loader;
 
-    //? if >1.21.8 && fabric {
+    //? if >1.21.8 {
     /*public static final KeyMapping.Category CATEGORY = KeyMapping.Category.register(locate("keybinds")); // The category translation key used to categorize in the Controls screen
-    *///?} else if >1.21.8 && neoforge {
-    /*public static final KeyMapping.Category CATEGORY = new KeyMapping.Category(locate("keybinds")); // The category translation key used to categorize in the Controls screen
     *///?} else {
     public static final String CATEGORY = "key.category.immersiveoverlays.keybinds";
      //?}
