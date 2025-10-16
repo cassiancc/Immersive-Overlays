@@ -30,7 +30,7 @@ This feature supports all vanilla biomes, as well as some modded biomes. Mod sup
 
 An overlay displaying the current season is displayed whenever the player has a calendar in their inventory, including in a bundle.
 
-This requires a compatible seasons mod, with support for [Serene Seasons](https://modrinth.com/mod/serene-seasons), [Fabric Seasons](https://modrinth.com/mod/fabric-seasons), and [Simple Seasons](https://modrinth.com/mod/simple-seasons).
+This requires a compatible seasons mod, with support for [Serene Seasons](https://modrinth.com/mod/serene-seasons), [Fabric Seasons](https://modrinth.com/mod/fabric-seasons), [Ecliptic Seasons](https://www.curseforge.com/minecraft/mc-mods/ecliptic-seasons) and [Simple Seasons](https://modrinth.com/mod/simple-seasons).
 
 ## Temperature Overlays
 
@@ -41,6 +41,7 @@ An overlay displaying the current temperature is displayed whenever the player h
 - With [Tough as Nails](https://modrinth.com/mod/tough-as-nails) installed, this data is sourced from the player's temperature.
 - With [Cold Sweat](https://modrinth.com/mod/cold-sweat/) installed, this data is sourced from the player's temperature.
 - With [Legendary Survival Overhaul](https://www.curseforge.com/minecraft/mc-mods/legendary-survival-overhaul) installed, this data is sourced from the player's temperature.
+- With [Thermoo](https://modrinth.com/mod/thermoo) installed, this data is sourced from the player's temperature.
 
 ## Speed Overlays
 
@@ -65,7 +66,7 @@ In addition, the following features are present when compatible mods are install
 - [Xaero's Minimap](https://modrinth.com/mod/xaeros-minimap): When a map item is set, it can be used inside a bundle.
 - [Xaero's World Map](https://modrinth.com/mod/xaeros-world-map): When a map item is set, it can be used inside a bundle.
 - [Map Atlases](https://modrinth.com/mod/map-atlases) (disabled by default, has issues): Atlases can be used inside a bundle.
-- [Antique Atlas 4](https://modrinth.com/mod/antique-atlas-4): When a map item is set, it can be used inside a bundle.
+- [Antique Atlas 4](https://modrinth.com/mod/antique-atlas-4): When a map item is required, it can be used inside a bundle.
 
 ## Credits
 

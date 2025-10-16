@@ -23,8 +23,20 @@ public class ModConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 
     private static ModConfig INSTANCE = new ModConfig();
+    // version
+    public int version = ModClient.CONFIG_VERSION;
     //General settings
     public boolean enabled = true;
+    //? if >1.21.5
+    /*public boolean locator_bar = true;*/
+    public boolean avoid_overlapping = true;
+    public boolean moved_by_effects = true;
+    public boolean require_item = true;
+    public boolean require_item_in_hand = false;
+    public boolean search_containers = true;
+    public boolean search_containers_for_containers = true;
+    public boolean render_background = true;
+    public boolean hide_from_debug = true;
     // coords
     public boolean compass_enable = true;
     public int compass_vertical_position = 140;
@@ -48,23 +60,20 @@ public class ModConfig {
     public boolean clock_horizontal_position_left = false;
     public List<String> clock_items = List.of("minecraft:clock");
     public List<String> clock_weather_items = List.of("caverns_and_chasms:barometer", "firmaciv:barometer");
-    // general
-    //? if >1.21.5
-    /*public boolean locator_bar = true;*/
-    public boolean avoid_overlapping = true;
-    public boolean moved_by_effects = true;
-    public boolean require_item = true;
-    public boolean require_item_in_hand = false;
-    public boolean search_containers = true;
-    public boolean search_containers_for_containers = true;
-    public boolean render_background = true;
-    public boolean hide_from_debug = true;
+    // temperature
+    public boolean temperature_enable = true;
+    public boolean temperature_icons = true;
+    public int temperature_hot_colour = 16759694;
+    public int temperature_cold_colour = 9371647;
+    public int temperature_temperate_colour = 16777215;
+    public int temperature_vertical_position = 112;
+    public boolean temperature_horizontal_position_left = true;
+    public List<String> temperature_items = List.of("oreganized:thermometer", "toughasnails:thermometer", "legendarysurvivaloverhaul:thermometer", "cold_sweat:thermometer");
     // compat
     //? if fabric
     public boolean compat_playerlocatorplus = true;
     public boolean compat_xaeros = true;
     public boolean compat_antique_atlas = true;
-    public boolean compat_map_atlases = false;
     public boolean compat_accessorify = true;
     //? if (forge && =1.20.1) || (neoforge && =1.21.1) {
     /*public boolean compat_oreganized_temperature = true;
@@ -89,25 +98,16 @@ public class ModConfig {
     public List<String> biome_items = List.of("minecraft:map", "minecraft:empty_map", "map_atlases:atlas", "map_atlases:end_atlas", "map_atlases:nether_atlas",  "naturescompass:naturescompass", "antiqueatlas:antique_atlas");
     // seasons
     public List<String> season_items = List.of("sereneseasons:calendar", "seasonsextras:season_calendar", "eclipticseasons:calendar");
-    // temperature
-    public boolean temperature_enable = true;
-    public boolean temperature_icons = true;
-    public int temperature_hot_colour = 16759694;
-    public int temperature_cold_colour = 9371647;
-    public int temperature_temperate_colour = 16777215;
-    public int temperature_vertical_position = 112;
-    public boolean temperature_horizontal_position_left = true;
-    public List<String> temperature_items = List.of("oreganized:thermometer", "toughasnails:thermometer", "legendarysurvivaloverhaul:thermometer", "cold_sweat:thermometer");
-    // version
-    public int version = ModClient.CONFIG_VERSION;
+    //speed
     public boolean speed_enable = true;
     public int speed_vertical_position = 140;
     public boolean speed_horizontal_position_left = true;
     public int speed_colour = 0xc7bf81;
-    public boolean compat_oreganized_speed = true;
     public List<String> speed_items = List.of("oreganized:speedometer", "speedometer:speedometer");
+    public boolean compat_oreganized_speed = true;
     public boolean compat_jade = false;
     public List<String> compat_waila_items = List.of("minecraft:spyglass", "create:goggles");
+    public boolean compat_map_atlases = false;
     public boolean compat_serene_seasons = true;
     //? if fabric {
     public boolean compat_fabric_seasons = true;

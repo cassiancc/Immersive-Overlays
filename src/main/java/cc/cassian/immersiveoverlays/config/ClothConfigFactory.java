@@ -51,10 +51,10 @@ public class ClothConfigFactory {
             if (is(field, "compass")) category = compassCategory;
             else if (is(field,"clock")) category = clockCategory;
             else if (is(field,"biome")) category = biomeCategory;
-            else if (is(field,"compat")) category = compatCategory;
+            else if (is(field,"season")) category = clockCategory;
             else if (is(field,"temperature")) category = temperatureCategory;
             else if (is(field,"speed")) category = speedCategory;
-            else if (is(field,"season")) category = clockCategory;
+            else if (is(field,"compat")) category = compatCategory;
             else category = generalCategory;
             if (is(field, "version")) {}
             else if (field.getType() == boolean.class) {
