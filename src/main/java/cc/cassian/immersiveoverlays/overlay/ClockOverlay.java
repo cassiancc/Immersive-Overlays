@@ -117,7 +117,7 @@ public class ClockOverlay {
     }
 
     public static ResourceLocation getSprite(String season) {
-        var spriteText = season.replace("early_", "").replace("mid_", "").replace("mid_", "").replace("autumn", "fall");
+        var spriteText = season.replace("early_", "").replace("mid_", "").replace("late_", "").replace("autumn", "fall");
         return ModClient.locate("textures/gui/"+spriteText+".png");
     }
 
