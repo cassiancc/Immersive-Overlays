@@ -1,7 +1,9 @@
 package cc.cassian.immersiveoverlays.helpers;
 
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Component;
+import org.apache.commons.lang3.text.WordUtils;
 //? if <1.19 {
 /*import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -20,7 +22,9 @@ public class TextHelpers {
         //? if >1.20 {
         return Component.translatableWithFallback(key, fallback);
         //?} else {
-        /*return TextHelpers.literal(fallback));
+        /*if (I18n.exists(key)) {
+            return TextHelpers.literal(I18n.get(key));
+        } else return TextHelpers.literal(fallback);
          *///?}
     }
 

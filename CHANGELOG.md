@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.2] - 2025-10-16
+
+### Added
+- River, Frozen River, Ice Spikes, and Snowy Beach biome overlay textures. (@noelledotjpg)
+- Biome overlay textures for Clifftree (kelpiesaurus)
+
+### Changed
+- Season, Temperature, and Speed mod compat options are now in their individual sections instead of the general compat category.
+
+### Fixed
+- Clock Overlay placement being off.
+- Oreganized 1.21.1 integration not working correctly.
+- Fallback text on biome overlays.
+
 ## [1.4.1] - 2025-10-14
 
 ### Added

@@ -143,7 +143,7 @@ public class BiomeOverlay {
         var key = "biome.%s.%s".formatted(namespace, path);
         if (I18n.exists(key)) {
             return I18n.get(key);
-        } else return WordUtils.capitalize(path);
+        } else return WordUtils.capitalize(path.replace("_"," "));
     }
 
 }
