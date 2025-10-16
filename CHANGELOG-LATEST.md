@@ -1,5 +1,6 @@
 ### Added
-- River and Frozen River biome overlay texture (@noelledotjpg)
+- River, Frozen River, Ice Spikes, and Snowy Beach biome overlay textures. (@noelledotjpg)
+- Biome overlay textures for Clifftree (kelpiesaurus)
 
 ### Changed
 - Season, Temperature, and Speed mod compat options are now in their individual sections instead of the general compat category.
