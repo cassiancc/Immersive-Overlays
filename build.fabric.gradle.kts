@@ -69,7 +69,7 @@ repositories {
     maven ( "https://maven.isxander.dev/releases") {
         name = "Xander Maven"
     }
-    maven ( "https://maven.nucleoid.xyz" ) {
+    maven ( "https://maven.nucleoid.xyz/releases" ) {
         name = "Nucleoid Maven (Polymer)"
     }
     maven ( "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/") {
@@ -175,7 +175,7 @@ dependencies {
     if (stonecutter.eval(mcVersion, "<1.21.4")) {
         modCompileOnly("dev.emi:trinkets:${mod.dep("trinkets")}")
     } else {
-        modCompileOnly("maven.modrinth:trinkets-canary:${mod.dep("trinkets")}")
+        modCompileOnly("eu.pb4.fork:trinkets:${mod.dep("trinkets")}")
     }
 
     if (hasProperty("deps.antique_atlas")) {
