@@ -105,15 +105,15 @@ dependencies {
         modCompileOnly("com.terraformersmc:modmenu:15.0.0-beta.3")
     }
     modCompileOnly("maven.modrinth:map-atlases:${mod.dep("map_atlases")}")
-    if (stonecutter.eval(mcVersion, ">1.19.2")) {
+    // Accesories
+    if (hasProperty("deps.accessories")) {
         modCompileOnly("io.wispforest:accessories-fabric:${mod.dep("accessories")}")
     }
-    if (stonecutter.eval(mcVersion, ">1.20") && stonecutter.eval(mcVersion, "<1.21.5")) {
-        modCompileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+$minecraft")
+    // Accessorify
+    if (hasProperty("deps.accessorify")) {
+        modCompileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}")
     }
-    else if (stonecutter.eval(mcVersion, ">=1.21.5")) {
-        modCompileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+1.21.4")
-    }
+    // Tough as Nails
     if (stonecutter.eval(mcVersion, ">1.19.2")) {
         modCompileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
     }
