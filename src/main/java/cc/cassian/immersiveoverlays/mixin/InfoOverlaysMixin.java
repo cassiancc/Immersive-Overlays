@@ -13,13 +13,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Pseudo
-//? if =1.21.8 || neoforge {
+//? if =1.21.8 {
 /*@Mixin(InfoOverlays.class)
 *///?} else {
 @Mixin(Minecraft.class)
 //?}
 public class InfoOverlaysMixin {
-    //? if =1.21.8 || neoforge {
+    //? if =1.21.8 {
     /*@Inject(method = "prepareCompassOverlay", at = @At(value = "HEAD"), cancellable = true, remap = false)
     private static void disableCompass(CallbackInfo ci) {
         if (ModConfig.get().compat_accessorify) {

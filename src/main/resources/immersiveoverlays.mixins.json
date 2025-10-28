@@ -6,7 +6,6 @@
   "client": [
     "BetterPlayerLocatorBarHudMixin",
     "GuiMixin",
-    "InfoOverlaysMixin",
     "JadeMixin",
     "LocatorBarRendererMixin",
     "PlayerLocatorPlusClientMixin",

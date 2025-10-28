@@ -188,7 +188,7 @@ public class OverlayHelpers {
                 if (ModCompat.ACCESSORIES)
                     AccessoriesCompat.checkForImportantAccessories(player);
                 //?}
-                //? if forge {
+                //? if forge || neoforge {
                 /*if (ModCompat.CURIOS)
                     CuriosCompat.checkForImportantAccessories(player);
                 *///?}

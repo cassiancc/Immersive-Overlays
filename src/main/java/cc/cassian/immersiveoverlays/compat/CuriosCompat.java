@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 
 public class CuriosCompat {
     public static void checkForImportantAccessories(Player player) {
-        //? if forge && >1.20 || neoforge {
+        //? if (forge && >1.20) || neoforge {
         /*var capability = CuriosApi.getCuriosInventory(player);
         if (capability.isPresent()) {
             IItemHandlerModifiable allEquipped = capability

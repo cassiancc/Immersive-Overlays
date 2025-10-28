@@ -217,7 +217,7 @@ public class ClockOverlay {
                 if (tfcCompat != null) season = tfcCompat;
             }
             *///?}
-            //? if forge && >1.20 {
+            //? if (forge || neoforge) && >1.20 {
              /*if (ModCompat.ECLIPTIC_SEASONS && ModConfig.get().compat_ecliptic_seasons) {
                 var eclipticCompat = EclipticSeasonsCompat.getSeason(level, pos);
                 if (eclipticCompat != null) season = eclipticCompat;
