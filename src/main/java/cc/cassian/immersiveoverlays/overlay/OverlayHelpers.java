@@ -62,7 +62,8 @@ public class OverlayHelpers {
             final int uWidth = fontWidth+xOffset+4;
             OverlayHelpers.blit(guiGraphics, xPlacementWithOffset, yPlacementWithOffset, 0, textureOffset, uWidth, tooltipSize, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
             // render endcap
-            OverlayHelpers.blit(guiGraphics, endCapXPlacement, yPlacementWithOffset, endCapOffset, textureOffset, 3, tooltipSize, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+            if (ModConfig.get().render_endcap)
+                OverlayHelpers.blit(guiGraphics, endCapXPlacement, yPlacementWithOffset, endCapOffset, textureOffset, 3, tooltipSize, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
         }
     }
 

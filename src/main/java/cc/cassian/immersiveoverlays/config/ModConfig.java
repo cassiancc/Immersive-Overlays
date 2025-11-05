@@ -36,6 +36,7 @@ public class ModConfig {
     public boolean search_containers = true;
     public boolean search_containers_for_containers = true;
     public boolean render_background = true;
+    public boolean render_endcap = true;
     public boolean hide_from_debug = true;
     // coords
     public boolean compass_enable = true;
@@ -95,7 +96,7 @@ public class ModConfig {
     public int biome_text_colour = 14737632;
     public int biome_vertical_position = 112;
     public boolean biome_horizontal_position_left = false;
-    public List<String> biome_items = List.of("minecraft:map", "minecraft:empty_map", "map_atlases:atlas", "map_atlases:end_atlas", "map_atlases:nether_atlas",  "naturescompass:naturescompass", "antiqueatlas:antique_atlas");
+    public List<String> biome_items = List.of("minecraft:map", "minecraft:filled_map", "minecraft:empty_map", "map_atlases:atlas", "map_atlases:end_atlas", "map_atlases:nether_atlas",  "naturescompass:naturescompass", "antiqueatlas:antique_atlas");
     // seasons
     public List<String> season_items = List.of("sereneseasons:calendar", "seasonsextras:season_calendar", "eclipticseasons:calendar");
     //speed

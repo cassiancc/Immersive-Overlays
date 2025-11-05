@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.4]
+
+### Added
+- Aliases for the Sparse Jungle biome and some Wilder Wild biomes.
+
+### Changed
+- Accessorify support has been removed as Accessorify now handles Immersive Overlays support itself.
+
+### Fixed
+- Ecliptic Seasons and Curios support now works correctly on 1.21.1 NeoForge.
+
+
 ## [1.4.3] - 2025-10-16
 
 ### Fixed

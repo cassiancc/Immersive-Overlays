@@ -86,6 +86,7 @@
   "config.immersiveoverlays.config.locator_bar": "Require compass for locator bar",
   "config.immersiveoverlays.config.moved_by_effects": "Status effects move overlays down",
   "config.immersiveoverlays.config.render_background": "Show background",
+  "config.immersiveoverlays.config.render_endcap": "Show background endcap",
   "config.immersiveoverlays.config.require_item": "Require item",
   "config.immersiveoverlays.config.require_item.tooltip": "Require an item to activate overlays. This is the intended way to use the mod.",
   "config.immersiveoverlays.config.require_item_in_hand": "Require item in hand",
