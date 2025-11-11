@@ -45,41 +45,116 @@ repositories {
     maven ( "https://maven.minecraftforge.net" ) {
         name = "Minecraft Forge"
     }
-    maven ( "https://maven.shedaniel.me/" ) {
+    maven {
         name = "shedaniel (Cloth Config)"
+        url = uri("https://maven.shedaniel.me/")
+        content {
+            includeGroupAndSubgroups("me.shedaniel")
+        }
     }
-    maven ( "https://maven.terraformersmc.com/releases/" ) {
+    maven {
         name = "Terraformers (Mod Menu)"
+        url = uri("https://maven.terraformersmc.com/releases/")
+        content {
+            includeGroupAndSubgroups("com.terraformersmc")
+            includeGroup("dev.emi")
+        }
     }
-    maven ( "https://maven.wispforest.io/releases/" ) {
+    maven {
         name = "Wisp Forest Maven"
+        url = uri("https://maven.wispforest.io/releases/")
+        content {
+            includeGroupAndSubgroups("io.wispforest")
+        }
     }
-    maven ( "https://api.modrinth.com/maven") {
+    maven {
         name = "Modrinth"
+        url = uri("https://api.modrinth.com/maven")
+        content {
+            includeGroupAndSubgroups("maven.modrinth")
+        }
     }
-    maven ( "https://maven2.bai.lol" ) {
+    maven {
         name = "WTHIT"
+        url = uri("https://maven2.bai.lol")
+        content {
+            includeGroupAndSubgroups("mcp.mobius.waila")
+            includeGroupAndSubgroups("lol.bai")
+        }
     }
-    maven ( "https://repo.sleeping.town/" ) {
+    maven {
         name = "Sisby Maven"
+        url = uri("https://repo.sleeping.town/")
+        content {
+            includeGroupAndSubgroups("folk.sisby")
+        }
     }
-    maven ( "https://maven.parchmentmc.org" ) {
+    maven {
         name = "Parchment Mappings"
+        url = uri("https://maven.parchmentmc.org")
+        content {
+            includeGroupAndSubgroups("org.parchmentmc")
+        }
     }
-    maven ( "https://maven.isxander.dev/releases") {
+    maven {
         name = "Xander Maven"
+        url = uri("https://maven.isxander.dev/releases")
+        content {
+            includeGroupAndSubgroups("dev.isxander")
+            includeGroupAndSubgroups("org.quiltmc.parsers")
+        }
     }
-    maven ( "https://maven.nucleoid.xyz/releases" ) {
+    maven {
         name = "Nucleoid Maven (Polymer)"
+        url = uri("https://maven.nucleoid.xyz")
+        content {
+            includeGroupAndSubgroups("eu.pb4")
+            includeGroupAndSubgroups("xyz.nucleoid")
+        }
     }
-    maven ( "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/") {
+    maven {
         name = "Fuzs Mod Resources"
+        url = uri("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
+        content {
+            includeGroupAndSubgroups("fuzs")
+        }
+    }
+    maven {
+        name = "FzzyMaven"
+        url = uri("https://maven.fzzyhmstrs.me/")
+        content {
+            includeGroup("me.fzzyhmstrs")
+        }
+    }
+    maven {
+        name = "Cardinal Components"
+        url = uri("https://maven.ladysnake.org/releases")
+        content {
+            includeGroupAndSubgroups("dev.onyxstudios")
+            includeGroupAndSubgroups("org.ladysnake")
+        }
+    }
+    maven {
+        name = "Fabricators of Create (Snapshots)"
+        url = uri("https://mvn.devos.one/snapshots")
+        content {
+            includeGroupAndSubgroups("net.createmod")
+            includeGroupAndSubgroups("dev.engine-room")
+            includeGroupAndSubgroups("io.github.fabricators_of_create")
+            includeGroupAndSubgroups("com.simibubi")
+        }
+    }
+    maven {
+        name = "Fabricators of Create (Releases)"
+        url = uri("https://mvn.devos.one/releases")
+        content {
+            includeGroupAndSubgroups("net.createmod")
+            includeGroupAndSubgroups("dev.engine-room")
+            includeGroupAndSubgroups("io.github.fabricators_of_create")
+            includeGroupAndSubgroups("com.simibubi")
+        }
     }
 
-    maven("https://mvn.devos.one/releases/" )
-    maven("https://mvn.devos.one/snapshots/" )
-    maven("https://maven.jamieswhiteshirt.com/libs-release")
-    maven("https://maven.ladysnake.org/releases")
 }
 
 dependencies {
@@ -108,10 +183,6 @@ dependencies {
     // Accesories
     if (hasProperty("deps.accessories")) {
         modCompileOnly("io.wispforest:accessories-fabric:${mod.dep("accessories")}")
-    }
-    // Accessorify
-    if (hasProperty("deps.accessorify")) {
-        modCompileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}")
     }
     // Tough as Nails
     if (stonecutter.eval(mcVersion, ">1.19.2")) {
@@ -184,6 +255,15 @@ dependencies {
         modCompileOnly("maven.modrinth:antique-atlas-4:utFwd9ms")
     }
 
+    if (hasProperty("deps.tiered_backpacks")) {
+        modCompileOnly("maven.modrinth:tiered-backpacks:${mod.dep("tiered_backpacks")}")
+        modLocalRuntime("maven.modrinth:tiered-backpacks:${mod.dep("tiered_backpacks")}")
+    }
+    if (hasProperty("deps.fzzy_config")) {
+        modCompileOnly("me.fzzyhmstrs:fzzy_config:${mod.dep("fzzy_config")}")
+        modLocalRuntime("me.fzzyhmstrs:fzzy_config:${mod.dep("fzzy_config")}")
+    }
+
 
 
     modCompileOnly("maven.modrinth:bplb:v1.0.0")
@@ -193,6 +273,13 @@ dependencies {
 configurations.all {
     resolutionStrategy {
         force("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
+    }
+}
+
+stonecutter {
+    replacements.string {
+        direction = eval(current.version, ">1.21.10")
+        replace("ResourceLocation", "Identifier")
     }
 }
 
