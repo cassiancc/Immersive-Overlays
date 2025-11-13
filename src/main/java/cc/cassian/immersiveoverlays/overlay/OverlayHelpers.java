@@ -98,7 +98,7 @@ public class OverlayHelpers {
     }
 
     public static int moveBy(Player player) {
-        //? if >1.21 {
+        //? if >1.20.4 {
         boolean hasBeneficial =
                 player.getActiveEffects().stream().anyMatch(p -> p.getEffect().value().isBeneficial());
         boolean hasNegative =
@@ -122,7 +122,7 @@ public class OverlayHelpers {
         if (mc.options.hideGui) return true;
         if (!ModConfig.get().enabled) return true;
         if (ModConfig.get().hide_from_debug) {
-            //? if >1.21 {
+            //? if >1.20.4 {
             var debug = mc.getDebugOverlay().showDebugScreen();
              //?} else {
             /*var debug = mc.options.renderDebug;
