@@ -4,7 +4,6 @@ import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 //? if neoforge {
 /*import com.tiviacz.travelersbackpack.capability.AttachmentUtils;
 import com.tiviacz.travelersbackpack.inventory.BackpackWrapper;
-import net.neoforged.neoforge.items.ItemStackHandler;
 *///?} else if forge {
 /*import com.tiviacz.travelersbackpack.capability.CapabilityUtils;
 import net.minecraftforge.items.ItemStackHandler;
@@ -19,7 +18,11 @@ public class TravelersBackpackCompat {
         /*if (AttachmentUtils.isWearingBackpack(player)) {
             BackpackWrapper backpackWrapper = AttachmentUtils.getBackpackWrapper(player);
             if (backpackWrapper != null) {
-                ItemStackHandler inventory = backpackWrapper.inventory;
+                //? if >1.21.9 {
+                var inventory = backpackWrapper.getStorage();
+                //?} else {
+                /^var inventory = backpackWrapper.inventory;
+                ^///?}
                 for (int i =0; i < inventory.getSlots(); i++) {
                     OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
                 }
@@ -54,15 +57,21 @@ public class TravelersBackpackCompat {
             /*ComponentUtils.getBackpackInv(player);
              *///?}
             if (backpackWrapper != null) {
-                var inventory = backpackWrapper.
-                        //? if >1.20 {
-                        inventory;
+                var inventory = backpackWrapper
+                //? if >1.21.9 {
+                /*.getStorage();
+                *///?} else if >1.20 {
+                .inventory;
+                //?} else {
+                /*getInventory();
+                *///?}
+                //? if >1.20 {
                 for (int i =0; i < inventory.getSlots(); i++) {
                     OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
                 }
 
                 //?} else {
-                /*getInventory();
+                /*
                 for (int i =0; i < inventory.getContainerSize(); i++) {
                     OverlayHelpers.isImportantItemOrContainer(inventory.getItem(i));
                 }

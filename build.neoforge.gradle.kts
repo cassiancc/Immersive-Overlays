@@ -233,7 +233,7 @@ dependencies {
         compileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+1.21.4")
     }
     compileOnly("top.theillusivec4.curios:curios-neoforge:${mod.dep("curios")}:api")
-    compileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-neoforge")
+    implementation("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-neoforge")
 
     compileOnly("maven.modrinth:oreganized:5.0.3")
     if (stonecutter.eval(mcVersion, "=1.21.1")) {
@@ -269,8 +269,8 @@ dependencies {
     compileOnly("org.sinytra.forgified-fabric-api:fabric-convention-tags-v2:2.11.0+87e5848019")
 
 
-    implementation("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
-    implementation("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
+    compileOnly("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
+    compileOnly("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
 
 }
 
