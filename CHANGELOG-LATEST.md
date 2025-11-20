@@ -4,4 +4,4 @@
 ### Fixed
 - Filled maps now show biome overlays.
 - Basalt Deltas now show their biome icon.
-- Crashed on newly released Traveler's Backpacks for 1.21.10.
+- Crash on newly released Traveler's Backpacks for 1.21.10.
