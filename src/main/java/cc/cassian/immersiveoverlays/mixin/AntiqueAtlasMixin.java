@@ -31,7 +31,7 @@ public abstract class AntiqueAtlasMixin {
 
     @Inject(
             method = "hasHandheldAtlas",
-            at = @At(value = "RETURN"),
+            at = @At(value = "RETURN"), remap = false,
             cancellable = true)
     private static void allowMapInBundles(Player player, CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().compat_antique_atlas && ModConfig.get().search_containers) {

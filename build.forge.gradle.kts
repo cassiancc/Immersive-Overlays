@@ -238,8 +238,27 @@ dependencies {
     modCompileOnly("io.github.llamalad7:mixinextras-common:0.5.0")
     implementation("io.github.llamalad7:mixinextras-forge:0.5.0")
     jarJar("io.github.llamalad7:mixinextras-forge:0.5.0")
+    annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
 
 }
+
+
+mixin {
+    add(sourceSets["main"], "immersiveoverlays.refmap.json")
+    config("immersiveoverlays.mixins.json")
+}
+
+dependencies {
+}
+
+tasks.named<Jar>("jar") {
+    manifest {
+        attributes(
+            "MixinConfigs" to "immersiveoverlays.mixins.json"
+        )
+    }
+}
+
 
 tasks {
     processResources {

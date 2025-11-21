@@ -16,7 +16,7 @@ import xaero.common.misc.Misc;
 public class XaerosMinimapMixin {
     @Inject(
             method = "hasItem(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/Item;)Z",
-            at = @At(value = "RETURN"),
+            at = @At(value = "RETURN"), remap = false,
             cancellable = true)
     private static void allowMapInBundles(Player player, Item item, CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().compat_xaeros && ModConfig.get().search_containers)
