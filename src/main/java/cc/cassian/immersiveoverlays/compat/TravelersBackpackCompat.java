@@ -71,8 +71,8 @@ public class TravelersBackpackCompat {
                 }
 
                 //?} else {
-                /*
-                for (int i =0; i < inventory.getContainerSize(); i++) {
+                
+                /*for (int i =0; i < inventory.getContainerSize(); i++) {
                     OverlayHelpers.isImportantItemOrContainer(inventory.getItem(i));
                 }
                 *///?}

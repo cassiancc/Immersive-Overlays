@@ -214,7 +214,7 @@ dependencies {
     modImplementation("maven.modrinth:cold-sweat:${mod.dep("cold_sweat")}")
 
     // Jade
-    modImplementation("maven.modrinth:jade:${mod.dep("jade_version")}")
+    modImplementation("maven.modrinth:jade:${mod.dep("jade")}")
 
     modCompileOnly("curse.maven:ecliptic-seasons-1118306:${mod.dep("ecliptic_seasons")}")
 
