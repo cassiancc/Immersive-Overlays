@@ -19,10 +19,10 @@ public class TravelersBackpackCompat {
             BackpackWrapper backpackWrapper = AttachmentUtils.getBackpackWrapper(player);
             if (backpackWrapper != null) {
                 //? if >1.21.9 {
-                var inventory = backpackWrapper.getStorage();
-                //?} else {
-                /^var inventory = backpackWrapper.inventory;
-                ^///?}
+                /^var inventory = backpackWrapper.getStorage();
+                ^///?} else {
+                var inventory = backpackWrapper.inventory;
+                //?}
                 for (int i =0; i < inventory.getSlots(); i++) {
                     OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
                 }

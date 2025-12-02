@@ -61,7 +61,7 @@ public class ImmersiveOverlaysNeoForgeClient {
     public static void registerKeybinds(RegisterKeyMappingsEvent event){
         event.register(ModClient.overlayToggle);
         //? if >1.21.8
-        event.registerCategory(ModClient.CATEGORY);
+        /^event.registerCategory(ModClient.CATEGORY);^/
     }
 
 

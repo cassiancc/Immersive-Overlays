@@ -93,7 +93,7 @@ public class TemperatureOverlay {
             return ColdSweatCompat.getTemperaturePair(player);
         }
         *///?}
-        //? if forge {
+        //? if forge || neoforge {
         /*if (ModCompat.LEGENDARY_SURVIVAL_OVERHAUL && ModConfig.get().compat_legendary_survival_overhaul_temperature) {
             String temperature = LegendarySurvivalOverhaulCompat.getAmbientTemperature(player);
             var sprite = switch (temperature) {

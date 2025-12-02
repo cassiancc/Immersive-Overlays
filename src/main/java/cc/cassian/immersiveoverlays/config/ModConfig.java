@@ -83,7 +83,7 @@ public class ModConfig {
     //? if forge || neoforge {
     /*public boolean compat_cold_sweat_temperature = true;
     *///?}
-    //? if forge {
+    //? if forge || neoforge {
     /*public boolean compat_legendary_survival_overhaul_temperature = true;
      *///?}
     //? if fabric
