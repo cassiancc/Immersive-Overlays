@@ -12,6 +12,9 @@ import net.minecraft.client.gui.GuiGraphics;
 //?} else {
 /*import com.mojang.blaze3d.vertex.PoseStack;
 *///?}
+//? if >1.21 {
+import net.minecraft.client.DeltaTracker;
+//?}
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
@@ -29,11 +32,18 @@ public class ClockOverlay {
     public static boolean showSeason = false;
 
 
-    //? if >1.20 {
-    public static void renderGameOverlayEvent(GuiGraphics guiGraphics) {
-    //?} else {
-        /*public static void renderGameOverlayEvent(PoseStack guiGraphics) {
-     *///?}
+    public static void renderGameOverlayEvent(
+            //? if >1.20 {
+            GuiGraphics guiGraphics
+            //?} else {
+            /*PoseStack guiGraphics*/
+            //?}
+            //? if >1.21 {
+            , DeltaTracker deltaTracker
+            //?} else {
+            /*, float deltaTracker
+             *///?}
+    ) {
         if ((!showWeather && !showTime && !shouldShowSeasons()) || !ModConfig.get().clock_enable)
             return;
         var mc = Minecraft.getInstance();

@@ -4,6 +4,9 @@ import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.config.ModConfig;
+//? if >1.21 {
+import net.minecraft.client.DeltaTracker;
+//?}
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
@@ -387,12 +390,19 @@ public class OverlayHelpers {
             //?} else {
             /*PoseStack
              *///?}
-                    hud) {
-        CompassOverlay.renderGameOverlayEvent(hud);
-        ClockOverlay.renderGameOverlayEvent(hud);
-        BiomeOverlay.renderGameOverlayEvent(hud);
-        TemperatureOverlay.renderGameOverlayEvent(hud);
-        SpeedOverlay.renderGameOverlayEvent(hud);
+            hud,
+            //? if >1.21 {
+            DeltaTracker
+            //?} else {
+            /*float
+            *///?}
+            tickProgress
+                    ) {
+        CompassOverlay.renderGameOverlayEvent(hud, tickProgress);
+        ClockOverlay.renderGameOverlayEvent(hud, tickProgress);
+        BiomeOverlay.renderGameOverlayEvent(hud, tickProgress);
+        TemperatureOverlay.renderGameOverlayEvent(hud, tickProgress);
+        SpeedOverlay.renderGameOverlayEvent(hud, tickProgress);
     }
 
     public static void blit(
@@ -425,7 +435,6 @@ public class OverlayHelpers {
                 x, y,
                 //? if <1.21.2
                 0, //z
-                //?
                 uOffset,
                 vOffset, uWidth, vHeight,
                 textureWidth, textureHeight);

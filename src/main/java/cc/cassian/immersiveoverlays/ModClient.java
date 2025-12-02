@@ -29,9 +29,8 @@ public class ModClient {
             CATEGORY
     );
 
-    public static void init(String loader) {
+    public static void init() {
         ModConfig.load();
-        ModClient.loader = loader;
     }
 
     public static ResourceLocation locate(String s) {

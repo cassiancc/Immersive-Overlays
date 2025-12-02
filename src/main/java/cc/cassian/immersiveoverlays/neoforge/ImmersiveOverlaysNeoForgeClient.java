@@ -7,8 +7,7 @@ import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.config.ModConfigFactory;
-import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
-import cc.cassian.immersiveoverlays.layers.*;
+import cc.cassian.immersiveoverlays.overlay.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
@@ -33,7 +32,7 @@ public class ImmersiveOverlaysNeoForgeClient {
 
     public ImmersiveOverlaysNeoForgeClient(IEventBus eventBus, ModContainer modContainer) {
         // Load config.
-        ModClient.init("neoforge");
+        ModClient.init();
         //Register config screen.
         registerModsPage();
     }
@@ -45,11 +44,11 @@ public class ImmersiveOverlaysNeoForgeClient {
 
     @SubscribeEvent
     public static void renderGameOverlayEvent(RegisterGuiLayersEvent event) {
-        event.registerAboveAll(ModClient.locate("biome"), new BiomeLayer());
-        event.registerAboveAll(ModClient.locate("clock"), new ClockLayer());
-        event.registerAboveAll(ModClient.locate("compass"), new CompassLayer());
-        event.registerAboveAll(ModClient.locate("speed"), new SpeedLayer());
-        event.registerAboveAll(ModClient.locate("temperature"), new TemperatureLayer());
+        event.registerAboveAll(ModClient.locate("biome"), BiomeOverlay::renderGameOverlayEvent);
+        event.registerAboveAll(ModClient.locate("clock"), ClockOverlay::renderGameOverlayEvent);
+        event.registerAboveAll(ModClient.locate("compass"), CompassOverlay::renderGameOverlayEvent);
+        event.registerAboveAll(ModClient.locate("speed"), SpeedOverlay::renderGameOverlayEvent);
+        event.registerAboveAll(ModClient.locate("temperature"), TemperatureOverlay::renderGameOverlayEvent);
     }
 
     @SubscribeEvent

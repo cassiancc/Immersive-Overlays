@@ -2,6 +2,9 @@ package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.config.ModConfig;
+//? if >1.21 {
+import net.minecraft.client.DeltaTracker;
+//?}
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -18,7 +21,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import org.apache.commons.lang3.text.WordUtils;
 
-import java.io.IOException;
 import java.util.Objects;
 
 public class BiomeOverlay {
@@ -26,11 +28,18 @@ public class BiomeOverlay {
     public static ResourceLocation UNDEFINED = ModClient.locate("textures/immersiveoverlays/undefined.png");
 
 
+    public static void renderGameOverlayEvent(
     //? if >1.20 {
-    public static void renderGameOverlayEvent(GuiGraphics guiGraphics) {
+        GuiGraphics guiGraphics
     //?} else {
-        /*public static void renderGameOverlayEvent(PoseStack guiGraphics) {
-     *///?}
+        /*PoseStack guiGraphics*/
+    //?}
+    //? if >1.21 {
+        , DeltaTracker deltaTracker
+    //?} else {
+        /*, float deltaTracker
+    *///?}
+    ) {
         if (!showBiome || !ModConfig.get().biome_enable)
             return;
         if (ModConfig.get().biome_reduced_info) {

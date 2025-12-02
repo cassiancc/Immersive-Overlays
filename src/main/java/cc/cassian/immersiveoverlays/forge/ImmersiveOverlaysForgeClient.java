@@ -21,7 +21,7 @@ public class ImmersiveOverlaysForgeClient {
     public static void init() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         // Load config.
-        ModClient.init("forge");
+        ModClient.init();
         //Register config screen.
         registerModsPage();
         MinecraftForge.EVENT_BUS.addListener(ImmersiveOverlaysForgeClient::checkInventoryForOverlays);
@@ -42,7 +42,7 @@ public class ImmersiveOverlaysForgeClient {
         //?} else {
         /^var hud = event.getPoseStack();
          ^///?}
-        OverlayHelpers.renderOverlays(hud);
+        OverlayHelpers.renderOverlays(hud, event.getPartialTick());
     }
 
 

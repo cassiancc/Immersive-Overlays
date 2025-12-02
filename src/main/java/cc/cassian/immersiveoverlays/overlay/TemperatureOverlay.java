@@ -3,8 +3,10 @@ package cc.cassian.immersiveoverlays.overlay;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 import cc.cassian.immersiveoverlays.helpers.TextHelpers;
+//? if >1.21 {
+import net.minecraft.client.DeltaTracker;
+//?}
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -21,11 +23,18 @@ public class TemperatureOverlay {
     public static boolean showTemperature = false;
 
 
-    //? if >1.20 {
-    public static void renderGameOverlayEvent(GuiGraphics poseStack) {
-    //?} else {
-        /*public static void renderGameOverlayEvent(PoseStack poseStack) {
-     *///?}
+    public static void renderGameOverlayEvent(
+            //? if >1.20 {
+            GuiGraphics guiGraphics
+            //?} else {
+            /*PoseStack guiGraphics*/
+            //?}
+            //? if >1.21 {
+            , DeltaTracker deltaTracker
+            //?} else {
+            /*, float deltaTracker
+             *///?}
+    ) {
         if (!showTemperature || !ModConfig.get().temperature_enable)
             return;
         var mc = Minecraft.getInstance();
@@ -50,12 +59,12 @@ public class TemperatureOverlay {
         int windowWidth = mc.getWindow().getGuiScaledWidth();
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().temperature_horizontal_position_left);
         // render background
-        OverlayHelpers.renderBackground(poseStack, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().temperature_horizontal_position_left);
+        OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().temperature_horizontal_position_left);
         // render text
-        OverlayHelpers.drawString(poseStack, mc.font, temperature.component(), xPlacement-xOffset+iconOffset, textYPlacement, temperature.color());
+        OverlayHelpers.drawString(guiGraphics, mc.font, temperature.component(), xPlacement-xOffset+iconOffset, textYPlacement, temperature.color());
         // render sprite
         if (showTemperature && ModConfig.get().temperature_icons) {
-            OverlayHelpers.blitSprite(poseStack, ModClient.locate("textures/gui/" + temperature.texture() + ".png"), xPlacement-xOffset-1, textYPlacement-3);
+            OverlayHelpers.blitSprite(guiGraphics, ModClient.locate("textures/gui/" + temperature.texture() + ".png"), xPlacement-xOffset-1, textYPlacement-3);
         }
     }
 
