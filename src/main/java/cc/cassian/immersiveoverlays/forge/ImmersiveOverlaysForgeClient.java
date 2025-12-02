@@ -48,6 +48,7 @@ public class ImmersiveOverlaysForgeClient {
 
     public static void registerKeybinds(RegisterKeyMappingsEvent event){
         event.register(ModClient.overlayToggle);
+        event.register(ModClient.overlaySettings);
     }
 
 

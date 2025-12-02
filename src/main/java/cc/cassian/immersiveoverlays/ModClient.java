@@ -28,6 +28,12 @@ public class ModClient {
             InputConstants.UNKNOWN.getValue(), // The default keycode
             CATEGORY
     );
+    public static final KeyMapping overlaySettings = new KeyMapping(
+            "key.immersiveoverlays.settings", // The translation key of the name shown in the Controls screen
+            InputConstants.Type.KEYSYM, // This key mapping is for Keyboards by default
+            InputConstants.UNKNOWN.getValue(), // The default keycode
+            CATEGORY
+    );
 
     public static void init() {
         ModConfig.load();

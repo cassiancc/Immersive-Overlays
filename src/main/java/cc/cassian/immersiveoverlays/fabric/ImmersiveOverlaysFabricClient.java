@@ -50,6 +50,7 @@ public final class ImmersiveOverlaysFabricClient implements ClientModInitializer
             ModLists.loadLists();
         }));
         KeyBindingHelper.registerKeyBinding(ModClient.overlayToggle);
+        KeyBindingHelper.registerKeyBinding(ModClient.overlaySettings);
     }
 
 }

@@ -121,7 +121,8 @@
   "gui.c.season.summer": "Summer",
   "gui.c.season.fall": "Fall",
   "gui.c.season.winter": "Winter",
-  "key.immersiveoverlays.toggle": "Toggle overlays",
+  "key.immersiveoverlays.toggle": "Toggle Overlays",
+  "key.immersiveoverlays.settings": "Open Config",
   "key.category.immersiveoverlays.keybinds": "Immersive Overlays"
 
 }

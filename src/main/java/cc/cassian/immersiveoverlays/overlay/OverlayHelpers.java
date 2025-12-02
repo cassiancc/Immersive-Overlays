@@ -2,6 +2,7 @@ package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
+import cc.cassian.immersiveoverlays.config.ClothConfigFactory;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 //? if >1.21 {
@@ -470,6 +471,9 @@ public class OverlayHelpers {
             }
         } else {
             hasBeenToggled = false;
+        }
+        if (ModClient.overlaySettings.isDown()) {
+           Minecraft.getInstance().setScreen(ClothConfigFactory.create(Minecraft.getInstance().screen));
         }
     }
 }
