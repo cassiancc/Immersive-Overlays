@@ -21,18 +21,26 @@ import net.p3pp3rf1y.sophisticatedbackpacks.backpack.wrapper.IBackpackWrapper;
 *///?}
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+//? if >1.21.9 {
+/*import net.p3pp3rf1y.sophisticatedcore.inventory.ItemStackKey;
+*///?}
 import java.util.Optional;
+import java.util.Set;
 
 public class SophisticatedBackpacksCompat {
 
     public static void checkBackpackContents(ItemStack stack) {
-        //? if neoforge {
+    //? if neoforge {
         /*Optional<IBackpackWrapper> backpackWrapper = BackpackWrapper.fromExistingData(stack);
         if (backpackWrapper.isPresent()) {
-            ItemStackHandler inventory = backpackWrapper.get().getInventoryHandler();
+            var inventory = backpackWrapper.get().getInventoryHandler();
+            //? if >1.21.9 {
+            /^inventory.getTrackedStacks().forEach(slot->OverlayHelpers.isImportantItemOrContainer(slot.stack()));
+            ^///?} else {
             for (int i =0; i < inventory.getSlots(); i++) {
                 OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
             }
+            //?}
         }
     *///?}
     //? if >1.21 && fabric {

@@ -220,7 +220,7 @@ dependencies {
     implementation("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}_NeoForge_${mod.dep("xaeros_mc")}")
 
     // Cold Sweat
-    implementation("maven.modrinth:cold-sweat:${mod.dep("cold_sweat")}")
+    compileOnly("maven.modrinth:cold-sweat:${mod.dep("cold_sweat")}")
 
 
     if (stonecutter.eval(mcVersion, ">1.19.2")) {
@@ -233,7 +233,7 @@ dependencies {
         compileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+1.21.4")
     }
     compileOnly("top.theillusivec4.curios:curios-neoforge:${mod.dep("curios")}:api")
-    implementation("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-neoforge")
+    compileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-neoforge")
 
     compileOnly("maven.modrinth:oreganized:5.0.3")
     if (stonecutter.eval(mcVersion, "=1.21.1")) {
@@ -267,11 +267,8 @@ dependencies {
         compileOnly("org.sinytra:forgified-fabric-loader:2.5.55+0.17.2+1.21.1")
     }
 
-    compileOnly("org.sinytra.forgified-fabric-api:fabric-convention-tags-v2:2.11.0+87e5848019")
-
-
-    compileOnly("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
-    compileOnly("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
+    implementation("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
+    implementation("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
 
 }
 
