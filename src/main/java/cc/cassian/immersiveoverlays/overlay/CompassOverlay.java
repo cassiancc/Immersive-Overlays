@@ -82,7 +82,7 @@ public class CompassOverlay {
             if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable || (ModConfig.get().clock_horizontal_position_left != ModConfig.get().compass_horizontal_position_left)) {
                 yPlacement = yPlacement - 15;
             }
-            if (ClockOverlay.showWeather && (ModConfig.get().clock_horizontal_position_left == ModConfig.get().compass_horizontal_position_left)) {
+            if ((ClockOverlay.showTime || ClockOverlay.showWeather) && (ModConfig.get().clock_horizontal_position_left == ModConfig.get().compass_horizontal_position_left)) {
                 yPlacement = yPlacement + 9;
             }
             if (!BiomeOverlay.showBiome || !ModConfig.get().biome_enable || ModConfig.get().biome_reduced_info || (ModConfig.get().biome_horizontal_position_left != ModConfig.get().compass_horizontal_position_left)) {
