@@ -18,10 +18,13 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
+import net.minecraft.data.worldgen.DimensionTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.dimension.DimensionType;
 import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.Locale;
@@ -53,7 +56,11 @@ public class ClockOverlay {
 
         String time = "Hi! ";
         if (showTime) {
+            //? if >1.21.2 {
+            /*if (mc.level.dimensionType().hasFixedTime()) {
+            *///?} else {
             if (mc.level.dimensionType().natural()) {
+            //?}
                 time = getTime(mc.level.getDayTime());
             } else {
                 time = "????";
@@ -152,8 +159,13 @@ public class ClockOverlay {
         *///?} else {
         var snows = biome.coldEnoughToSnow(player.blockPosition());
          //?}
-        if (!level.dimensionType().natural()) return 124; // Netherlike
-        else if (level.isThundering()) {
+        //? if >1.21.10 {
+        /*if (!level.dimension().equals(Level.OVERWORLD)) {
+        *///?} else {
+        if (!level.dimensionType().natural()) {
+        //?}
+            return 124; // Netherlike
+        } else if (level.isThundering()) {
             if (snows) return 92; // Snowing
             if (precipitation.equals(Biome.Precipitation.NONE)) return 108; // Sandstorming
             return 76; // Thundering

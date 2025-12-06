@@ -26,7 +26,7 @@ public class ModConfigFactory
     public ModConfigFactory() {
     }
 
-    //? if fabric
+    //? if fabric || unobf
     public Screen create(Screen parent) {
         //? if neoforge
         /*public @NotNull Screen createScreen(@NotNull ModContainer modContainer, @NotNull Screen parent) {*/

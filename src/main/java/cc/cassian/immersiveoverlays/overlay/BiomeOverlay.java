@@ -143,7 +143,12 @@ public class BiomeOverlay {
     }
 
     public static ResourceLocation getId(Holder<Biome> biome) {
-        return biome.unwrapKey().orElse(Biomes.THE_VOID).location();
+        return biome.unwrapKey().orElse(Biomes.THE_VOID)
+        //? if >1.21.10 {
+        /*.identifier();
+        *///?} else {
+        .location();
+        //?}
     }
 
     public static String formatBiome(ResourceLocation biome) {

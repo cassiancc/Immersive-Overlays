@@ -21,7 +21,7 @@ import net.p3pp3rf1y.sophisticatedbackpacks.backpack.wrapper.IBackpackWrapper;
 *///?}
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-//? if >1.21.9 {
+//? if >1.21.9 && !unobf {
 /*import net.p3pp3rf1y.sophisticatedcore.inventory.ItemStackKey;
 *///?}
 import java.util.Optional;
