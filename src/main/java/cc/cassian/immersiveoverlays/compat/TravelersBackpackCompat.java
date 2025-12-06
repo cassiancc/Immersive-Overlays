@@ -18,11 +18,7 @@ public class TravelersBackpackCompat {
         /*if (AttachmentUtils.isWearingBackpack(player)) {
             BackpackWrapper backpackWrapper = AttachmentUtils.getBackpackWrapper(player);
             if (backpackWrapper != null) {
-                //? if >1.21.9 {
-                /^var inventory = backpackWrapper.getStorage();
-                ^///?} else {
-                var inventory = backpackWrapper.inventory;
-                //?}
+                var inventory = backpackWrapper.getStorage();
                 for (int i =0; i < inventory.getSlots(); i++) {
                     OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
                 }
@@ -58,11 +54,11 @@ public class TravelersBackpackCompat {
              *///?}
             if (backpackWrapper != null) {
                 var inventory = backpackWrapper
-                //? if >1.21.9 {
-                /*.getStorage();
-                *///?} else if >1.20 {
-                .inventory;
-                //?} else {
+                //? if >1.21.9 || 1.21.1 {
+                .getStorage();
+                //?} else if >1.20 {
+                /*.inventory;
+                *///?} else {
                 /*getInventory();
                 *///?}
                 //? if >1.20 {

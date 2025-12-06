@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.6]
+
+### Added
+- Keybind for opening mod configurations.
+- Support for Sophisticated Backpacks on 1.21.10 NeoForge.
+
+### Fixed
+- Legendary Survival Overhaul compat on NeoForge.
+- Clock overlay placement when weather icon is not visible.
+
 ## [1.4.5]
 
 ### Added
