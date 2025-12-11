@@ -56,18 +56,17 @@ public class ClockOverlay {
 
         String time = "Hi! ";
         if (showTime) {
-            //? if >1.21.2 {
-            /*if (mc.level.dimensionType().hasFixedTime()) {
+            //? if >1.21.10 {
+            /*if (!mc.level.dimensionType().hasFixedTime()) {
             *///?} else {
             if (mc.level.dimensionType().natural()) {
             //?}
                 time = getTime(mc.level.getDayTime());
+                if (time.length() == 4) {
+                    time = " " + time;
+                }
             } else {
-                time = "????";
-            }
-
-            if (time.length() == 4) {
-                time = " " + time;
+                time = "";
             }
         }
 
@@ -175,7 +174,7 @@ public class ClockOverlay {
             return 60; // Raining
         }
         else if (time >= 12500 && time <= 13500) return 30; // Sunset
-        else if (time >= 13500 && time <= 22500) return 46; // Night
+        else if (time >= 13500 && time <= 23000) return 46; // Night
         else if (time >= 23000 || time <= 300) return 15; // Morning
         return 0; // Sunny
     }

@@ -5,7 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.4.6]
+## [1.4.8] - 2025-12-06
+
+### Fixed
+- Crash from new version of Traveler's Backpack.
+
+## [1.4.7] - 2025-12-03
 
 ### Added
 - Keybind for opening mod configurations.
@@ -15,7 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Legendary Survival Overhaul compat on NeoForge.
 - Clock overlay placement when weather icon is not visible.
 
-## [1.4.5]
+## [1.4.6] - 2025-11-21
+
+### Fixed
+- Mixins not applying on LegacyForge.
+
+## [1.4.5] - 2025-11-20
 
 ### Added
 - Debug option to disable end cap rendering (might improve the appearance of some custom resource packs)
