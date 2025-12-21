@@ -1,6 +1,6 @@
 package cc.cassian.immersiveoverlays.fabric;
 
-//? if fabric || unobf {
+//? if fabric {
 
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.config.ModConfig;

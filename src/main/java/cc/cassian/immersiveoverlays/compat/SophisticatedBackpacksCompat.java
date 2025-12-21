@@ -6,7 +6,7 @@ import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 /*import net.neoforged.neoforge.items.ItemStackHandler;
 import net.p3pp3rf1y.sophisticatedbackpacks.backpack.wrapper.BackpackWrapper;
 import net.p3pp3rf1y.sophisticatedbackpacks.backpack.wrapper.IBackpackWrapper;
-*///?} else if fabric {
+*///?} else if fabric && <26 {
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleSlotStorage;
 import net.p3pp3rf1y.sophisticatedbackpacks.backpack.BackpackItem;
@@ -21,7 +21,7 @@ import net.p3pp3rf1y.sophisticatedbackpacks.backpack.wrapper.IBackpackWrapper;
 *///?}
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-//? if >1.21.9 && !unobf {
+//? if >1.21.9 && <26 {
 /*import net.p3pp3rf1y.sophisticatedcore.inventory.ItemStackKey;
 *///?}
 import java.util.Optional;
@@ -43,7 +43,7 @@ public class SophisticatedBackpacksCompat {
             //?}
         }
     *///?}
-    //? if >1.21 && fabric {
+    //? if >1.21 && fabric && <26 {
     Optional<IBackpackWrapper> backpackWrapper = BackpackWrapper.fromExistingData(stack);
     if (backpackWrapper.isPresent()) {
         InventoryHandler inventory = backpackWrapper.get().getInventoryHandler();
@@ -51,7 +51,7 @@ public class SophisticatedBackpacksCompat {
             OverlayHelpers.isImportantItemOrContainer(slot.getResource().toStack());
         }
     }
-    //?} else if fabric && >1.19 {
+    //?} else if fabric && >1.19 && <26 {
     /*if (stack.getItem() instanceof BackpackItem) {
         IBackpackWrapper backpackWrapper = new BackpackWrapper(stack);
         InventoryHandler inventory = backpackWrapper.getInventoryHandler();

@@ -3,7 +3,7 @@ package cc.cassian.immersiveoverlays.compat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import cc.cassian.immersiveoverlays.overlay.TemperatureOverlay;
-//? if fabric
+//? if fabric && <26
 import com.github.thedeathlycow.thermoo.api.temperature.TemperatureAware;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
@@ -12,7 +12,7 @@ import net.minecraft.network.chat.Component;
 public class ThermooCompat {
 
     public static TemperatureOverlay.TemperaturePair getTemperaturePair(LocalPlayer player) {
-        //? if fabric {
+        //? if fabric && <26 {
         var temperatureAware = TemperatureAware.getNullable(player);
         if (temperatureAware != null) {
             var scale = temperatureAware.thermoo$getTemperatureScale();

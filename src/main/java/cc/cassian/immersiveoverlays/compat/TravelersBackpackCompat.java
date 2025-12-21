@@ -7,7 +7,7 @@ import com.tiviacz.travelersbackpack.inventory.BackpackWrapper;
 *///?} else if forge {
 /*import com.tiviacz.travelersbackpack.capability.CapabilityUtils;
 import net.minecraftforge.items.ItemStackHandler;
-*///?} else if fabric {
+*///?} else if fabric && <26 {
 import com.tiviacz.travelersbackpack.component.ComponentUtils;
 //?}
 import net.minecraft.world.entity.player.Player;
@@ -44,7 +44,7 @@ public class TravelersBackpackCompat {
                 }
             }
         }
-        *///?} else if fabric {
+        *///?} else if fabric && <26 {
         if (ComponentUtils.isWearingBackpack(player)) {
             var backpackWrapper =
             //? if >1.20 {

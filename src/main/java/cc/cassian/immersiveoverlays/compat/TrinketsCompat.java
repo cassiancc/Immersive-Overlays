@@ -1,7 +1,7 @@
 package cc.cassian.immersiveoverlays.compat;
 
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
-//? if fabric {
+//? if fabric && <26 {
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketsApi;
 //?}
@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class TrinketsCompat {
     public static void checkForImportantAccessories(Player player) {
-        //? if fabric {
+        //? if fabric && <26 {
         var capability = TrinketsApi.getTrinketComponent(player);
         if (capability.isPresent()) {
             for (Tuple<SlotReference, ItemStack> slotReferenceItemStackTuple : capability.get().getAllEquipped()) {

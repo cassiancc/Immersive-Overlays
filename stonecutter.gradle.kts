@@ -12,7 +12,7 @@ plugins {
 stonecutter active "1.21.1-fabric"
 
 stonecutter parameters {
-    constants.match(node.metadata.project.substringAfterLast('-'), "fabric", "unobf", "neoforge", "forge")
+    constants.match(node.metadata.project.substringAfterLast('-'), "fabric", "neoforge", "forge")
     filters.include("**/*.fsh", "**/*.vsh")
 }
 

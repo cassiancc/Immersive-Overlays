@@ -1,6 +1,6 @@
 package cc.cassian.immersiveoverlays.config;
 
-//? if fabric {
+//? if fabric && <26 {
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;

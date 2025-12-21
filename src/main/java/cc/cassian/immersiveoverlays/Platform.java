@@ -1,6 +1,6 @@
 package cc.cassian.immersiveoverlays;
 
-//? fabric || unobf {
+//? fabric {
 import cc.cassian.immersiveoverlays.fabric.FabricPlatformImpl;
 //?}
 import net.minecraft.world.item.ItemStack;
@@ -14,7 +14,7 @@ import java.nio.file.Path;
 
 public interface Platform {
 
-    //? fabric || unobf {
+    //? fabric {
     Platform INSTANCE = new FabricPlatformImpl();
     //?}
     //? neoforge {

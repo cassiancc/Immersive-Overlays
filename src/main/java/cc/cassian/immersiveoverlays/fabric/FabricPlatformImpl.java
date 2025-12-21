@@ -1,6 +1,6 @@
 package cc.cassian.immersiveoverlays.fabric;
 
-//? fabric || unobf {
+//? fabric {
 
 import cc.cassian.immersiveoverlays.Platform;
 import net.fabricmc.loader.api.FabricLoader;
