@@ -30,7 +30,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 //? if >1.21.4
-/*import net.minecraft.world.entity.EquipmentSlot;*/
+//import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -361,7 +361,7 @@ public class OverlayHelpers {
           *///?}
           poseStack, Font font, Component text, int x, int y, Integer color) {
         //? if >1.21.6
-        /*color = ARGB.opaque(color);*/
+        //color = ARGB.opaque(color);
         //? if >1.20 {
         poseStack.drawString(font, text, x, y, color);
         //?} else {
@@ -377,7 +377,7 @@ public class OverlayHelpers {
           *///?}
          poseStack, Font font, String text, int x, int y, Integer color) {
         //? if >1.21.6
-        /*color = ARGB.opaque(color);*/
+        //color = ARGB.opaque(color);
         //? if >1.20 {
         poseStack.drawString(font, text, x, y, color);
         //?} else {

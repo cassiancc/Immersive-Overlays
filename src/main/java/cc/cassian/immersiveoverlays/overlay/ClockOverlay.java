@@ -4,7 +4,7 @@ import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 //? if >1.21.5
-/*import net.minecraft.client.renderer.RenderPipelines;*/
+//import net.minecraft.client.renderer.RenderPipelines;
 import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import net.minecraft.client.Minecraft;
 //? if >1.20 {

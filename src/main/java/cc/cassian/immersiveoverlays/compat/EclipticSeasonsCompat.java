@@ -1,7 +1,7 @@
 package cc.cassian.immersiveoverlays.compat;
 
 //? if neoforge || forge
-/*import com.teamtea.eclipticseasons.api.EclipticSeasonsApi;*/
+//import com.teamtea.eclipticseasons.api.EclipticSeasonsApi;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 

@@ -235,9 +235,9 @@ dependencies {
     compileOnly("top.theillusivec4.curios:curios-neoforge:${mod.dep("curios")}:api")
     compileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-neoforge")
 
-    compileOnly("maven.modrinth:oreganized:5.0.3")
+    compileOnly("maven.modrinth:oreganized:5.1.1")
     if (stonecutter.eval(mcVersion, "=1.21.1")) {
-        runtimeOnly("maven.modrinth:oreganized:5.0.3")
+        runtimeOnly("maven.modrinth:oreganized:5.1.1")
         implementation("com.teamabnormals:blueprint:1.21.1-8.0.5")
         implementation("curse.maven:legendary-survival-overhaul-840254:7278267")
     }

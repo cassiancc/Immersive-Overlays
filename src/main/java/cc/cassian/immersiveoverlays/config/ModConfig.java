@@ -28,7 +28,7 @@ public class ModConfig {
     //General settings
     public boolean enabled = true;
     //? if >1.21.5
-    /*public boolean locator_bar = true;*/
+    //public boolean locator_bar = true;
     public boolean avoid_overlapping = true;
     public boolean moved_by_effects = true;
     public boolean require_item = true;

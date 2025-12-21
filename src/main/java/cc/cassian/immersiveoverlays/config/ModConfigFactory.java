@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ModConfigFactory
         //? if neoforge
-        /*implements IConfigScreenFactory*/
+        //implements IConfigScreenFactory
         //? if fabric && <26
         implements ConfigScreenFactory<Screen>
 {
@@ -29,7 +29,7 @@ public class ModConfigFactory
     //? if fabric
     public Screen create(Screen parent) {
         //? if neoforge
-        /*public @NotNull Screen createScreen(@NotNull ModContainer modContainer, @NotNull Screen parent) {*/
+        //public @NotNull Screen createScreen(@NotNull ModContainer modContainer, @NotNull Screen parent) {
         //? if forge
         /*public static @NotNull Screen createScreen(Minecraft modContainer, @NotNull Screen parent) {*/
         if (ModCompat.CLOTH_CONFIG) {

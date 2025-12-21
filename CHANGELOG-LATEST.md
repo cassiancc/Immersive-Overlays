@@ -1,2 +1,0 @@
-### Fixed
-- Incorrect clock placement.

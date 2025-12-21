@@ -3,11 +3,11 @@ package cc.cassian.immersiveoverlays.compat;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 import net.minecraft.world.entity.player.Player;
 //? if neoforge
-/*import net.neoforged.neoforge.items.IItemHandlerModifiable;*/
+//import net.neoforged.neoforge.items.IItemHandlerModifiable;
 //? if forge
 /*import net.minecraftforge.items.IItemHandlerModifiable;*/
 //? if neoforge || forge
-/*import top.theillusivec4.curios.api.CuriosApi;*/
+//import top.theillusivec4.curios.api.CuriosApi;
 
 public class CuriosCompat {
     public static void checkForImportantAccessories(Player player) {

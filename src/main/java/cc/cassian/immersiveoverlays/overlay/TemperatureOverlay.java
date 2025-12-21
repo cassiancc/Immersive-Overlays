@@ -70,7 +70,7 @@ public class TemperatureOverlay {
 
     public static TemperaturePair getTemperature(LocalPlayer player) {
         //? if (forge && =1.20.1) || (neoforge && =1.21.1) {
-        /*if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature && ModClient.loader.contains("forge")) {
+        /*if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature) {
             int temperature =  OreganizedCompat.getAmbientTemperatureFromThermometer(player);
             return new TemperaturePair(Component.translatable("tooltip.oreganized.heat_"+temperature), OreganizedCompat.getTemperatureColourFromThermometer(temperature), "heat_"+temperature);
         }

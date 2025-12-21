@@ -35,12 +35,12 @@ public class SophisticatedBackpacksCompat {
         if (backpackWrapper.isPresent()) {
             var inventory = backpackWrapper.get().getInventoryHandler();
             //? if >1.21.9 {
-            /^inventory.getTrackedStacks().forEach(slot->OverlayHelpers.isImportantItemOrContainer(slot.stack()));
-            ^///?} else {
-            for (int i =0; i < inventory.getSlots(); i++) {
+            inventory.getTrackedStacks().forEach(slot->OverlayHelpers.isImportantItemOrContainer(slot.stack()));
+            //?} else {
+            /^for (int i =0; i < inventory.getSlots(); i++) {
                 OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
             }
-            //?}
+            ^///?}
         }
     *///?}
     //? if >1.21 && fabric && <26 {

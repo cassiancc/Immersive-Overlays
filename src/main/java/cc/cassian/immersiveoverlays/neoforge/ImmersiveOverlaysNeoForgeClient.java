@@ -62,7 +62,7 @@ public class ImmersiveOverlaysNeoForgeClient {
         event.register(ModClient.overlayToggle);
         event.register(ModClient.overlaySettings);
         //? if >1.21.8
-        /^event.registerCategory(ModClient.CATEGORY);^/
+        event.registerCategory(ModClient.CATEGORY);
     }
 
 
