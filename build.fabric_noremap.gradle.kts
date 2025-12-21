@@ -185,7 +185,7 @@ dependencies {
 
     compileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
     compileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-forge")
-    implementation("curse.maven:map-atlases-forge-519759:${mod.dep("map_atlases")}")
+    compileOnly("curse.maven:map-atlases-forge-519759:${mod.dep("map_atlases")}")
 
 }
 
@@ -224,8 +224,10 @@ tasks {
 
 java {
     withSourcesJar()
-    val javaCompat = if (stonecutter.eval(stonecutter.current.version, ">=1.21")) {
-        JavaVersion.VERSION_21
+    val javaCompat = if (stonecutter.eval(stonecutter.current.version, ">26")) {
+        JavaVersion.VERSION_25
+    } else if (stonecutter.eval(stonecutter.current.version, ">=1.21")) {
+        JavaVersion.VERSION_17
     } else {
         JavaVersion.VERSION_17
     }
