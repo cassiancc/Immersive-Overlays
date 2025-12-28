@@ -5,8 +5,8 @@ import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 //? if >1.21 {
-import net.minecraft.client.DeltaTracker;
-//?}
+/*import net.minecraft.client.DeltaTracker;
+*///?}
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -30,10 +30,10 @@ public class TemperatureOverlay {
             /*PoseStack guiGraphics*/
             //?}
             //? if >1.21 {
-            , DeltaTracker deltaTracker
-            //?} else {
-            /*, float deltaTracker
-             *///?}
+            /*, DeltaTracker deltaTracker
+            *///?} else {
+            , float deltaTracker
+             //?}
     ) {
         if (!showTemperature || !ModConfig.get().temperature_enable)
             return;
@@ -70,11 +70,11 @@ public class TemperatureOverlay {
 
     public static TemperaturePair getTemperature(LocalPlayer player) {
         //? if (forge && =1.20.1) || (neoforge && =1.21.1) {
-        /*if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature) {
+        if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature) {
             int temperature =  OreganizedCompat.getAmbientTemperatureFromThermometer(player);
             return new TemperaturePair(Component.translatable("tooltip.oreganized.heat_"+temperature), OreganizedCompat.getTemperatureColourFromThermometer(temperature), "heat_"+temperature);
         }
-        *///?}
+        //?}
         if (ModCompat.TOUGH_AS_NAILS && ModConfig.get().compat_tough_as_nails_temperature) {
             if (ToughAsNailsCompat.isTemperatureEnabled()) {
                 String temperature = ToughAsNailsCompat.getAmbientTemperature(player);
@@ -89,12 +89,12 @@ public class TemperatureOverlay {
             }
         }
         //? if forge || neoforge {
-        /*if (ModCompat.COLD_SWEAT && ModConfig.get().compat_cold_sweat_temperature) {
+        if (ModCompat.COLD_SWEAT && ModConfig.get().compat_cold_sweat_temperature) {
             return ColdSweatCompat.getTemperaturePair(player);
         }
-        *///?}
+        //?}
         //? if forge || neoforge {
-        /*if (ModCompat.LEGENDARY_SURVIVAL_OVERHAUL && ModConfig.get().compat_legendary_survival_overhaul_temperature) {
+        if (ModCompat.LEGENDARY_SURVIVAL_OVERHAUL && ModConfig.get().compat_legendary_survival_overhaul_temperature) {
             String temperature = LegendarySurvivalOverhaulCompat.getAmbientTemperature(player);
             var sprite = switch (temperature) {
                 case "FROSTBITE" -> "heat_0";
@@ -105,14 +105,14 @@ public class TemperatureOverlay {
             };
             return new TemperaturePair(Component.literal(WordUtils.capitalizeFully(temperature)), -1, sprite);
         }
-        *///?}
+        //?}
         //? if fabric {
-        if (ModCompat.THERMOO && ModConfig.get().compat_thermoo_temperature) {
+        /*if (ModCompat.THERMOO && ModConfig.get().compat_thermoo_temperature) {
             TemperaturePair temperaturePair = ThermooCompat.getTemperaturePair(player);
             if (temperaturePair != null)
                 return temperaturePair;
         }
-        //?}
+        *///?}
         var level = player.level
         //? if >1.20 {
         ()

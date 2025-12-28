@@ -13,8 +13,8 @@ import net.minecraft.client.gui.GuiGraphics;
 /*import com.mojang.blaze3d.vertex.PoseStack;
 *///?}
 //? if >1.21 {
-import net.minecraft.client.DeltaTracker;
-//?}
+/*import net.minecraft.client.DeltaTracker;
+*///?}
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
@@ -42,10 +42,10 @@ public class ClockOverlay {
             /*PoseStack guiGraphics*/
             //?}
             //? if >1.21 {
-            , DeltaTracker deltaTracker
-            //?} else {
-            /*, float deltaTracker
-             *///?}
+            /*, DeltaTracker deltaTracker
+            *///?} else {
+            , float deltaTracker
+             //?}
     ) {
         if ((!showWeather && !showTime && !shouldShowSeasons()) || !ModConfig.get().clock_enable)
             return;
@@ -225,25 +225,25 @@ public class ClockOverlay {
             }
             //?}
             //? if fabric {
-            if (ModCompat.FABRIC_SEASONS && ModConfig.get().compat_fabric_seasons) {
+            /*if (ModCompat.FABRIC_SEASONS && ModConfig.get().compat_fabric_seasons) {
                 season = FabricSeasonsCompat.getSeason(level);
             }
             if (ModCompat.SIMPLE_SEASONS && ModConfig.get().compat_simple_seasons) {
                 season = SimpleSeasonsCompat.getSeason(level);
             }
-            //?}
+            *///?}
             //? if forge || neoforge {
-            /*if (ModCompat.TERRAFIRMACRAFT && ModConfig.get().compat_tfc_seasons) {
+            if (ModCompat.TERRAFIRMACRAFT && ModConfig.get().compat_tfc_seasons) {
                 var tfcCompat = TerrafirmacraftCompat.getSeason(level);
                 if (tfcCompat != null) season = tfcCompat;
             }
-            *///?}
+            //?}
             //? if (forge || neoforge) && >1.20 {
-             /*if (ModCompat.ECLIPTIC_SEASONS && ModConfig.get().compat_ecliptic_seasons) {
+             if (ModCompat.ECLIPTIC_SEASONS && ModConfig.get().compat_ecliptic_seasons) {
                 var eclipticCompat = EclipticSeasonsCompat.getSeason(level, pos);
                 if (eclipticCompat != null) season = eclipticCompat;
             }
-            *///?}
+            //?}
         }
         return season;
     }

@@ -1,8 +1,8 @@
 package cc.cassian.immersiveoverlays;
 
 //? fabric {
-import cc.cassian.immersiveoverlays.fabric.FabricPlatformImpl;
-//?}
+/*import cc.cassian.immersiveoverlays.fabric.FabricPlatformImpl;
+*///?}
 import net.minecraft.world.item.ItemStack;
 import java.io.File;
 import java.nio.file.Path;
@@ -10,19 +10,19 @@ import java.nio.file.Path;
 /*import cc.cassian.immersiveoverlays.neoforge.NeoforgePlatformImpl;
 *///?}
 //? forge
-/*import cc.cassian.immersiveoverlays.forge.ForgePlatformImpl;*/
+import cc.cassian.immersiveoverlays.forge.ForgePlatformImpl;
 
 public interface Platform {
 
     //? fabric {
-    Platform INSTANCE = new FabricPlatformImpl();
-    //?}
+    /*Platform INSTANCE = new FabricPlatformImpl();
+    *///?}
     //? neoforge {
     /*Platform INSTANCE = new NeoforgePlatformImpl();
     *///?}
     //? forge {
-    /*Platform INSTANCE = new ForgePlatformImpl();
-     *///?}
+    Platform INSTANCE = new ForgePlatformImpl();
+     //?}
 
 
     boolean isLoaded(String modid);

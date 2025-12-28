@@ -2,7 +2,7 @@ package cc.cassian.immersiveoverlays.fabric;
 
 //? fabric {
 
-import cc.cassian.immersiveoverlays.Platform;
+/*import cc.cassian.immersiveoverlays.Platform;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.client.resources.language.I18n;
@@ -34,4 +34,4 @@ public class FabricPlatformImpl implements Platform {
         return FabricLoader.getInstance().getConfigDir();
     }
 }
-//?}
+*///?}

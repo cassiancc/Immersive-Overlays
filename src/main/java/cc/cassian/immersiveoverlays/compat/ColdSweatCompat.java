@@ -6,9 +6,9 @@ import cc.cassian.immersiveoverlays.overlay.TemperatureOverlay;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 //? if neoforge || forge {
-/*import com.momosoftworks.coldsweat.client.gui.Overlays;
+import com.momosoftworks.coldsweat.client.gui.Overlays;
 import com.momosoftworks.coldsweat.config.ConfigSettings;
-*///?}
+//?}
 
 public class ColdSweatCompat {
 
@@ -55,17 +55,17 @@ public class ColdSweatCompat {
 
     public static double getAmbientTemperature(LocalPlayer player) {
         //? if forge || neoforge {
-        /*return Overlays.WORLD_TEMP;
-        *///?} else {
-        return 0;
-        //?}
+        return Overlays.WORLD_TEMP;
+        //?} else {
+        /*return 0;
+        *///?}
     }
 
     public static boolean isCelsius() {
         //? if forge || neoforge {
-        /*return ConfigSettings.CELSIUS.get();
-        *///?} else {
-        return false;
-         //?}
+        return ConfigSettings.CELSIUS.get();
+        //?} else {
+        /*return false;
+         *///?}
     }
 }

@@ -14,10 +14,10 @@ import pepjebs.mapatlases.MapAtlasesMod;
 /*import pepjebs.mapatlases.item.MapAtlasItem;
 import pepjebs.mapatlases.map_collection.MapCollection;
 *///?} else if forge {
-/*import pepjebs.mapatlases.map_collection.IMapCollection;
+import pepjebs.mapatlases.map_collection.IMapCollection;
 import pepjebs.mapatlases.map_collection.forge.CapStuff;
 import pepjebs.mapatlases.map_collection.forge.IMapCollectionImpl;
-*///?} else if fabric && =1.20.1 {
+//?} else if fabric && =1.20.1 {
 /*import pepjebs.mapatlases.map_collection.fabric.IMapCollectionImpl;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 *///?}
@@ -25,12 +25,12 @@ import java.util.List;
 import java.util.Optional;
 @Pseudo
 //? if (fabric && =1.20.1) || forge {
-/*@Mixin(IMapCollectionImpl.class)
-*///?} else if neoforge {
+@Mixin(IMapCollectionImpl.class)
+//?} else if neoforge {
 /*@Mixin(MapAtlasItem.class)
 *///?} else {
-@Mixin(MapAtlasesMod.class)
-//?}
+/*@Mixin(MapAtlasesMod.class)
+*///?}
 public class IMapCollectionImplMixin {
     //? if neoforge {
     /*@Inject(method = "getMaps", at = @At(value = "HEAD"), remap = false, cancellable = true)
@@ -47,7 +47,7 @@ public class IMapCollectionImplMixin {
         }
     }
     *///?} else if forge {
-    /*@Inject(method = "get", at = @At(value = "HEAD"), remap = false, cancellable = true)
+    @Inject(method = "get", at = @At(value = "HEAD"), remap = false, cancellable = true)
     private static void mixin(ItemStack stack, Level level, CallbackInfoReturnable<IMapCollection> cir) {
         if (ModConfig.get().compat_map_atlases) {
             if (OverlayHelpers.isContainer(stack)) {
@@ -69,7 +69,7 @@ public class IMapCollectionImplMixin {
             }
         }
     }
-    *///?}
+    //?}
 
     //? if fabric && =1.20.1 {
 

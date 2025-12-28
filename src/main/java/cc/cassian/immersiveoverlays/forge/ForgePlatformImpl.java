@@ -1,7 +1,7 @@
 package cc.cassian.immersiveoverlays.forge;
 
 //? forge {
-/*import cc.cassian.immersiveoverlays.Platform;
+import cc.cassian.immersiveoverlays.Platform;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.fml.loading.LoadingModList;
@@ -30,4 +30,4 @@ public class ForgePlatformImpl implements Platform {
 
 
 }
-*///?}
+//?}

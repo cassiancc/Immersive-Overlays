@@ -24,6 +24,7 @@ public class ModLists {
     public static ArrayList<Item> season_items = new ArrayList<>();
     public static ArrayList<Item> temperature_items = new ArrayList<>();
     public static ArrayList<Item> speed_items = new ArrayList<>();
+    public static ArrayList<Item> wind_items = new ArrayList<>();
     public static ArrayList<Item> waila_items = new ArrayList<>();
 
 
@@ -42,6 +43,7 @@ public class ModLists {
         addAll(registry, ModConfig.get().season_items, season_items);
         addAll(registry, ModConfig.get().temperature_items, temperature_items);
         addAll(registry, ModConfig.get().speed_items, speed_items);
+        addAll(registry, ModConfig.get().wind_items, wind_items);
         addAll(registry, ModConfig.get().compat_waila_items, waila_items);
     }
 

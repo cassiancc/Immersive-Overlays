@@ -4,8 +4,8 @@ package cc.cassian.immersiveoverlays.overlay;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 //? if >1.21 {
-import net.minecraft.client.DeltaTracker;
-//?}
+/*import net.minecraft.client.DeltaTracker;
+*///?}
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -31,10 +31,10 @@ public class CompassOverlay {
             /*PoseStack guiGraphics*/
             //?}
             //? if >1.21 {
-            , DeltaTracker deltaTracker
-            //?} else {
-            /*, float deltaTracker
-             *///?}
+            /*, DeltaTracker deltaTracker
+            *///?} else {
+            , float deltaTracker
+             //?}
     ) {
         boolean showBiomeIcon = ModConfig.get().biome_enable && BiomeOverlay.showBiome && ModConfig.get().biome_reduced_info && ModConfig.get().biome_icons;
         if (!showX && !showY && !showZ)

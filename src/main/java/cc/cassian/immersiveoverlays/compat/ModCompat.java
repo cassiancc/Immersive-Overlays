@@ -90,13 +90,9 @@ public class ModCompat {
      */
     public static final boolean TRINKETS = Platform.INSTANCE.isLoaded("trinkets");
 
-
-
-
-
-
-
-
-
-
+    /**
+     * Breezy - used for Wind Direction Overlays.
+     * Forge
+     */
+    public static boolean BREEZY = Platform.INSTANCE.isLoaded("breezy");
 }

@@ -142,6 +142,14 @@ repositories {
             includeGroup("curse.maven")
         }
     }
+    maven {
+        name = "GeckoLib"
+        url = uri("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
+        content {
+            includeGroupByRegex("software\\.bernie.*")
+            includeGroup("com.eliotlash.mclib")
+        }
+    }
     flatDir { dirs("libs") }
 }
 
@@ -234,6 +242,10 @@ dependencies {
         modCompileOnly("maven.local:antique-atlas:2.12.0+1.20_mapped_srg_1.20.1")
         modCompileOnly("dev.su5ed.sinytra:fabric-loader:2.7.11+0.16.5+1.20.1")
     }
+
+    modImplementation("maven.modrinth:breezy:${mod.dep("breezy")}")
+    modImplementation("software.bernie.geckolib:geckolib-forge-${property("deps.minecraft")}:${property("deps.geckolib")}")
+    implementation("com.eliotlash.mclib:mclib:20")
 
     modCompileOnly("io.github.llamalad7:mixinextras-common:0.5.0")
     implementation("io.github.llamalad7:mixinextras-forge:0.5.0")

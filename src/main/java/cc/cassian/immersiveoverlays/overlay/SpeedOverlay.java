@@ -5,8 +5,8 @@ import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.compat.OreganizedCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 //? if >1.21 {
-import net.minecraft.client.DeltaTracker;
-//?}
+/*import net.minecraft.client.DeltaTracker;
+*///?}
 import net.minecraft.client.Minecraft;
 
 import net.minecraft.client.player.LocalPlayer;
@@ -29,10 +29,10 @@ public class SpeedOverlay {
             /*PoseStack guiGraphics*/
             //?}
             //? if >1.21 {
-            , DeltaTracker deltaTracker
-            //?} else {
-            /*, float deltaTracker
-             *///?}
+            /*, DeltaTracker deltaTracker
+            *///?} else {
+            , float deltaTracker
+             //?}
     ) {
         if (!showSpeed || !ModConfig.get().speed_enable)
             return;

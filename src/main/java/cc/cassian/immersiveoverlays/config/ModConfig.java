@@ -72,22 +72,22 @@ public class ModConfig {
     public List<String> temperature_items = List.of("oreganized:thermometer", "toughasnails:thermometer", "legendarysurvivaloverhaul:thermometer", "cold_sweat:thermometer");
     // compat
     //? if fabric
-    public boolean compat_playerlocatorplus = true;
+    //public boolean compat_playerlocatorplus = true;
     public boolean compat_xaeros = true;
     public boolean compat_antique_atlas = true;
     public boolean compat_accessorify = true;
     //? if (forge && =1.20.1) || (neoforge && =1.21.1) {
-    /*public boolean compat_oreganized_temperature = true;
-    *///?}
+    public boolean compat_oreganized_temperature = true;
+    //?}
     public boolean compat_tough_as_nails_temperature = true;
     //? if forge || neoforge {
-    /*public boolean compat_cold_sweat_temperature = true;
-    *///?}
+    public boolean compat_cold_sweat_temperature = true;
+    //?}
     //? if forge || neoforge {
-    /*public boolean compat_legendary_survival_overhaul_temperature = true;
-     *///?}
+    public boolean compat_legendary_survival_overhaul_temperature = true;
+     //?}
     //? if fabric
-    public boolean compat_thermoo_temperature = true;
+    //public boolean compat_thermoo_temperature = true;
     // biomes
     public boolean biome_enable = true;
     public boolean biome_icons = true;
@@ -111,13 +111,19 @@ public class ModConfig {
     public boolean compat_map_atlases = false;
     public boolean compat_serene_seasons = true;
     //? if fabric {
-    public boolean compat_fabric_seasons = true;
+    /*public boolean compat_fabric_seasons = true;
     public boolean compat_simple_seasons = true;
-    //?}
-    //? if forge || neoforge {
-    /*public boolean compat_tfc_seasons = true;
-    public boolean compat_ecliptic_seasons = true;
     *///?}
+    //? if forge || neoforge {
+    public boolean compat_tfc_seasons = true;
+    public boolean compat_ecliptic_seasons = true;
+    //?}
+    public boolean wind_enable = true;
+    public int wind_vertical_position = 170;
+    public boolean wind_horizontal_position_left = true;
+    public int wind_colour = 0xc7bf81;
+    public boolean compat_breezy = true;
+    public List<String> wind_items = List.of("breezy:gust_gauge");
 
 
     public static void load() {

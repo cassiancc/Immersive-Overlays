@@ -1,7 +1,7 @@
 package cc.cassian.immersiveoverlays.config;
 
 //? if fabric && <26 {
-import cc.cassian.immersiveoverlays.ModClient;
+/*import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
@@ -19,4 +19,4 @@ public class ModMenuIntegration implements ModMenuApi {
         }
     }
 }
-//?}
+*///?}
