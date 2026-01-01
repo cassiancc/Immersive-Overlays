@@ -2,9 +2,19 @@ package cc.cassian.immersiveoverlays;
 
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
+
+import cc.cassian.immersiveoverlays.overlay.*;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.ResourceLocation;
+//? neoforge {
+/*import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import cc.cassian.immersiveoverlays.neoforge.NeoforgePlatformImpl;
+*///?} else forge {
+import cc.cassian.immersiveoverlays.forge.ForgePlatformImpl;
+import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
+//?}
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -36,6 +46,25 @@ public class ModClient {
 
     public static void init() {
         ModConfig.load();
+    }
+
+    public static void registerOverlays(
+            //? neoforge
+            //RegisterGuiLayersEvent event
+            //? forge
+            CustomizeGuiOverlayEvent.DebugText event
+    ) {
+        //? neoforge
+        //NeoforgePlatformImpl.guiLayersEvent = event;
+        //? forge
+        ForgePlatformImpl.guiLayersEvent = event;
+
+        Platform.INSTANCE.registerOverlay(ModClient.locate("biome"), BiomeOverlay::renderGameOverlayEvent);
+        Platform.INSTANCE.registerOverlay(ModClient.locate("clock"), ClockOverlay::renderGameOverlayEvent);
+        Platform.INSTANCE.registerOverlay(ModClient.locate("compass"), CompassOverlay::renderGameOverlayEvent);
+        Platform.INSTANCE.registerOverlay(ModClient.locate("speed"), SpeedOverlay::renderGameOverlayEvent);
+        Platform.INSTANCE.registerOverlay(ModClient.locate("temperature"), TemperatureOverlay::renderGameOverlayEvent);
+        Platform.INSTANCE.registerOverlay(ModClient.locate("wind"), WindOverlay::renderGameOverlayEvent);
     }
 
     public static ResourceLocation locate(String s) {

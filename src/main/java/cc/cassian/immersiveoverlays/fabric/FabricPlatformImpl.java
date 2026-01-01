@@ -2,10 +2,19 @@ package cc.cassian.immersiveoverlays.fabric;
 
 //? fabric {
 
-/*import cc.cassian.immersiveoverlays.Platform;
+/*import cc.cassian.immersiveoverlays.ModClient;
+import cc.cassian.immersiveoverlays.Overlay;
+import cc.cassian.immersiveoverlays.Platform;
+import cc.cassian.immersiveoverlays.overlay.*;
+//? if >1.21.2 {
+/^import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+^///?} else {
+import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
+//?}
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -32,6 +41,15 @@ public class FabricPlatformImpl implements Platform {
     @Override
     public Path configPath() {
         return FabricLoader.getInstance().getConfigDir();
+    }
+
+    @Override
+    public void registerOverlay(Identifier id, Overlay overlay) {
+        //? if >1.21.5 {
+        /^HudElementRegistry.addFirst(id, overlay::render);
+        ^///?} else {
+        HudRenderCallback.EVENT.register(overlay::render);
+        //?}
     }
 }
 *///?}

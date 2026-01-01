@@ -3,7 +3,7 @@ package cc.cassian.immersiveoverlays.config;
 
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ClothConfigFactory;
-//? if fabric && <26
+//? if fabric
 //import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class ModConfigFactory
         //? if neoforge
         //implements IConfigScreenFactory
-        //? if fabric && <26
+        //? if fabric
         //implements ConfigScreenFactory<Screen>
 {
 

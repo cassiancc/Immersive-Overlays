@@ -2,13 +2,12 @@ package cc.cassian.immersiveoverlays.compat;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.TemperatureOverlay;
-//? if >1.19
 import net.fabricmc.fabric.api.tag.client.v1.ClientTags;
 //? if >1.21 {
 /*import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
 *///?} else {
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
- //?}
+//?}
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.biome.Biome;
@@ -18,7 +17,6 @@ public class FabricCompat {
      * As this is a clientside mod, Fabric API's client tag API is required to read tag information.
      * This can be substituted for the Forgified Fabric API.
      */
-    //? if >1.19 {
     public static TemperatureOverlay.TemperaturePair getBiomeTemperatureFromTag(Holder<Biome> biomeHolder) {
         if (ClientTags.isInWithLocalFallback(
                 //? if >1.21
@@ -36,5 +34,4 @@ public class FabricCompat {
             return new TemperatureOverlay.TemperaturePair(Component.translatable("gui.c.temperature.cold"), ModConfig.get().temperature_cold_colour, "heat_0");
         } else return new TemperatureOverlay.TemperaturePair(Component.translatable("gui.c.temperature.temperate"), ModConfig.get().temperature_temperate_colour, "heat_1");
     }
-    //?}
 }

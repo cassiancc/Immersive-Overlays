@@ -11,7 +11,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 
 public class CuriosCompat {
     public static void checkForImportantAccessories(Player player) {
-        //? if (forge && >1.20) || neoforge {
+        //? if (forge) || neoforge {
         var capability = CuriosApi.getCuriosInventory(player);
         if (capability.isPresent()) {
             IItemHandlerModifiable allEquipped = capability

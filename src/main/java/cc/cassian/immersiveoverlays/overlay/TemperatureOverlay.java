@@ -8,11 +8,7 @@ import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 /*import net.minecraft.client.DeltaTracker;
 *///?}
 import net.minecraft.client.Minecraft;
-//? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
-//?} else {
-/*import com.mojang.blaze3d.vertex.PoseStack;
-*///?}
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -23,12 +19,7 @@ public class TemperatureOverlay {
     public static boolean showTemperature = false;
 
 
-    public static void renderGameOverlayEvent(
-            //? if >1.20 {
-            GuiGraphics guiGraphics
-            //?} else {
-            /*PoseStack guiGraphics*/
-            //?}
+    public static void renderGameOverlayEvent(GuiGraphics guiGraphics
             //? if >1.21 {
             /*, DeltaTracker deltaTracker
             *///?} else {
@@ -106,7 +97,7 @@ public class TemperatureOverlay {
             return new TemperaturePair(Component.literal(WordUtils.capitalizeFully(temperature)), -1, sprite);
         }
         //?}
-        //? if fabric {
+        //? if fabric || 1.21.1 {
         /*if (ModCompat.THERMOO && ModConfig.get().compat_thermoo_temperature) {
             TemperaturePair temperaturePair = ThermooCompat.getTemperaturePair(player);
             if (temperaturePair != null)

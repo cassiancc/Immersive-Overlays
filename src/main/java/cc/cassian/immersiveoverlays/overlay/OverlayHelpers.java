@@ -7,40 +7,27 @@ import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 //? if >1.21 {
 /*import net.minecraft.client.DeltaTracker;
-*///?}
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.Minecraft;
-//? if >1.20 {
-import net.minecraft.client.gui.GuiGraphics;
-//?} else {
-/*import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.GuiComponent;
-import com.mojang.blaze3d.vertex.PoseStack;
- *///?}
-//? if >1.21.6 {
-/*import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.util.ARGB;
-*///?}
-//? if <1.21 {
+import net.minecraft.world.item.component.BundleContents;
+import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.core.component.DataComponents;
+*///?} else {
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 //?}
-//? if 1.21.5
-/*import net.minecraft.client.renderer.RenderType;*/
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+//? if >1.21.6 {
+/*import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.util.ARGB;
+import net.minecraft.world.entity.EquipmentSlot;
+*///?}
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-//? if >1.21.4
-//import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-//? if >1.20.5 {
-/*import net.minecraft.world.item.component.BundleContents;
-import net.minecraft.world.item.component.ItemContainerContents;
-import net.minecraft.core.component.DataComponents;
-*///?}
-
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -50,15 +37,9 @@ public class OverlayHelpers {
     public static final ResourceLocation TEXTURE = ModClient.locate("textures/gui/overlay.png");
     public static boolean showWaila = false;
 
-    //? if >1.20 {
     public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int tooltipSize, boolean leftAlign) {
-        //?} else {
-        /*public static void renderBackground(PoseStack guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int tooltipSize, boolean leftAlign) {
-         *///?}
         if (ModConfig.get().render_background) {
             int textureOffset = OverlayHelpers.getTextureOffsetFromSize(tooltipSize);
-            //? if <1.20
-            /*RenderSystem.setShaderTexture(0, OverlayHelpers.TEXTURE);*/
             final int yPlacementWithOffset = yPlacement-4;
             final int endCapOffset = 197;
             final int xPlacementWithOffset = xPlacement-xOffset-4;
@@ -191,10 +172,8 @@ public class OverlayHelpers {
                     isImportantItemOrContainer(player.getItemBySlot(value));
                 }
                 *///?}
-                //? if >1.20 {
                 if (ModCompat.ACCESSORIES)
                     AccessoriesCompat.checkForImportantAccessories(player);
-                //?}
                 //? if forge || neoforge {
                 if (ModCompat.CURIOS)
                     CuriosCompat.checkForImportantAccessories(player);
@@ -308,7 +287,7 @@ public class OverlayHelpers {
             //? if <1.21.5 {
              inventory.items
             //?} else {
-                /*inventory.getNonEquipmentItems()
+            /*inventory.getNonEquipmentItems()
             *///?}
         ) {
             isImportantItem(stack);
@@ -323,8 +302,8 @@ public class OverlayHelpers {
             //? if <1.21.5 {
              inventory.items
             //?} else {
-        /*inventory.getNonEquipmentItems()
-        *///?}
+            /*inventory.getNonEquipmentItems()
+            *///?}
         ) {
             if (stack.is(item)) return stack;
             else if (item != null && stack.is(item))
@@ -356,112 +335,41 @@ public class OverlayHelpers {
         }
     }
 
-    public static void drawString(
-           //? if >1.20 {
-          GuiGraphics
-          //?} else {
-          /*PoseStack
-          *///?}
-          poseStack, Font font, Component text, int x, int y, Integer color) {
+    public static void drawString(GuiGraphics poseStack, Font font, Component text, int x, int y, Integer color) {
         //? if >1.21.6
         //color = ARGB.opaque(color);
-        //? if >1.20 {
         poseStack.drawString(font, text, x, y, color);
-        //?} else {
-        /*GuiComponent.drawString(poseStack, font, text, x, y, color);
-         *///?}
     }
 
-    public static void drawString(
-          //? if >1.20 {
-          GuiGraphics
-          //?} else {
-          /*PoseStack
-          *///?}
-         poseStack, Font font, String text, int x, int y, Integer color) {
+    public static void drawString(GuiGraphics guiGraphics, Font font, String text, int x, int y, Integer color) {
         //? if >1.21.6
         //color = ARGB.opaque(color);
-        //? if >1.20 {
-        poseStack.drawString(font, text, x, y, color);
-        //?} else {
-        /*GuiComponent.drawString(poseStack, font, text, x, y, color);
-         *///?}
+        guiGraphics.drawString(font, text, x, y, color);
     }
 
-    public static void renderOverlays(
-            //? if >1.20 {
-            GuiGraphics
-            //?} else {
-            /*PoseStack
-             *///?}
-            hud,
-            //? if >1.21 {
-            /*DeltaTracker
-            *///?} else {
-            float
-            //?}
-            tickProgress
-                    ) {
-        CompassOverlay.renderGameOverlayEvent(hud, tickProgress);
-        ClockOverlay.renderGameOverlayEvent(hud, tickProgress);
-        BiomeOverlay.renderGameOverlayEvent(hud, tickProgress);
-        TemperatureOverlay.renderGameOverlayEvent(hud, tickProgress);
-        SpeedOverlay.renderGameOverlayEvent(hud, tickProgress);
-        WindOverlay.renderGameOverlayEvent(hud, tickProgress);
-    }
-
-    public static void blit(
-           //? if >1.20 {
-          GuiGraphics
-          //?} else {
-          /*PoseStack
-          *///?}
-          guiGraphics, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
+    public static void blit(GuiGraphics guiGraphics, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
         OverlayHelpers.blit(guiGraphics, TEXTURE, x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
-    public static void blit(
-           //? if >1.20 {
-          GuiGraphics
-          //?} else {
-          /*PoseStack
-          *///?}
-          guiGraphics, ResourceLocation texture, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
+    public static void blit(GuiGraphics guiGraphics, ResourceLocation texture, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
         //? if >1.21.5 {
         /*guiGraphics.blit(RenderPipelines.GUI_TEXTURED, texture,
-        *///?} else if >1.21.2 {
-        /*guiGraphics.blit(RenderType::guiTextured, texture,
-         *///?} else if >1.20 {
+        *///?} else {
         guiGraphics.blit(texture,
-                //?} else {
-            /*RenderSystem.setShaderTexture(0, texture);
-               GuiComponent.blit(guiGraphics,
-             *///?}
-                x, y,
-                //? if <1.21.2
-                0, //z
-                uOffset,
-                vOffset, uWidth, vHeight,
-                textureWidth, textureHeight);
+        //?}
+            x, y,
+            //? if <1.21.2
+            0, //z
+            uOffset,
+            vOffset, uWidth, vHeight,
+            textureWidth, textureHeight);
     }
 
-    public static void blitSprite(
-            //? if >1.20 {
-            GuiGraphics
-                    //?} else {
-                    /*PoseStack
-                     *///?}
-                    guiGraphics, ResourceLocation texture, int x, int y) {
+    public static void blitSprite(GuiGraphics guiGraphics, ResourceLocation texture, int x, int y) {
         blitSprite(guiGraphics, texture, x, y, 16);
     }
 
-    public static void blitSprite(
-            //? if >1.20 {
-            GuiGraphics
-                    //?} else {
-                    /*PoseStack
-                     *///?}
-                    guiGraphics, ResourceLocation texture, int x, int y, int size) {
+    public static void blitSprite(GuiGraphics guiGraphics, ResourceLocation texture, int x, int y, int size) {
         blit(guiGraphics, texture, x, y, 0, 0, size, size, size, size);
     }
 

@@ -3,6 +3,7 @@ package cc.cassian.immersiveoverlays.neoforge;
 //? if neoforge {
 
 /*import cc.cassian.immersiveoverlays.ModClient;
+import cc.cassian.immersiveoverlays.Platform;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
@@ -44,11 +45,7 @@ public class ImmersiveOverlaysNeoForgeClient {
 
     @SubscribeEvent
     public static void renderGameOverlayEvent(RegisterGuiLayersEvent event) {
-        event.registerAboveAll(ModClient.locate("biome"), BiomeOverlay::renderGameOverlayEvent);
-        event.registerAboveAll(ModClient.locate("clock"), ClockOverlay::renderGameOverlayEvent);
-        event.registerAboveAll(ModClient.locate("compass"), CompassOverlay::renderGameOverlayEvent);
-        event.registerAboveAll(ModClient.locate("speed"), SpeedOverlay::renderGameOverlayEvent);
-        event.registerAboveAll(ModClient.locate("temperature"), TemperatureOverlay::renderGameOverlayEvent);
+        ModClient.registerOverlays(event);
     }
 
     @SubscribeEvent
@@ -62,7 +59,7 @@ public class ImmersiveOverlaysNeoForgeClient {
         event.register(ModClient.overlayToggle);
         event.register(ModClient.overlaySettings);
         //? if >1.21.8
-        event.registerCategory(ModClient.CATEGORY);
+        //event.registerCategory(ModClient.CATEGORY);
     }
 
 

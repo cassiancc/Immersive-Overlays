@@ -8,11 +8,9 @@ import net.minecraft.core.BlockPos;
 public class EclipticSeasonsCompat {
 
     public static String getSeason(ClientLevel level, BlockPos pos) {
-        //? if neoforge || forge && >1.20 {
+        //? if neoforge || forge {
         return EclipticSeasonsApi.getInstance().getAgroSeason(level, pos).name();
-        //?} else if forge {
-        /*return EclipticSeasonsApi.getInstance().getSolarTerm(level).getSeason().name();
-        *///?} else {
+        //?} else {
         /*return null;
         *///?}
     }

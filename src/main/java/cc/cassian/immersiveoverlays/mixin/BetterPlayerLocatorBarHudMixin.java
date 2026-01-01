@@ -15,13 +15,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Pseudo
-//? if fabric && >1.20 && <26 {
+//? if fabric && <26 {
 /*@Mixin(BetterPlayerLocatorBarHud.class)
 *///?} else {
 @Mixin(Minecraft.class)
 //?}
 public class BetterPlayerLocatorBarHudMixin {
-    //? if >1.20 && fabric && <26 {
+    //? if fabric && <26 {
     /*@Inject(method = "render", at = @At(value = "HEAD"), cancellable = true)
     private static void mixin(GuiGraphics guiGraphics, CallbackInfo ci) {
         if (ModConfig.get().compat_playerlocatorplus) {

@@ -1,10 +1,15 @@
 package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.ModClient;
+//? forge {
 import cc.cassian.immersiveoverlays.compat.BreezyCompat;
+//?}
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.TextHelpers;
+//? >1.21 {
+/*import net.minecraft.client.DeltaTracker;
+*///?}
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
@@ -14,8 +19,7 @@ public class WindOverlay {
     public static boolean showWind = false;
 
 
-    public static void renderGameOverlayEvent(
-            GuiGraphics guiGraphics
+    public static void renderGameOverlayEvent(GuiGraphics guiGraphics
             //? if >1.21 {
             /*, DeltaTracker deltaTracker
             *///?} else {
@@ -56,15 +60,14 @@ public class WindOverlay {
     }
 
     public static WindPair getWind(LocalPlayer player) {
-        Component direction;
-        String sprite;
+        Component direction = TextHelpers.translatable("UNSET");
+        String sprite = "unknown";
+        //? forge {
         if (ModCompat.BREEZY && ModConfig.get().compat_breezy) {
             direction = BreezyCompat.getWindDirection(player);
             sprite = BreezyCompat.getSprite(player);
-        } else {
-            direction = TextHelpers.translatable("UNSET");
-            sprite = "unknown";
         }
+        //?}
         return new WindPair(direction, sprite);
     }
 

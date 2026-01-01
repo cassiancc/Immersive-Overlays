@@ -35,12 +35,7 @@ public class ClockOverlay {
     public static boolean showSeason = false;
 
 
-    public static void renderGameOverlayEvent(
-            //? if >1.20 {
-            GuiGraphics guiGraphics
-            //?} else {
-            /*PoseStack guiGraphics*/
-            //?}
+    public static void renderGameOverlayEvent(GuiGraphics guiGraphics
             //? if >1.21 {
             /*, DeltaTracker deltaTracker
             *///?} else {

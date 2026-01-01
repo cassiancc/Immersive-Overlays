@@ -9,7 +9,7 @@ public class TerrafirmacraftCompat {
     public static String getSeason(ClientLevel level) {
         //? if neoforge {
         /*return Calendars.get(true).getAbsoluteCalendarMonthOfYear().getSeason().getSerializedName();
-        *///?} else if forge && >1.20 {
+        *///?} else if forge {
         return Calendars.get(true).getCalendarMonthOfYear().getSeason().getSerializedName();
         //?} else {
         /*return null;

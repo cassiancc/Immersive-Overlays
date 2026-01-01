@@ -37,12 +37,7 @@ public class ImmersiveOverlaysForgeClient {
 
 
     public static void renderGameOverlayEvent(CustomizeGuiOverlayEvent.DebugText event) {
-        //? if >1.20 {
-        var hud = event.getGuiGraphics();
-        //?} else {
-        /*var hud = event.getPoseStack();
-         *///?}
-        OverlayHelpers.renderOverlays(hud, event.getPartialTick());
+        ModClient.registerOverlays(event);
     }
 
 
@@ -54,6 +49,7 @@ public class ImmersiveOverlaysForgeClient {
 
     public static void checkInventoryForOverlays(TickEvent.ClientTickEvent event){
         OverlayHelpers.checkInventoryForOverlays(Minecraft.getInstance());
+        OverlayHelpers.checkKeybind();
     }
 
     //Integrate Cloth Config screen (if mod present) with Forge mod menu.

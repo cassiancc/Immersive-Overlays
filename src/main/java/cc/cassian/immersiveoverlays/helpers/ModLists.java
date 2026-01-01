@@ -29,11 +29,7 @@ public class ModLists {
 
 
     public static void loadLists() {
-        //? if >1.20 {
         var registry = BuiltInRegistries.ITEM;
-        //?} else {
-        /*var registry = Registry.ITEM;
-         *///?}
         addAll(registry, ModConfig.get().compass_x_items, compass_x_items);
         addAll(registry, ModConfig.get().compass_y_items, compass_y_items, compass_x_items);
         addAll(registry, ModConfig.get().compass_z_items, compass_z_items, compass_x_items);

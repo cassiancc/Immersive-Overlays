@@ -86,8 +86,7 @@ public class ModConfig {
     //? if forge || neoforge {
     public boolean compat_legendary_survival_overhaul_temperature = true;
      //?}
-    //? if fabric
-    //public boolean compat_thermoo_temperature = true;
+    public boolean compat_thermoo_temperature = true;
     // biomes
     public boolean biome_enable = true;
     public boolean biome_icons = true;

@@ -26,19 +26,9 @@ public class TravelersBackpackCompat {
         }
         *///?} else if forge {
         if (CapabilityUtils.isWearingBackpack(player)) {
-            var backpackWrapper =
-                    //? if >1.20 {
-                    CapabilityUtils.getBackpackWrapper(player);
-            //?} else {
-            /*CapabilityUtils.getBackpackInv(player);
-             *///?}
+            var backpackWrapper = CapabilityUtils.getBackpackWrapper(player);
             if (backpackWrapper != null) {
-                var inventory = backpackWrapper.
-                        //? if >1.20 {
-                        inventory;
-                //?} else {
-                /*getHandler();
-                 *///?}
+                var inventory = backpackWrapper.inventory;
                 for (int i =0; i < inventory.getSlots(); i++) {
                     OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
                 }
@@ -46,32 +36,12 @@ public class TravelersBackpackCompat {
         }
         //?} else if fabric && <26 {
         /*if (ComponentUtils.isWearingBackpack(player)) {
-            var backpackWrapper =
-            //? if >1.20 {
-            ComponentUtils.getBackpackWrapper(player);
-            //?} else {
-            /^ComponentUtils.getBackpackInv(player);
-             ^///?}
+            var backpackWrapper = ComponentUtils.getBackpackWrapper(player);
             if (backpackWrapper != null) {
-                var inventory = backpackWrapper
-                //? if >1.21.9 || 1.21.1 {
-                /^.getStorage();
-                ^///?} else if >1.20 {
-                .inventory;
-                //?} else {
-                /^getInventory();
-                ^///?}
-                //? if >1.20 {
+                var inventory = backpackWrapper.getStorage();
                 for (int i =0; i < inventory.getSlots(); i++) {
                     OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
                 }
-
-                //?} else {
-                
-                /^for (int i =0; i < inventory.getContainerSize(); i++) {
-                    OverlayHelpers.isImportantItemOrContainer(inventory.getItem(i));
-                }
-                ^///?}
             }
         }
         *///?}

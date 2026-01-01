@@ -28,12 +28,7 @@ public class BiomeOverlay {
     public static ResourceLocation UNDEFINED = ModClient.locate("textures/immersiveoverlays/undefined.png");
 
 
-    public static void renderGameOverlayEvent(
-    //? if >1.20 {
-        GuiGraphics guiGraphics
-    //?} else {
-        /*PoseStack guiGraphics*/
-    //?}
+    public static void renderGameOverlayEvent(GuiGraphics guiGraphics
     //? if >1.21 {
         /*, DeltaTracker deltaTracker
     *///?} else {

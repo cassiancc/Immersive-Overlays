@@ -1,22 +1,18 @@
 package cc.cassian.immersiveoverlays.neoforge;
 
 //? neoforge {
-/*import cc.cassian.immersiveoverlays.ModClient;
+/*import cc.cassian.immersiveoverlays.Overlay;
 import cc.cassian.immersiveoverlays.Platform;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.language.I18n;
-import net.minecraft.world.item.ItemStack;
-import net.neoforged.fml.ModContainer;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.fml.loading.LoadingModList;
-import org.apache.commons.lang3.text.WordUtils;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 
-import java.io.File;
 import java.nio.file.Path;
-import java.util.Optional;
 
 public class NeoforgePlatformImpl implements Platform {
+    public static RegisterGuiLayersEvent guiLayersEvent;
 
     public boolean isLoaded(String mod) {
         return ModList.get().isLoaded(mod);
@@ -36,6 +32,9 @@ public class NeoforgePlatformImpl implements Platform {
         return FMLPaths.CONFIGDIR.get();
     }
 
-
+    @Override
+    public void registerOverlay(ResourceLocation id, Overlay overlay) {
+        guiLayersEvent.registerAboveAll(id, overlay::render);
+    }
 }
 *///?}

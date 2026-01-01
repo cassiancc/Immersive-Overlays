@@ -1,5 +1,7 @@
 package cc.cassian.immersiveoverlays.compat;
 
+//? if forge {
+
 import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import codyhuh.breezy.common.network.BreezyNetworking;
 import codyhuh.breezy.common.network.NewWindSavedData;
@@ -76,3 +78,4 @@ public class BreezyCompat {
 		return 0;
 	}
 }
+//?}

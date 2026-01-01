@@ -168,30 +168,19 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
     // Cloth Config
-    if (hasProperty("deps.cloth_version")) {
-        modApi("me.shedaniel.cloth:cloth-config-fabric:${property("deps.cloth_version")}")
-    } else {
-        modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:19.0.147")
-    }
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${property("deps.cloth_version")}")
     // Mod Menu
-    if (hasProperty("deps.modmenu_version"))
-        modApi("com.terraformersmc:modmenu:${property("deps.modmenu_version")}")
-    else {
-        modCompileOnly("com.terraformersmc:modmenu:15.0.0-beta.3")
-    }
+    modApi("com.terraformersmc:modmenu:${property("deps.modmenu_version")}")
+    // Map Atlases
     modCompileOnly("maven.modrinth:map-atlases:${mod.dep("map_atlases")}")
     // Accesories
     if (hasProperty("deps.accessories")) {
         modCompileOnly("io.wispforest:accessories-fabric:${mod.dep("accessories")}")
     }
     // Tough as Nails
-    if (stonecutter.eval(mcVersion, ">1.19.2")) {
-        modCompileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
-    }
+    modCompileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
     modCompileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}")
-    if (stonecutter.eval(mcVersion, ">1.20")) {
-        modCompileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-fabric")
-    }
+    modCompileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-fabric")
     // Fabric Seasons
     if (hasProperty("deps.fabric_seasons")) {
         modCompileOnly("maven.modrinth:fabric-seasons:${mod.dep("fabric_seasons")}")
@@ -199,38 +188,27 @@ dependencies {
     } else {
         modCompileOnly("maven.modrinth:fabric-seasons:2.4.2-BETA+1.21")
     }
-
+    // Simple Seasons
     modCompileOnly("maven.modrinth:simple-seasons:${mod.dep("simple_seasons")}")
 
     // Sophisticated Backpacks
     modCompileOnly("maven.modrinth:9jxwkYQL:${mod.dep("sophisticated_core")}")
     modCompileOnly("maven.modrinth:ouNrBQtq:${mod.dep("sophisticated_backpacks")}")
     modCompileOnly("io.github.fabricators_of_create.Porting-Lib:transfer:2.3.9+1.20.1")
-    if (stonecutter.eval(mcVersion, "=1.19.2")) {
-        modCompileOnly("io.github.fabricators_of_create.Porting-Lib:Porting-Lib:2.1.1453+1.19.2")
-    }
 
     // Jade
-    if (hasProperty("deps.jade")) {
-        modCompileOnly("maven.modrinth:jade:${property("deps.jade")}")
-        modLocalRuntime("maven.modrinth:jade:${property("deps.jade")}")
-    } else {
-        modCompileOnly("maven.modrinth:jade:19.3.2+fabric")
-    }
+    modCompileOnly("maven.modrinth:jade:${property("deps.jade")}")
+    modLocalRuntime("maven.modrinth:jade:${property("deps.jade")}")
 
-    //Xaero's
+    // Xaero's
     modCompileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros")}_Fabric_${mod.dep("xaeros_mc")}")
     modCompileOnly("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}_Fabric_${mod.dep("xaeros_mc")}")
 
+    // Thermoo
+    modCompileOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
+    modLocalRuntime("maven.modrinth:thermoo:${property("deps.thermoo")}")
 
-    if (hasProperty("deps.thermoo")) {
-        modCompileOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
-        modLocalRuntime("maven.modrinth:thermoo:${property("deps.thermoo")}")
-    } else {
-        modCompileOnly("maven.modrinth:thermoo:8.0.1")
-    }
-
-
+    // Cardinal Components
     if (hasProperty("deps.cardinal_components")) {
         modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-entity:${mod.dep("cardinal_components")}")
         modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-base:${mod.dep("cardinal_components")}")
@@ -243,18 +221,21 @@ dependencies {
         modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.3")
     }
 
+    // Trinkets
     if (stonecutter.eval(mcVersion, "<1.21.4")) {
         modCompileOnly("dev.emi:trinkets:${mod.dep("trinkets")}")
     } else {
         modCompileOnly("eu.pb4.fork:trinkets:${mod.dep("trinkets")}")
     }
 
+    // Antique Atlases
     if (hasProperty("deps.antique_atlas")) {
         modCompileOnly("maven.modrinth:antique-atlas-4:${mod.dep("antique_atlas")}")
     } else {
         modCompileOnly("maven.modrinth:antique-atlas-4:utFwd9ms")
     }
 
+    // Tiered Backpacks
     if (hasProperty("deps.tiered_backpacks")) {
         modCompileOnly("maven.modrinth:tiered-backpacks:${mod.dep("tiered_backpacks")}")
         modLocalRuntime("maven.modrinth:tiered-backpacks:${mod.dep("tiered_backpacks")}")
@@ -264,10 +245,10 @@ dependencies {
         modLocalRuntime("me.fzzyhmstrs:fzzy_config:${mod.dep("fzzy_config")}")
     }
 
-
-
+    // Player Locator Bar Backports
     modCompileOnly("maven.modrinth:bplb:v1.0.0")
     modCompileOnly("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
+
 }
 
 configurations.all {

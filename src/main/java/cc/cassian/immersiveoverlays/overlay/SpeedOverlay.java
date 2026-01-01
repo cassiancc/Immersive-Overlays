@@ -8,26 +8,16 @@ import cc.cassian.immersiveoverlays.config.ModConfig;
 /*import net.minecraft.client.DeltaTracker;
 *///?}
 import net.minecraft.client.Minecraft;
-
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
-//? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
-//?} else {
-/*import com.mojang.blaze3d.vertex.PoseStack;
- *///?}
 
 public class SpeedOverlay {
     public static boolean showSpeed = false;
 
 
-    public static void renderGameOverlayEvent(
-            //? if >1.20 {
-            GuiGraphics guiGraphics
-            //?} else {
-            /*PoseStack guiGraphics*/
-            //?}
+    public static void renderGameOverlayEvent(GuiGraphics guiGraphics
             //? if >1.21 {
             /*, DeltaTracker deltaTracker
             *///?} else {

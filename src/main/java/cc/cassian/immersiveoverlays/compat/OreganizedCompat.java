@@ -10,7 +10,7 @@ import galena.oreganized.world.IMotionHolder;
 public class OreganizedCompat {
 
     public static int getAmbientTemperatureFromThermometer(LocalPlayer player) {
-        //? if (forge && >1.20) || (neoforge && =1.21.1) {
+        //? if (forge) || (neoforge && =1.21.1) {
         return ThermometerItem.ambientMeasurement(player);
         //?} else {
         /*return 0;
@@ -18,7 +18,7 @@ public class OreganizedCompat {
     }
 
     public static int getTemperatureColourFromThermometer(int temperature) {
-        //? if (forge && >1.20) || (neoforge && =1.21.1) {
+        //? if (forge) || (neoforge && =1.21.1) {
         return ClientThermometerTooltip.getColor(temperature);
         //?} else {
         /*return 0;
@@ -27,7 +27,7 @@ public class OreganizedCompat {
     }
 
     public static double getSpeed(LocalPlayer player) {
-        //? if (forge && >1.20) || (neoforge && =1.21.1) {
+        //? if (forge) || (neoforge && =1.21.1) {
         if (player.getRootVehicle() instanceof IMotionHolder motionHolder) {
             return motionHolder.oreganised$getMotion();
         }

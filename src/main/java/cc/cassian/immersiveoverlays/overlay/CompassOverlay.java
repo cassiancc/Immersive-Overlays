@@ -24,12 +24,7 @@ public class CompassOverlay {
     public static boolean showY = false;
     public static boolean showZ = false;
 
-    public static void renderGameOverlayEvent(
-            //? if >1.20 {
-            GuiGraphics guiGraphics
-            //?} else {
-            /*PoseStack guiGraphics*/
-            //?}
+    public static void renderGameOverlayEvent(GuiGraphics guiGraphics
             //? if >1.21 {
             /*, DeltaTracker deltaTracker
             *///?} else {

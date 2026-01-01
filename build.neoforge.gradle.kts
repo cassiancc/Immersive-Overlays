@@ -156,6 +156,9 @@ neoForge {
     }
 
     runs {
+        configureEach {
+            systemProperty("neoforge.warnings.onlyin.hide", "true")
+        }
         register("client") {
             gameDirectory = file("run/")
             client()
@@ -201,9 +204,11 @@ dependencies {
     }
     // Jade
     if (hasProperty("deps.jade")) {
+        compileOnly("maven.modrinth:jade:${property("deps.jade")}")
         runtimeOnly("maven.modrinth:jade:${property("deps.jade")}")
+    } else {
+        compileOnly("maven.modrinth:jade:19.3.1+neoforge")
     }
-    compileOnly("maven.modrinth:jade:19.3.1+neoforge")
 
     // Map Atlases
     if (stonecutter.eval(mcVersion, "<1.21.2")) {
@@ -222,16 +227,7 @@ dependencies {
     // Cold Sweat
     compileOnly("maven.modrinth:cold-sweat:${mod.dep("cold_sweat")}")
 
-
-    if (stonecutter.eval(mcVersion, ">1.19.2")) {
-        compileOnly("io.wispforest:accessories-neoforge:${mod.dep("accessories")}")
-    }
-    if (stonecutter.eval(mcVersion, ">1.21") && stonecutter.eval(mcVersion, "<1.21.5")) {
-        compileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+$minecraft")
-    }
-    else if (stonecutter.eval(mcVersion, ">=1.21.5")) {
-        compileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+1.21.4")
-    }
+    compileOnly("io.wispforest:accessories-neoforge:${mod.dep("accessories")}")
     compileOnly("top.theillusivec4.curios:curios-neoforge:${mod.dep("curios")}:api")
     compileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-neoforge")
 
@@ -240,44 +236,41 @@ dependencies {
         runtimeOnly("maven.modrinth:oreganized:5.1.1")
         implementation("com.teamabnormals:blueprint:1.21.1-8.0.5")
         implementation("curse.maven:legendary-survival-overhaul-840254:7278267")
-    }
-
-    compileOnly("maven.modrinth:terrafirmacraft:JCusAJHn")
-    if (stonecutter.eval(mcVersion, "=1.21.1")) {
         runtimeOnly("maven.modrinth:terrafirmacraft:JCusAJHn")
         runtimeOnly("maven.modrinth:patchouli:h6hKI2ob")
-    }
-
-    compileOnly("curse.maven:ecliptic-seasons-1118306:7041469")
-    if (stonecutter.eval(mcVersion, "=1.21.1")) {
         runtimeOnly("curse.maven:ecliptic-seasons-1118306:7041469")
-    }
-
-    if (stonecutter.eval(mcVersion, ">1.19.2")) {
-        compileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
-    }
-    if (stonecutter.eval(mcVersion, ">1.20")) {
-        compileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-forge")
-    }
-    compileOnly("org.sinytra.forgified-fabric-api:fabric-client-tags-api-v1:1.1.15+e053909619")
-    compileOnly("org.sinytra.forgified-fabric-api:fabric-convention-tags-v2:2.11.0+87e5848019")
-
-    if (stonecutter.eval(mcVersion, "1.21.1")) {
         compileOnly("maven.local:antique-atlas:2.12.0+1.21_mapped_moj_1.21.1")
         compileOnly("org.sinytra:forgified-fabric-loader:2.5.55+0.17.2+1.21.1")
     }
 
+    compileOnly("maven.modrinth:terrafirmacraft:JCusAJHn")
+    compileOnly("curse.maven:ecliptic-seasons-1118306:7041469")
+    compileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
+    compileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-forge")
+    compileOnly("org.sinytra.forgified-fabric-api:fabric-client-tags-api-v1:1.1.15+e053909619")
+    compileOnly("org.sinytra.forgified-fabric-api:fabric-convention-tags-v2:2.11.0+87e5848019")
     implementation("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
     implementation("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
 
+    if (hasProperty("deps.thermoo")) {
+        compileOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
+        runtimeOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
+    }
+}
+
+stonecutter {
+    replacements.string {
+        direction = eval(current.version, ">1.21.10")
+        replace("ResourceLocation", "Identifier")
+    }
 }
 
 java {
     withSourcesJar()
-    val javaCompat = if (stonecutter.eval(stonecutter.current.version, ">=1.20.5")) {
-        JavaVersion.VERSION_21
+    val javaCompat = if (stonecutter.eval(stonecutter.current.version, ">26")) {
+        JavaVersion.VERSION_25
     } else {
-        JavaVersion.VERSION_17
+        JavaVersion.VERSION_21
     }
     sourceCompatibility = javaCompat
     targetCompatibility = javaCompat
