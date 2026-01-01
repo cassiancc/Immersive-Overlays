@@ -119,9 +119,10 @@ public class ModConfig {
     public boolean compat_ecliptic_seasons = true;
     //?}
     public boolean wind_enable = true;
+    public boolean wind_icons = true;
     public int wind_vertical_position = 170;
     public boolean wind_horizontal_position_left = true;
-    public int wind_colour = 0xc7bf81;
+    public int wind_colour = 0x9c7934;
     public boolean compat_breezy = true;
     public List<String> wind_items = List.of("breezy:gust_gauge");
 

@@ -50,6 +50,12 @@ An overlay displaying the current temperature is displayed whenever the player h
 - In vanilla, this data is sourced from the player's speed.
 - With [Oreganized](https://modrinth.com/mod/oreganized) installed, this data is sourced from the Speedometer.
 
+## Wind Overlays
+
+An overlay displaying wind intensity and direction is displayed whenever the player has a gust gauge in their inventory, including in a bundle.
+
+- With [Breezy](https://modrinth.com/mod/breezy) installed, this data is sourced from the Gust Gauge.
+
 ## Mod Compatibility
 
 The mod has support for [Spelunkery](https://modrinth.com/mod/spelunkery), [Caverns & Chasms](https://modrinth.com/mod/caverns-and-chasms), and [Supplementaries](https://modrinth.com/mod/supplementaries) items out of the box. For other mods, items can be added to the mod's various config options.
