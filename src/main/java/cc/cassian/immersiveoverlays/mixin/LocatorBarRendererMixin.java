@@ -6,6 +6,7 @@ import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
 /*import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.contextualbar.LocatorBarRenderer;
 *///?}
+import com.moulberry.mixinconstraints.annotations.IfMinecraftVersion;
 import net.minecraft.client.gui.Gui;
 //? if >1.20
 import net.minecraft.client.gui.GuiGraphics;
@@ -15,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Pseudo
+@IfMinecraftVersion(minVersion = "1.21.6")
 //? if >1.21.5 {
 /*@Mixin(LocatorBarRenderer.class)
 *///?} else {

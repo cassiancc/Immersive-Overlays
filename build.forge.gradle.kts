@@ -251,6 +251,9 @@ dependencies {
     implementation("io.github.llamalad7:mixinextras-forge:0.5.0")
     jarJar("io.github.llamalad7:mixinextras-forge:0.5.0")
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
+    // Mixin Constraints - embedded
+    implementation("com.moulberry:mixinconstraints:1.0.9")
+    jarJar("com.moulberry:mixinconstraints:1.0.9")
 
 }
 

@@ -3,6 +3,7 @@ package cc.cassian.immersiveoverlays.mixin;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
+import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import pepjebs.mapatlases.MapAtlasesMod;
 import pepjebs.mapatlases.utils.MapAtlasesAccessUtils;
 
-@Pseudo
+@IfModLoaded("map_atlases")
 @Mixin(MapAtlasesAccessUtils.class)
 public class MapAtlasAccessUtilsMixin {
     @Inject(method = "getAtlasFromInventory", at = @At(value = "RETURN"), remap = false, cancellable = true)

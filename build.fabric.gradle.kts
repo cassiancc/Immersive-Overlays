@@ -249,6 +249,9 @@ dependencies {
     modCompileOnly("maven.modrinth:bplb:v1.0.0")
     modCompileOnly("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
 
+    // Mixin Constraints - embedded
+    implementation("com.moulberry:mixinconstraints:1.0.9")
+    include("com.moulberry:mixinconstraints:1.0.9")
 }
 
 configurations.all {

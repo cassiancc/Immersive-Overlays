@@ -5,6 +5,7 @@ import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
 //? if fabric && <26
 //import net.bichal.bplb.client.BetterPlayerLocatorBarHud;
 //? if >1.20 {
+import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.minecraft.client.gui.GuiGraphics;
 //?}
 import net.minecraft.client.Minecraft;
@@ -14,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Pseudo
+@IfModLoaded("bplb")
 //? if fabric && <26 {
 /*@Mixin(BetterPlayerLocatorBarHud.class)
 *///?} else {

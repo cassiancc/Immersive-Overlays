@@ -2,6 +2,7 @@ package cc.cassian.immersiveoverlays.mixin;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
+import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 *///?}
 import java.util.List;
 import java.util.Optional;
-@Pseudo
+@IfModLoaded("map_atlases")
 //? if (fabric && =1.20.1) || forge {
 @Mixin(IMapCollectionImpl.class)
 //?} else if neoforge {

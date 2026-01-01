@@ -256,6 +256,10 @@ dependencies {
         compileOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
         runtimeOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
     }
+
+    // Mixin Constraints - embedded
+    implementation("com.moulberry:mixinconstraints:1.0.9")
+    jarJar("com.moulberry:mixinconstraints:1.0.9")
 }
 
 stonecutter {

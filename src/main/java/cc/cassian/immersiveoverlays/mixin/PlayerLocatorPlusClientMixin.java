@@ -2,6 +2,7 @@ package cc.cassian.immersiveoverlays.mixin;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
+import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -11,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //? if fabric && <26
 //import sh.sit.plp.PlayerLocatorPlusClient;
 
-@Pseudo
+@IfModLoaded("player-locator-plus")
 //? if fabric && <26 {
 /*@Mixin(PlayerLocatorPlusClient.class)
 *///?} else {

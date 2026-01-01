@@ -8,3 +8,4 @@
 
 ### Fixed
 - Keybind not working on 1.20.1 Forge.
+- Unused mixins are now properly disabled.

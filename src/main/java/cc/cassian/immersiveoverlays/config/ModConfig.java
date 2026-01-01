@@ -76,7 +76,7 @@ public class ModConfig {
     public boolean compat_xaeros = true;
     public boolean compat_antique_atlas = true;
     public boolean compat_accessorify = true;
-    //? if (forge && =1.20.1) || (neoforge && =1.21.1) {
+    //? if (forge) || (neoforge && =1.21.1) {
     public boolean compat_oreganized_temperature = true;
     //?}
     public boolean compat_tough_as_nails_temperature = true;

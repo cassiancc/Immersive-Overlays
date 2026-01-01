@@ -3,6 +3,7 @@ package cc.cassian.immersiveoverlays.mixin;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 //? if 1.20.1 || 1.21.1 {
+import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import folk.sisby.antique_atlas.AntiqueAtlas;
 import static cc.cassian.immersiveoverlays.overlay.OverlayHelpers.getContainerContents;
 import static cc.cassian.immersiveoverlays.overlay.OverlayHelpers.isContainer;
@@ -20,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
 
-@Pseudo
+@IfModLoaded(value = "antique-atlas", aliases = "antique_atlas")
 //? if 1.20.1 || 1.21.1 {
 @Mixin(AntiqueAtlas.class)
 //?} else {
