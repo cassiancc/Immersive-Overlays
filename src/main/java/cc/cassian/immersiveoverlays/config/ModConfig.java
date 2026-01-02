@@ -91,8 +91,8 @@ public class ModConfig {
     public boolean compat_legendary_survival_overhaul_temperature = true;
      //?}
     //? if fabric || 1.21.1 {
-    public boolean compat_thermoo_temperature = true;
-    //?}
+    /*public boolean compat_thermoo_temperature = true;
+    *///?}
 
     // biomes
     public boolean biome_enable = true;
@@ -128,7 +128,6 @@ public class ModConfig {
     //?}
 
     // wind
-    //? if forge {
     public boolean wind_enable = true;
     public boolean wind_icons = true;
     public int wind_vertical_position = 90;
@@ -136,7 +135,6 @@ public class ModConfig {
     public int wind_colour = 0x9c7934;
     public boolean compat_breezy = true;
     public List<String> wind_items = List.of("breezy:gust_gauge");
-    //?}
 
 
     public static void load() {

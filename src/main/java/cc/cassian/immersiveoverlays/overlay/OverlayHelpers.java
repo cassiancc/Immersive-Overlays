@@ -28,6 +28,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -297,7 +298,7 @@ public class OverlayHelpers {
         }
     }
 
-    public static ItemStack checkInventoryForStack(Inventory inventory, Item item) {
+    public static @NotNull ItemStack checkInventoryForStack(Inventory inventory, Item item) {
         for (ItemStack stack :
             //? if <1.21.5 {
              inventory.items
@@ -335,10 +336,10 @@ public class OverlayHelpers {
         }
     }
 
-    public static void drawString(GuiGraphics poseStack, Font font, Component text, int x, int y, Integer color) {
+    public static void drawString(GuiGraphics guiGraphics, Font font, Component text, int x, int y, Integer color) {
         //? if >1.21.6
         //color = ARGB.opaque(color);
-        poseStack.drawString(font, text, x, y, color);
+        guiGraphics.drawString(font, text, x, y, color);
     }
 
     public static void drawString(GuiGraphics guiGraphics, Font font, String text, int x, int y, Integer color) {

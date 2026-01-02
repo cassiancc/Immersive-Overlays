@@ -23,6 +23,7 @@ public class ModClient {
     public static final String MOD_NAME = "Immersive Overlays";
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
     public static final int CONFIG_VERSION = 3;
+    public static boolean DEBUG = false;
 
     //? if >1.21.8 {
     /*public static final KeyMapping.Category CATEGORY = KeyMapping.Category.register(locate("keybinds")); // The category translation key used to categorize in the Controls screen

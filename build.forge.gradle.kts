@@ -274,6 +274,12 @@ tasks.named<Jar>("jar") {
     }
 }
 
+stonecutter {
+    replacements.string {
+        direction = eval(current.version, ">1.21.10")
+        replace("ResourceLocation", "Identifier")
+    }
+}
 
 tasks {
     processResources {
@@ -291,6 +297,7 @@ tasks {
         dependsOn("build")
     }
 }
+
 
 java {
     withSourcesJar()

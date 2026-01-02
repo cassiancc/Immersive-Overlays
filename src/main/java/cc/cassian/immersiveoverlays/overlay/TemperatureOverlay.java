@@ -1,12 +1,10 @@
 package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.ModClient;
+import cc.cassian.immersiveoverlays.Platform;
 import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.TextHelpers;
-//? if >1.21 {
-/*import net.minecraft.client.DeltaTracker;
-*///?}
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
@@ -21,7 +19,7 @@ public class TemperatureOverlay {
 
     public static void renderGameOverlayEvent(GuiGraphics guiGraphics
             //? if >1.21 {
-            /*, DeltaTracker deltaTracker
+            /*, net.minecraft.client.DeltaTracker deltaTracker
             *///?} else {
             , float deltaTracker
              //?}
@@ -33,7 +31,7 @@ public class TemperatureOverlay {
             return;
 
         if (mc.player == null) return;
-        TemperaturePair temperature = getTemperature(mc.player);
+        TemperaturePair temperature = getTemperature(mc.player, guiGraphics);
 
         int xOffset = 3;
         // The amount of offset needed to display the biome icons.
@@ -59,15 +57,12 @@ public class TemperatureOverlay {
         }
     }
 
-    public static TemperaturePair getTemperature(LocalPlayer player) {
-        //? if (forge && =1.20.1) || (neoforge && =1.21.1) {
-        if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature) {
-            int temperature =  OreganizedCompat.getAmbientTemperatureFromThermometer(player);
-            return new TemperaturePair(Component.translatable("tooltip.oreganized.heat_"+temperature), OreganizedCompat.getTemperatureColourFromThermometer(temperature), "heat_"+temperature);
-        }
-        //?}
+    public static TemperaturePair getTemperature(LocalPlayer player, GuiGraphics guiGraphics) {
         if (ModCompat.TOUGH_AS_NAILS && ModConfig.get().compat_tough_as_nails_temperature) {
             if (ToughAsNailsCompat.isTemperatureEnabled()) {
+                if (Platform.showDevInfo()) {
+                    OverlayHelpers.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Using Tough as Nails for Temperature!"), 0, 0, -1);
+                }
                 String temperature = ToughAsNailsCompat.getAmbientTemperature(player);
                 var sprite = switch (temperature) {
                     case "ICY" -> "heat_0";
@@ -81,6 +76,9 @@ public class TemperatureOverlay {
         }
         //? if forge || neoforge {
         if (ModCompat.COLD_SWEAT && ModConfig.get().compat_cold_sweat_temperature) {
+            if (Platform.showDevInfo()) {
+                OverlayHelpers.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Using Cold Sweat for Temperature!"), 0, 0, -1);
+            }
             return ColdSweatCompat.getTemperaturePair(player);
         }
         //?}
@@ -104,11 +102,16 @@ public class TemperatureOverlay {
                 return temperaturePair;
         }
         *///?}
-        var level = player.level
-        //? if >1.20 {
-        ()
+        //? if (forge) || (neoforge && =1.21.1) {
+        if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature) {
+            int temperature =  OreganizedCompat.getAmbientTemperatureFromThermometer(player);
+            if (Platform.showDevInfo()) {
+                OverlayHelpers.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Oreganized: " + temperature), 0, 0, -1);
+            }
+            return new TemperaturePair(Component.translatable("tooltip.oreganized.heat_"+temperature), OreganizedCompat.getTemperatureColourFromThermometer(temperature), "heat_"+temperature);
+        }
         //?}
-        ;
+        var level = player.level();
         return getBiomeTemperature(level.getBiome(player.blockPosition()));
     }
 

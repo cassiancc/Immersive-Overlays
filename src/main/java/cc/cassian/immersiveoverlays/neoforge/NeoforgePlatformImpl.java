@@ -4,7 +4,9 @@ package cc.cassian.immersiveoverlays.neoforge;
 /*import cc.cassian.immersiveoverlays.Overlay;
 import cc.cassian.immersiveoverlays.Platform;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.ModList;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.fml.loading.LoadingModList;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
@@ -35,6 +37,16 @@ public class NeoforgePlatformImpl implements Platform {
     @Override
     public void registerOverlay(ResourceLocation id, Overlay overlay) {
         guiLayersEvent.registerAboveAll(id, overlay::render);
+    }
+
+    @Override
+    public boolean isDeveloperEnvironment() {
+        //? if >1.21.9 {
+        /^return !FMLEnvironment.isProduction();
+        ^///?} else {
+        return !FMLEnvironment.production;
+        //?}
+
     }
 }
 *///?}

@@ -7,6 +7,7 @@ import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.fml.loading.LoadingModList;
 
@@ -37,6 +38,11 @@ public class ForgePlatformImpl implements Platform {
     @Override
     public void registerOverlay(ResourceLocation id, Overlay overlay) {
         overlay.render(guiLayersEvent.getGuiGraphics(), guiLayersEvent.getPartialTick());
+    }
+
+    @Override
+    public boolean isDeveloperEnvironment() {
+        return !FMLEnvironment.production;
     }
 
 

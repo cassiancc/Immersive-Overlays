@@ -31,4 +31,11 @@ public interface Platform {
     String loader();
     Path configPath();
     void registerOverlay(ResourceLocation id, Overlay overlay);
+
+	boolean isDeveloperEnvironment();
+
+    @SuppressWarnings("false")
+    static boolean showDevInfo() {
+        return ModClient.DEBUG && Platform.INSTANCE.isDeveloperEnvironment();
+    }
 }

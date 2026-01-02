@@ -1,7 +1,7 @@
 package cc.cassian.immersiveoverlays.compat;
 
 import net.minecraft.client.player.LocalPlayer;
-//? if (forge && >1.20) || (neoforge && =1.21.1) {
+//? if (forge) || (neoforge && =1.21.1) {
 import galena.oreganized.client.tooltips.ClientThermometerTooltip;
 import galena.oreganized.content.item.ThermometerItem;
 import galena.oreganized.world.IMotionHolder;
