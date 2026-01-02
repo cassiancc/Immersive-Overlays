@@ -46,9 +46,9 @@ public class ModConfig {
     public int compass_vertical_position = 140;
     public boolean compass_horizontal_position_left = false;
     public int compass_text_colour = 14737632;
-    public String compass_x_colour = "Red";
-    public String compass_y_colour = "Green";
-    public String compass_z_colour = "Blue";
+    public int compass_x_colour = 16733525;
+    public int compass_y_colour = 5635925;
+    public int compass_z_colour = 5592575;
     public List<String> compass_x_items = List.of("minecraft:compass", "minecraft:recovery_compass", "spelunkery:magnetic_compass", "firmaciv:nav_clock", "firmaciv:firmaciv_compass");
     public List<String> compass_y_items = List.of("spelunkery:depth_gauge","caverns_and_chasms:depth_gauge","additionaladditions:depth_meter","supplementaries:altimeter","depthmeter:depthmeter");
     public List<String> compass_z_items = List.of("firmaciv:sextant");
@@ -135,9 +135,10 @@ public class ModConfig {
     public int wind_colour = 0x9c7934;
     public boolean compat_breezy = true;
     public List<String> wind_items = List.of("breezy:gust_gauge");
+    public boolean compass_direction = true;
 
 
-    public static void load() {
+	public static void load() {
         if (!Files.exists(configPath())) {
             save();
             return;
@@ -148,7 +149,7 @@ public class ModConfig {
                 save();
                 return;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             ModClient.LOGGER.warn("Upgrading config file to version: " + ModClient.CONFIG_VERSION);
         }
 
@@ -158,8 +159,10 @@ public class ModConfig {
                 INSTANCE = new ModConfig();
                 save();
             }
-        } catch (IOException e) {
-            ModClient.LOGGER.warn("Unable to load config file!");
+        } catch (Exception e) {
+            ModClient.LOGGER.warn("Unable to load config file! Upgrading it to version: " + ModClient.CONFIG_VERSION);
+            INSTANCE = new ModConfig();
+            save();
         }
     }
 

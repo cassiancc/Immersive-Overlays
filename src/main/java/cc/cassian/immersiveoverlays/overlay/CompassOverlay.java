@@ -3,16 +3,12 @@ package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModHelpers;
-//? if >1.21 {
-/*import net.minecraft.client.DeltaTracker;
-*///?}
+import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import net.minecraft.client.Minecraft;
-//? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
-//?} else {
-/*import com.mojang.blaze3d.vertex.PoseStack;
- *///?}
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -26,7 +22,7 @@ public class CompassOverlay {
 
     public static void renderGameOverlayEvent(GuiGraphics guiGraphics
             //? if >1.21 {
-            /*, DeltaTracker deltaTracker
+            /*, net.minecraft.client.DeltaTracker deltaTracker
             *///?} else {
             , float deltaTracker
              //?}
@@ -41,7 +37,7 @@ public class CompassOverlay {
         if (OverlayHelpers.shouldCancelRender(mc))
             return;
 
-        ArrayList<String> coords = new ArrayList<>();
+        ArrayList<Component> coords = new ArrayList<>();
 
         BlockPos pos;
         if (mc.player != null) pos = mc.player.blockPosition();
@@ -54,15 +50,15 @@ public class CompassOverlay {
         width = Integer.max(width, y.length());
         if (showX) {
             x = StringUtils.leftPad(x, width);
-            coords.add("§%sX:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_x_colour), x));
+            coords.add(Component.empty().append(Component.literal("X: ").withStyle(Style.EMPTY.withColor(ModConfig.get().compass_x_colour))).append(x));
         }
         if (showY) {
             y = StringUtils.leftPad(y, width);
-            coords.add("§%sY:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_y_colour), y));
+            coords.add(Component.empty().append(Component.literal("Y: ").withStyle(Style.EMPTY.withColor(ModConfig.get().compass_y_colour))).append(y));
         }
         if (showZ) {
             z = StringUtils.leftPad(z, width);
-            coords.add("§%sZ:§r %s".formatted(ModHelpers.getColour(ModConfig.get().compass_z_colour), z));
+            coords.add(Component.empty().append(Component.literal("Z: ").withStyle(Style.EMPTY.withColor(ModConfig.get().compass_z_colour))).append(z));
         }
         int xOffset = 3;
         int yPlacement = ModConfig.get().compass_vertical_position;
@@ -110,7 +106,7 @@ public class CompassOverlay {
             xOffset -= 16;
         }
         // render text
-        for (String text : coords) {
+        for (Component text : coords) {
             OverlayHelpers.drawString(guiGraphics, mc.font, text, xPlacement-xOffset, yPlacement, ModConfig.get().compass_text_colour);
             yPlacement += mc.font.lineHeight;
         }

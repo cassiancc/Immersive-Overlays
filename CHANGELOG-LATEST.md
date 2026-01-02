@@ -4,6 +4,7 @@
 - Support for 26.1-snapshot-1.
 
 ### Changed
+- Compass text now uses proper colour codes rather than legacy formatting code names.
 - Removed all support for 1.19.2 - this version is now discontinued.
 
 ### Fixed

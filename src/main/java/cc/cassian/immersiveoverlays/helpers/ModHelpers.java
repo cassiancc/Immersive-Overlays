@@ -46,33 +46,4 @@ public class ModHelpers {
             return TextHelpers.translatable(key);
         else return TextHelpers.empty();
     }
-
-    /**
-     * Used to check what colour the text should be.
-     * Adapted from Item Descriptions.
-     */
-    public static char getColour(String colour) {
-        int length = colour.length();
-        if (length == 1) {
-            return colour.charAt(0);
-        }
-        else {
-            String replacedColour = colour.toLowerCase().replace(" ", "_");
-            return switch (replacedColour) {
-                case "black", "dark_blue", "dark_green", "dark_red", "dark_purple",
-                     "blue", "green", "aqua", "red", "yellow", "white" ->
-                        Objects.requireNonNullElse(ChatFormatting.getByName(colour), ChatFormatting.GRAY).getChar();
-                case "pink", "light_purple" ->
-                        Objects.requireNonNullElse(ChatFormatting.getByName("light_purple"), ChatFormatting.GRAY).getChar();
-                case "dark_gray", "dark_grey" ->
-                        Objects.requireNonNullElse(ChatFormatting.getByName("dark_gray"), ChatFormatting.GRAY).getChar();
-                case "cyan", "dark_aqua" ->
-                        Objects.requireNonNullElse(ChatFormatting.getByName("dark_aqua"), ChatFormatting.GRAY).getChar();
-                case "orange", "gold", "dark_yellow" ->
-                        Objects.requireNonNullElse(ChatFormatting.getByName("gold"), ChatFormatting.GRAY).getChar();
-                default -> ChatFormatting.GRAY.getChar();
-            };
-
-        }
-    }
 }
