@@ -300,7 +300,7 @@ publishMods {
     modrinth {
         projectId = property("publish.modrinth") as String
         accessToken = env.MODRINTH_API_KEY.orNull()
-        minecraftVersions.add(stonecutter.current.version)
+        minecraftVersions.add(property("deps.minecraft") as String)
         minecraftVersions.addAll(additionalVersions)
         optional("cloth-config")
     }
@@ -308,7 +308,11 @@ publishMods {
     curseforge {
         projectId = property("publish.curseforge") as String
         accessToken = env.CURSEFORGE_API_KEY.orNull()
-        minecraftVersions.add(stonecutter.current.version)
+        if (hasProperty("deps.curseforge_minecraft_version")) {
+            minecraftVersions.add(property("deps.curseforge_minecraft_version") as String)
+        } else {
+            minecraftVersions.add(property("deps.minecraft") as String)
+        }
         minecraftVersions.addAll(additionalVersions)
     }
 }
