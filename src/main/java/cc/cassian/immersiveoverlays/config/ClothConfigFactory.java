@@ -44,6 +44,7 @@ public class ClothConfigFactory {
         final var biomeCategory = createCategory("biome", builder);
         final var temperatureCategory = createCategory("temperature", builder);
         final var speedCategory = createCategory("speed", builder);
+        final var windCategory = createCategory("wind", builder);
         final var compatCategory = createCategory("compat", builder);
 
         for (var field : ModConfig.class.getFields()) {
@@ -54,6 +55,7 @@ public class ClothConfigFactory {
             else if (is(field,"season")) category = clockCategory;
             else if (is(field,"temperature")) category = temperatureCategory;
             else if (is(field,"speed")) category = speedCategory;
+            else if (is(field,"wind")) category = windCategory;
             else if (is(field,"compat")) category = compatCategory;
             else category = generalCategory;
             if (is(field, "version")) {}

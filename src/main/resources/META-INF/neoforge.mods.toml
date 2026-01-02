@@ -10,7 +10,7 @@ authors = "cassiancc, noelledotjpg"
 description = '''
 Overlays useful info like coordinates and the time - as long as you have the right item.
 '''
-logoFile = "assets/immersiveoverlays/icon.png"
+logoFile = "icon.png"
 issueTrackerURL = "https://github.com/cassiancc/Immersive-Overlays/issues"
 displayURL="https://modrinth.com/mod/immersive-overlays"
 modURL="https://modrinth.com/mod/immersive-overlays"
@@ -19,14 +19,14 @@ credits = "Additional sprites from ProbablyEkho, Crabbarition, Kelpiesaurus, and
 [[dependencies.immersiveoverlays]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.0,)"
+versionRange = "[21.1.181,)"
 ordering = "NONE"
 side = "CLIENT"
 
 [[dependencies.immersiveoverlays]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21,)"
+versionRange = "[${minecraft}]"
 ordering = "NONE"
 side = "CLIENT"
 

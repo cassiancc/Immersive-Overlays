@@ -2,8 +2,8 @@ package cc.cassian.immersiveoverlays.mixin;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
-//? if 1.20.1 || 1.21.1 {
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
+//? if 1.20.1 || 1.21.1 {
 import folk.sisby.antique_atlas.AntiqueAtlas;
 import static cc.cassian.immersiveoverlays.overlay.OverlayHelpers.getContainerContents;
 import static cc.cassian.immersiveoverlays.overlay.OverlayHelpers.isContainer;

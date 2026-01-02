@@ -41,8 +41,8 @@ public class ModHelpers {
      * Automatically generate translation keys for config options.
      */
     public static Component fieldTooltip(Field field) {
-        var key = "config.%s.config.%s.tooltip".formatted(MOD_ID, field.getName());
-        if (I18n.exists("config.%s.config.%s.tooltip".formatted(MOD_ID, field.getName())))
+        var key = "config.%s.%s.tooltip".formatted(MOD_ID, field.getName());
+        if (I18n.exists("config.%s.%s.tooltip".formatted(MOD_ID, field.getName())))
             return TextHelpers.translatable(key);
         else return TextHelpers.empty();
     }

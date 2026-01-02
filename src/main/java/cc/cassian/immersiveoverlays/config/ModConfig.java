@@ -23,8 +23,10 @@ public class ModConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 
     private static ModConfig INSTANCE = new ModConfig();
+
     // version
     public int version = ModClient.CONFIG_VERSION;
+
     //General settings
     public boolean enabled = true;
     //? if >1.21.5
@@ -38,6 +40,7 @@ public class ModConfig {
     public boolean render_background = true;
     public boolean render_endcap = true;
     public boolean hide_from_debug = true;
+
     // coords
     public boolean compass_enable = true;
     public int compass_vertical_position = 140;
@@ -61,6 +64,7 @@ public class ModConfig {
     public boolean clock_horizontal_position_left = false;
     public List<String> clock_items = List.of("minecraft:clock");
     public List<String> clock_weather_items = List.of("caverns_and_chasms:barometer", "firmaciv:barometer");
+
     // temperature
     public boolean temperature_enable = true;
     public boolean temperature_icons = true;
@@ -70,12 +74,12 @@ public class ModConfig {
     public int temperature_vertical_position = 112;
     public boolean temperature_horizontal_position_left = true;
     public List<String> temperature_items = List.of("oreganized:thermometer", "toughasnails:thermometer", "legendarysurvivaloverhaul:thermometer", "cold_sweat:thermometer");
+
     // compat
     //? if fabric
     //public boolean compat_playerlocatorplus = true;
     public boolean compat_xaeros = true;
     public boolean compat_antique_atlas = true;
-    public boolean compat_accessorify = true;
     //? if (forge) || (neoforge && =1.21.1) {
     public boolean compat_oreganized_temperature = true;
     //?}
@@ -86,7 +90,10 @@ public class ModConfig {
     //? if forge || neoforge {
     public boolean compat_legendary_survival_overhaul_temperature = true;
      //?}
+    //? if fabric || 1.21.1 {
     public boolean compat_thermoo_temperature = true;
+    //?}
+
     // biomes
     public boolean biome_enable = true;
     public boolean biome_icons = true;
@@ -96,11 +103,13 @@ public class ModConfig {
     public int biome_vertical_position = 112;
     public boolean biome_horizontal_position_left = false;
     public List<String> biome_items = List.of("minecraft:map", "minecraft:filled_map", "minecraft:empty_map", "map_atlases:atlas", "map_atlases:end_atlas", "map_atlases:nether_atlas",  "naturescompass:naturescompass", "antiqueatlas:antique_atlas");
+
     // seasons
     public List<String> season_items = List.of("sereneseasons:calendar", "seasonsextras:season_calendar", "eclipticseasons:calendar");
+
     //speed
     public boolean speed_enable = true;
-    public int speed_vertical_position = 140;
+    public int speed_vertical_position = 137;
     public boolean speed_horizontal_position_left = true;
     public int speed_colour = 0xc7bf81;
     public List<String> speed_items = List.of("oreganized:speedometer", "speedometer:speedometer");
@@ -117,13 +126,17 @@ public class ModConfig {
     public boolean compat_tfc_seasons = true;
     public boolean compat_ecliptic_seasons = true;
     //?}
+
+    // wind
+    //? if forge {
     public boolean wind_enable = true;
     public boolean wind_icons = true;
-    public int wind_vertical_position = 170;
+    public int wind_vertical_position = 90;
     public boolean wind_horizontal_position_left = true;
     public int wind_colour = 0x9c7934;
     public boolean compat_breezy = true;
     public List<String> wind_items = List.of("breezy:gust_gauge");
+    //?}
 
 
     public static void load() {
