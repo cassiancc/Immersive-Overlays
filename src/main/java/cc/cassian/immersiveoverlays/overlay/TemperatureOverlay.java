@@ -120,10 +120,8 @@ public class TemperatureOverlay {
     }
 
     public static TemperaturePair getBiomeTemperature(Holder<Biome> biome) {
-        //? if >1.19 {
         if (ModCompat.FABRIC_API)
             return FabricCompat.getBiomeTemperatureFromTag(biome);
-        //?}
         return getBiomeTemperature(biome.value().getBaseTemperature());
     }
 

@@ -4,10 +4,8 @@ import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
 //? if fabric && <26
 import net.bichal.bplb.client.BetterPlayerLocatorBarHud;
-//? if >1.20 {
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.minecraft.client.gui.GuiGraphics;
-//?}
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;

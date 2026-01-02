@@ -3,18 +3,9 @@ package cc.cassian.immersiveoverlays.overlay;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-//? if >1.21.5
-//import net.minecraft.client.renderer.RenderPipelines;
 import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import net.minecraft.client.Minecraft;
-//? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
-//?} else {
-/*import com.mojang.blaze3d.vertex.PoseStack;
-*///?}
-//? if >1.21 {
-import net.minecraft.client.DeltaTracker;
-//?}
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
@@ -37,7 +28,7 @@ public class ClockOverlay {
 
     public static void renderGameOverlayEvent(GuiGraphics guiGraphics
             //? if >1.21 {
-            , DeltaTracker deltaTracker
+            , net.minecraft.client.DeltaTracker deltaTracker
             //?} else {
             /*, float deltaTracker
              *///?}
@@ -133,24 +124,14 @@ public class ClockOverlay {
     }
 
     public static int getWeather(Player player) {
-        var level = player.level
-        //? if >1.20 {
-        ();
-        //?} else {
-        /*;
-        *///?}
+        var level = player.level();
         var biome = level.getBiome(player.blockPosition()).value();
         var time = level.getDayTime() % 24000;
         //? if >1.21.2 {
         /*var precipitation = biome.getPrecipitationAt(player.blockPosition(), level.getSeaLevel());
-        *///?} else if >1.20 {
-        var precipitation = biome.getPrecipitationAt(player.blockPosition());
-        //?} else {
-         /*var precipitation = biome.getPrecipitation();
-        *///?}
-        //? if >1.21.2 {
-        /*var snows = biome.coldEnoughToSnow(player.blockPosition(), level.getSeaLevel());
+        var snows = biome.coldEnoughToSnow(player.blockPosition(), level.getSeaLevel());
         *///?} else {
+        var precipitation = biome.getPrecipitationAt(player.blockPosition());
         var snows = biome.coldEnoughToSnow(player.blockPosition());
          //?}
         //? if >1.21.10 {
@@ -214,11 +195,9 @@ public class ClockOverlay {
     public static String getSeason(ClientLevel level, BlockPos pos) {
         String season = "unknown";
         if (ModConfig.get().clock_seasons && showSeason) {
-            //? if >1.20 {
             if (ModCompat.SERENE_SEASONS && ModConfig.get().compat_serene_seasons) {
                 season = SereneSeasonsCompat.getSeason(level, pos);
             }
-            //?}
             //? if fabric {
             if (ModCompat.FABRIC_SEASONS && ModConfig.get().compat_fabric_seasons) {
                 season = FabricSeasonsCompat.getSeason(level);
@@ -233,7 +212,7 @@ public class ClockOverlay {
                 if (tfcCompat != null) season = tfcCompat;
             }
             *///?}
-            //? if (forge || neoforge) && >1.20 {
+            //? if (forge || neoforge) {
              /*if (ModCompat.ECLIPTIC_SEASONS && ModConfig.get().compat_ecliptic_seasons) {
                 var eclipticCompat = EclipticSeasonsCompat.getSeason(level, pos);
                 if (eclipticCompat != null) season = eclipticCompat;

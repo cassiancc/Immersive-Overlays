@@ -1,11 +1,7 @@
 package cc.cassian.immersiveoverlays.helpers;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
-//? if >1.20 {
 import net.minecraft.core.registries.BuiltInRegistries;
-//?} else {
-/*import net.minecraft.core.Registry;
- *///?}
 import net.minecraft.core.DefaultedRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

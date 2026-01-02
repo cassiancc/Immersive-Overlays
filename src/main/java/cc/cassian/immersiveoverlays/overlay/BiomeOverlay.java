@@ -2,17 +2,8 @@ package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-//? if >1.21 {
-import net.minecraft.client.DeltaTracker;
-//?}
 import net.minecraft.client.Minecraft;
-//? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
-//?} else {
-/*import net.minecraft.client.gui.GuiComponent;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.systems.RenderSystem;
- *///?}
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Holder;
@@ -30,7 +21,7 @@ public class BiomeOverlay {
 
     public static void renderGameOverlayEvent(GuiGraphics guiGraphics
     //? if >1.21 {
-        , DeltaTracker deltaTracker
+        , net.minecraft.client.DeltaTracker deltaTracker
     //?} else {
         /*, float deltaTracker
     *///?}
@@ -102,7 +93,6 @@ public class BiomeOverlay {
         var path = "textures/immersiveoverlays/"+ biome.getPath();
         var key = ModClient.locate(biome.getNamespace(), "%s.png".formatted(path));
         var redirect = ModClient.locate(biome.getNamespace(), "%s.txt".formatted(path));
-        //? if >1.19 {
         if (manager.getResource(key).isPresent())
             return key;
         else {
@@ -116,25 +106,10 @@ public class BiomeOverlay {
                 return UNDEFINED;
             }
         }
-        //?} else {
-        /*if (allowRedirect) {
-            try {
-                return getBiomeSprite(Objects.requireNonNull(ResourceLocation.tryParse(manager.getResource(redirect).getInputStream().toString())), false);
-            } catch (Exception e) {
-                return UNDEFINED;
-            }
-        } else {
-            return UNDEFINED;
-        }
-        *///?}
     }
 
     public static Holder<Biome> getBiome(LocalPlayer player) {
-        return player.level
-        //? if >1.20 {
-        ()
-        //?}
-        .getBiome(player.blockPosition());
+        return player.level().getBiome(player.blockPosition());
     }
 
     public static ResourceLocation getId(Holder<Biome> biome) {

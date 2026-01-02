@@ -84,7 +84,7 @@ public class OverlayHelpers {
     }
 
     public static int moveBy(Player player) {
-        //? if >1.20.4 {
+        //? if >1.21 {
         boolean hasBeneficial =
                 player.getActiveEffects().stream().anyMatch(p -> p.getEffect().value().isBeneficial());
         boolean hasNegative =
@@ -94,7 +94,6 @@ public class OverlayHelpers {
                 player.getActiveEffects().stream().anyMatch(p -> p.getEffect().isBeneficial());
         boolean hasNegative =
                 player.getActiveEffects().stream().anyMatch(p -> !p.getEffect().isBeneficial());
-
         *///?}
         if (hasNegative) {
             return 42;
