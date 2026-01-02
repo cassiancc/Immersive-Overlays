@@ -2,7 +2,7 @@ package cc.cassian.immersiveoverlays.compat;
 
 //? if forge {
 
-import cc.cassian.immersiveoverlays.helpers.TextHelpers;
+/*import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import codyhuh.breezy.common.network.BreezyNetworking;
 import codyhuh.breezy.common.network.NewWindSavedData;
 import codyhuh.breezy.core.other.tags.BreezyBiomeTags;
@@ -78,4 +78,4 @@ public class BreezyCompat {
 		return 0;
 	}
 }
-//?}
+*///?}

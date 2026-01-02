@@ -3,7 +3,7 @@ package cc.cassian.immersiveoverlays.mixin;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
 //? if fabric && <26
-//import net.bichal.bplb.client.BetterPlayerLocatorBarHud;
+import net.bichal.bplb.client.BetterPlayerLocatorBarHud;
 //? if >1.20 {
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,13 +17,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @IfModLoaded("bplb")
 //? if fabric && <26 {
-/*@Mixin(BetterPlayerLocatorBarHud.class)
-*///?} else {
-@Mixin(Minecraft.class)
-//?}
+@Mixin(BetterPlayerLocatorBarHud.class)
+//?} else {
+/*@Mixin(Minecraft.class)
+*///?}
 public class BetterPlayerLocatorBarHudMixin {
     //? if fabric && <26 {
-    /*@Inject(method = "render", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "render", at = @At(value = "HEAD"), cancellable = true)
     private static void mixin(GuiGraphics guiGraphics, CallbackInfo ci) {
         if (ModConfig.get().compat_playerlocatorplus) {
             if (!CompassOverlay.showX) {
@@ -31,5 +31,5 @@ public class BetterPlayerLocatorBarHudMixin {
             }
         }
     }
-    *///?}
+    //?}
 }

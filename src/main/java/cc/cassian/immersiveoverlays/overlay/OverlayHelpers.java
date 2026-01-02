@@ -6,14 +6,14 @@ import cc.cassian.immersiveoverlays.config.ClothConfigFactory;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 //? if >1.21 {
-/*import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.core.component.DataComponents;
-*///?} else {
-import net.minecraft.nbt.CompoundTag;
+//?} else {
+/*import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-//?}
+*///?}
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -85,17 +85,17 @@ public class OverlayHelpers {
 
     public static int moveBy(Player player) {
         //? if >1.20.4 {
-        /*boolean hasBeneficial =
+        boolean hasBeneficial =
                 player.getActiveEffects().stream().anyMatch(p -> p.getEffect().value().isBeneficial());
         boolean hasNegative =
                 player.getActiveEffects().stream().anyMatch(p -> !p.getEffect().value().isBeneficial());
-        *///?} else {
-        boolean hasBeneficial =
+        //?} else {
+        /*boolean hasBeneficial =
                 player.getActiveEffects().stream().anyMatch(p -> p.getEffect().isBeneficial());
         boolean hasNegative =
                 player.getActiveEffects().stream().anyMatch(p -> !p.getEffect().isBeneficial());
 
-        //?}
+        *///?}
         if (hasNegative) {
             return 42;
         } else if (hasBeneficial) {
@@ -109,10 +109,10 @@ public class OverlayHelpers {
         if (!ModConfig.get().enabled) return true;
         if (ModConfig.get().hide_from_debug) {
             //? if >1.20.4 {
-            /*var debug = mc.getDebugOverlay().showDebugScreen();
-             *///?} else {
-            var debug = mc.options.renderDebug;
-            //?}
+            var debug = mc.getDebugOverlay().showDebugScreen();
+             //?} else {
+            /*var debug = mc.options.renderDebug;
+            *///?}
             return debug;
         }
         return false;
@@ -176,13 +176,13 @@ public class OverlayHelpers {
                 if (ModCompat.ACCESSORIES)
                     AccessoriesCompat.checkForImportantAccessories(player);
                 //? if forge || neoforge {
-                if (ModCompat.CURIOS)
+                /*if (ModCompat.CURIOS)
                     CuriosCompat.checkForImportantAccessories(player);
-                //?}
-                //? if fabric {
-                /*if (ModCompat.TRINKETS)
-                    TrinketsCompat.checkForImportantAccessories(player);
                 *///?}
+                //? if fabric {
+                if (ModCompat.TRINKETS)
+                    TrinketsCompat.checkForImportantAccessories(player);
+                //?}
                 if (ModCompat.TRAVELERS_BACKPACK)
                     TravelersBackpackCompat.checkForImportantAccessories(player);
                 checkInventoryForStack(player.getInventory());
@@ -219,7 +219,7 @@ public class OverlayHelpers {
     public static Stream<ItemStack> getContainerContents(ItemStack stack) {
         if (!isContainer(stack)) return Stream.empty();
         //? if >1.20.5 {
-        /*var components = stack.getComponents();
+        var components = stack.getComponents();
         if (components.has(DataComponents.BUNDLE_CONTENTS)) {
             BundleContents bundleContents = components.get(DataComponents.BUNDLE_CONTENTS);
             if (bundleContents != null)
@@ -230,8 +230,8 @@ public class OverlayHelpers {
             if (containerContents != null)
                 return containerContents.stream();
         }
-        *///?} else {
-        CompoundTag compoundtag = stack.getTag();
+        //?} else {
+        /*CompoundTag compoundtag = stack.getTag();
         if (compoundtag == null) {
             return Stream.empty();
         } else {
@@ -245,7 +245,7 @@ public class OverlayHelpers {
                 return listtag.stream().map(CompoundTag.class::cast).map(ItemStack::of);
             }
         }
-        //?}
+        *///?}
         return Stream.empty();
     }
 
@@ -253,15 +253,15 @@ public class OverlayHelpers {
         if (!ModConfig.get().search_containers) return false;
         if (stack.isEmpty()) return false;
         //? if >1.20.5 {
-        /*var components = stack.getComponents();
+        var components = stack.getComponents();
         if (components.has(DataComponents.BUNDLE_CONTENTS)) {
             return true;
         }
         else if (components.has(DataComponents.CONTAINER)) {
             return true;
         }
-        *///?} else {
-        CompoundTag compoundtag = stack.getTag();
+        //?} else {
+        /*CompoundTag compoundtag = stack.getTag();
         if (compoundtag == null) {
             return false;
         } else {
@@ -274,7 +274,7 @@ public class OverlayHelpers {
                 }
             }
         }
-        //?}
+        *///?}
         return true;
     }
 

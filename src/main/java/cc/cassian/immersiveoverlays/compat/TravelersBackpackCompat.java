@@ -5,11 +5,11 @@ import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 /*import com.tiviacz.travelersbackpack.capability.AttachmentUtils;
 import com.tiviacz.travelersbackpack.inventory.BackpackWrapper;
 *///?} else if forge {
-import com.tiviacz.travelersbackpack.capability.CapabilityUtils;
+/*import com.tiviacz.travelersbackpack.capability.CapabilityUtils;
 import net.minecraftforge.items.ItemStackHandler;
-//?} else if fabric && <26 {
-/*import com.tiviacz.travelersbackpack.component.ComponentUtils;
-*///?}
+*///?} else if fabric && <26 {
+import com.tiviacz.travelersbackpack.component.ComponentUtils;
+//?}
 import net.minecraft.world.entity.player.Player;
 
 public class TravelersBackpackCompat {
@@ -25,7 +25,7 @@ public class TravelersBackpackCompat {
             }
         }
         *///?} else if forge {
-        if (CapabilityUtils.isWearingBackpack(player)) {
+        /*if (CapabilityUtils.isWearingBackpack(player)) {
             var backpackWrapper = CapabilityUtils.getBackpackWrapper(player);
             if (backpackWrapper != null) {
                 var inventory = backpackWrapper.inventory;
@@ -34,8 +34,8 @@ public class TravelersBackpackCompat {
                 }
             }
         }
-        //?} else if fabric && <26 {
-        /*if (ComponentUtils.isWearingBackpack(player)) {
+        *///?} else if fabric && <26 {
+        if (ComponentUtils.isWearingBackpack(player)) {
             var backpackWrapper = ComponentUtils.getBackpackWrapper(player);
             if (backpackWrapper != null) {
                 var inventory = backpackWrapper.getStorage();
@@ -44,6 +44,6 @@ public class TravelersBackpackCompat {
                 }
             }
         }
-        *///?}
+        //?}
     }
 }

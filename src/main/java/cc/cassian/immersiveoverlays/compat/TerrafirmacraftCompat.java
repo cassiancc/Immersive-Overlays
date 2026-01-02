@@ -1,7 +1,7 @@
 package cc.cassian.immersiveoverlays.compat;
 
 //? if neoforge || (forge && >1.20)
-import net.dries007.tfc.util.calendar.Calendars;
+//import net.dries007.tfc.util.calendar.Calendars;
 import net.minecraft.client.multiplayer.ClientLevel;
 
 public class TerrafirmacraftCompat {
@@ -10,9 +10,9 @@ public class TerrafirmacraftCompat {
         //? if neoforge {
         /*return Calendars.get(true).getAbsoluteCalendarMonthOfYear().getSeason().getSerializedName();
         *///?} else if forge {
-        return Calendars.get(true).getCalendarMonthOfYear().getSeason().getSerializedName();
-        //?} else {
-        /*return null;
-        *///?}
+        /*return Calendars.get(true).getCalendarMonthOfYear().getSeason().getSerializedName();
+        *///?} else {
+        return null;
+        //?}
     }
 }

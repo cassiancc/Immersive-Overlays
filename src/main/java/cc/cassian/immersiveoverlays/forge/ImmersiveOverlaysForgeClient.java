@@ -1,6 +1,6 @@
 package cc.cassian.immersiveoverlays.forge;
 //? if forge {
-import cc.cassian.immersiveoverlays.ModClient;
+/*import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.config.ModConfigFactory;
 import cc.cassian.immersiveoverlays.overlay.*;
@@ -57,4 +57,4 @@ public class ImmersiveOverlaysForgeClient {
         ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> new ConfigScreenHandler.ConfigScreenFactory(ModConfigFactory::createScreen));
     }
 }
-//?}
+*///?}

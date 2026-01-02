@@ -23,10 +23,10 @@ public class CompassOverlay {
 
     public static void renderGameOverlayEvent(GuiGraphics guiGraphics
             //? if >1.21 {
-            /*, net.minecraft.client.DeltaTracker deltaTracker
-            *///?} else {
-            , float deltaTracker
-             //?}
+            , net.minecraft.client.DeltaTracker deltaTracker
+            //?} else {
+            /*, float deltaTracker
+             *///?}
     ) {
         boolean showBiomeIcon = ModConfig.get().biome_enable && BiomeOverlay.showBiome && ModConfig.get().biome_reduced_info && ModConfig.get().biome_icons;
         if (!showX && !showY && !showZ)

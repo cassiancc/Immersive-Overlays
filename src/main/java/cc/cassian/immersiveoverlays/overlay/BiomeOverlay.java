@@ -3,8 +3,8 @@ package cc.cassian.immersiveoverlays.overlay;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 //? if >1.21 {
-/*import net.minecraft.client.DeltaTracker;
-*///?}
+import net.minecraft.client.DeltaTracker;
+//?}
 import net.minecraft.client.Minecraft;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
@@ -30,10 +30,10 @@ public class BiomeOverlay {
 
     public static void renderGameOverlayEvent(GuiGraphics guiGraphics
     //? if >1.21 {
-        /*, DeltaTracker deltaTracker
-    *///?} else {
-        , float deltaTracker
-    //?}
+        , DeltaTracker deltaTracker
+    //?} else {
+        /*, float deltaTracker
+    *///?}
     ) {
         if (!showBiome || !ModConfig.get().biome_enable)
             return;

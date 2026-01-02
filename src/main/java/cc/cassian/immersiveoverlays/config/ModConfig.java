@@ -79,22 +79,22 @@ public class ModConfig {
 
     // compat
     //? if fabric
-    //public boolean compat_playerlocatorplus = true;
+    public boolean compat_playerlocatorplus = true;
     public boolean compat_xaeros = true;
     public boolean compat_antique_atlas = true;
     //? if (forge) || (neoforge && =1.21.1) {
-    public boolean compat_oreganized_temperature = true;
-    //?}
+    /*public boolean compat_oreganized_temperature = true;
+    *///?}
     public boolean compat_tough_as_nails_temperature = true;
     //? if forge || neoforge {
-    public boolean compat_cold_sweat_temperature = true;
-    //?}
-    //? if forge || neoforge {
-    public boolean compat_legendary_survival_overhaul_temperature = true;
-     //?}
-    //? if fabric || 1.21.1 {
-    /*public boolean compat_thermoo_temperature = true;
+    /*public boolean compat_cold_sweat_temperature = true;
     *///?}
+    //? if forge || neoforge {
+    /*public boolean compat_legendary_survival_overhaul_temperature = true;
+     *///?}
+    //? if fabric || 1.21.1 {
+    public boolean compat_thermoo_temperature = true;
+    //?}
 
     // biomes
     public boolean biome_enable = true;
@@ -121,13 +121,13 @@ public class ModConfig {
     public boolean compat_map_atlases = false;
     public boolean compat_serene_seasons = true;
     //? if fabric {
-    /*public boolean compat_fabric_seasons = true;
+    public boolean compat_fabric_seasons = true;
     public boolean compat_simple_seasons = true;
-    *///?}
-    //? if forge || neoforge {
-    public boolean compat_tfc_seasons = true;
-    public boolean compat_ecliptic_seasons = true;
     //?}
+    //? if forge || neoforge {
+    /*public boolean compat_tfc_seasons = true;
+    public boolean compat_ecliptic_seasons = true;
+    *///?}
 
     // wind
     public boolean wind_enable = true;

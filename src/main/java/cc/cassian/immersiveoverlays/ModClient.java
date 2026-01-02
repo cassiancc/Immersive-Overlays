@@ -11,9 +11,9 @@ import net.minecraft.resources.ResourceLocation;
 /*import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import cc.cassian.immersiveoverlays.neoforge.NeoforgePlatformImpl;
 *///?} else forge {
-import cc.cassian.immersiveoverlays.forge.ForgePlatformImpl;
+/*import cc.cassian.immersiveoverlays.forge.ForgePlatformImpl;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
-//?}
+*///?}
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -53,12 +53,12 @@ public class ModClient {
             //? neoforge
             //RegisterGuiLayersEvent event
             //? forge
-            CustomizeGuiOverlayEvent.DebugText event
+            //CustomizeGuiOverlayEvent.DebugText event
     ) {
         //? neoforge
         //NeoforgePlatformImpl.guiLayersEvent = event;
         //? forge
-        ForgePlatformImpl.guiLayersEvent = event;
+        //ForgePlatformImpl.guiLayersEvent = event;
 
         Platform.INSTANCE.registerOverlay(ModClient.locate("biome"), BiomeOverlay::renderGameOverlayEvent);
         Platform.INSTANCE.registerOverlay(ModClient.locate("clock"), ClockOverlay::renderGameOverlayEvent);
@@ -74,9 +74,9 @@ public class ModClient {
 
     public static ResourceLocation locate(String namespace, String path) {
         //? if >1.21 {
-        /*return ResourceLocation.fromNamespaceAndPath(namespace, path);
-         *///?} else {
-        return new ResourceLocation(namespace, path);
-        //?}
+        return ResourceLocation.fromNamespaceAndPath(namespace, path);
+         //?} else {
+        /*return new ResourceLocation(namespace, path);
+        *///?}
     }
 }

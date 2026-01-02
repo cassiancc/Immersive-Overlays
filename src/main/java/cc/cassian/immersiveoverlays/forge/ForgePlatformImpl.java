@@ -1,7 +1,7 @@
 package cc.cassian.immersiveoverlays.forge;
 
 //? forge {
-import cc.cassian.immersiveoverlays.Overlay;
+/*import cc.cassian.immersiveoverlays.Overlay;
 import cc.cassian.immersiveoverlays.Platform;
 import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
 import net.minecraft.resources.ResourceLocation;
@@ -47,4 +47,4 @@ public class ForgePlatformImpl implements Platform {
 
 
 }
-//?}
+*///?}

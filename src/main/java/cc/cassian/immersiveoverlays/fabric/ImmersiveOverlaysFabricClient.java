@@ -2,7 +2,7 @@ package cc.cassian.immersiveoverlays.fabric;
 
 //? if fabric {
 
-/*import cc.cassian.immersiveoverlays.ModClient;
+import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.Platform;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
@@ -10,11 +10,11 @@ import cc.cassian.immersiveoverlays.overlay.*;
 //? if <26 {
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 //?} else {
-/^import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
-^///?}
+/*import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
+*///?}
 //? if >1.21.5 {
-import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
-//?}
+/*import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
+*///?}
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -38,10 +38,10 @@ public final class ImmersiveOverlaysFabricClient implements ClientModInitializer
         KeyBindingHelper.registerKeyBinding(ModClient.overlayToggle);
         KeyBindingHelper.registerKeyBinding(ModClient.overlaySettings);
         //?} else {
-        /^KeyMappingHelper.registerKeyMapping(ModClient.overlayToggle);
+        /*KeyMappingHelper.registerKeyMapping(ModClient.overlayToggle);
         KeyMappingHelper.registerKeyMapping(ModClient.overlaySettings);
-        ^///?}
+        *///?}
     }
 
 }
-*///?}
+//?}

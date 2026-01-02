@@ -19,10 +19,10 @@ public class TemperatureOverlay {
 
     public static void renderGameOverlayEvent(GuiGraphics guiGraphics
             //? if >1.21 {
-            /*, net.minecraft.client.DeltaTracker deltaTracker
-            *///?} else {
-            , float deltaTracker
-             //?}
+            , net.minecraft.client.DeltaTracker deltaTracker
+            //?} else {
+            /*, float deltaTracker
+             *///?}
     ) {
         if (!showTemperature || !ModConfig.get().temperature_enable)
             return;
@@ -75,15 +75,15 @@ public class TemperatureOverlay {
             }
         }
         //? if forge || neoforge {
-        if (ModCompat.COLD_SWEAT && ModConfig.get().compat_cold_sweat_temperature) {
+        /*if (ModCompat.COLD_SWEAT && ModConfig.get().compat_cold_sweat_temperature) {
             if (Platform.showDevInfo()) {
                 OverlayHelpers.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Using Cold Sweat for Temperature!"), 0, 0, -1);
             }
             return ColdSweatCompat.getTemperaturePair(player);
         }
-        //?}
+        *///?}
         //? if forge || neoforge {
-        if (ModCompat.LEGENDARY_SURVIVAL_OVERHAUL && ModConfig.get().compat_legendary_survival_overhaul_temperature) {
+        /*if (ModCompat.LEGENDARY_SURVIVAL_OVERHAUL && ModConfig.get().compat_legendary_survival_overhaul_temperature) {
             String temperature = LegendarySurvivalOverhaulCompat.getAmbientTemperature(player);
             var sprite = switch (temperature) {
                 case "FROSTBITE" -> "heat_0";
@@ -94,23 +94,23 @@ public class TemperatureOverlay {
             };
             return new TemperaturePair(Component.literal(WordUtils.capitalizeFully(temperature)), -1, sprite);
         }
-        //?}
+        *///?}
         //? if fabric || 1.21.1 {
-        /*if (ModCompat.THERMOO && ModConfig.get().compat_thermoo_temperature) {
+        if (ModCompat.THERMOO && ModConfig.get().compat_thermoo_temperature) {
             TemperaturePair temperaturePair = ThermooCompat.getTemperaturePair(player);
             if (temperaturePair != null)
                 return temperaturePair;
         }
-        *///?}
+        //?}
         //? if (forge) || (neoforge && =1.21.1) {
-        if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature) {
+        /*if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature) {
             int temperature =  OreganizedCompat.getAmbientTemperatureFromThermometer(player);
             if (Platform.showDevInfo()) {
                 OverlayHelpers.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Oreganized: " + temperature), 0, 0, -1);
             }
             return new TemperaturePair(Component.translatable("tooltip.oreganized.heat_"+temperature), OreganizedCompat.getTemperatureColourFromThermometer(temperature), "heat_"+temperature);
         }
-        //?}
+        *///?}
         var level = player.level();
         return getBiomeTemperature(level.getBiome(player.blockPosition()));
     }
