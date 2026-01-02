@@ -1,6 +1,7 @@
 ### Added
-- Support for Wind Overlays with Breezy installed.
-- Support for Thermoo on 1.21.1 NeoForge.
+- Compasses can now display direction overlays (disabled by default).
+- Support for Wind Overlays with [Breezy](https://modrinth.com/mod/breezy) installed.
+- Support for [Thermoo](https://modrinth.com/mod/thermoo/) on 1.21.1 NeoForge.
 - Support for 26.1-snapshot-1.
 
 ### Changed

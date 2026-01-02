@@ -6,6 +6,7 @@ import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -48,17 +49,21 @@ public class CompassOverlay {
         String z = String.format("%d", pos.getZ());
         var width = Integer.max(x.length(), z.length());
         width = Integer.max(width, y.length());
+        if (ModConfig.get().compass_direction && mc.getCameraEntity() != null) {
+            var direction = mc.getCameraEntity().getDirection().getName();
+            coords.add(TextHelpers.translatable("gui.c.direction."+ direction).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_direction_text_colour)));
+		}
         if (showX) {
             x = StringUtils.leftPad(x, width);
-            coords.add(Component.empty().append(Component.literal("X: ").withStyle(Style.EMPTY.withColor(ModConfig.get().compass_x_colour))).append(x));
+            coords.add(Component.empty().append(Component.literal("X: ").withStyle(Style.EMPTY.withColor(ModConfig.get().compass_x_colour))).append(Component.literal(x).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_text_colour))));
         }
         if (showY) {
             y = StringUtils.leftPad(y, width);
-            coords.add(Component.empty().append(Component.literal("Y: ").withStyle(Style.EMPTY.withColor(ModConfig.get().compass_y_colour))).append(y));
+            coords.add(Component.empty().append(Component.literal("Y: ").withStyle(Style.EMPTY.withColor(ModConfig.get().compass_y_colour))).append(Component.literal(y).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_text_colour))));
         }
         if (showZ) {
             z = StringUtils.leftPad(z, width);
-            coords.add(Component.empty().append(Component.literal("Z: ").withStyle(Style.EMPTY.withColor(ModConfig.get().compass_z_colour))).append(z));
+            coords.add(Component.empty().append(Component.literal("Z: ").withStyle(Style.EMPTY.withColor(ModConfig.get().compass_z_colour))).append(Component.literal(z).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_text_colour))));
         }
         int xOffset = 3;
         int yPlacement = ModConfig.get().compass_vertical_position;
@@ -67,7 +72,15 @@ public class CompassOverlay {
         if (showBiomeIcon) {
             iconXOffset += 20;
         }
-        int fontWidth = mc.font.width(StringUtils.repeat("a", width+2))+iconXOffset;
+
+        int buffer = 2;
+        if (ModConfig.get().compass_direction && mc.getCameraEntity() != null) {
+            var direction = mc.getCameraEntity().getDirection().getName();
+            width = Integer.max(width, I18n.get("gui.c.direction.south").length());
+            width = Integer.max(width, direction.length());
+            buffer = 0;
+        }
+        int fontWidth = mc.font.width(StringUtils.repeat("a", width+buffer))+iconXOffset;
 
         if (ModConfig.get().avoid_overlapping) {
             if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable || (ModConfig.get().clock_horizontal_position_left != ModConfig.get().compass_horizontal_position_left)) {
@@ -94,6 +107,10 @@ public class CompassOverlay {
         } else if (coords.size() == 3) {
             tooltipSize = 35;
             iconYOffset = 5;
+        }
+        else if (coords.size() == 4) {
+            tooltipSize = 45;
+            iconYOffset = 7;
         }
 
         int windowWidth = mc.getWindow().getGuiScaledWidth();

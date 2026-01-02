@@ -25,7 +25,8 @@ public class ClothConfigFactory {
         } else {
             section += "_";
         }
-        return builder.getOrCreateCategory(TextHelpers.translatable("config.immersiveoverlays.%stitle".formatted(section)));    }
+        return builder.getOrCreateCategory(TextHelpers.translatable("config.immersiveoverlays.%stitle".formatted(section)));
+    }
 
     private static boolean is(Field field, String name) {
         return field.getName().toLowerCase(Locale.ROOT).contains(name);

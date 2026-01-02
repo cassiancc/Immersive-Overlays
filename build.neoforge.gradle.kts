@@ -221,8 +221,8 @@ dependencies {
     }
 
     // Xaero's Minimap
-    implementation("maven.modrinth:xaeros-minimap:${mod.dep("xaeros")}_NeoForge_${mod.dep("xaeros_mc")}")
-    implementation("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}_NeoForge_${mod.dep("xaeros_mc")}")
+    compileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros")}_NeoForge_${mod.dep("xaeros_mc")}")
+    compileOnly("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}_NeoForge_${mod.dep("xaeros_mc")}")
 
     // Cold Sweat
     compileOnly("maven.modrinth:cold-sweat:${mod.dep("cold_sweat")}")
@@ -249,8 +249,8 @@ dependencies {
     compileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-forge")
     compileOnly("org.sinytra.forgified-fabric-api:fabric-client-tags-api-v1:1.1.15+e053909619")
     compileOnly("org.sinytra.forgified-fabric-api:fabric-convention-tags-v2:2.11.0+87e5848019")
-    implementation("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
-    implementation("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
+    compileOnly("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
+    compileOnly("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
 
     if (hasProperty("deps.thermoo")) {
         compileOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")

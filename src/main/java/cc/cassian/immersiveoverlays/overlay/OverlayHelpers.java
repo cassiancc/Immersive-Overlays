@@ -60,9 +60,9 @@ public class OverlayHelpers {
             return 111;
         } else if (textureSize == 25) {
             return 25;
-        } else if (textureSize == 35) {
+        } else if (textureSize == 35 || textureSize == 36) {
             return 51;
-        } else if (textureSize == 36) {
+        } else if (textureSize == 45) {
             return 132;
         }
         else return 0;
