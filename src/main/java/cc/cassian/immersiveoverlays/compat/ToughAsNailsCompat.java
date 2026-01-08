@@ -6,8 +6,8 @@ import toughasnails.api.temperature.TemperatureLevel;
 
 public class ToughAsNailsCompat {
     public static String getAmbientTemperature(LocalPlayer player) {
-      TemperatureLevel temperatureForPlayer = TemperatureHelper.getTemperatureForPlayer(player);
-        return temperatureForPlayer.name();
+        TemperatureLevel temperature = TemperatureHelper.getTemperatureAtPos(player.level(), player.blockPosition());
+        return temperature.name();
     }
 
     public static boolean isTemperatureEnabled() {
