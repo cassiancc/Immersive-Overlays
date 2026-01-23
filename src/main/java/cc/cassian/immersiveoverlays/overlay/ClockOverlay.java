@@ -12,6 +12,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.data.worldgen.DimensionTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.clock.WorldClocks;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -47,7 +48,11 @@ public class ClockOverlay {
             *///?} else {
             if (mc.level.dimensionType().natural()) {
             //?}
+                //? >26 {
+                /*time = getTime(mc.level.clockManager().getTotalTicks(mc.level.registryAccess().getOrThrow(WorldClocks.OVERWORLD)));
+                *///?} else {
                 time = getTime(mc.level.getDayTime());
+                //?}
                 if (time.length() == 4) {
                     time = " " + time;
                 }
@@ -126,7 +131,11 @@ public class ClockOverlay {
     public static int getWeather(Player player) {
         var level = player.level();
         var biome = level.getBiome(player.blockPosition()).value();
+        //? >26 {
+        /*var time = level.clockManager().getTotalTicks(level.registryAccess().getOrThrow(WorldClocks.OVERWORLD)) % 24000;
+        *///?} else {
         var time = level.getDayTime() % 24000;
+        //?}
         //? if >1.21.2 {
         /*var precipitation = biome.getPrecipitationAt(player.blockPosition(), level.getSeaLevel());
         var snows = biome.coldEnoughToSnow(player.blockPosition(), level.getSeaLevel());

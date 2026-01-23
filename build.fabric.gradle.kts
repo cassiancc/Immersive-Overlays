@@ -246,7 +246,7 @@ dependencies {
     }
 
     // Player Locator Bar Backports
-    modCompileOnly("maven.modrinth:bplb:v1.0.0")
+    modCompileOnly("maven.modrinth:bplb:v1.1.1")
     modCompileOnly("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
 
     // Mixin Constraints - embedded

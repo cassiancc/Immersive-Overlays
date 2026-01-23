@@ -226,8 +226,13 @@ public class OverlayHelpers {
         }
         else if (components.has(DataComponents.CONTAINER)) {
             ItemContainerContents containerContents = components.get(DataComponents.CONTAINER);
-            if (containerContents != null)
+            if (containerContents != null) {
+                //? >26 {
+				/*return containerContents.allItemsCopyStream();
+                *///?} else {
                 return containerContents.stream();
+                //?}
+			}
         }
         //?} else {
         /*CompoundTag compoundtag = stack.getTag();

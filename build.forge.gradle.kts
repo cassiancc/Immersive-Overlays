@@ -247,6 +247,8 @@ dependencies {
     modImplementation("software.bernie.geckolib:geckolib-forge-${property("deps.minecraft")}:${property("deps.geckolib")}")
     implementation("com.eliotlash.mclib:mclib:20")
 
+    modImplementation("maven.modrinth:player-locator-plus-reforged:1.0.1")
+
     modCompileOnly("io.github.llamalad7:mixinextras-common:0.5.0")
     implementation("io.github.llamalad7:mixinextras-forge:0.5.0")
     jarJar("io.github.llamalad7:mixinextras-forge:0.5.0")

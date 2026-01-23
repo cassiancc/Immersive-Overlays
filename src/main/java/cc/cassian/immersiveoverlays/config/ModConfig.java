@@ -78,7 +78,7 @@ public class ModConfig {
     public List<String> temperature_items = List.of("oreganized:thermometer", "toughasnails:thermometer", "legendarysurvivaloverhaul:thermometer", "cold_sweat:thermometer");
 
     // compat
-    //? if fabric
+    //? if fabric || forge
     public boolean compat_playerlocatorplus = true;
     public boolean compat_xaeros = true;
     public boolean compat_antique_atlas = true;
