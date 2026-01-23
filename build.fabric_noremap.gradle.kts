@@ -188,6 +188,8 @@ dependencies {
     compileOnly("curse.maven:map-atlases-forge-519759:${mod.dep("map_atlases")}")
     compileOnly("com.terraformersmc:modmenu:${property("deps.modmenu")}")
     compileOnly("maven.modrinth:dead-reckoning:6tHF0yCl")
+    compileOnly("maven.modrinth:bplb:v1.1.1")
+    compileOnly("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
 
     // Mixin Constraints - embedded
     implementation("com.moulberry:mixinconstraints:1.0.9")

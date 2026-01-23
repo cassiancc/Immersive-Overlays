@@ -2,7 +2,7 @@ package cc.cassian.immersiveoverlays.mixin;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
-//? if fabric && <26
+//? if fabric
 import net.bichal.bplb.client.Hud;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.minecraft.client.gui.GuiGraphics;
@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @IfModLoaded("bplb")
-//? if fabric && <26 {
+//? if fabric {
 @Mixin(Hud.class)
 //?} else {
 /*@Mixin(Minecraft.class)

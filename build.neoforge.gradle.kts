@@ -252,6 +252,8 @@ dependencies {
     compileOnly("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
     compileOnly("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
     compileOnly("maven.modrinth:dead-reckoning:6tHF0yCl")
+    compileOnly("maven.modrinth:bplb:v1.1.1")
+    compileOnly("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
 
     if (hasProperty("deps.thermoo")) {
         compileOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
