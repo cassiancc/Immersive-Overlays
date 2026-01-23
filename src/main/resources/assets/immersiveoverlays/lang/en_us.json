@@ -58,6 +58,8 @@
   "config.immersiveoverlays.compat_legendary_survival_overhaul_temperature": "Use Legendary Survival Overhaul for Temperature",
   "config.immersiveoverlays.compat_playerlocatorplus": "Require compass for locator bar backports",
   "config.immersiveoverlays.compat_playerlocatorplus.tooltip": "Requires Player Locator Plus or Better Player Locator Bar",
+  "config.immersiveoverlays.compat_dead_reckoning": "Allow Dead Reckoning compasses in bundles",
+  "config.immersiveoverlays.compat_dead_reckoning.tooltip": "Requires Dead Reckoning",
   "config.immersiveoverlays.clock_seasons": "Enable season overlay",
   "config.immersiveoverlays.clock_seasons.tooltip": "Requires a compatible seasons mod",
   "config.immersiveoverlays.compat_serene_seasons": "Use Serene Seasons for Seasons",

@@ -6,6 +6,7 @@
   "plugin": "com.moulberry.mixinconstraints.ConstraintsMixinPlugin",
   "client": [
     "BetterPlayerLocatorBarHudMixin",
+    "DeadReckoningCompassOverlayMixin",
     "GuiMixin",
     "JadeMixin",
     "LocatorBarRendererMixin",

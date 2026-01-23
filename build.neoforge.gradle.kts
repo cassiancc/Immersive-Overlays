@@ -251,6 +251,7 @@ dependencies {
     compileOnly("org.sinytra.forgified-fabric-api:fabric-convention-tags-v2:2.11.0+87e5848019")
     compileOnly("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
     compileOnly("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
+    compileOnly("maven.modrinth:dead-reckoning:6tHF0yCl")
 
     if (hasProperty("deps.thermoo")) {
         compileOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")

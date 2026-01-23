@@ -12,7 +12,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.data.worldgen.DimensionTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.clock.WorldClocks;
+//? >26
+//import net.minecraft.world.clock.WorldClocks;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;

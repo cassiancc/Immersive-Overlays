@@ -187,6 +187,7 @@ dependencies {
     compileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-forge")
     compileOnly("curse.maven:map-atlases-forge-519759:${mod.dep("map_atlases")}")
     compileOnly("com.terraformersmc:modmenu:${property("deps.modmenu")}")
+    compileOnly("maven.modrinth:dead-reckoning:6tHF0yCl")
 
     // Mixin Constraints - embedded
     implementation("com.moulberry:mixinconstraints:1.0.9")

@@ -32,7 +32,7 @@ public class PlayerLocatorPlusClientMixin {
     //?}
 
     //? if (forge) && <26 {
-    /*@Inject(method = "isHudVisible", at = @At(value = "HEAD"), cancellable = true)
+    /*@Inject(method = "isHudVisible", remap = false, at = @At(value = "HEAD"), cancellable = true)
     private static void hideHud(Minecraft mc, Player player, Map<UUID, com.myangel.playerlocatorplus.network.RelativePlayerLocation> snapshot, boolean visibleEmpty, CallbackInfoReturnable<Boolean> cir) {
 		if (ModConfig.get().compat_playerlocatorplus && !CompassOverlay.showX) {
 			cir.setReturnValue(false);

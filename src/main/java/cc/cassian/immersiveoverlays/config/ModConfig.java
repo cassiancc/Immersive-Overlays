@@ -137,6 +137,7 @@ public class ModConfig {
     public int wind_colour = 0x9c7934;
     public boolean compat_breezy = true;
     public List<String> wind_items = List.of("breezy:gust_gauge");
+    public boolean compat_dead_reckoning = true;
 
 
     public static void load() {

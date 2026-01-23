@@ -167,6 +167,9 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
+    implementation("folk.sisby:kaleido-config:${property("deps.kaleido")}")
+    modImplementation("maven.modrinth:mcqoy:k8u6AZVM")
+
     // Cloth Config
     modApi("me.shedaniel.cloth:cloth-config-fabric:${property("deps.cloth_version")}")
     // Mod Menu
@@ -184,7 +187,7 @@ dependencies {
     // Fabric Seasons
     if (hasProperty("deps.fabric_seasons")) {
         modCompileOnly("maven.modrinth:fabric-seasons:${mod.dep("fabric_seasons")}")
-        modLocalRuntime("maven.modrinth:fabric-seasons:${mod.dep("fabric_seasons")}")
+//        modLocalRuntime("maven.modrinth:fabric-seasons:${mod.dep("fabric_seasons")}")
     } else {
         modCompileOnly("maven.modrinth:fabric-seasons:2.4.2-BETA+1.21")
     }
@@ -233,6 +236,14 @@ dependencies {
         modCompileOnly("maven.modrinth:antique-atlas-4:${mod.dep("antique_atlas")}")
     } else {
         modCompileOnly("maven.modrinth:antique-atlas-4:utFwd9ms")
+    }
+    if (hasProperty("deps.dead_reckoning")) {
+        modImplementation("maven.modrinth:dead-reckoning:${mod.dep("dead_reckoning")}")
+    } else {
+        modCompileOnly("maven.modrinth:dead-reckoning:6tHF0yCl")
+    }
+    if (hasProperty("deps.surveyor")) {
+        modLocalRuntime("maven.modrinth:surveyor:${mod.dep("surveyor")}")
     }
 
     // Tiered Backpacks

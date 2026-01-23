@@ -248,6 +248,8 @@ dependencies {
     implementation("com.eliotlash.mclib:mclib:20")
 
     modImplementation("maven.modrinth:player-locator-plus-reforged:1.0.1")
+    compileOnly("maven.modrinth:dead-reckoning:sH7O0giM")
+
 
     modCompileOnly("io.github.llamalad7:mixinextras-common:0.5.0")
     implementation("io.github.llamalad7:mixinextras-forge:0.5.0")
