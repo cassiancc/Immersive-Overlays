@@ -77,8 +77,9 @@ public class BiomeOverlay {
         if (showBiome) {
             OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().biome_horizontal_position_left);
             OverlayHelpers.drawString(guiGraphics, mc.font, biomeText, xPlacement-xOffset+iconXOffset, textYPlacement, getTextColour(biome));
-            if (ModConfig.get().biome_icons && !sprite.equals(UNDEFINED))
+            if (ModConfig.get().biome_icons && !sprite.equals(UNDEFINED)) {
                 OverlayHelpers.blitSprite(guiGraphics, sprite, xPlacement-xOffset-1, textYPlacement-4);
+			}
         }
     }
 

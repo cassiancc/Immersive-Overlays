@@ -104,15 +104,16 @@ public class OverlayHelpers {
     }
 
     public static boolean shouldCancelRender(Minecraft mc) {
-        if (mc.options.hideGui) return true;
-        if (!ModConfig.get().enabled) return true;
+        if (mc.options.hideGui || !ModConfig.get().enabled) return true;
         if (ModConfig.get().hide_from_debug) {
-            //? if >1.20.4 {
-            var debug = mc.getDebugOverlay().showDebugScreen();
+            return
+            //? if >1.21.10 {
+            /*mc.debugEntries.isOverlayVisible();
+            *///?} else if >1.21 {
+            mc.getDebugOverlay().showDebugScreen();
              //?} else {
-            /*var debug = mc.options.renderDebug;
+            /*mc.options.renderDebug;
             *///?}
-            return debug;
         }
         return false;
     }
