@@ -72,7 +72,7 @@ public class SpeedOverlay {
             speed = OreganizedCompat.getSpeed(player);
         } else {
             Vec3 deltaMovement = player.getRootVehicle().getDeltaMovement();
-            speed = Math.max(Math.max(deltaMovement.x, deltaMovement.y), deltaMovement.z);
+            speed = Math.max(Math.max(Math.abs(deltaMovement.x), (Math.abs(deltaMovement.y)-0.08)), Math.abs(deltaMovement.z));
         }
         return speed;
     }

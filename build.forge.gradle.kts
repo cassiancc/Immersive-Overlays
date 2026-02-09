@@ -216,8 +216,8 @@ dependencies {
     modCompileOnly("top.theillusivec4.curios:curios-forge:${mod.dep("curios")}:api")
     modCompileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-forge")
 
-    modCompileOnly("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
-    modCompileOnly("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
+    modImplementation("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
+    modImplementation("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
 
     modImplementation("maven.modrinth:cold-sweat:${mod.dep("cold_sweat")}")
 

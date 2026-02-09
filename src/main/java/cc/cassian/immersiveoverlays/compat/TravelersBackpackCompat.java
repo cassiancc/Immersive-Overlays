@@ -17,33 +17,19 @@ public class TravelersBackpackCompat {
         //? if neoforge {
         /*if (AttachmentUtils.isWearingBackpack(player)) {
             BackpackWrapper backpackWrapper = AttachmentUtils.getBackpackWrapper(player);
-            if (backpackWrapper != null) {
-                var inventory = backpackWrapper.getStorage();
-                for (int i =0; i < inventory.getSlots(); i++) {
-                    OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
-                }
-            }
-        }
         *///?} else if forge {
         /*if (CapabilityUtils.isWearingBackpack(player)) {
             var backpackWrapper = CapabilityUtils.getBackpackWrapper(player);
-            if (backpackWrapper != null) {
-                var inventory = backpackWrapper.inventory;
-                for (int i =0; i < inventory.getSlots(); i++) {
-                    OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
-                }
-            }
-        }
         *///?} else if fabric && <26 {
         if (ComponentUtils.isWearingBackpack(player)) {
             var backpackWrapper = ComponentUtils.getBackpackWrapper(player);
+        //?}
             if (backpackWrapper != null) {
                 var inventory = backpackWrapper.getStorage();
-                for (int i =0; i < inventory.getSlots(); i++) {
+                for (int i = 0; i < inventory.getSlots(); i++) {
                     OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
                 }
             }
         }
-        //?}
     }
 }
