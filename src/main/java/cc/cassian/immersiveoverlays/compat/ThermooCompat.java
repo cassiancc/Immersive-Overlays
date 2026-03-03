@@ -13,7 +13,13 @@ public class ThermooCompat {
 
     public static TemperatureOverlay.TemperaturePair getTemperaturePair(LocalPlayer player) {
         //? if (fabric || 1.21.1) && <26 {
+
+        //? fabric && 1.20.1 {
+        /*var temperatureAware = player;
+        *///?} else {
         var temperatureAware = TemperatureAware.getNullable(player);
+        //?}
+
         if (temperatureAware != null) {
             var scale = temperatureAware.thermoo$getTemperatureScale();
             int temperature = (int) (scale*100);

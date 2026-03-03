@@ -24,6 +24,7 @@ public class TravelersBackpackCompat {
         if (ComponentUtils.isWearingBackpack(player)) {
             var backpackWrapper = ComponentUtils.getBackpackWrapper(player);
         //?}
+        //? if <26 {
             if (backpackWrapper != null) {
                 var inventory = backpackWrapper.getStorage();
                 for (int i = 0; i < inventory.getSlots(); i++) {
@@ -31,5 +32,6 @@ public class TravelersBackpackCompat {
                 }
             }
         }
+        //?}
     }
 }
