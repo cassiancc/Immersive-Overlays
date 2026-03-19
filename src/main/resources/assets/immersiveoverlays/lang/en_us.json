@@ -33,6 +33,7 @@
   "config.immersiveoverlays.compass_hide_when_similar_mods_present.tooltip": "Hides coordinates when other mods overlays are present",
   "config.immersiveoverlays.compass_horizontal_position_left": "Align overlay to the left edge",
   "config.immersiveoverlays.compass_require_y_item": "Require a different item for depth",
+  "config.immersiveoverlays.compass_single_line": "Display coordinates inline",
   "config.immersiveoverlays.compass_vertical_position": "Coordinate overlay position",
   "config.immersiveoverlays.compass_direction": "Cardinal Directions",
   "config.immersiveoverlays.compass_direction_text_colour": "Direction Color",

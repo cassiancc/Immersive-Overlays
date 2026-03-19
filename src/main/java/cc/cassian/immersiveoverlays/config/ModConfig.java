@@ -46,6 +46,7 @@ public class ModConfig {
     public int compass_vertical_position = 140;
     public boolean compass_horizontal_position_left = false;
     public boolean compass_direction = false;
+    public boolean compass_single_line = false;
     public int compass_direction_text_colour = 16755200;
     public int compass_text_colour = 14737632;
     public int compass_x_colour = 16733525;
@@ -139,8 +140,7 @@ public class ModConfig {
     public List<String> wind_items = List.of("breezy:gust_gauge");
     public boolean compat_dead_reckoning = true;
 
-
-    public static void load() {
+	public static void load() {
         if (!Files.exists(configPath())) {
             save();
             return;
