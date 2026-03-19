@@ -1,0 +1,6 @@
+### Added
+- Additional biome overlays for Environmental (thanks @Proxillus!)
+- Support for 26.1-rc-1
+
+### Fixed
+- Direction overlays cutting off coordinate overlays.
