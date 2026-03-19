@@ -2,7 +2,7 @@ package cc.cassian.immersiveoverlays.compat;
 
 //? if forge {
 
-/*import cc.cassian.immersiveoverlays.helpers.TextHelpers;
+/*
 import codyhuh.breezy.common.network.BreezyNetworking;
 import codyhuh.breezy.common.network.NewWindSavedData;
 import codyhuh.breezy.core.other.tags.BreezyBiomeTags;
@@ -35,7 +35,7 @@ public class BreezyCompat {
 		}
 		double wind = Math.round(windData.getWindAtHeight((int) player.getY(), player.level()) * 10) / 10.0;
 		int idx = getWindDxnIndex(wind);
-		return TextHelpers.translatable("gui.c.direction." + WIND_DIRECTIONS[idx]);
+		return Component.translatable("gui.c.direction." + WIND_DIRECTIONS[idx]);
 	}
 
 	public static String getSprite(LocalPlayer player) {

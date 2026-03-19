@@ -3,7 +3,6 @@ package cc.cassian.immersiveoverlays.overlay;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -92,7 +91,7 @@ public class ClockOverlay {
 
         if (shouldShowSeasons()) {
             seasonString = ClockOverlay.getSeason(mc.level, mc.player.blockPosition());
-            seasonText = TextHelpers.translatableWithFallback("gui.c.season."+seasonString, WordUtils.capitalizeFully(seasonString.replace("_", " ")));
+            seasonText = Component.translatableWithFallback("gui.c.season."+seasonString, WordUtils.capitalizeFully(seasonString.replace("_", " ")));
             fontWidth = Integer.max(mc.font.width(time), mc.font.width(seasonText))+iconXOffset;
         }
 

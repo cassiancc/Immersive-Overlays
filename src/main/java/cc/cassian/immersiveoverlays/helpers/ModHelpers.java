@@ -13,7 +13,7 @@ import static cc.cassian.immersiveoverlays.ModClient.MOD_ID;
 public class ModHelpers {
     // Automatically generate translation keys for config options.
     public static Component fieldName(Field field) {
-        return TextHelpers.translatable("config.%s.%s".formatted(MOD_ID, field.getName()));
+        return Component.translatable("config.%s.%s".formatted(MOD_ID, field.getName()));
     }
 
     // Get the current value of a config field.
@@ -43,7 +43,7 @@ public class ModHelpers {
     public static Component fieldTooltip(Field field) {
         var key = "config.%s.%s.tooltip".formatted(MOD_ID, field.getName());
         if (I18n.exists("config.%s.%s.tooltip".formatted(MOD_ID, field.getName())))
-            return TextHelpers.translatable(key);
-        else return TextHelpers.empty();
+            return Component.translatable(key);
+        else return Component.empty();
     }
 }

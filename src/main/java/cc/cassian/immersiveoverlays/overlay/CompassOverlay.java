@@ -3,7 +3,6 @@ package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModHelpers;
-import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.I18n;
@@ -52,19 +51,25 @@ public class CompassOverlay {
         boolean showDirection = ModConfig.get().compass_direction && mc.getCameraEntity() != null;
         if (showDirection) {
             var direction = mc.getCameraEntity().getDirection().getName();
-            coords.add(TextHelpers.translatable("gui.c.direction."+ direction).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_direction_text_colour)));
+            coords.add(Component.translatable("gui.c.direction."+ direction).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_direction_text_colour)));
 		}
         if (showX) {
             x = StringUtils.leftPad(x, width);
-            coords.add(Component.empty().append(Component.literal("X: ").withStyle(Style.EMPTY.withColor(ModConfig.get().compass_x_colour))).append(Component.literal(x).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_text_colour))));
+            var xLiteral = Component.literal(x).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_text_colour));
+            var xText = Component.translatable("gui.immersiveoverlays.coordinates.x", xLiteral).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_x_colour));
+            coords.add(xText);
         }
         if (showY) {
             y = StringUtils.leftPad(y, width);
-            coords.add(Component.empty().append(Component.literal("Y: ").withStyle(Style.EMPTY.withColor(ModConfig.get().compass_y_colour))).append(Component.literal(y).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_text_colour))));
+            var yLiteral = Component.literal(y).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_text_colour));
+            var yText = Component.translatable("gui.immersiveoverlays.coordinates.y", yLiteral).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_y_colour));
+            coords.add(yText);
         }
         if (showZ) {
             z = StringUtils.leftPad(z, width);
-            coords.add(Component.empty().append(Component.literal("Z: ").withStyle(Style.EMPTY.withColor(ModConfig.get().compass_z_colour))).append(Component.literal(z).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_text_colour))));
+            var zLiteral = Component.literal(z).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_text_colour));
+            var zText = Component.translatable("gui.immersiveoverlays.coordinates.z", zLiteral).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_z_colour));
+            coords.add(zText);
         }
         int xOffset = 3;
         int yPlacement = ModConfig.get().compass_vertical_position;

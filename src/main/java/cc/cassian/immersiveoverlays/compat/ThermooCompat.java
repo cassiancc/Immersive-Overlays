@@ -1,7 +1,6 @@
 package cc.cassian.immersiveoverlays.compat;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
-import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import cc.cassian.immersiveoverlays.overlay.TemperatureOverlay;
 //? if (fabric || 1.21.1) && <26
 import com.github.thedeathlycow.thermoo.api.temperature.TemperatureAware;
@@ -65,7 +64,7 @@ public class ThermooCompat {
                 colour = 4169980;
             }
 
-            return new TemperatureOverlay.TemperaturePair(TextHelpers.translatable(text).append(TextHelpers.literal(" (" + temperature + "%)")), colour, sprite);
+            return new TemperatureOverlay.TemperaturePair(Component.translatable(text).append(Component.literal(" (" + temperature + "%)")), colour, sprite);
         }
         //?}
         return null;

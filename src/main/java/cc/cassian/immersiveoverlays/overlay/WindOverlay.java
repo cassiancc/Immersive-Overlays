@@ -6,7 +6,6 @@ import cc.cassian.immersiveoverlays.ModClient;
 *///?}
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
@@ -57,7 +56,7 @@ public class WindOverlay {
     }
 
     public static WindPair getWind(LocalPlayer player) {
-        Component direction = TextHelpers.translatable("UNSET");
+        Component direction = Component.translatable("UNSET");
         String sprite = "unknown";
         //? forge {
         /*if (ModCompat.BREEZY && ModConfig.get().compat_breezy) {
