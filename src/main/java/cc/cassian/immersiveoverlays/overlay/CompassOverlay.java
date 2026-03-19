@@ -49,7 +49,8 @@ public class CompassOverlay {
         String z = String.format("%d", pos.getZ());
         var width = Integer.max(x.length(), z.length());
         width = Integer.max(width, y.length());
-        if (ModConfig.get().compass_direction && mc.getCameraEntity() != null) {
+        boolean showDirection = ModConfig.get().compass_direction && mc.getCameraEntity() != null;
+        if (showDirection) {
             var direction = mc.getCameraEntity().getDirection().getName();
             coords.add(TextHelpers.translatable("gui.c.direction."+ direction).withStyle(Style.EMPTY.withColor(ModConfig.get().compass_direction_text_colour)));
 		}
@@ -73,14 +74,11 @@ public class CompassOverlay {
             iconXOffset += 20;
         }
 
-        int buffer = 2;
-        if (ModConfig.get().compass_direction && mc.getCameraEntity() != null) {
-            var direction = mc.getCameraEntity().getDirection().getName();
-            width = Integer.max(width, I18n.get("gui.c.direction.south").length());
-            width = Integer.max(width, direction.length());
-            buffer = 0;
-        }
-        int fontWidth = mc.font.width(StringUtils.repeat("a", width+buffer))+iconXOffset;
+        int fontWidth = mc.font.width(StringUtils.repeat("a", width+2))+iconXOffset;
+        if (showDirection) {
+            fontWidth = Integer.max(fontWidth, mc.font.width(I18n.get("gui.c.direction.south")));
+            fontWidth = Math.max(fontWidth, mc.font.width(mc.getCameraEntity().getDirection().getName()));
+		}
 
         if (ModConfig.get().avoid_overlapping) {
             if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable || (ModConfig.get().clock_horizontal_position_left != ModConfig.get().compass_horizontal_position_left)) {

@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.2]
+
+### Added
+- Additional biome overlays for Atmospheric, Autumnity, Environmental, Raspberry Flavoured, Windswept, and vanilla biomes (thanks @Quoraal).
+
+### Fixed
+- Speed Overlay now properly handles negative values.
+- Added more examples for season translations.
+- Fabric 1.20.1 build.
+
 ## [1.5.1]
 
 ### Added
