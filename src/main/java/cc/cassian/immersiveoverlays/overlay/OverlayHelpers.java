@@ -147,6 +147,8 @@ public class OverlayHelpers {
             BiomeOverlay.showBiome = true;
         if (ModLists.season_items.contains(item))
             ClockOverlay.showSeason = true;
+        if (ModLists.day_count_items.contains(item))
+            ClockOverlay.showDayCount = true;
         if (ModLists.temperature_items.contains(item))
             TemperatureOverlay.showTemperature = true;
         if (ModLists.speed_items.contains(item))
@@ -200,6 +202,7 @@ public class OverlayHelpers {
         ClockOverlay.showWeather = b;
         BiomeOverlay.showBiome = b;
         ClockOverlay.showSeason = b;
+        ClockOverlay.showDayCount = b;
         TemperatureOverlay.showTemperature = b;
         SpeedOverlay.showSpeed = b;
         WindOverlay.showWind = b;

@@ -67,6 +67,7 @@ public class ModConfig {
     public boolean clock_horizontal_position_left = false;
     public List<String> clock_items = List.of("minecraft:clock");
     public List<String> clock_weather_items = List.of("caverns_and_chasms:barometer", "firmaciv:barometer");
+    public List<String> clock_day_count_items = List.of();
 
     // temperature
     public boolean temperature_enable = true;

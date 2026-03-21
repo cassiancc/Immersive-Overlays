@@ -25,6 +25,7 @@ public class ClockOverlay {
     public static boolean showTime = false;
     public static boolean showWeather = false;
     public static boolean showSeason = false;
+    public static boolean showDayCount = false;
 
 
     public static void renderGameOverlayEvent(GuiGraphics guiGraphics
@@ -34,7 +35,7 @@ public class ClockOverlay {
             /*, float deltaTracker
              *///?}
     ) {
-        if ((!showWeather && !showTime && !shouldShowSeasons()) || !ModConfig.get().clock_enable)
+        if (!isVisible() || !ModConfig.get().clock_enable)
             return;
         var mc = Minecraft.getInstance();
         if (OverlayHelpers.shouldCancelRender(mc))
@@ -42,7 +43,8 @@ public class ClockOverlay {
         if (mc.level == null || mc.player == null) return;
 
         String time = "Hi! ";
-        if (showTime) {
+        boolean showFirstLine = showTime || showDayCount;
+        if (showFirstLine) {
             //? if >1.21.10 {
             /*if (!mc.level.dimensionType().hasFixedTime()) {
             *///?} else {
@@ -69,14 +71,14 @@ public class ClockOverlay {
         int iconYPlacement = yPlacement;
         int textYPlacement = yPlacement;
         if (showWeather) {
-            if (showTime) {
+            if (showFirstLine) {
                 iconXOffset = 20;
             }
             tooltipSize = 21;
             textYPlacement += 2;
         }
         if (shouldShowSeasons()) {
-            if (showTime) {
+            if (showFirstLine) {
                 tooltipSize = 36;
             } else {
                 tooltipSize = 21;
@@ -103,7 +105,7 @@ public class ClockOverlay {
         int windowWidth = mc.getWindow().getGuiScaledWidth();
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().clock_horizontal_position_left);
         OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().clock_horizontal_position_left);
-        if (showTime) {
+        if (showFirstLine) {
             // render text
             OverlayHelpers.drawString(guiGraphics, mc.font, time, xPlacement-xOffset+iconXOffset, textYPlacement, ModConfig.get().clock_text_colour);
         }
@@ -113,7 +115,7 @@ public class ClockOverlay {
         }
         if (ClockOverlay.shouldShowSeasons()) {
             int seasonTextYPlacement = textYPlacement;
-            if (showTime) {
+            if (showFirstLine) {
                 seasonTextYPlacement+=15;
             }
             OverlayHelpers.drawString(guiGraphics, mc.font, seasonText, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, ModConfig.get().clock_text_colour);
@@ -170,14 +172,15 @@ public class ClockOverlay {
     // to compete with Supplementaries.
     public static String getTime(float dayTime) {
         StringBuilder currentTime = new StringBuilder();
-        if (ModConfig.get().clock_day_count) {
+        boolean showCurrentTime = ModConfig.get().clock_current_time && ClockOverlay.showTime;
+        if ((ModConfig.get().clock_day_count && ClockOverlay.showTime) || showDayCount) {
             int day = (int) (dayTime/24000);
            currentTime.append(I18n.get("gui.c.day", day));
-           if (ModConfig.get().clock_current_time) {
+           if (showCurrentTime) {
                currentTime.append(", ");
            }
         }
-        if (ModConfig.get().clock_current_time) {
+        if (showCurrentTime) {
             int time = (int)(dayTime + 6000L) % 24000;
             int m = (int)((float)time % 1000.0F / 1000.0F * 60.0F);
             int hour = time / 1000;
@@ -229,5 +232,9 @@ public class ClockOverlay {
             *///?}
         }
         return season;
+    }
+
+    public static boolean isVisible() {
+        return ClockOverlay.showTime || ClockOverlay.showWeather || ClockOverlay.showDayCount;
     }
 }
