@@ -52,7 +52,7 @@ public class TemperatureOverlay {
         OverlayHelpers.drawString(guiGraphics, mc.font, temperature.component(), xPlacement-xOffset+iconOffset, textYPlacement, temperature.color());
         // render sprite
         if (showTemperature && ModConfig.get().temperature_icons) {
-            OverlayHelpers.blitSprite(guiGraphics, ModClient.locate("textures/gui/" + temperature.texture() + ".png"), xPlacement-xOffset-1, textYPlacement-3);
+            OverlayHelpers.blitSprite(guiGraphics, temperature.texture(), xPlacement-xOffset-1, textYPlacement-3);
         }
     }
 

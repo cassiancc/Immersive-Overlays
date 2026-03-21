@@ -110,8 +110,7 @@ public class ClockOverlay {
             OverlayHelpers.drawString(guiGraphics, mc.font, time, xPlacement-xOffset+iconXOffset, textYPlacement, ModConfig.get().clock_text_colour);
         }
         if (showWeather) {
-            var spriteOffset = getWeather(mc.player);
-            OverlayHelpers.blit(guiGraphics, xPlacement-xOffset-1, iconYPlacement-1, spriteOffset, 95, 16, 16, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+            OverlayHelpers.blitSprite(guiGraphics, getWeather(mc.player), xPlacement-xOffset-1, iconYPlacement-1);
         }
         if (ClockOverlay.shouldShowSeasons()) {
             int seasonTextYPlacement = textYPlacement;
@@ -130,7 +129,7 @@ public class ClockOverlay {
         return ModClient.locate("textures/gui/"+spriteText+".png");
     }
 
-    public static int getWeather(Player player) {
+    public static String getWeather(Player player) {
         var level = player.level();
         var biome = level.getBiome(player.blockPosition()).value();
         //? >26 {
@@ -150,20 +149,20 @@ public class ClockOverlay {
         *///?} else {
         if (!level.dimensionType().natural()) {
         //?}
-            return 124; // Netherlike
+            return "nether"; // Netherlike
         } else if (level.isThundering()) {
-            if (snows) return 92; // Snowing
-            if (precipitation.equals(Biome.Precipitation.NONE)) return 108; // Sandstorming
-            return 76; // Thundering
+            if (snows) return "snow"; // Snowing
+            if (precipitation.equals(Biome.Precipitation.NONE)) return "sandstorm"; // Sandstorming
+            return "storm"; // Thundering
         } else if (level.isRaining()) {
-            if (snows) return 92; // Snowing
-            if (precipitation.equals(Biome.Precipitation.NONE)) return 108; // Sandstorming
-            return 60; // Raining
+            if (snows) return "snow"; // Snowing
+            if (precipitation.equals(Biome.Precipitation.NONE)) return "sandstorm"; // Sandstorming
+            return "rain"; // Raining
         }
-        else if (time >= 12500 && time <= 13500) return 30; // Sunset
-        else if (time >= 13500 && time <= 23000) return 46; // Night
-        else if (time >= 23000 || time <= 300) return 15; // Morning
-        return 0; // Sunny
+        else if (time >= 12500 && time <= 13500) return "moonrise"; // Sunset
+        else if (time >= 13500 && time <= 23000) return "moon"; // Night
+        else if (time >= 23000 || time <= 300) return "sunrise"; // Morning
+        return "sun"; // Sunny
     }
 
     // This code was originally authored by MehVadVukaar for Supplementaries.

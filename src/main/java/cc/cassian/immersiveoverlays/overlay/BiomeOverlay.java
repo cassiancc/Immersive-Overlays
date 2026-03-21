@@ -91,7 +91,7 @@ public class BiomeOverlay {
 
     public static ResourceLocation getBiomeSprite(ResourceLocation biome, boolean allowRedirect) {
         var manager = Minecraft.getInstance().getResourceManager();
-        var path = "textures/immersiveoverlays/"+ biome.getPath();
+        var path = "textures/immersiveoverlays/" + biome.getPath();
         var key = ModClient.locate(biome.getNamespace(), "%s.png".formatted(path));
         var redirect = ModClient.locate(biome.getNamespace(), "%s.txt".formatted(path));
         if (manager.getResource(key).isPresent())

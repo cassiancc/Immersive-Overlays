@@ -51,7 +51,7 @@ public class WindOverlay {
         OverlayHelpers.drawString(guiGraphics, mc.font, wind.direction, xPlacement-xOffset+iconOffset, textYPlacement, ModConfig.get().wind_colour);
         // render sprite
         if (showWind && ModConfig.get().wind_icons) {
-            OverlayHelpers.blitSprite(guiGraphics, ModClient.locate("textures/gui/" + wind.texture() + ".png"), xPlacement-xOffset-1, textYPlacement-3);
+            OverlayHelpers.blitSprite(guiGraphics, wind.texture(), xPlacement-xOffset-1, textYPlacement-3);
         }
     }
 

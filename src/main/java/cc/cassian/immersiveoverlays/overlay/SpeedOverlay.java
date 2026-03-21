@@ -49,8 +49,8 @@ public class SpeedOverlay {
         OverlayHelpers.drawString(guiGraphics, mc.font, speedText, xPlacement-xOffset+10, textYPlacement, ModConfig.get().speed_colour);
         var spriteX = xPlacement-4;
         var spriteY = textYPlacement+10;
-        var fast = ModClient.locate("textures/gui/fast.png");
-        var slow = ModClient.locate("textures/gui/slow.png");
+        var fast = ModClient.locate("textures/gui/sprites/fast.png");
+        var slow = ModClient.locate("textures/gui/sprites/slow.png");
         ResourceLocation sprite;
         if (speed>=0.05) sprite = fast; else sprite = slow;
         OverlayHelpers.blitSprite(guiGraphics, sprite, spriteX, spriteY, 7);

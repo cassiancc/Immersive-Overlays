@@ -386,6 +386,10 @@ public class OverlayHelpers {
             textureWidth, textureHeight);
     }
 
+    public static void blitSprite(GuiGraphics guiGraphics, String texture, int x, int y) {
+        blitSprite(guiGraphics, ModClient.locate("textures/gui/sprites/%s.png".formatted(texture)), x, y);
+    }
+
     public static void blitSprite(GuiGraphics guiGraphics, ResourceLocation texture, int x, int y) {
         blitSprite(guiGraphics, texture, x, y, 16);
     }
