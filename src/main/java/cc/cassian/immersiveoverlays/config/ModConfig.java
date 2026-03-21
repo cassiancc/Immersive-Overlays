@@ -38,7 +38,9 @@ public class ModConfig {
     public boolean search_containers = true;
     public boolean search_containers_for_containers = true;
     public boolean render_background = true;
-    public boolean render_endcap = true;
+    //? if <1.21 {
+    /*public boolean render_endcap = true;
+    *///?}
     public boolean hide_from_debug = true;
 
     // coords

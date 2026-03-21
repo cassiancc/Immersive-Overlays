@@ -40,20 +40,29 @@ public class OverlayHelpers {
 
     public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int tooltipSize, boolean leftAlign) {
         if (ModConfig.get().render_background) {
-            int textureOffset = OverlayHelpers.getTextureOffsetFromSize(tooltipSize);
             final int yPlacementWithOffset = yPlacement-4;
-            final int endCapOffset = 197;
             final int xPlacementWithOffset = xPlacement-xOffset-4;
-            final int endCapXPlacement = OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth, leftAlign);
             final int uWidth = fontWidth+xOffset+4;
+            //? if >1.21 {
+            guiGraphics.blitSprite(
+                    //? if >1.21.2
+                    //RenderPipelines.GUI_TEXTURED,
+                    ModClient.locate("background"), xPlacementWithOffset, yPlacementWithOffset, uWidth, tooltipSize);
+            //?} else {
+            /*
+            int textureOffset = OverlayHelpers.getTextureOffsetFromSize(tooltipSize);
+            final int endCapXPlacement = OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth, leftAlign);
+            final int endCapOffset = 197;
             OverlayHelpers.blit(guiGraphics, xPlacementWithOffset, yPlacementWithOffset, 0, textureOffset, uWidth, tooltipSize, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
             // render endcap
             if (ModConfig.get().render_endcap)
                 OverlayHelpers.blit(guiGraphics, endCapXPlacement, yPlacementWithOffset, endCapOffset, textureOffset, 3, tooltipSize, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+            *///?}
         }
     }
 
-    public static int getTextureOffsetFromSize(int textureSize) {
+    //? if <1.21 {
+    /*public static int getTextureOffsetFromSize(int textureSize) {
         if (textureSize == 16) {
             return 7;
         } else if (textureSize == 21) {
@@ -67,6 +76,7 @@ public class OverlayHelpers {
         }
         else return 0;
     }
+    *///?}
 
     public static void checkInventoryForOverlays(Minecraft minecraft){
         if ((ModConfig.get().compass_enable || ModConfig.get().clock_enable || ModConfig.get().biome_enable || ModConfig.get().temperature_enable)  && minecraft.level != null) {
@@ -336,13 +346,15 @@ public class OverlayHelpers {
         }
     }
 
-    public static int getEndCapPlacement(int windowWidth, int fontWidth, boolean leftAlign) {
+    //? if <1.21 {
+    /*public static int getEndCapPlacement(int windowWidth, int fontWidth, boolean leftAlign) {
         if (leftAlign) {
             return fontWidth+8;
         } else {
             return windowWidth-4;
         }
     }
+    *///?}
 
     public static void drawString(GuiGraphics guiGraphics, Font font, Component text, int x, int y, Integer color) {
         //? if >1.21.6

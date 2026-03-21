@@ -220,8 +220,8 @@ dependencies {
         modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.2")
         modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-base:6.1.2")
     } else {
-        modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.3")
-        modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.3")
+        modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.3")
+        modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.3")
     }
 
     // Trinkets
