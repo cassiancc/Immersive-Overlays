@@ -105,14 +105,6 @@ repositories {
         }
     }
     maven {
-        name = "Nucleoid Maven (Polymer)"
-        url = uri("https://maven.nucleoid.xyz")
-        content {
-            includeGroupAndSubgroups("eu.pb4")
-            includeGroupAndSubgroups("xyz.nucleoid")
-        }
-    }
-    maven {
         name = "Fuzs Mod Resources"
         url = uri("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
         content {

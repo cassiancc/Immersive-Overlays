@@ -85,7 +85,7 @@ public class CompassOverlay {
             iconXOffset += 20;
         }
 
-        int fontWidth = mc.font.width(StringUtils.repeat("a", width+2))+iconXOffset;
+        int fontWidth = mc.font.width(StringUtils.repeat("a", width+2));
         if (showDirection) {
             fontWidth = Integer.max(fontWidth, mc.font.width(I18n.get("gui.c.direction.south")));
             fontWidth = Math.max(fontWidth, mc.font.width(mc.getCameraEntity().getDirection().getName()));
@@ -93,6 +93,7 @@ public class CompassOverlay {
         if (ModConfig.get().compass_single_line) {
             fontWidth = Math.max(fontWidth, mc.font.width(line));
         }
+        fontWidth = fontWidth+iconXOffset;
 
         if (ModConfig.get().avoid_overlapping) {
             if (!(ClockOverlay.isVisible()) || !ModConfig.get().clock_enable || (ModConfig.get().clock_horizontal_position_left != ModConfig.get().compass_horizontal_position_left)) {

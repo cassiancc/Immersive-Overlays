@@ -34,8 +34,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class OverlayHelpers {
-    public static final int textureSize = 256;
-    public static final ResourceLocation TEXTURE = ModClient.locate("textures/gui/overlay.png");
     public static boolean showWaila = false;
 
     public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int tooltipSize, boolean leftAlign) {
@@ -53,10 +51,10 @@ public class OverlayHelpers {
             int textureOffset = OverlayHelpers.getTextureOffsetFromSize(tooltipSize);
             final int endCapXPlacement = OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth, leftAlign);
             final int endCapOffset = 197;
-            OverlayHelpers.blit(guiGraphics, xPlacementWithOffset, yPlacementWithOffset, 0, textureOffset, uWidth, tooltipSize, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+            OverlayHelpers.blit(guiGraphics, xPlacementWithOffset, yPlacementWithOffset, 0, textureOffset, uWidth, tooltipSize, 256, 256);
             // render endcap
             if (ModConfig.get().render_endcap)
-                OverlayHelpers.blit(guiGraphics, endCapXPlacement, yPlacementWithOffset, endCapOffset, textureOffset, 3, tooltipSize, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+                OverlayHelpers.blit(guiGraphics, endCapXPlacement, yPlacementWithOffset, endCapOffset, textureOffset, 3, tooltipSize, 256, 256);
             *///?}
         }
     }
@@ -368,8 +366,12 @@ public class OverlayHelpers {
         guiGraphics.drawString(font, text, x, y, color);
     }
 
+    /**
+     * Cannot be removed until 1.20.x gains nine-slicing or support is dropped.
+	 */
+    @Deprecated
     public static void blit(GuiGraphics guiGraphics, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
-        OverlayHelpers.blit(guiGraphics, TEXTURE, x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
+        OverlayHelpers.blit(guiGraphics, ModClient.locate("textures/gui/overlay.png"), x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
     public static void blit(GuiGraphics guiGraphics, ResourceLocation texture, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
