@@ -105,14 +105,6 @@ repositories {
         }
     }
     maven {
-        name = "Nucleoid Maven (Polymer)"
-        url = uri("https://maven.nucleoid.xyz")
-        content {
-            includeGroupAndSubgroups("eu.pb4")
-            includeGroupAndSubgroups("xyz.nucleoid")
-        }
-    }
-    maven {
         name = "Fuzs Mod Resources"
         url = uri("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
         content {
@@ -220,8 +212,8 @@ dependencies {
         modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.2")
         modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-base:6.1.2")
     } else {
-        modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.3")
-        modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.3")
+        modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.3")
+        modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.3")
     }
 
     // Trinkets
@@ -275,6 +267,14 @@ stonecutter {
     replacements.string {
         direction = eval(current.version, ">1.21.10")
         replace("ResourceLocation", "Identifier")
+    }
+    replacements.string {
+        direction = eval(current.version, ">26")
+        replace("GuiGraphics", "GuiGraphicsExtractor")
+    }
+    replacements.string {
+        direction = eval(current.version, ">26")
+        replace("guiGraphics.drawString", "guiGraphics.text")
     }
 }
 

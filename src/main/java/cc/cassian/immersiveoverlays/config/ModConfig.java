@@ -38,7 +38,9 @@ public class ModConfig {
     public boolean search_containers = true;
     public boolean search_containers_for_containers = true;
     public boolean render_background = true;
-    public boolean render_endcap = true;
+    //? if <1.21 {
+    /*public boolean render_endcap = true;
+    *///?}
     public boolean hide_from_debug = true;
 
     // coords
@@ -46,6 +48,7 @@ public class ModConfig {
     public int compass_vertical_position = 140;
     public boolean compass_horizontal_position_left = false;
     public boolean compass_direction = false;
+    public boolean compass_single_line = false;
     public int compass_direction_text_colour = 16755200;
     public int compass_text_colour = 14737632;
     public int compass_x_colour = 16733525;
@@ -66,6 +69,7 @@ public class ModConfig {
     public boolean clock_horizontal_position_left = false;
     public List<String> clock_items = List.of("minecraft:clock");
     public List<String> clock_weather_items = List.of("caverns_and_chasms:barometer", "firmaciv:barometer");
+    public List<String> clock_day_count_items = List.of();
 
     // temperature
     public boolean temperature_enable = true;
@@ -139,8 +143,7 @@ public class ModConfig {
     public List<String> wind_items = List.of("breezy:gust_gauge");
     public boolean compat_dead_reckoning = true;
 
-
-    public static void load() {
+	public static void load() {
         if (!Files.exists(configPath())) {
             save();
             return;

@@ -1,7 +1,14 @@
 ### Added
-- Additional biome overlays for Atmospheric, Autumnity, Environmental, Raspberry Flavoured, Windswept, and vanilla biomes (thanks @Quoraal).
+- Day count has been modified to be a separate item list.
+
+### Changed
+- Overlay background rendering has been adjusted on 1.21+ to no longer require drawing an endcap.
+- Textures in `immersiveoverlays/textures/gui` have been moved to `immersiveoverlays/textures/gui/sprites`. The exception to this is `overlay.png`, which is now only used for background rendering on 1.20.
+- Weather sprites are now located in `immersiveoverlays/textures/gui/sprites` allowing them to be more easily modified with resource packs.
 
 ### Fixed
-- Speed Overlay now properly handles negative values.
-- Added more examples for season translations.
-- Fabric 1.20.1 build.
+- Crash on release 26.1.
+- Offscreen coordinates with single line coordinate rendering and biome overlay.
+
+### Removed
+- 1.21.11 support.

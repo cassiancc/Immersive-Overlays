@@ -105,7 +105,7 @@ repositories {
         }
     }
     maven {
-        name = "Nucleoid Maven (Polymer)"
+        name = "Nucleoid Maven (Trinkets)"
         url = uri("https://maven.nucleoid.xyz")
         content {
             includeGroupAndSubgroups("eu.pb4")
@@ -169,8 +169,12 @@ dependencies {
     implementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     implementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
+    compileOnly("com.terraformersmc:modmenu:${property("deps.modmenu")}")
+    localRuntime("com.terraformersmc:modmenu:${property("deps.modmenu")}")
+
     compileOnly("me.shedaniel.cloth:cloth-config-neoforge:19.0.147")
-    compileOnly("maven.modrinth:jade:19.3.1+neoforge")
+    compileOnly("maven.modrinth:jade:${property("deps.jade")}")
+    localRuntime("maven.modrinth:jade:${property("deps.jade")}")
 
     // Xaero's Minimap
     compileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros")}_NeoForge_${mod.dep("xaeros_mc")}")
@@ -186,7 +190,6 @@ dependencies {
     compileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
     compileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-forge")
     compileOnly("curse.maven:map-atlases-forge-519759:${mod.dep("map_atlases")}")
-    compileOnly("com.terraformersmc:modmenu:${property("deps.modmenu")}")
     compileOnly("maven.modrinth:dead-reckoning:6tHF0yCl")
     compileOnly("maven.modrinth:bplb:v1.1.1")
     compileOnly("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
@@ -207,6 +210,14 @@ stonecutter {
     replacements.string {
         direction = eval(current.version, ">1.21.10")
         replace("ResourceLocation", "Identifier")
+    }
+    replacements.string {
+        direction = eval(current.version, ">26")
+        replace("GuiGraphics", "GuiGraphicsExtractor")
+    }
+    replacements.string {
+        direction = eval(current.version, ">26")
+        replace("guiGraphics.drawString", "guiGraphics.text")
     }
 }
 

@@ -1,8 +1,6 @@
 package cc.cassian.immersiveoverlays.compat;
 
-import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import cc.cassian.immersiveoverlays.overlay.TemperatureOverlay;
-
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 //? if neoforge || forge {
@@ -50,7 +48,7 @@ public class ColdSweatCompat {
             sprite = "heat_0";
             colour = 4169980;
         }
-        return new TemperatureOverlay.TemperaturePair(TextHelpers.literal(String.valueOf(temperature)), colour, sprite);
+        return new TemperatureOverlay.TemperaturePair(Component.literal(String.valueOf(temperature)), colour, sprite);
     }
 
     public static double getAmbientTemperature(LocalPlayer player) {

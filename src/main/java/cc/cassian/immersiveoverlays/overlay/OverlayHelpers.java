@@ -34,26 +34,33 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class OverlayHelpers {
-    public static final int textureSize = 256;
-    public static final ResourceLocation TEXTURE = ModClient.locate("textures/gui/overlay.png");
     public static boolean showWaila = false;
 
     public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int tooltipSize, boolean leftAlign) {
         if (ModConfig.get().render_background) {
-            int textureOffset = OverlayHelpers.getTextureOffsetFromSize(tooltipSize);
             final int yPlacementWithOffset = yPlacement-4;
-            final int endCapOffset = 197;
             final int xPlacementWithOffset = xPlacement-xOffset-4;
-            final int endCapXPlacement = OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth, leftAlign);
             final int uWidth = fontWidth+xOffset+4;
-            OverlayHelpers.blit(guiGraphics, xPlacementWithOffset, yPlacementWithOffset, 0, textureOffset, uWidth, tooltipSize, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+            //? if >1.21 {
+            guiGraphics.blitSprite(
+                    //? if >1.21.2
+                    //RenderPipelines.GUI_TEXTURED,
+                    ModClient.locate("background"), xPlacementWithOffset, yPlacementWithOffset, uWidth, tooltipSize);
+            //?} else {
+            /*
+            int textureOffset = OverlayHelpers.getTextureOffsetFromSize(tooltipSize);
+            final int endCapXPlacement = OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth, leftAlign);
+            final int endCapOffset = 197;
+            OverlayHelpers.blit(guiGraphics, xPlacementWithOffset, yPlacementWithOffset, 0, textureOffset, uWidth, tooltipSize, 256, 256);
             // render endcap
             if (ModConfig.get().render_endcap)
-                OverlayHelpers.blit(guiGraphics, endCapXPlacement, yPlacementWithOffset, endCapOffset, textureOffset, 3, tooltipSize, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+                OverlayHelpers.blit(guiGraphics, endCapXPlacement, yPlacementWithOffset, endCapOffset, textureOffset, 3, tooltipSize, 256, 256);
+            *///?}
         }
     }
 
-    public static int getTextureOffsetFromSize(int textureSize) {
+    //? if <1.21 {
+    /*public static int getTextureOffsetFromSize(int textureSize) {
         if (textureSize == 16) {
             return 7;
         } else if (textureSize == 21) {
@@ -67,6 +74,7 @@ public class OverlayHelpers {
         }
         else return 0;
     }
+    *///?}
 
     public static void checkInventoryForOverlays(Minecraft minecraft){
         if ((ModConfig.get().compass_enable || ModConfig.get().clock_enable || ModConfig.get().biome_enable || ModConfig.get().temperature_enable)  && minecraft.level != null) {
@@ -147,6 +155,8 @@ public class OverlayHelpers {
             BiomeOverlay.showBiome = true;
         if (ModLists.season_items.contains(item))
             ClockOverlay.showSeason = true;
+        if (ModLists.day_count_items.contains(item))
+            ClockOverlay.showDayCount = true;
         if (ModLists.temperature_items.contains(item))
             TemperatureOverlay.showTemperature = true;
         if (ModLists.speed_items.contains(item))
@@ -200,6 +210,7 @@ public class OverlayHelpers {
         ClockOverlay.showWeather = b;
         BiomeOverlay.showBiome = b;
         ClockOverlay.showSeason = b;
+        ClockOverlay.showDayCount = b;
         TemperatureOverlay.showTemperature = b;
         SpeedOverlay.showSpeed = b;
         WindOverlay.showWind = b;
@@ -333,13 +344,15 @@ public class OverlayHelpers {
         }
     }
 
-    public static int getEndCapPlacement(int windowWidth, int fontWidth, boolean leftAlign) {
+    //? if <1.21 {
+    /*public static int getEndCapPlacement(int windowWidth, int fontWidth, boolean leftAlign) {
         if (leftAlign) {
             return fontWidth+8;
         } else {
             return windowWidth-4;
         }
     }
+    *///?}
 
     public static void drawString(GuiGraphics guiGraphics, Font font, Component text, int x, int y, Integer color) {
         //? if >1.21.6
@@ -353,8 +366,12 @@ public class OverlayHelpers {
         guiGraphics.drawString(font, text, x, y, color);
     }
 
+    /**
+     * Cannot be removed until 1.20.x gains nine-slicing or support is dropped.
+	 */
+    @Deprecated
     public static void blit(GuiGraphics guiGraphics, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
-        OverlayHelpers.blit(guiGraphics, TEXTURE, x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
+        OverlayHelpers.blit(guiGraphics, ModClient.locate("textures/gui/overlay.png"), x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
     public static void blit(GuiGraphics guiGraphics, ResourceLocation texture, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
@@ -369,6 +386,10 @@ public class OverlayHelpers {
             uOffset,
             vOffset, uWidth, vHeight,
             textureWidth, textureHeight);
+    }
+
+    public static void blitSprite(GuiGraphics guiGraphics, String texture, int x, int y) {
+        blitSprite(guiGraphics, ModClient.locate("textures/gui/sprites/%s.png".formatted(texture)), x, y);
     }
 
     public static void blitSprite(GuiGraphics guiGraphics, ResourceLocation texture, int x, int y) {

@@ -6,7 +6,6 @@ import cc.cassian.immersiveoverlays.ModClient;
 *///?}
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
@@ -52,12 +51,12 @@ public class WindOverlay {
         OverlayHelpers.drawString(guiGraphics, mc.font, wind.direction, xPlacement-xOffset+iconOffset, textYPlacement, ModConfig.get().wind_colour);
         // render sprite
         if (showWind && ModConfig.get().wind_icons) {
-            OverlayHelpers.blitSprite(guiGraphics, ModClient.locate("textures/gui/" + wind.texture() + ".png"), xPlacement-xOffset-1, textYPlacement-3);
+            OverlayHelpers.blitSprite(guiGraphics, wind.texture(), xPlacement-xOffset-1, textYPlacement-3);
         }
     }
 
     public static WindPair getWind(LocalPlayer player) {
-        Component direction = TextHelpers.translatable("UNSET");
+        Component direction = Component.translatable("UNSET");
         String sprite = "unknown";
         //? forge {
         /*if (ModCompat.BREEZY && ModConfig.get().compat_breezy) {

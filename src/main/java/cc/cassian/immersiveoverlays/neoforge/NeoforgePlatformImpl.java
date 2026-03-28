@@ -42,10 +42,10 @@ public class NeoforgePlatformImpl implements Platform {
     @Override
     public boolean isDeveloperEnvironment() {
         //? if >1.21.9 {
-        /^return !FMLEnvironment.isProduction();
-        ^///?} else {
-        return !FMLEnvironment.production;
-        //?}
+        return !FMLEnvironment.isProduction();
+        //?} else {
+        /^return !FMLEnvironment.production;
+        ^///?}
 
     }
 }

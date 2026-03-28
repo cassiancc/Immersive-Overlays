@@ -3,7 +3,6 @@ package cc.cassian.immersiveoverlays.overlay;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -26,6 +25,7 @@ public class ClockOverlay {
     public static boolean showTime = false;
     public static boolean showWeather = false;
     public static boolean showSeason = false;
+    public static boolean showDayCount = false;
 
 
     public static void renderGameOverlayEvent(GuiGraphics guiGraphics
@@ -35,7 +35,7 @@ public class ClockOverlay {
             /*, float deltaTracker
              *///?}
     ) {
-        if ((!showWeather && !showTime && !shouldShowSeasons()) || !ModConfig.get().clock_enable)
+        if (!isVisible() || !ModConfig.get().clock_enable)
             return;
         var mc = Minecraft.getInstance();
         if (OverlayHelpers.shouldCancelRender(mc))
@@ -43,7 +43,8 @@ public class ClockOverlay {
         if (mc.level == null || mc.player == null) return;
 
         String time = "Hi! ";
-        if (showTime) {
+        boolean showFirstLine = showTime || showDayCount;
+        if (showFirstLine) {
             //? if >1.21.10 {
             /*if (!mc.level.dimensionType().hasFixedTime()) {
             *///?} else {
@@ -70,14 +71,14 @@ public class ClockOverlay {
         int iconYPlacement = yPlacement;
         int textYPlacement = yPlacement;
         if (showWeather) {
-            if (showTime) {
+            if (showFirstLine) {
                 iconXOffset = 20;
             }
             tooltipSize = 21;
             textYPlacement += 2;
         }
         if (shouldShowSeasons()) {
-            if (showTime) {
+            if (showFirstLine) {
                 tooltipSize = 36;
             } else {
                 tooltipSize = 21;
@@ -92,7 +93,7 @@ public class ClockOverlay {
 
         if (shouldShowSeasons()) {
             seasonString = ClockOverlay.getSeason(mc.level, mc.player.blockPosition());
-            seasonText = TextHelpers.translatableWithFallback("gui.c.season."+seasonString, WordUtils.capitalizeFully(seasonString.replace("_", " ")));
+            seasonText = Component.translatableWithFallback("gui.c.season."+seasonString, WordUtils.capitalizeFully(seasonString.replace("_", " ")));
             fontWidth = Integer.max(mc.font.width(time), mc.font.width(seasonText))+iconXOffset;
         }
 
@@ -104,17 +105,16 @@ public class ClockOverlay {
         int windowWidth = mc.getWindow().getGuiScaledWidth();
         int xPlacement = OverlayHelpers.getPlacement(windowWidth, fontWidth, ModConfig.get().clock_horizontal_position_left);
         OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().clock_horizontal_position_left);
-        if (showTime) {
+        if (showFirstLine) {
             // render text
             OverlayHelpers.drawString(guiGraphics, mc.font, time, xPlacement-xOffset+iconXOffset, textYPlacement, ModConfig.get().clock_text_colour);
         }
         if (showWeather) {
-            var spriteOffset = getWeather(mc.player);
-            OverlayHelpers.blit(guiGraphics, xPlacement-xOffset-1, iconYPlacement-1, spriteOffset, 95, 16, 16, OverlayHelpers.textureSize, OverlayHelpers.textureSize);
+            OverlayHelpers.blitSprite(guiGraphics, getWeather(mc.player), xPlacement-xOffset-1, iconYPlacement-1);
         }
         if (ClockOverlay.shouldShowSeasons()) {
             int seasonTextYPlacement = textYPlacement;
-            if (showTime) {
+            if (showFirstLine) {
                 seasonTextYPlacement+=15;
             }
             OverlayHelpers.drawString(guiGraphics, mc.font, seasonText, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, ModConfig.get().clock_text_colour);
@@ -129,7 +129,7 @@ public class ClockOverlay {
         return ModClient.locate("textures/gui/"+spriteText+".png");
     }
 
-    public static int getWeather(Player player) {
+    public static String getWeather(Player player) {
         var level = player.level();
         var biome = level.getBiome(player.blockPosition()).value();
         //? >26 {
@@ -149,20 +149,20 @@ public class ClockOverlay {
         *///?} else {
         if (!level.dimensionType().natural()) {
         //?}
-            return 124; // Netherlike
+            return "nether"; // Netherlike
         } else if (level.isThundering()) {
-            if (snows) return 92; // Snowing
-            if (precipitation.equals(Biome.Precipitation.NONE)) return 108; // Sandstorming
-            return 76; // Thundering
+            if (snows) return "snow"; // Snowing
+            if (precipitation.equals(Biome.Precipitation.NONE)) return "sandstorm"; // Sandstorming
+            return "storm"; // Thundering
         } else if (level.isRaining()) {
-            if (snows) return 92; // Snowing
-            if (precipitation.equals(Biome.Precipitation.NONE)) return 108; // Sandstorming
-            return 60; // Raining
+            if (snows) return "snow"; // Snowing
+            if (precipitation.equals(Biome.Precipitation.NONE)) return "sandstorm"; // Sandstorming
+            return "rain"; // Raining
         }
-        else if (time >= 12500 && time <= 13500) return 30; // Sunset
-        else if (time >= 13500 && time <= 23000) return 46; // Night
-        else if (time >= 23000 || time <= 300) return 15; // Morning
-        return 0; // Sunny
+        else if (time >= 12500 && time <= 13500) return "moonrise"; // Sunset
+        else if (time >= 13500 && time <= 23000) return "moon"; // Night
+        else if (time >= 23000 || time <= 300) return "sunrise"; // Morning
+        return "sun"; // Sunny
     }
 
     // This code was originally authored by MehVadVukaar for Supplementaries.
@@ -171,14 +171,15 @@ public class ClockOverlay {
     // to compete with Supplementaries.
     public static String getTime(float dayTime) {
         StringBuilder currentTime = new StringBuilder();
-        if (ModConfig.get().clock_day_count) {
+        boolean showCurrentTime = ModConfig.get().clock_current_time && ClockOverlay.showTime;
+        if ((ModConfig.get().clock_day_count && ClockOverlay.showTime) || showDayCount) {
             int day = (int) (dayTime/24000);
            currentTime.append(I18n.get("gui.c.day", day));
-           if (ModConfig.get().clock_current_time) {
+           if (showCurrentTime) {
                currentTime.append(", ");
            }
         }
-        if (ModConfig.get().clock_current_time) {
+        if (showCurrentTime) {
             int time = (int)(dayTime + 6000L) % 24000;
             int m = (int)((float)time % 1000.0F / 1000.0F * 60.0F);
             int hour = time / 1000;
@@ -230,5 +231,9 @@ public class ClockOverlay {
             *///?}
         }
         return season;
+    }
+
+    public static boolean isVisible() {
+        return ClockOverlay.showTime || ClockOverlay.showWeather || ClockOverlay.showDayCount;
     }
 }
