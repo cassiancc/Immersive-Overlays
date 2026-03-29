@@ -95,4 +95,10 @@ public class ModCompat {
      * Forge
      */
     public static boolean BREEZY = Platform.INSTANCE.isLoaded("breezy");
+
+    /**
+	 * Backpacked
+     * Multiplatform
+	 */
+	public static boolean BACKPACKED = Platform.INSTANCE.isLoaded("backpacked");
 }

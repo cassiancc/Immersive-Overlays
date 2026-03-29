@@ -154,11 +154,16 @@ repositories {
             includeGroupAndSubgroups("com.simibubi")
         }
     }
-    maven {
-        name = "CurseForge"
-        url = uri("https://cursemaven.com")
-        content {
-            includeGroup("curse.maven")
+    repositories {
+        exclusiveContent {
+            forRepository {
+                maven {
+                    url = uri("https://cursemaven.com")
+                }
+            }
+            filter {
+                includeGroup ("curse.maven")
+            }
         }
     }
 }
@@ -193,6 +198,10 @@ dependencies {
     compileOnly("maven.modrinth:dead-reckoning:6tHF0yCl")
     compileOnly("maven.modrinth:bplb:v1.1.1")
     compileOnly("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
+
+    // Backpacked
+    compileOnly("curse.maven:backpacked-352835:${mod.dep("backpacked")}")
+    implementation("curse.maven:framework-549225:${mod.dep("framework")}")
 
     // Mixin Constraints - embedded
     implementation("com.moulberry:mixinconstraints:1.0.9")

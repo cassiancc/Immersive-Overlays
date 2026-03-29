@@ -146,6 +146,18 @@ repositories {
             includeGroupAndSubgroups("com.simibubi")
         }
     }
+    repositories {
+        exclusiveContent {
+            forRepository {
+                maven {
+                    url = uri("https://cursemaven.com")
+                }
+            }
+            filter {
+                includeGroup ("curse.maven")
+            }
+        }
+    }
 
 }
 
@@ -247,6 +259,9 @@ dependencies {
         modCompileOnly("me.fzzyhmstrs:fzzy_config:${mod.dep("fzzy_config")}")
         modLocalRuntime("me.fzzyhmstrs:fzzy_config:${mod.dep("fzzy_config")}")
     }
+    // Backpacked
+    modCompileOnly("curse.maven:backpacked-352835:${mod.dep("backpacked")}")
+    modCompileOnly("curse.maven:framework-549225:${mod.dep("framework")}")
 
     // Player Locator Bar Backports
     modCompileOnly("maven.modrinth:bplb:v1.1.1")

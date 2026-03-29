@@ -195,6 +195,8 @@ public class OverlayHelpers {
                 //?}
                 if (ModCompat.TRAVELERS_BACKPACK)
                     TravelersBackpackCompat.checkForImportantAccessories(player);
+                if (ModCompat.BACKPACKED)
+                    BackpackedCompat.checkForImportantAccessories(player);
                 checkInventoryForStack(player.getInventory());
             }
         } else {

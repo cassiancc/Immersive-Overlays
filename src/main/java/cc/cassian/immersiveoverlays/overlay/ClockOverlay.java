@@ -234,6 +234,6 @@ public class ClockOverlay {
     }
 
     public static boolean isVisible() {
-        return ClockOverlay.showTime || ClockOverlay.showWeather || ClockOverlay.showDayCount;
+        return ClockOverlay.showTime || ClockOverlay.showWeather || ClockOverlay.showDayCount || shouldShowSeasons();
     }
 }

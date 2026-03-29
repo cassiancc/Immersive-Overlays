@@ -135,11 +135,16 @@ repositories {
             includeGroup("com.teamabnormals")
         }
     }
-    maven {
-        name = "CurseForge"
-        url = uri("https://cursemaven.com")
-        content {
-            includeGroup("curse.maven")
+    repositories {
+        exclusiveContent {
+            forRepository {
+                maven {
+                    url = uri("https://cursemaven.com")
+                }
+            }
+            filter {
+                includeGroup ("curse.maven")
+            }
         }
     }
     maven {
@@ -250,6 +255,9 @@ dependencies {
     modImplementation("maven.modrinth:player-locator-plus-reforged:1.0.1")
     compileOnly("maven.modrinth:dead-reckoning:sH7O0giM")
 
+    // Backpacked
+    modCompileOnly("curse.maven:backpacked-352835:${mod.dep("backpacked")}")
+    modImplementation("curse.maven:framework-549225:${mod.dep("framework")}")
 
     modCompileOnly("io.github.llamalad7:mixinextras-common:0.5.0")
     implementation("io.github.llamalad7:mixinextras-forge:0.5.0")

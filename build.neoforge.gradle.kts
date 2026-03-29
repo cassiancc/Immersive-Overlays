@@ -135,11 +135,16 @@ repositories {
             includeGroup("com.teamabnormals")
         }
     }
-    maven {
-        name = "CurseForge"
-        url = uri("https://cursemaven.com")
-        content {
-            includeGroup("curse.maven")
+    repositories {
+        exclusiveContent {
+            forRepository {
+                maven {
+                    url = uri("https://cursemaven.com")
+                }
+            }
+            filter {
+                includeGroup ("curse.maven")
+            }
         }
     }
     flatDir { dirs("libs") }
@@ -257,11 +262,23 @@ dependencies {
 
     if (hasProperty("deps.thermoo")) {
         compileOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
-        runtimeOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
+//        runtimeOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
+    }
+
+    // Backpacked
+    implementation("curse.maven:backpacked-352835:${mod.dep("backpacked")}")
+    implementation("curse.maven:framework-549225:${mod.dep("framework")}")
+    implementation("com.electronwill.night-config:core:3.8.3")
+    implementation("com.electronwill.night-config:toml:3.8.3")
+    implementation("org.javassist:javassist:3.30.2-GA")
+    implementation("org.reflections:reflections:0.10.2") {
+        isTransitive = false
     }
 
     // Mixin Constraints - embedded
-    implementation("com.moulberry:mixinconstraints:1.0.9")
+    implementation("com.moulberry:mixinconstraints:1.0.9") {
+        exclude(group = "org.slf4j")
+    }
     jarJar("com.moulberry:mixinconstraints:1.0.9")
 }
 
