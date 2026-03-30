@@ -1,6 +1,7 @@
 package cc.cassian.immersiveoverlays.compat;
 
 import cc.cassian.immersiveoverlays.overlay.TemperatureOverlay;
+import com.momosoftworks.coldsweat.config.spec.ClientSettingsConfig;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 //? if neoforge || forge {
@@ -61,7 +62,7 @@ public class ColdSweatCompat {
 
     public static boolean isCelsius() {
         //? if forge || neoforge {
-        /*return ConfigSettings.CELSIUS.get();
+        /*return ClientSettingsConfig.USE_CELSIUS.get();
         *///?} else {
         return false;
          //?}

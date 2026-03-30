@@ -11,6 +11,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.biome.Biome;
 import org.apache.commons.lang3.text.WordUtils;
+import org.jetbrains.annotations.NotNull;
 
 public class TemperatureOverlay {
     public static boolean showTemperature = false;
@@ -83,19 +84,19 @@ public class TemperatureOverlay {
         *///?}
         //? if forge || neoforge {
         /*if (ModCompat.LEGENDARY_SURVIVAL_OVERHAUL && ModConfig.get().compat_legendary_survival_overhaul_temperature) {
-            String temperature = LegendarySurvivalOverhaulCompat.getAmbientTemperature(player);
-            var sprite = switch (temperature) {
-                case "FROSTBITE" -> "heat_0";
-                case "COLD" -> "heat_1";
-                case "HOT" -> "heat_4";
-                case "HEAT_STROKE" -> "heat_6";
-                default -> "heat_2";
-            };
-            return new TemperaturePair(Component.literal(WordUtils.capitalizeFully(temperature)), -1, sprite);
+            if (Platform.showDevInfo()) {
+                OverlayHelpers.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Using Legendary Survival Overhaul for Temperature!"), 0, 0, -1);
+            }
+            TemperaturePair temperaturePair = LegendarySurvivalOverhaulCompat.getTemperaturePair(player);
+            if (temperaturePair != null)
+                return temperaturePair;
         }
         *///?}
         //? if fabric || 1.21.1 {
         if (ModCompat.THERMOO && ModConfig.get().compat_thermoo_temperature) {
+            if (Platform.showDevInfo()) {
+                OverlayHelpers.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Using Thermoo for Temperature!"), 0, 0, -1);
+            }
             TemperaturePair temperaturePair = ThermooCompat.getTemperaturePair(player);
             if (temperaturePair != null)
                 return temperaturePair;

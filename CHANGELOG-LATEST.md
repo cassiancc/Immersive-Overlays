@@ -1,5 +1,5 @@
-### Added
-- Biome overlays for the Grove, Lukewarm Ocean, Old Growth Birch Forest, Old Growth Spruce Taiga, Savanna, Sparse Jungle, Warm Ocean, Windswept Savanna (thanks @Proxillus!).
+### Changed
+- Legendary Survival Overhaul temperatures can now be translated and have a better default state.
 
 ### Fixed
-- Season overlays not rendering.
+- Crash with latest betas of Cold Sweat.
