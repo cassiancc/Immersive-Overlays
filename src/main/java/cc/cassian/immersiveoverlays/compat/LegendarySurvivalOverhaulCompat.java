@@ -33,6 +33,6 @@ public class LegendarySurvivalOverhaulCompat {
             case "HEAT_STROKE" -> "heat_6";
             default -> "heat_2";
         };
-        return new TemperatureOverlay.TemperaturePair(Component.translatable("gui.c.temperature.%s".formatted(temperature), WordUtils.capitalizeFully(temperature.replace("_", " "))), -1, sprite);
+        return new TemperatureOverlay.TemperaturePair(Component.translatableWithFallback("gui.c.temperature.%s".formatted(temperature.toLowerCase()), WordUtils.capitalizeFully(temperature.replace("_", " "))), -1, sprite);
     }
 }
