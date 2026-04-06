@@ -191,6 +191,7 @@ dependencies {
         isTransitive = false
     }
 
+    implementation("eu.pb4:trinkets:${mod.dep("trinkets")}")
 
     compileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
     compileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-forge")

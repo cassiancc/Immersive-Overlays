@@ -189,7 +189,7 @@ public class OverlayHelpers {
                 /*if (ModCompat.CURIOS)
                     CuriosCompat.checkForImportantAccessories(player);
                 *///?}
-                //? if fabric {
+                //? if fabric || >26 {
                 if (ModCompat.TRINKETS)
                     TrinketsCompat.checkForImportantAccessories(player);
                 //?}

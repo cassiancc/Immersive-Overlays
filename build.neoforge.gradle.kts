@@ -234,6 +234,11 @@ dependencies {
 
     compileOnly("io.wispforest:accessories-neoforge:${mod.dep("accessories")}")
     compileOnly("top.theillusivec4.curios:curios-neoforge:${mod.dep("curios")}:api")
+    if (stonecutter.eval(mcVersion, "=26.1")) {
+        compileOnly("eu.pb4:trinkets:${mod.dep("trinkets")}") {
+            isTransitive = false
+        }
+    }
     compileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-neoforge")
 
     if (stonecutter.eval(mcVersion, "=1.21.1")) {

@@ -1,2 +1,2 @@
-### Fixed
-- Legendary Survival Overhaul temperatures not translating correctly.
+### Added
+- Support for [Trinkets (Updated)](https://modrinth.com/mod/trinkets-updated) by Patbox. Note that [Trinkets Continued](https://modrinth.com/mod/trinkets-continued) by Rebel459 is not supported, and will crash if you attempt to use it.
