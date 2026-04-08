@@ -175,11 +175,9 @@ dependencies {
     implementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
     compileOnly("com.terraformersmc:modmenu:${property("deps.modmenu")}")
-    localRuntime("com.terraformersmc:modmenu:${property("deps.modmenu")}")
 
     compileOnly("me.shedaniel.cloth:cloth-config-neoforge:19.0.147")
     compileOnly("maven.modrinth:jade:${property("deps.jade")}")
-    localRuntime("maven.modrinth:jade:${property("deps.jade")}")
 
     // Xaero's Minimap
     compileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros")}_NeoForge_${mod.dep("xaeros_mc")}")
@@ -191,7 +189,14 @@ dependencies {
         isTransitive = false
     }
 
-    implementation("eu.pb4:trinkets:${mod.dep("trinkets")}")
+    if (hasProperty("deps.trinkets")) {
+        implementation("eu.pb4:trinkets:${mod.dep("trinkets")}")
+    }
+
+    if (stonecutter.eval(mcVersion, "=26.1")) {
+        localRuntime("maven.modrinth:jade:${property("deps.jade")}")
+        localRuntime("com.terraformersmc:modmenu:${property("deps.modmenu")}")
+    }
 
     compileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
     compileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-forge")

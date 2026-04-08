@@ -13,9 +13,23 @@ import org.spongepowered.asm.mixin.injection.At;
 *///?}
 
 @IfMinecraftVersion(minVersion = "1.21.6")
+//? if >26.1 {
+/*@Mixin(net.minecraft.client.gui.Hud.class)
+*///?} else {
 @Mixin(Gui.class)
+//?}
 public class GuiMixin {
-    //? if >1.21.5 {
+    //? if >26.1 {
+    /*@WrapOperation(method = "nextContextualInfoState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/waypoints/ClientWaypointManager;hasWaypoints()Z"))
+    private boolean mixin(ClientWaypointManager instance, Operation<Boolean> original) {
+        if (ModConfig.get().locator_bar) {
+            if (!CompassOverlay.showX) {
+                return false;
+            }
+        }
+        return original.call(instance);
+    }
+    *///?} else if >1.21.5 {
     /*@WrapOperation(method = "nextContextualInfoState", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/waypoints/ClientWaypointManager;hasWaypoints()Z"))
     private boolean mixin(ClientWaypointManager instance, Operation<Boolean> original) {
         if (ModConfig.get().locator_bar) {

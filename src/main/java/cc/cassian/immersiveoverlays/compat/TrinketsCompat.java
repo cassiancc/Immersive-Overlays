@@ -4,11 +4,12 @@ import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 //? if fabric && <26 {
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketsApi;
-//?}
-//? if >26 {
-/*import eu.pb4.trinkets.api.TrinketsApi;
-*///?}
 import net.minecraft.util.Tuple;
+//?}
+//? if =26.1 {
+/*import eu.pb4.trinkets.api.TrinketsApi;
+import net.minecraft.util.Tuple;
+*///?}
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -22,7 +23,7 @@ public class TrinketsCompat {
             }
         }
         //?}
-        //? if >26 {
+        //? if =26.1 {
         /*TrinketsApi.getAttachment(player).getAllEquipped().stream().map(Tuple::getB).forEach(OverlayHelpers::isImportantItemOrContainer);
         *///?}
     }
