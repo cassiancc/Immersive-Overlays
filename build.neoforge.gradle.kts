@@ -13,7 +13,7 @@ tasks.named<ProcessResources>("processResources") {
 
     val props = HashMap<String, String>().apply {
         this["version"] = prop("mod.version") + "+" + prop("deps.minecraft")
-        this["minecraft"] = prop("deps.minecraft")
+        this["minecraft"] = prop("mod.mc_dep_forgelike")
     }
 
     filesMatching(listOf("neoforge.mod.json", "META-INF/neoforge.mods.toml", "META-INF/mods.toml")) {
@@ -235,9 +235,7 @@ dependencies {
     compileOnly("io.wispforest:accessories-neoforge:${mod.dep("accessories")}")
     compileOnly("top.theillusivec4.curios:curios-neoforge:${mod.dep("curios")}:api")
     if (stonecutter.eval(mcVersion, "=26.1")) {
-        compileOnly("eu.pb4:trinkets:${mod.dep("trinkets")}") {
-            isTransitive = false
-        }
+        implementation("eu.pb4:trinkets:${mod.dep("trinkets")}")
     }
     compileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-neoforge")
 
@@ -271,8 +269,8 @@ dependencies {
     }
 
     // Backpacked
-    implementation("curse.maven:backpacked-352835:${mod.dep("backpacked")}")
-    implementation("curse.maven:framework-549225:${mod.dep("framework")}")
+    compileOnly("curse.maven:backpacked-352835:${mod.dep("backpacked")}")
+    compileOnly("curse.maven:framework-549225:${mod.dep("framework")}")
     implementation("com.electronwill.night-config:core:3.8.3")
     implementation("com.electronwill.night-config:toml:3.8.3")
     implementation("org.javassist:javassist:3.30.2-GA")

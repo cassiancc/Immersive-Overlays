@@ -1,2 +1,6 @@
 ### Added
-- Support for [Trinkets (Updated)](https://modrinth.com/mod/trinkets-updated) by Patbox. Note that [Trinkets Continued](https://modrinth.com/mod/trinkets-continued) by Rebel459 is not supported, and will crash if you attempt to use it.
+- Support for [Trinkets (Updated)](https://modrinth.com/mod/trinkets-updated) by Patbox, an updated fork of Trinkets that supports Fabric and NeoForge.
+- Support for Traveler's Backpack on 26.1.
+
+### Fixed
+- NeoForge 26.1.1 support.

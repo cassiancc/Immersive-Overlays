@@ -202,7 +202,17 @@ dependencies {
 
     // Backpacked
     compileOnly("curse.maven:backpacked-352835:${mod.dep("backpacked")}")
-    implementation("curse.maven:framework-549225:${mod.dep("framework")}")
+    compileOnly("curse.maven:framework-549225:${mod.dep("framework")}")
+
+    // Travelers Backpack
+    compileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}")
+
+    // Tiered Backpacks
+    if (hasProperty("deps.tiered_backpacks")) {
+        compileOnly("maven.modrinth:tiered-backpacks:${mod.dep("tiered_backpacks")}")
+        localRuntime("maven.modrinth:tiered-backpacks:${mod.dep("tiered_backpacks")}")
+        implementation("me.fzzyhmstrs:fzzy_config:${prop("deps.fzzy_config")}")
+    }
 
     // Mixin Constraints - embedded
     implementation("com.moulberry:mixinconstraints:1.0.9")

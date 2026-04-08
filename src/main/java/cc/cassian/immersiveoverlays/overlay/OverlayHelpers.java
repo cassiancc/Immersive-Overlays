@@ -112,7 +112,13 @@ public class OverlayHelpers {
     }
 
     public static boolean shouldCancelRender(Minecraft mc) {
-        if (mc.options.hideGui || !ModConfig.get().enabled) return true;
+        //? if >26.1 {
+        /*if (mc.gui.hud.isHidden())
+        *///?} else {
+        if (mc.options.hideGui)
+        //?}
+            return true;
+        if (!ModConfig.get().enabled) return true;
         if (ModConfig.get().hide_from_debug) {
             return
             //? if >1.21.10 {
@@ -189,10 +195,14 @@ public class OverlayHelpers {
                 /*if (ModCompat.CURIOS)
                     CuriosCompat.checkForImportantAccessories(player);
                 *///?}
-                //? if fabric || >26 {
+                //? if fabric && <26 {
                 if (ModCompat.TRINKETS)
                     TrinketsCompat.checkForImportantAccessories(player);
                 //?}
+                //? if >26 {
+                /*if (ModCompat.TRINKETS_UPDATED)
+                    TrinketsCompat.checkForImportantAccessories(player);
+                *///?}
                 if (ModCompat.TRAVELERS_BACKPACK)
                     TravelersBackpackCompat.checkForImportantAccessories(player);
                 if (ModCompat.BACKPACKED)
@@ -414,7 +424,12 @@ public class OverlayHelpers {
             hasBeenToggled = false;
         }
         if (ModClient.overlaySettings.isDown()) {
-           Minecraft.getInstance().setScreen(ClothConfigFactory.create(Minecraft.getInstance().screen));
+            Minecraft mc = Minecraft.getInstance();
+            //? if >26.1 {
+            /*mc.gui.setScreen(ClothConfigFactory.create(mc.gui.screen()));
+            *///?} else {
+            mc.setScreen(ClothConfigFactory.create(mc.screen));
+            //?}
         }
     }
 }

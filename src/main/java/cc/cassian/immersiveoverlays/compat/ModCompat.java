@@ -91,6 +91,12 @@ public class ModCompat {
     public static final boolean TRINKETS = Platform.INSTANCE.isLoaded("trinkets");
 
     /**
+     * Trinkets (Updated) - used for detecting overlays in accessory slots.
+     * Multiplatform
+     */
+    public static final boolean TRINKETS_UPDATED = Platform.INSTANCE.isLoaded("trinkets_updated");
+
+    /**
      * Breezy - used for Wind Direction Overlays.
      * Forge
      */
