@@ -18,6 +18,7 @@ public class ModLists {
     public static ArrayList<Item> compass_x_items = new ArrayList<>();
     public static ArrayList<Item> compass_y_items = new ArrayList<>();
     public static ArrayList<Item> compass_z_items = new ArrayList<>();
+    public static ArrayList<Item> compass_anchor_items = new ArrayList<>();
     public static ArrayList<Item> clock_items = new ArrayList<>();
     public static ArrayList<Item> weather_items = new ArrayList<>();
     public static ArrayList<Item> biome_items = new ArrayList<>();
@@ -36,6 +37,7 @@ public class ModLists {
         addAll(registry, ModConfig.get().compass_x_items, compass_x_items);
         addAll(registry, ModConfig.get().compass_y_items, compass_y_items, compass_x_items);
         addAll(registry, ModConfig.get().compass_z_items, compass_z_items, compass_x_items);
+        addAll(registry, ModConfig.get().compass_anchor_items, compass_anchor_items, compass_anchor_items);
         addAll(registry, ModConfig.get().clock_items, clock_items);
         addAll(registry, ModConfig.get().biome_items, biome_items, compass_x_items);
         addAll(registry, ModConfig.get().clock_weather_items, weather_items, clock_items);

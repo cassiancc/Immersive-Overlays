@@ -10,6 +10,7 @@ import net.minecraft.client.DeltaTracker;
 //?}
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.GlobalPos;
 //? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
 //?} else {
@@ -24,6 +25,7 @@ import net.minecraft.util.ARGB;
 //? if <1.21 {
 /*import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.world.item.CompassItem;
 *///?}
 //? if 1.21.5
 /*import net.minecraft.client.renderer.RenderType;*/
@@ -39,6 +41,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.LodestoneTracker;
 //?}
 
 
@@ -171,6 +174,8 @@ public class OverlayHelpers {
             SpeedOverlay.showSpeed = true;
         if (ModLists.waila_items.contains(item))
             showWaila = true;
+        if (ModLists.compass_anchor_items.contains(item))
+            readAnchor(itemStack);
     }
 
     public static void checkInventoryForItems(Player player) {
@@ -221,6 +226,7 @@ public class OverlayHelpers {
         TemperatureOverlay.showTemperature = b;
         SpeedOverlay.showSpeed = b;
         showWaila = b;
+        CompassOverlay.anchor = b ? CompassOverlay.anchor : null;
     }
 
     public static void isImportantItemOrContainer(ItemStack stack) {
@@ -475,5 +481,39 @@ public class OverlayHelpers {
         if (ModClient.overlaySettings.isDown()) {
            Minecraft.getInstance().setScreen(ClothConfigFactory.create(Minecraft.getInstance().screen));
         }
+    }
+
+
+    public static void readAnchor(ItemStack stack)
+    {
+        if (!ModConfig.get().compass_relative_pos)
+            return;
+        Player player = Minecraft.getInstance().player;
+        if (player == null)
+            return;
+        //? if > 1.20.5 {
+        LodestoneTracker tracker = stack.get(DataComponents.LODESTONE_TRACKER);
+        if (tracker == null)
+            return;
+        if (!tracker.tracked())
+            return;
+        if (tracker.target().isEmpty())
+            return;
+        GlobalPos anchor = tracker.target().get();
+        if (player.level().dimension() != anchor.dimension())
+            return;
+        CompassOverlay.anchor = anchor;
+        //?} else {
+        /*CompoundTag compoundtag = stack.getTag();
+        if (compoundtag == null) {
+            return;
+        }
+        GlobalPos anchor = CompassItem.getLodestonePosition(compoundtag);
+        if (anchor == null)
+            return;
+        if (player.level.dimension() != anchor.dimension())
+            return;
+        CompassOverlay.anchor = anchor;
+        *///?}
     }
 }

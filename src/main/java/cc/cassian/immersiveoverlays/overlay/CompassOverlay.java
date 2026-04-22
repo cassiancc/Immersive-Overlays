@@ -13,6 +13,7 @@ import net.minecraft.client.gui.GuiGraphics;
 /*import com.mojang.blaze3d.vertex.PoseStack;
  *///?}
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.GlobalPos;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class CompassOverlay {
     public static boolean showX = false;
     public static boolean showY = false;
     public static boolean showZ = false;
+    public static GlobalPos anchor;
 
     public static void renderGameOverlayEvent(
             //? if >1.20 {
@@ -51,6 +53,14 @@ public class CompassOverlay {
         BlockPos pos;
         if (mc.player != null) pos = mc.player.blockPosition();
         else return;
+
+        if (ModConfig.get().compass_relative_pos && anchor != null) {
+            pos = pos.offset(
+                    -anchor.pos().getX(),
+                    -anchor.pos().getY(),
+                    -anchor.pos().getZ()
+            );
+        }
 
         String x = String.format("%d", pos.getX());
         String y = String.format("%d", pos.getY());
