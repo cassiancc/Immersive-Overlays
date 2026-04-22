@@ -135,11 +135,24 @@ repositories {
             includeGroup("com.teamabnormals")
         }
     }
+    repositories {
+        exclusiveContent {
+            forRepository {
+                maven {
+                    url = uri("https://cursemaven.com")
+                }
+            }
+            filter {
+                includeGroup ("curse.maven")
+            }
+        }
+    }
     maven {
-        name = "CurseForge"
-        url = uri("https://cursemaven.com")
+        name = "GeckoLib"
+        url = uri("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
         content {
-            includeGroup("curse.maven")
+            includeGroupByRegex("software\\.bernie.*")
+            includeGroup("com.eliotlash.mclib")
         }
     }
     flatDir { dirs("libs") }
@@ -208,8 +221,8 @@ dependencies {
     modCompileOnly("top.theillusivec4.curios:curios-forge:${mod.dep("curios")}:api")
     modCompileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-forge")
 
-    modCompileOnly("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
-    modCompileOnly("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
+    modImplementation("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
+    modImplementation("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
 
     modImplementation("maven.modrinth:cold-sweat:${mod.dep("cold_sweat")}")
 
@@ -235,10 +248,24 @@ dependencies {
         modCompileOnly("dev.su5ed.sinytra:fabric-loader:2.7.11+0.16.5+1.20.1")
     }
 
+    modImplementation("maven.modrinth:breezy:${mod.dep("breezy")}")
+    modImplementation("software.bernie.geckolib:geckolib-forge-${property("deps.minecraft")}:${property("deps.geckolib")}")
+    implementation("com.eliotlash.mclib:mclib:20")
+
+    modImplementation("maven.modrinth:player-locator-plus-reforged:1.0.1")
+    compileOnly("maven.modrinth:dead-reckoning:sH7O0giM")
+
+    // Backpacked
+    modCompileOnly("curse.maven:backpacked-352835:${mod.dep("backpacked")}")
+    modImplementation("curse.maven:framework-549225:${mod.dep("framework")}")
+
     modCompileOnly("io.github.llamalad7:mixinextras-common:0.5.0")
     implementation("io.github.llamalad7:mixinextras-forge:0.5.0")
     jarJar("io.github.llamalad7:mixinextras-forge:0.5.0")
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
+    // Mixin Constraints - embedded
+    implementation("com.moulberry:mixinconstraints:1.0.9")
+    jarJar("com.moulberry:mixinconstraints:1.0.9")
 
 }
 
@@ -259,6 +286,20 @@ tasks.named<Jar>("jar") {
     }
 }
 
+stonecutter {
+    replacements.string {
+        direction = eval(current.version, ">1.21.10")
+        replace("ResourceLocation", "Identifier")
+    }
+    replacements.string {
+        direction = eval(current.version, ">26")
+        replace("GuiGraphics", "GuiGraphicsExtractor")
+    }
+    replacements.string {
+        direction = eval(current.version, ">26")
+        replace("guiGraphics.drawString", "guiGraphics.text")
+    }
+}
 
 tasks {
     processResources {
@@ -277,13 +318,10 @@ tasks {
     }
 }
 
+
 java {
     withSourcesJar()
-    val javaCompat = if (stonecutter.eval(stonecutter.current.version, ">=1.20.5")) {
-        JavaVersion.VERSION_21
-    } else {
-        JavaVersion.VERSION_17
-    }
+    val javaCompat = JavaVersion.VERSION_17
     sourceCompatibility = javaCompat
     targetCompatibility = javaCompat
 }
@@ -296,10 +334,10 @@ val additionalVersions: List<String> = additionalVersionsStr
     ?: emptyList()
 
 publishMods {
-    file = tasks.jar.map { it.archiveFile.get() }
+    file = (tasks.named<org.gradle.jvm.tasks.Jar>("reobfJar").map { it.archiveFile.get() })
     additionalFiles.from(tasks.named<org.gradle.jvm.tasks.Jar>("sourcesJar").map { it.archiveFile.get() })
 
-    type = STABLE
+    type = BETA
     displayName = "${property("mod.name")} ${property("mod.version")} for ${stonecutter.current.version} Forge"
     version = "${property("mod.version")}+${property("deps.minecraft")}-forge"
     changelog = provider { rootProject.file("CHANGELOG-LATEST.md").readText() }

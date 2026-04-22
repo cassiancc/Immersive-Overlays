@@ -1,13 +1,12 @@
 package cc.cassian.immersiveoverlays.compat;
 
-import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import cc.cassian.immersiveoverlays.overlay.TemperatureOverlay;
-
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 //? if neoforge || forge {
 /*import com.momosoftworks.coldsweat.client.gui.Overlays;
 import com.momosoftworks.coldsweat.config.ConfigSettings;
+import com.momosoftworks.coldsweat.config.spec.ClientSettingsConfig;
 *///?}
 
 public class ColdSweatCompat {
@@ -50,7 +49,7 @@ public class ColdSweatCompat {
             sprite = "heat_0";
             colour = 4169980;
         }
-        return new TemperatureOverlay.TemperaturePair(TextHelpers.literal(String.valueOf(temperature)), colour, sprite);
+        return new TemperatureOverlay.TemperaturePair(Component.literal(String.valueOf(temperature)), colour, sprite);
     }
 
     public static double getAmbientTemperature(LocalPlayer player) {
@@ -63,7 +62,7 @@ public class ColdSweatCompat {
 
     public static boolean isCelsius() {
         //? if forge || neoforge {
-        /*return ConfigSettings.CELSIUS.get();
+        /*return ClientSettingsConfig.USE_CELSIUS.get();
         *///?} else {
         return false;
          //?}

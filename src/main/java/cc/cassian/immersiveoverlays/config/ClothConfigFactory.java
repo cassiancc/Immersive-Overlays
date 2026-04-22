@@ -1,7 +1,5 @@
 package cc.cassian.immersiveoverlays.config;
 
-
-import cc.cassian.immersiveoverlays.helpers.TextHelpers;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import net.minecraft.client.gui.screens.Screen;
@@ -25,7 +23,8 @@ public class ClothConfigFactory {
         } else {
             section += "_";
         }
-        return builder.getOrCreateCategory(TextHelpers.translatable("config.immersiveoverlays.%stitle".formatted(section)));    }
+        return builder.getOrCreateCategory(Component.translatable("config.immersiveoverlays.%stitle".formatted(section)));
+    }
 
     private static boolean is(Field field, String name) {
         return field.getName().toLowerCase(Locale.ROOT).contains(name);
@@ -34,7 +33,7 @@ public class ClothConfigFactory {
     public static Screen create(Screen parent) {
         final var builder = ConfigBuilder.create()
                 .setParentScreen(parent)
-                .setTitle(TextHelpers.translatable("config.immersiveoverlays.title"));
+                .setTitle(Component.translatable("config.immersiveoverlays.title"));
 
         final var entryBuilder = builder.entryBuilder();
         final var configInstance = ModConfig.get();
@@ -44,6 +43,7 @@ public class ClothConfigFactory {
         final var biomeCategory = createCategory("biome", builder);
         final var temperatureCategory = createCategory("temperature", builder);
         final var speedCategory = createCategory("speed", builder);
+        final var windCategory = createCategory("wind", builder);
         final var compatCategory = createCategory("compat", builder);
 
         for (var field : ModConfig.class.getFields()) {
@@ -54,6 +54,7 @@ public class ClothConfigFactory {
             else if (is(field,"season")) category = clockCategory;
             else if (is(field,"temperature")) category = temperatureCategory;
             else if (is(field,"speed")) category = speedCategory;
+            else if (is(field,"wind")) category = windCategory;
             else if (is(field,"compat")) category = compatCategory;
             else category = generalCategory;
             if (is(field, "version")) {}

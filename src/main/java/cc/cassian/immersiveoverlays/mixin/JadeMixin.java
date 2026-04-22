@@ -3,6 +3,7 @@ package cc.cassian.immersiveoverlays.mixin;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
+import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
@@ -11,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import snownee.jade.overlay.OverlayRenderer;
 
+@IfModLoaded("jade")
 @Mixin(OverlayRenderer.class)
 public class JadeMixin {
     @Inject(method = "shouldShow", remap = false, at = @At(value = "HEAD"), cancellable = true)

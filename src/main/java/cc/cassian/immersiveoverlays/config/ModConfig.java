@@ -23,12 +23,14 @@ public class ModConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 
     private static ModConfig INSTANCE = new ModConfig();
+
     // version
     public int version = ModClient.CONFIG_VERSION;
+
     //General settings
     public boolean enabled = true;
     //? if >1.21.5
-    /*public boolean locator_bar = true;*/
+    //public boolean locator_bar = true;
     public boolean avoid_overlapping = true;
     public boolean moved_by_effects = true;
     public boolean require_item = true;
@@ -36,16 +38,22 @@ public class ModConfig {
     public boolean search_containers = true;
     public boolean search_containers_for_containers = true;
     public boolean render_background = true;
-    public boolean render_endcap = true;
+    //? if <1.21 {
+    /*public boolean render_endcap = true;
+    *///?}
     public boolean hide_from_debug = true;
+
     // coords
     public boolean compass_enable = true;
     public int compass_vertical_position = 140;
     public boolean compass_horizontal_position_left = false;
+    public boolean compass_direction = false;
+    public boolean compass_single_line = false;
+    public int compass_direction_text_colour = 16755200;
     public int compass_text_colour = 14737632;
-    public String compass_x_colour = "Red";
-    public String compass_y_colour = "Green";
-    public String compass_z_colour = "Blue";
+    public int compass_x_colour = 16733525;
+    public int compass_y_colour = 5635925;
+    public int compass_z_colour = 5592575;
     public List<String> compass_x_items = List.of("minecraft:compass", "minecraft:recovery_compass", "spelunkery:magnetic_compass", "firmaciv:nav_clock", "firmaciv:firmaciv_compass");
     public List<String> compass_y_items = List.of("spelunkery:depth_gauge","caverns_and_chasms:depth_gauge","additionaladditions:depth_meter","supplementaries:altimeter","depthmeter:depthmeter");
     public List<String> compass_z_items = List.of("firmaciv:sextant");
@@ -63,6 +71,8 @@ public class ModConfig {
     public boolean clock_horizontal_position_left = false;
     public List<String> clock_items = List.of("minecraft:clock");
     public List<String> clock_weather_items = List.of("caverns_and_chasms:barometer", "firmaciv:barometer");
+    public List<String> clock_day_count_items = List.of();
+
     // temperature
     public boolean temperature_enable = true;
     public boolean temperature_icons = true;
@@ -72,13 +82,13 @@ public class ModConfig {
     public int temperature_vertical_position = 112;
     public boolean temperature_horizontal_position_left = true;
     public List<String> temperature_items = List.of("oreganized:thermometer", "toughasnails:thermometer", "legendarysurvivaloverhaul:thermometer", "cold_sweat:thermometer");
+
     // compat
-    //? if fabric
+    //? if fabric || forge
     public boolean compat_playerlocatorplus = true;
     public boolean compat_xaeros = true;
     public boolean compat_antique_atlas = true;
-    public boolean compat_accessorify = true;
-    //? if (forge && =1.20.1) || (neoforge && =1.21.1) {
+    //? if (forge) || (neoforge && =1.21.1) {
     /*public boolean compat_oreganized_temperature = true;
     *///?}
     public boolean compat_tough_as_nails_temperature = true;
@@ -88,8 +98,10 @@ public class ModConfig {
     //? if forge || neoforge {
     /*public boolean compat_legendary_survival_overhaul_temperature = true;
      *///?}
-    //? if fabric
+    //? if fabric || 1.21.1 {
     public boolean compat_thermoo_temperature = true;
+    //?}
+
     // biomes
     public boolean biome_enable = true;
     public boolean biome_icons = true;
@@ -99,11 +111,13 @@ public class ModConfig {
     public int biome_vertical_position = 112;
     public boolean biome_horizontal_position_left = false;
     public List<String> biome_items = List.of("minecraft:map", "minecraft:filled_map", "minecraft:empty_map", "map_atlases:atlas", "map_atlases:end_atlas", "map_atlases:nether_atlas",  "naturescompass:naturescompass", "antiqueatlas:antique_atlas");
+
     // seasons
     public List<String> season_items = List.of("sereneseasons:calendar", "seasonsextras:season_calendar", "eclipticseasons:calendar");
+
     //speed
     public boolean speed_enable = true;
-    public int speed_vertical_position = 140;
+    public int speed_vertical_position = 137;
     public boolean speed_horizontal_position_left = true;
     public int speed_colour = 0xc7bf81;
     public List<String> speed_items = List.of("oreganized:speedometer", "speedometer:speedometer");
@@ -121,8 +135,17 @@ public class ModConfig {
     public boolean compat_ecliptic_seasons = true;
     *///?}
 
+    // wind
+    public boolean wind_enable = true;
+    public boolean wind_icons = true;
+    public int wind_vertical_position = 90;
+    public boolean wind_horizontal_position_left = true;
+    public int wind_colour = 0x9c7934;
+    public boolean compat_breezy = true;
+    public List<String> wind_items = List.of("breezy:gust_gauge");
+    public boolean compat_dead_reckoning = true;
 
-    public static void load() {
+	public static void load() {
         if (!Files.exists(configPath())) {
             save();
             return;
@@ -133,7 +156,7 @@ public class ModConfig {
                 save();
                 return;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             ModClient.LOGGER.warn("Upgrading config file to version: " + ModClient.CONFIG_VERSION);
         }
 
@@ -143,8 +166,10 @@ public class ModConfig {
                 INSTANCE = new ModConfig();
                 save();
             }
-        } catch (IOException e) {
-            ModClient.LOGGER.warn("Unable to load config file!");
+        } catch (Exception e) {
+            ModClient.LOGGER.warn("Unable to load config file! Upgrading it to version: " + ModClient.CONFIG_VERSION);
+            INSTANCE = new ModConfig();
+            save();
         }
     }
 

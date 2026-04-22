@@ -5,7 +5,118 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.4.5]
+## [1.6.2]
+
+### Fixed
+- Legendary Survival Overhaul temperatures not translating correctly.
+
+## [1.6.1]
+
+### Added
+- Biome overlays for the Grove, Lukewarm Ocean, Old Growth Birch Forest, Old Growth Spruce Taiga, Savanna, Sparse Jungle, Warm Ocean, Windswept Savanna (thanks @Proxillus!).
+
+### Fixed
+- Season overlays not rendering.
+
+## [1.6.0]
+
+### Added
+- Day count has been modified to be a separate item list.
+
+### Changed
+- Overlay background rendering has been adjusted on 1.21+ to no longer require drawing an endcap.
+- Textures in `immersiveoverlays/textures/gui` have been moved to `immersiveoverlays/textures/gui/sprites`. The exception to this is `overlay.png`, which is now only used for background rendering on 1.20.
+- Weather sprites are now located in `immersiveoverlays/textures/gui/sprites` allowing them to be more easily modified with resource packs.
+
+### Fixed
+- Crash on release 26.1.
+- Offscreen coordinates with single line coordinate rendering and biome overlay.
+
+### Removed
+- 1.21.11 support.
+
+## [1.5.3]
+
+### Added
+- Additional biome overlays for Environmental (thanks @Proxillus!)
+- Support for 26.1-rc-1.
+- Coordinate overlays can now be translated.
+- Coordinate overlays can now be configured to be inline.
+
+### Fixed
+- Direction overlays cutting off coordinate overlays.
+
+## [1.5.2]
+
+### Added
+- Additional biome overlays for Atmospheric, Autumnity, Environmental, Raspberry Flavoured, Windswept, and vanilla biomes (thanks @Quoraal).
+
+### Fixed
+- Speed Overlay now properly handles negative values.
+- Added more examples for season translations.
+- Fabric 1.20.1 build.
+
+## [1.5.1]
+
+### Added
+- Support for 26.1-snapshot-6.
+- Support for [Player Locator Plus Reforged](https://modrinth.com/mod/player-locator-plus-reforged).
+- [Dead Reckoning](https://modrinth.com/mod/dead-reckoning)'s overlay is now shown when a compass overlay is active.
+
+### Changed
+- Tough as Nails now calculates temperature based on the block position rather than the player position.
+
+### Fixed
+- Support for newer versions of [Better Player Locator Bar](https://modrinth.com/mod/bplb).
+- 1.21.11 versions of Polytone causing Immersive Overlays to not render.
+
+## [1.5.0]
+
+### Added
+- Compasses can now display direction overlays (disabled by default).
+- Support for Wind Overlays with [Breezy](https://modrinth.com/mod/breezy) installed.
+- Support for [Thermoo](https://modrinth.com/mod/thermoo/) on 1.21.1 NeoForge.
+- Support for 26.1-snapshot-1.
+
+### Changed
+- Compass text now uses proper colour codes rather than legacy formatting code names.
+- Removed all support for 1.19.2 - this version is now discontinued.
+
+### Fixed
+- Keybind not working on 1.20.1 Forge.
+- Unused mixins are now properly disabled.
+
+## [1.4.10] - 2025-12-21
+
+### Fixed
+- Crash with Oreganized.
+
+## [1.4.9] - 2025-12-09
+
+### Fixed
+- Incorrect clock placement.
+
+## [1.4.8] - 2025-12-06
+
+### Fixed
+- Crash from new version of Traveler's Backpack.
+
+## [1.4.7] - 2025-12-03
+
+### Added
+- Keybind for opening mod configurations.
+- Support for Sophisticated Backpacks on 1.21.10 NeoForge.
+
+### Fixed
+- Legendary Survival Overhaul compat on NeoForge.
+- Clock overlay placement when weather icon is not visible.
+
+## [1.4.6] - 2025-11-21
+
+### Fixed
+- Mixins not applying on LegacyForge.
+
+## [1.4.5] - 2025-11-20
 
 ### Added
 - Debug option to disable end cap rendering (might improve the appearance of some custom resource packs)

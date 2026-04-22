@@ -1,7 +1,6 @@
 ### Added
-- Keybind for opening mod configurations.
-- Support for Sophisticated Backpacks on 1.21.10 NeoForge.
+- Support for [Trinkets (Updated)](https://modrinth.com/mod/trinkets-updated) by Patbox, an updated fork of Trinkets that supports Fabric and NeoForge.
+- Support for Traveler's Backpack on 26.1.
 
 ### Fixed
-- Legendary Survival Overhaul compat on NeoForge.
-- Clock overlay placement when weather icon is not visible.
+- NeoForge 26.1.1 support.

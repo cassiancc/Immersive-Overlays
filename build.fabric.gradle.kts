@@ -1,7 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    id("fabric-loom")
+    id("net.fabricmc.fabric-loom-remap")
     id("dev.kikugie.postprocess.jsonlang")
     id("me.modmuss50.mod-publish-plugin")
     id("maven-publish")
@@ -105,14 +105,6 @@ repositories {
         }
     }
     maven {
-        name = "Nucleoid Maven (Polymer)"
-        url = uri("https://maven.nucleoid.xyz")
-        content {
-            includeGroupAndSubgroups("eu.pb4")
-            includeGroupAndSubgroups("xyz.nucleoid")
-        }
-    }
-    maven {
         name = "Fuzs Mod Resources"
         url = uri("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/")
         content {
@@ -154,6 +146,18 @@ repositories {
             includeGroupAndSubgroups("com.simibubi")
         }
     }
+    repositories {
+        exclusiveContent {
+            forRepository {
+                maven {
+                    url = uri("https://cursemaven.com")
+                }
+            }
+            filter {
+                includeGroup ("curse.maven")
+            }
+        }
+    }
 
 }
 
@@ -167,70 +171,51 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
+    implementation("folk.sisby:kaleido-config:${property("deps.kaleido")}")
+    modImplementation("maven.modrinth:mcqoy:k8u6AZVM")
+
     // Cloth Config
-    if (hasProperty("deps.cloth_version")) {
-        modApi("me.shedaniel.cloth:cloth-config-fabric:${property("deps.cloth_version")}")
-    } else {
-        modCompileOnly("me.shedaniel.cloth:cloth-config-fabric:19.0.147")
-    }
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${property("deps.cloth_version")}")
     // Mod Menu
-    if (hasProperty("deps.modmenu_version"))
-        modApi("com.terraformersmc:modmenu:${property("deps.modmenu_version")}")
-    else {
-        modCompileOnly("com.terraformersmc:modmenu:15.0.0-beta.3")
-    }
+    modApi("com.terraformersmc:modmenu:${property("deps.modmenu_version")}")
+    // Map Atlases
     modCompileOnly("maven.modrinth:map-atlases:${mod.dep("map_atlases")}")
     // Accesories
     if (hasProperty("deps.accessories")) {
         modCompileOnly("io.wispforest:accessories-fabric:${mod.dep("accessories")}")
     }
     // Tough as Nails
-    if (stonecutter.eval(mcVersion, ">1.19.2")) {
-        modCompileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
-    }
+    modCompileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
     modCompileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}")
-    if (stonecutter.eval(mcVersion, ">1.20")) {
-        modCompileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-fabric")
-    }
+    modCompileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-fabric")
     // Fabric Seasons
     if (hasProperty("deps.fabric_seasons")) {
         modCompileOnly("maven.modrinth:fabric-seasons:${mod.dep("fabric_seasons")}")
-        modLocalRuntime("maven.modrinth:fabric-seasons:${mod.dep("fabric_seasons")}")
+//        modLocalRuntime("maven.modrinth:fabric-seasons:${mod.dep("fabric_seasons")}")
     } else {
         modCompileOnly("maven.modrinth:fabric-seasons:2.4.2-BETA+1.21")
     }
-
+    // Simple Seasons
     modCompileOnly("maven.modrinth:simple-seasons:${mod.dep("simple_seasons")}")
 
     // Sophisticated Backpacks
     modCompileOnly("maven.modrinth:9jxwkYQL:${mod.dep("sophisticated_core")}")
     modCompileOnly("maven.modrinth:ouNrBQtq:${mod.dep("sophisticated_backpacks")}")
     modCompileOnly("io.github.fabricators_of_create.Porting-Lib:transfer:2.3.9+1.20.1")
-    if (stonecutter.eval(mcVersion, "=1.19.2")) {
-        modCompileOnly("io.github.fabricators_of_create.Porting-Lib:Porting-Lib:2.1.1453+1.19.2")
-    }
 
     // Jade
-    if (hasProperty("deps.jade")) {
-        modCompileOnly("maven.modrinth:jade:${property("deps.jade")}")
-        modLocalRuntime("maven.modrinth:jade:${property("deps.jade")}")
-    } else {
-        modCompileOnly("maven.modrinth:jade:19.3.2+fabric")
-    }
+    modCompileOnly("maven.modrinth:jade:${property("deps.jade")}")
+    modLocalRuntime("maven.modrinth:jade:${property("deps.jade")}")
 
-    //Xaero's
+    // Xaero's
     modCompileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros")}_Fabric_${mod.dep("xaeros_mc")}")
     modCompileOnly("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}_Fabric_${mod.dep("xaeros_mc")}")
 
+    // Thermoo
+    modCompileOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
+    modLocalRuntime("maven.modrinth:thermoo:${property("deps.thermoo")}")
 
-    if (hasProperty("deps.thermoo")) {
-        modCompileOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
-        modLocalRuntime("maven.modrinth:thermoo:${property("deps.thermoo")}")
-    } else {
-        modCompileOnly("maven.modrinth:thermoo:8.0.1")
-    }
-
-
+    // Cardinal Components
     if (hasProperty("deps.cardinal_components")) {
         modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-entity:${mod.dep("cardinal_components")}")
         modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-base:${mod.dep("cardinal_components")}")
@@ -239,22 +224,33 @@ dependencies {
         modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.2")
         modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-base:6.1.2")
     } else {
-        modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.3")
-        modCompileOnly("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.3")
+        modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.3")
+        modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.3")
     }
 
+    // Trinkets
     if (stonecutter.eval(mcVersion, "<1.21.4")) {
         modCompileOnly("dev.emi:trinkets:${mod.dep("trinkets")}")
     } else {
         modCompileOnly("eu.pb4.fork:trinkets:${mod.dep("trinkets")}")
     }
 
+    // Antique Atlases
     if (hasProperty("deps.antique_atlas")) {
         modCompileOnly("maven.modrinth:antique-atlas-4:${mod.dep("antique_atlas")}")
     } else {
         modCompileOnly("maven.modrinth:antique-atlas-4:utFwd9ms")
     }
+    if (hasProperty("deps.dead_reckoning")) {
+        modImplementation("maven.modrinth:dead-reckoning:${mod.dep("dead_reckoning")}")
+    } else {
+        modCompileOnly("maven.modrinth:dead-reckoning:6tHF0yCl")
+    }
+    if (hasProperty("deps.surveyor")) {
+        modLocalRuntime("maven.modrinth:surveyor:${mod.dep("surveyor")}")
+    }
 
+    // Tiered Backpacks
     if (hasProperty("deps.tiered_backpacks")) {
         modCompileOnly("maven.modrinth:tiered-backpacks:${mod.dep("tiered_backpacks")}")
         modLocalRuntime("maven.modrinth:tiered-backpacks:${mod.dep("tiered_backpacks")}")
@@ -263,11 +259,17 @@ dependencies {
         modCompileOnly("me.fzzyhmstrs:fzzy_config:${mod.dep("fzzy_config")}")
         modLocalRuntime("me.fzzyhmstrs:fzzy_config:${mod.dep("fzzy_config")}")
     }
+    // Backpacked
+    modCompileOnly("curse.maven:backpacked-352835:${mod.dep("backpacked")}")
+    modCompileOnly("curse.maven:framework-549225:${mod.dep("framework")}")
 
-
-
-    modCompileOnly("maven.modrinth:bplb:v1.0.0")
+    // Player Locator Bar Backports
+    modCompileOnly("maven.modrinth:bplb:v1.1.1")
     modCompileOnly("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
+
+    // Mixin Constraints - embedded
+    implementation("com.moulberry:mixinconstraints:1.0.9")
+    include("com.moulberry:mixinconstraints:1.0.9")
 }
 
 configurations.all {
@@ -280,6 +282,14 @@ stonecutter {
     replacements.string {
         direction = eval(current.version, ">1.21.10")
         replace("ResourceLocation", "Identifier")
+    }
+    replacements.string {
+        direction = eval(current.version, ">26")
+        replace("GuiGraphics", "GuiGraphicsExtractor")
+    }
+    replacements.string {
+        direction = eval(current.version, ">26")
+        replace("guiGraphics.drawString", "guiGraphics.text")
     }
 }
 

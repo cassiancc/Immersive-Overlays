@@ -4,26 +4,27 @@ import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.CompassOverlay;
 //? if >1.21.5 {
 /*import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.gui.contextualbar.LocatorBarRenderer;
-*///?}
-import net.minecraft.client.gui.Gui;
-//? if >1.20
 import net.minecraft.client.gui.GuiGraphics;
+*///?}
+import com.moulberry.mixinconstraints.annotations.IfMinecraftVersion;
+import net.minecraft.client.gui.Gui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Pseudo
-//? if >1.21.5 {
-/*@Mixin(LocatorBarRenderer.class)
+@IfMinecraftVersion(minVersion = "1.21.6")
+//? if >26.1 {
+/*@Mixin(net.minecraft.client.gui.contextualbar.LocatorBar.class)
+*///?} else if >1.21.5 {
+/*@Mixin(net.minecraft.client.gui.contextualbar.LocatorBarRenderer.class)
 *///?} else {
 @Mixin(Gui.class)
 //?}
 public class LocatorBarRendererMixin {
     //? if >1.21.5 {
-    /*@Inject(method = "render", at = @At(value = "HEAD"), cancellable = true)
+    /*@Inject(method = "extractRenderState", at = @At(value = "HEAD"), cancellable = true)
     private void mixin(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if (ModConfig.get().locator_bar) {
             if (!CompassOverlay.showX) {
