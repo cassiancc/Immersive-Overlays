@@ -13,7 +13,7 @@ tasks.named<ProcessResources>("processResources") {
 
     val props = HashMap<String, String>().apply {
         this["version"] = prop("mod.version") + "+" + prop("deps.minecraft")
-        this["minecraft"] = prop("deps.minecraft")
+        this["minecraft"] = prop("mod.mc_dep_forgelike")
     }
 
     filesMatching(listOf("neoforge.mod.json", "META-INF/neoforge.mods.toml", "META-INF/mods.toml")) {
@@ -135,11 +135,16 @@ repositories {
             includeGroup("com.teamabnormals")
         }
     }
-    maven {
-        name = "CurseForge"
-        url = uri("https://cursemaven.com")
-        content {
-            includeGroup("curse.maven")
+    repositories {
+        exclusiveContent {
+            forRepository {
+                maven {
+                    url = uri("https://cursemaven.com")
+                }
+            }
+            filter {
+                includeGroup ("curse.maven")
+            }
         }
     }
     flatDir { dirs("libs") }
@@ -156,6 +161,9 @@ neoForge {
     }
 
     runs {
+        configureEach {
+            systemProperty("neoforge.warnings.onlyin.hide", "true")
+        }
         register("client") {
             gameDirectory = file("run/")
             client()
@@ -201,9 +209,11 @@ dependencies {
     }
     // Jade
     if (hasProperty("deps.jade")) {
+        compileOnly("maven.modrinth:jade:${property("deps.jade")}")
         runtimeOnly("maven.modrinth:jade:${property("deps.jade")}")
+    } else {
+        compileOnly("maven.modrinth:jade:19.3.1+neoforge")
     }
-    compileOnly("maven.modrinth:jade:19.3.1+neoforge")
 
     // Map Atlases
     if (stonecutter.eval(mcVersion, "<1.21.2")) {
@@ -216,68 +226,86 @@ dependencies {
     }
 
     // Xaero's Minimap
-    implementation("maven.modrinth:xaeros-minimap:${mod.dep("xaeros")}_NeoForge_${mod.dep("xaeros_mc")}")
-    implementation("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}_NeoForge_${mod.dep("xaeros_mc")}")
+    compileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros")}_NeoForge_${mod.dep("xaeros_mc")}")
+    compileOnly("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}_NeoForge_${mod.dep("xaeros_mc")}")
 
     // Cold Sweat
     compileOnly("maven.modrinth:cold-sweat:${mod.dep("cold_sweat")}")
 
-
-    if (stonecutter.eval(mcVersion, ">1.19.2")) {
-        compileOnly("io.wispforest:accessories-neoforge:${mod.dep("accessories")}")
-    }
-    if (stonecutter.eval(mcVersion, ">1.21") && stonecutter.eval(mcVersion, "<1.21.5")) {
-        compileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+$minecraft")
-    }
-    else if (stonecutter.eval(mcVersion, ">=1.21.5")) {
-        compileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+1.21.4")
-    }
+    compileOnly("io.wispforest:accessories-neoforge:${mod.dep("accessories")}")
     compileOnly("top.theillusivec4.curios:curios-neoforge:${mod.dep("curios")}:api")
+    if (stonecutter.eval(mcVersion, "=26.1")) {
+        implementation("eu.pb4:trinkets:${mod.dep("trinkets")}")
+    }
     compileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-neoforge")
 
-    compileOnly("maven.modrinth:oreganized:5.0.3")
     if (stonecutter.eval(mcVersion, "=1.21.1")) {
-        runtimeOnly("maven.modrinth:oreganized:5.0.3")
+        compileOnly("maven.modrinth:oreganized:${property("deps.oreganized")}")
+        runtimeOnly("maven.modrinth:oreganized:${property("deps.oreganized")}")
         implementation("com.teamabnormals:blueprint:1.21.1-8.0.5")
         implementation("curse.maven:legendary-survival-overhaul-840254:7278267")
-    }
-
-    compileOnly("maven.modrinth:terrafirmacraft:JCusAJHn")
-    if (stonecutter.eval(mcVersion, "=1.21.1")) {
         runtimeOnly("maven.modrinth:terrafirmacraft:JCusAJHn")
         runtimeOnly("maven.modrinth:patchouli:h6hKI2ob")
-    }
-
-    compileOnly("curse.maven:ecliptic-seasons-1118306:7041469")
-    if (stonecutter.eval(mcVersion, "=1.21.1")) {
         runtimeOnly("curse.maven:ecliptic-seasons-1118306:7041469")
-    }
-
-    if (stonecutter.eval(mcVersion, ">1.19.2")) {
-        compileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
-    }
-    if (stonecutter.eval(mcVersion, ">1.20")) {
-        compileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-forge")
-    }
-    compileOnly("org.sinytra.forgified-fabric-api:fabric-client-tags-api-v1:1.1.15+e053909619")
-    compileOnly("org.sinytra.forgified-fabric-api:fabric-convention-tags-v2:2.11.0+87e5848019")
-
-    if (stonecutter.eval(mcVersion, "1.21.1")) {
         compileOnly("maven.local:antique-atlas:2.12.0+1.21_mapped_moj_1.21.1")
         compileOnly("org.sinytra:forgified-fabric-loader:2.5.55+0.17.2+1.21.1")
     }
 
-    implementation("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
-    implementation("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
+    compileOnly("maven.modrinth:terrafirmacraft:JCusAJHn")
+    compileOnly("curse.maven:ecliptic-seasons-1118306:7041469")
+    compileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
+    compileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-forge")
+    compileOnly("org.sinytra.forgified-fabric-api:fabric-client-tags-api-v1:1.1.15+e053909619")
+    compileOnly("org.sinytra.forgified-fabric-api:fabric-convention-tags-v2:2.11.0+87e5848019")
+    compileOnly("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
+    compileOnly("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
+    compileOnly("maven.modrinth:dead-reckoning:6tHF0yCl")
+    compileOnly("maven.modrinth:bplb:v1.1.1")
+    compileOnly("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
 
+    if (hasProperty("deps.thermoo")) {
+        compileOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
+//        runtimeOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
+    }
+
+    // Backpacked
+    compileOnly("curse.maven:backpacked-352835:${mod.dep("backpacked")}")
+    compileOnly("curse.maven:framework-549225:${mod.dep("framework")}")
+    implementation("com.electronwill.night-config:core:3.8.3")
+    implementation("com.electronwill.night-config:toml:3.8.3")
+    implementation("org.javassist:javassist:3.30.2-GA")
+    implementation("org.reflections:reflections:0.10.2") {
+        isTransitive = false
+    }
+
+    // Mixin Constraints - embedded
+    implementation("com.moulberry:mixinconstraints:1.0.9") {
+        exclude(group = "org.slf4j")
+    }
+    jarJar("com.moulberry:mixinconstraints:1.0.9")
+}
+
+stonecutter {
+    replacements.string {
+        direction = eval(current.version, ">1.21.10")
+        replace("ResourceLocation", "Identifier")
+    }
+    replacements.string {
+        direction = eval(current.version, ">26")
+        replace("GuiGraphics", "GuiGraphicsExtractor")
+    }
+    replacements.string {
+        direction = eval(current.version, ">26")
+        replace("guiGraphics.drawString", "guiGraphics.text")
+    }
 }
 
 java {
     withSourcesJar()
-    val javaCompat = if (stonecutter.eval(stonecutter.current.version, ">=1.20.5")) {
-        JavaVersion.VERSION_21
+    val javaCompat = if (stonecutter.eval(stonecutter.current.version, ">26")) {
+        JavaVersion.VERSION_25
     } else {
-        JavaVersion.VERSION_17
+        JavaVersion.VERSION_21
     }
     sourceCompatibility = javaCompat
     targetCompatibility = javaCompat
@@ -303,7 +331,7 @@ publishMods {
     modrinth {
         projectId = property("publish.modrinth") as String
         accessToken = env.MODRINTH_API_KEY.orNull()
-        minecraftVersions.add(stonecutter.current.version)
+        minecraftVersions.add(property("deps.minecraft") as String)
         minecraftVersions.addAll(additionalVersions)
         optional("cloth-config")
     }
@@ -311,7 +339,11 @@ publishMods {
     curseforge {
         projectId = property("publish.curseforge") as String
         accessToken = env.CURSEFORGE_API_KEY.orNull()
-        minecraftVersions.add(stonecutter.current.version)
+        if (hasProperty("deps.curseforge_minecraft_version")) {
+            minecraftVersions.add(property("deps.curseforge_minecraft_version") as String)
+        } else {
+            minecraftVersions.add(property("deps.minecraft") as String)
+        }
         minecraftVersions.addAll(additionalVersions)
     }
 }

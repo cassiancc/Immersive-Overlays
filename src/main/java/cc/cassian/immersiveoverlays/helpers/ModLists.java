@@ -1,11 +1,7 @@
 package cc.cassian.immersiveoverlays.helpers;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
-//? if >1.20 {
 import net.minecraft.core.registries.BuiltInRegistries;
-//?} else {
-/*import net.minecraft.core.Registry;
- *///?}
 import net.minecraft.core.DefaultedRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -23,17 +19,15 @@ public class ModLists {
     public static ArrayList<Item> weather_items = new ArrayList<>();
     public static ArrayList<Item> biome_items = new ArrayList<>();
     public static ArrayList<Item> season_items = new ArrayList<>();
+    public static ArrayList<Item> day_count_items = new ArrayList<>();
     public static ArrayList<Item> temperature_items = new ArrayList<>();
     public static ArrayList<Item> speed_items = new ArrayList<>();
+    public static ArrayList<Item> wind_items = new ArrayList<>();
     public static ArrayList<Item> waila_items = new ArrayList<>();
 
 
     public static void loadLists() {
-        //? if >1.20 {
         var registry = BuiltInRegistries.ITEM;
-        //?} else {
-        /*var registry = Registry.ITEM;
-         *///?}
         addAll(registry, ModConfig.get().compass_x_items, compass_x_items);
         addAll(registry, ModConfig.get().compass_y_items, compass_y_items, compass_x_items);
         addAll(registry, ModConfig.get().compass_z_items, compass_z_items, compass_x_items);
@@ -42,11 +36,18 @@ public class ModLists {
         addAll(registry, ModConfig.get().biome_items, biome_items, compass_x_items);
         addAll(registry, ModConfig.get().clock_weather_items, weather_items, clock_items);
         addAll(registry, ModConfig.get().season_items, season_items);
+        addAll(registry, ModConfig.get().clock_day_count_items, day_count_items);
         addAll(registry, ModConfig.get().temperature_items, temperature_items);
         addAll(registry, ModConfig.get().speed_items, speed_items);
+        addAll(registry, ModConfig.get().wind_items, wind_items);
         addAll(registry, ModConfig.get().compat_waila_items, waila_items);
     }
 
+    /**
+     * @param registry The registry to check - usually {@link BuiltInRegistries#ITEM}
+     * @param idList - A list of strings to convert to items.
+     * @param itemList - A list of items to fill with strings.
+     */
     private static void addAll(DefaultedRegistry<Item> registry, List<String> idList, ArrayList<Item> itemList) {
         itemList.clear();
         for (String itemId : idList) {
@@ -55,6 +56,12 @@ public class ModLists {
         }
     }
 
+	/**
+	 * @param registry The registry to check - usually {@link BuiltInRegistries#ITEM}
+	 * @param idList - A list of strings to convert to items.
+	 * @param itemList - A list of items to fill with strings.
+	 * @param fallbackList - A list of items to use if the main list is empty.
+	 */
     private static void addAll(DefaultedRegistry<Item> registry, List<String> idList, ArrayList<Item> itemList, ArrayList<Item> fallbackList) {
         addAll(registry, idList, itemList);
         if (itemList.isEmpty()) {

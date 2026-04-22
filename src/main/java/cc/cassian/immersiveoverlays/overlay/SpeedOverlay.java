@@ -8,26 +8,16 @@ import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.client.DeltaTracker;
 //?}
 import net.minecraft.client.Minecraft;
-
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
-//? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
-//?} else {
-/*import com.mojang.blaze3d.vertex.PoseStack;
- *///?}
 
 public class SpeedOverlay {
     public static boolean showSpeed = false;
 
 
-    public static void renderGameOverlayEvent(
-            //? if >1.20 {
-            GuiGraphics guiGraphics
-            //?} else {
-            /*PoseStack guiGraphics*/
-            //?}
+    public static void renderGameOverlayEvent(GuiGraphics guiGraphics
             //? if >1.21 {
             , DeltaTracker deltaTracker
             //?} else {
@@ -59,8 +49,8 @@ public class SpeedOverlay {
         OverlayHelpers.drawString(guiGraphics, mc.font, speedText, xPlacement-xOffset+10, textYPlacement, ModConfig.get().speed_colour);
         var spriteX = xPlacement-4;
         var spriteY = textYPlacement+10;
-        var fast = ModClient.locate("textures/gui/fast.png");
-        var slow = ModClient.locate("textures/gui/slow.png");
+        var fast = ModClient.locate("textures/gui/sprites/fast.png");
+        var slow = ModClient.locate("textures/gui/sprites/slow.png");
         ResourceLocation sprite;
         if (speed>=0.05) sprite = fast; else sprite = slow;
         OverlayHelpers.blitSprite(guiGraphics, sprite, spriteX, spriteY, 7);
@@ -82,7 +72,7 @@ public class SpeedOverlay {
             speed = OreganizedCompat.getSpeed(player);
         } else {
             Vec3 deltaMovement = player.getRootVehicle().getDeltaMovement();
-            speed = Math.max(Math.max(deltaMovement.x, deltaMovement.y), deltaMovement.z);
+            speed = Math.max(Math.max(Math.abs(deltaMovement.x), (Math.abs(deltaMovement.y)-0.08)), Math.abs(deltaMovement.z));
         }
         return speed;
     }

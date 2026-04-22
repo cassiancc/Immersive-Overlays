@@ -2,8 +2,8 @@ package cc.cassian.immersiveoverlays;
 
 //? fabric {
 import cc.cassian.immersiveoverlays.fabric.FabricPlatformImpl;
-
 //?}
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import java.io.File;
 import java.nio.file.Path;
@@ -11,7 +11,7 @@ import java.nio.file.Path;
 /*import cc.cassian.immersiveoverlays.neoforge.NeoforgePlatformImpl;
 *///?}
 //? forge
-/*import cc.cassian.immersiveoverlays.forge.ForgePlatformImpl;*/
+//import cc.cassian.immersiveoverlays.forge.ForgePlatformImpl;
 
 public interface Platform {
 
@@ -30,4 +30,12 @@ public interface Platform {
     boolean isLoadingLoaded(String mod);
     String loader();
     Path configPath();
+    void registerOverlay(ResourceLocation id, Overlay overlay);
+
+	boolean isDeveloperEnvironment();
+
+    @SuppressWarnings("false")
+    static boolean showDevInfo() {
+        return ModClient.DEBUG && Platform.INSTANCE.isDeveloperEnvironment();
+    }
 }

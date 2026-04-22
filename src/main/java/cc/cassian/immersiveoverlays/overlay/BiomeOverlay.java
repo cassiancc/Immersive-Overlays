@@ -2,17 +2,8 @@ package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-//? if >1.21 {
-import net.minecraft.client.DeltaTracker;
-//?}
 import net.minecraft.client.Minecraft;
-//? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
-//?} else {
-/*import net.minecraft.client.gui.GuiComponent;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.systems.RenderSystem;
- *///?}
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Holder;
@@ -28,14 +19,9 @@ public class BiomeOverlay {
     public static ResourceLocation UNDEFINED = ModClient.locate("textures/immersiveoverlays/undefined.png");
 
 
-    public static void renderGameOverlayEvent(
-    //? if >1.20 {
-        GuiGraphics guiGraphics
-    //?} else {
-        /*PoseStack guiGraphics*/
-    //?}
+    public static void renderGameOverlayEvent(GuiGraphics guiGraphics
     //? if >1.21 {
-        , DeltaTracker deltaTracker
+        , net.minecraft.client.DeltaTracker deltaTracker
     //?} else {
         /*, float deltaTracker
     *///?}
@@ -71,7 +57,7 @@ public class BiomeOverlay {
         int fontWidth = mc.font.width(biomeText)+iconXOffset;
 
         if (ModConfig.get().avoid_overlapping) {
-            if (!(ClockOverlay.showTime || ClockOverlay.showWeather) || !ModConfig.get().clock_enable) {
+            if (!ClockOverlay.isVisible() || !ModConfig.get().clock_enable) {
                 yPlacement = yPlacement - 24;
                 textYPlacement = textYPlacement - 24;
             }
@@ -91,8 +77,9 @@ public class BiomeOverlay {
         if (showBiome) {
             OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().biome_horizontal_position_left);
             OverlayHelpers.drawString(guiGraphics, mc.font, biomeText, xPlacement-xOffset+iconXOffset, textYPlacement, getTextColour(biome));
-            if (ModConfig.get().biome_icons && !sprite.equals(UNDEFINED))
+            if (ModConfig.get().biome_icons && !sprite.equals(UNDEFINED)) {
                 OverlayHelpers.blitSprite(guiGraphics, sprite, xPlacement-xOffset-1, textYPlacement-4);
+			}
         }
     }
 
@@ -104,10 +91,9 @@ public class BiomeOverlay {
 
     public static ResourceLocation getBiomeSprite(ResourceLocation biome, boolean allowRedirect) {
         var manager = Minecraft.getInstance().getResourceManager();
-        var path = "textures/immersiveoverlays/"+ biome.getPath();
+        var path = "textures/immersiveoverlays/" + biome.getPath();
         var key = ModClient.locate(biome.getNamespace(), "%s.png".formatted(path));
         var redirect = ModClient.locate(biome.getNamespace(), "%s.txt".formatted(path));
-        //? if >1.19 {
         if (manager.getResource(key).isPresent())
             return key;
         else {
@@ -121,29 +107,19 @@ public class BiomeOverlay {
                 return UNDEFINED;
             }
         }
-        //?} else {
-        /*if (allowRedirect) {
-            try {
-                return getBiomeSprite(Objects.requireNonNull(ResourceLocation.tryParse(manager.getResource(redirect).getInputStream().toString())), false);
-            } catch (Exception e) {
-                return UNDEFINED;
-            }
-        } else {
-            return UNDEFINED;
-        }
-        *///?}
     }
 
     public static Holder<Biome> getBiome(LocalPlayer player) {
-        return player.level
-        //? if >1.20 {
-        ()
-        //?}
-        .getBiome(player.blockPosition());
+        return player.level().getBiome(player.blockPosition());
     }
 
     public static ResourceLocation getId(Holder<Biome> biome) {
-        return biome.unwrapKey().orElse(Biomes.THE_VOID).location();
+        return biome.unwrapKey().orElse(Biomes.THE_VOID)
+        //? if >1.21.10 {
+        /*.identifier();
+        *///?} else {
+        .location();
+        //?}
     }
 
     public static String formatBiome(ResourceLocation biome) {

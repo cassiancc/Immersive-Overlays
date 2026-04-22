@@ -14,7 +14,7 @@ logoFile = "icon.png"
 issueTrackerURL = "https://github.com/cassiancc/Immersive-Overlays/issues"
 displayURL="https://modrinth.com/mod/immersive-overlays"
 modURL="https://modrinth.com/mod/immersive-overlays"
-credits = "Additional sprites from ProbablyEkho, Crabbarition, Kelpiesaurus, and KevBo"
+credits = "Additional sprites from ProbablyEkho, Crabbarition, Kelpiesaurus, KevBo, Quoraal, and Proxillus"
 
 [[dependencies.immersiveoverlays]]
 modId = "forge"
@@ -26,6 +26,6 @@ side = "CLIENT"
 [[dependencies.immersiveoverlays]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.19.2,1.21)"
+versionRange = "[1.20,1.20.2)"
 ordering = "NONE"
 side = "CLIENT"

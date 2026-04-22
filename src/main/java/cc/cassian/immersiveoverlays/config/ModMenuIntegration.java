@@ -14,7 +14,6 @@ public class ModMenuIntegration implements ModMenuApi {
         //Display Cloth Config screen if mod present, else error.
         if (ModCompat.CLOTH_CONFIG) return new ModConfigFactory();
         else {
-            ModClient.LOGGER.warn("User attempted to edit config, but Cloth Config is not present!");
             return parent -> null;
         }
     }
