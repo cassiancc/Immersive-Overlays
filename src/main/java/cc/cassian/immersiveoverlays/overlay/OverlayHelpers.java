@@ -220,6 +220,9 @@ public class OverlayHelpers {
             }
         } else {
             setOverlays(true);
+            if (player == null || !ModConfig.get().compass_relative_pos)
+                return;
+            checkInventoryForAnchorStack(player.getInventory());
         }
     }
 
@@ -336,6 +339,41 @@ public class OverlayHelpers {
         }
     }
 
+    private static void checkInventoryForAnchorStack(Inventory inventory){
+        for (ItemStack stack :
+            //? if <1.21.5 {
+                inventory.items
+            //?} else {
+            /*inventory.getNonEquipmentItems()
+             *///?}
+        ) {
+            tryReadAnchor(stack);
+            if (isContainer(stack))
+                findAnchorContainerContents(stack);
+        }
+    }
+
+    private static void findAnchorContainerContents(ItemStack container) {
+        List<ItemStack> list = getContainerContents(container).toList();
+        for (ItemStack itemStack : list) {
+            if (ModConfig.get().search_containers_for_containers) {
+                readAnchorItemOrContainer(itemStack);
+            } else {
+                tryReadAnchor(itemStack);
+            }
+        }
+    }
+
+    public static void readAnchorItemOrContainer(ItemStack stack) {
+        tryReadAnchor(stack);
+        if (isContainer(stack)) {
+            findAnchorContainerContents(stack);
+        }
+        if (ModCompat.SOPHISTICATED_BACKPACKS) {
+            SophisticatedBackpacksCompat.readAnchorFromBackpack(stack);
+        }
+    }
+
     public static @NotNull ItemStack checkInventoryForStack(Inventory inventory, Item item) {
         for (ItemStack stack :
             //? if <1.21.5 {
@@ -443,11 +481,18 @@ public class OverlayHelpers {
         }
     }
 
+    public static void tryReadAnchor(ItemStack stack){
+        var item = stack.getItem();
+        if (!ModLists.compass_anchor_items.contains(item))
+            return;
+        readAnchor(stack);
+        hasSeenAnchorStack = true;
+    }
+
 
     public static void readAnchor(ItemStack stack)
     {
-        if (!ModConfig.get().compass_relative_pos)
-            return;
+        if (!ModConfig.get().compass_relative_pos) return;
         if (hasSeenAnchorStack)
             return;
         Player player = Minecraft.getInstance().player;
