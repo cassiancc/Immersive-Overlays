@@ -19,7 +19,6 @@ import net.minecraft.world.item.CompassItem;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.GlobalPos;
-//? if >1.20 {
 import net.minecraft.client.gui.GuiGraphics;
 //? if >1.21.6 {
 /*import net.minecraft.client.renderer.RenderPipelines;
