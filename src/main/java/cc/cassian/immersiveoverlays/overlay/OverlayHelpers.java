@@ -38,6 +38,7 @@ import java.util.stream.Stream;
 
 public class OverlayHelpers {
     public static boolean showWaila = false;
+    private static boolean hasSeenAnchorStack = false;
 
     public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int tooltipSize, boolean leftAlign) {
         if (ModConfig.get().render_background) {
@@ -174,8 +175,10 @@ public class OverlayHelpers {
             WindOverlay.showWind = true;
         if (ModLists.waila_items.contains(item))
             showWaila = true;
-        if (ModLists.compass_anchor_items.contains(item))
+        if (ModLists.compass_anchor_items.contains(item)){
             readAnchor(itemStack);
+            hasSeenAnchorStack = true;
+        }
     }
 
     public static void checkInventoryForItems(Player player) {
@@ -183,6 +186,7 @@ public class OverlayHelpers {
             setOverlays(false);
             if (player == null)
                 return;
+            hasSeenAnchorStack = false;
             isImportantItemOrContainer(player.getOffhandItem());
             if (ModConfig.get().require_item_in_hand) {
                 isImportantItemOrContainer(player.getMainHandItem());
@@ -444,6 +448,8 @@ public class OverlayHelpers {
     {
         if (!ModConfig.get().compass_relative_pos)
             return;
+        if (hasSeenAnchorStack)
+            return;
         Player player = Minecraft.getInstance().player;
         if (player == null)
             return;
@@ -458,7 +464,6 @@ public class OverlayHelpers {
         GlobalPos anchor = tracker.target().get();
         if (player.level().dimension() != anchor.dimension())
             return;
-        CompassOverlay.anchor = anchor;
         //?} else {
         /*CompoundTag compoundtag = stack.getTag();
         if (compoundtag == null) {
@@ -469,7 +474,7 @@ public class OverlayHelpers {
             return;
         if (player.level.dimension() != anchor.dimension())
             return;
-        CompassOverlay.anchor = anchor;
         *///?}
+        CompassOverlay.anchor = anchor;
     }
 }
