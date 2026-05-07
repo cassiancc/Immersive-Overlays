@@ -176,6 +176,8 @@ dependencies {
 
     // Cloth Config
     modApi("me.shedaniel.cloth:cloth-config-fabric:${property("deps.cloth_version")}")
+    // YACL
+    modApi("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")
     // Mod Menu
     modApi("com.terraformersmc:modmenu:${property("deps.modmenu_version")}")
     // Map Atlases
@@ -207,9 +209,9 @@ dependencies {
     modCompileOnly("maven.modrinth:jade:${property("deps.jade")}")
     modLocalRuntime("maven.modrinth:jade:${property("deps.jade")}")
 
-    // Xaero's
-    modCompileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros")}_Fabric_${mod.dep("xaeros_mc")}")
-    modCompileOnly("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}_Fabric_${mod.dep("xaeros_mc")}")
+    // Xaero's Minimap
+    modCompileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros_minimap")}")
+    modCompileOnly("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}")
 
     // Thermoo
     modCompileOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")

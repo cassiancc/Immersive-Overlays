@@ -97,6 +97,12 @@ public class ModCompat {
     public static final boolean TRINKETS_UPDATED = Platform.INSTANCE.isLoaded("trinkets_updated");
 
     /**
+     * Yet Another Config Lib - ingame configuration.
+     * Multiplatform
+     */
+    public static final boolean YET_ANOTHER_CONFIG_LIB = Platform.INSTANCE.isLoaded("yet_another_config_lib_v3");
+
+    /**
      * Breezy - used for Wind Direction Overlays.
      * Forge
      */

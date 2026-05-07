@@ -148,6 +148,7 @@ repositories {
         }
     }
     flatDir { dirs("libs") }
+    mavenCentral()
 }
 
 neoForge {
@@ -205,8 +206,10 @@ dependencies {
     if (hasProperty("deps.cloth_version")) {
         implementation("me.shedaniel.cloth:cloth-config-neoforge:${property("deps.cloth_version")}")
     } else {
-        compileOnly("me.shedaniel.cloth:cloth-config-neoforge:19.0.147")
+        compileOnly("me.shedaniel.cloth:cloth-config-neoforge:26.1.154")
     }
+    // YACL
+    implementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")
     // Jade
     if (hasProperty("deps.jade")) {
         compileOnly("maven.modrinth:jade:${property("deps.jade")}")
@@ -226,8 +229,8 @@ dependencies {
     }
 
     // Xaero's Minimap
-    compileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros")}_NeoForge_${mod.dep("xaeros_mc")}")
-    compileOnly("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}_NeoForge_${mod.dep("xaeros_mc")}")
+    compileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros_minimap")}")
+    compileOnly("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}")
 
     // Cold Sweat
     compileOnly("maven.modrinth:cold-sweat:${mod.dep("cold_sweat")}")
@@ -249,6 +252,7 @@ dependencies {
         runtimeOnly("curse.maven:ecliptic-seasons-1118306:7041469")
         compileOnly("maven.local:antique-atlas:2.12.0+1.21_mapped_moj_1.21.1")
         compileOnly("org.sinytra:forgified-fabric-loader:2.5.55+0.17.2+1.21.1")
+        compileOnly("maven.local:fabric-seasons:2.4.2-BETA+1.21_mapped_moj_1.21.1")
     }
 
     compileOnly("maven.modrinth:terrafirmacraft:JCusAJHn")

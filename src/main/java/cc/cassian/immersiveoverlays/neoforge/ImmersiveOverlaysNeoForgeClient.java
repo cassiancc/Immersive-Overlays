@@ -65,7 +65,7 @@ public class ImmersiveOverlaysNeoForgeClient {
 
     //Integrate Cloth Config screen (if mod present) with NeoForge mod menu.
     public static void registerModsPage() {
-        if (ModCompat.CLOTH_CONFIG) ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, ModConfigFactory::new);
+        if (ModCompat.CLOTH_CONFIG || ModCompat.YET_ANOTHER_CONFIG_LIB) ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, ()-> (container, parent) -> ModConfigFactory.create(parent));
     }
 }
 

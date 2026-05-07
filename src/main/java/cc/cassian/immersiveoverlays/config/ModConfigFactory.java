@@ -15,23 +15,12 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 //import net.minecraftforge.fml.ModContainer;
 import org.jetbrains.annotations.NotNull;
 
-public class ModConfigFactory
-        //? if neoforge
-        //implements IConfigScreenFactory
-        //? if fabric
-        implements ConfigScreenFactory<Screen>
-{
+public class ModConfigFactory {
 
-
-    public ModConfigFactory() {
-    }
-
-    //? if fabric
-    public Screen create(Screen parent) {
-        //? if neoforge
-        //public @NotNull Screen createScreen(@NotNull ModContainer modContainer, @NotNull Screen parent) {
-        //? if forge
-        //public static @NotNull Screen createScreen(Minecraft modContainer, @NotNull Screen parent) {
+    public static Screen create(Screen parent) {
+        if (ModCompat.YET_ANOTHER_CONFIG_LIB) {
+            return YetAnotherConfigFactory.create(parent);
+        }
         if (ModCompat.CLOTH_CONFIG) {
             return ClothConfigFactory.create(parent);
         }

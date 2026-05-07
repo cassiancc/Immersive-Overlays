@@ -3,10 +3,11 @@ package cc.cassian.immersiveoverlays.overlay;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ClothConfigFactory;
+import cc.cassian.immersiveoverlays.config.ModConfigFactory;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 //? if >1.21 {
-import net.minecraft.client.DeltaTracker;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.core.component.DataComponents;
@@ -31,6 +32,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -51,8 +53,8 @@ public class OverlayHelpers {
                     //RenderPipelines.GUI_TEXTURED,
                     ModClient.locate("background"), xPlacementWithOffset, yPlacementWithOffset, uWidth, tooltipSize);
             //?} else {
-            /*
-            int textureOffset = OverlayHelpers.getTextureOffsetFromSize(tooltipSize);
+            
+            /*int textureOffset = OverlayHelpers.getTextureOffsetFromSize(tooltipSize);
             final int endCapXPlacement = OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth, leftAlign);
             final int endCapOffset = 197;
             OverlayHelpers.blit(guiGraphics, xPlacementWithOffset, yPlacementWithOffset, 0, textureOffset, uWidth, tooltipSize, 256, 256);
@@ -82,7 +84,7 @@ public class OverlayHelpers {
 
     public static void checkInventoryForOverlays(Minecraft minecraft){
         if ((ModConfig.get().compass_enable || ModConfig.get().clock_enable || ModConfig.get().biome_enable || ModConfig.get().temperature_enable)  && minecraft.level != null) {
-            OverlayHelpers.checkInventoryForItems(minecraft.player);
+            OverlayHelpers.checkPlayerForOverlays(minecraft.player);
         }
     }
 
@@ -181,7 +183,7 @@ public class OverlayHelpers {
         }
     }
 
-    public static void checkInventoryForItems(Player player) {
+    public static void checkPlayerForOverlays(Player player) {
         if (ModConfig.get().require_item) {
             setOverlays(false);
             if (player == null)
@@ -218,12 +220,48 @@ public class OverlayHelpers {
                     BackpackedCompat.checkForImportantAccessories(player);
                 checkInventoryForStack(player.getInventory());
             }
+            if (ModConfig.get().allow_blocks && !ModLists.important_blocks.isEmpty()) {
+                checkSurroundingsForOverlays(player);
+            }
         } else {
             setOverlays(true);
             if (player == null || !ModConfig.get().compass_relative_pos)
                 return;
             checkInventoryForAnchorStack(player.getInventory());
         }
+    }
+
+    public static void checkSurroundingsForOverlays(Player player) {
+        AABB box = new AABB(player.blockPosition()).inflate(ModConfig.get().allow_blocks_distance).expandTowards(0.0, ModConfig.get().allow_blocks_distance, 0.0);
+        player.level().getBlockStatesIfLoaded(box).forEach(blockState -> {
+            if (blockState.isAir())
+                return;
+            var item = blockState.getBlock();
+            if (ModLists.compass_x_blocks.contains(item))
+                CompassOverlay.showX = true;
+            if (ModLists.compass_y_blocks.contains(item))
+                CompassOverlay.showY = true;
+            if (ModLists.compass_z_blocks.contains(item))
+                CompassOverlay.showZ = true;
+            if (ModLists.clock_blocks.contains(item))
+                ClockOverlay.showTime = true;
+            if (ModLists.weather_blocks.contains(item))
+                ClockOverlay.showWeather = true;
+            if (ModLists.biome_blocks.contains(item))
+                BiomeOverlay.showBiome = true;
+            if (ModLists.season_blocks.contains(item))
+                ClockOverlay.showSeason = true;
+            if (ModLists.day_count_blocks.contains(item))
+                ClockOverlay.showDayCount = true;
+            if (ModLists.temperature_blocks.contains(item))
+                TemperatureOverlay.showTemperature = true;
+            if (ModLists.speed_blocks.contains(item))
+                SpeedOverlay.showSpeed = true;
+            if (ModLists.wind_blocks.contains(item))
+                WindOverlay.showWind = true;
+            if (ModLists.waila_blocks.contains(item))
+                showWaila = true;
+        });
     }
 
     private static void setOverlays(boolean b) {
@@ -474,9 +512,9 @@ public class OverlayHelpers {
         if (ModClient.overlaySettings.isDown()) {
             Minecraft mc = Minecraft.getInstance();
             //? if >26.1 {
-            /*mc.gui.setScreen(ClothConfigFactory.create(mc.gui.screen()));
+            /*mc.gui.setScreen(ModConfigFactory.create(mc.gui.screen()));
             *///?} else {
-            mc.setScreen(ClothConfigFactory.create(mc.screen));
+            mc.setScreen(ModConfigFactory.create(mc.screen));
             //?}
         }
     }

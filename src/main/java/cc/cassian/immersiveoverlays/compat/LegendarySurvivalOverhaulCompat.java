@@ -12,6 +12,8 @@ import sfiomn.legendarysurvivaloverhaul.api.temperature.TemperatureUtil;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 
+import java.util.Locale;
+
 public class LegendarySurvivalOverhaulCompat {
 
     public static @Nullable String getAmbientTemperature(LocalPlayer player) {
@@ -33,6 +35,6 @@ public class LegendarySurvivalOverhaulCompat {
             case "HEAT_STROKE" -> "heat_6";
             default -> "heat_2";
         };
-        return new TemperatureOverlay.TemperaturePair(Component.translatableWithFallback("gui.c.temperature.%s".formatted(temperature.toLowerCase()), WordUtils.capitalizeFully(temperature.replace("_", " "))), -1, sprite);
+        return new TemperatureOverlay.TemperaturePair(Component.translatableWithFallback("gui.c.temperature.%s".formatted(temperature.toLowerCase(Locale.ROOT)), WordUtils.capitalizeFully(temperature.replace("_", " "))), -1, sprite);
     }
 }
