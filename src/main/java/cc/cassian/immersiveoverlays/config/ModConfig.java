@@ -37,6 +37,8 @@ public class ModConfig {
     public boolean require_item_in_hand = false;
     public boolean search_containers = true;
     public boolean search_containers_for_containers = true;
+    public boolean allow_blocks = true;
+    public int allow_blocks_distance = 3;
     public boolean render_background = true;
     //? if <1.21 {
     /*public boolean render_endcap = true;
@@ -57,6 +59,9 @@ public class ModConfig {
     public List<String> compass_x_items = List.of("minecraft:compass", "minecraft:recovery_compass", "spelunkery:magnetic_compass", "firmaciv:nav_clock", "firmaciv:firmaciv_compass");
     public List<String> compass_y_items = List.of("spelunkery:depth_gauge","caverns_and_chasms:depth_gauge","additionaladditions:depth_meter","supplementaries:altimeter","depthmeter:depthmeter");
     public List<String> compass_z_items = List.of("firmaciv:sextant");
+    public List<String> compass_x_blocks = List.of();
+    public List<String> compass_y_blocks  = List.of();
+    public List<String> compass_z_blocks = List.of();
 
     // time
     public boolean clock_enable = true;
@@ -70,6 +75,9 @@ public class ModConfig {
     public List<String> clock_items = List.of("minecraft:clock");
     public List<String> clock_weather_items = List.of("caverns_and_chasms:barometer", "firmaciv:barometer");
     public List<String> clock_day_count_items = List.of();
+    public List<String> clock_blocks = List.of();
+    public List<String> clock_weather_blocks = List.of();
+    public List<String> clock_day_count_blocks = List.of();
 
     // temperature
     public boolean temperature_enable = true;
@@ -80,6 +88,7 @@ public class ModConfig {
     public int temperature_vertical_position = 112;
     public boolean temperature_horizontal_position_left = true;
     public List<String> temperature_items = List.of("oreganized:thermometer", "toughasnails:thermometer", "legendarysurvivaloverhaul:thermometer", "cold_sweat:thermometer");
+    public List<String> temperature_blocks = List.of();
 
     // compat
     //? if fabric || forge
@@ -109,9 +118,11 @@ public class ModConfig {
     public int biome_vertical_position = 112;
     public boolean biome_horizontal_position_left = false;
     public List<String> biome_items = List.of("minecraft:map", "minecraft:filled_map", "minecraft:empty_map", "map_atlases:atlas", "map_atlases:end_atlas", "map_atlases:nether_atlas",  "naturescompass:naturescompass", "antiqueatlas:antique_atlas");
+    public List<String> biome_blocks = List.of();
 
     // seasons
     public List<String> season_items = List.of("sereneseasons:calendar", "seasonsextras:season_calendar", "eclipticseasons:calendar");
+    public List<String> season_blocks = List.of();
 
     //speed
     public boolean speed_enable = true;
@@ -119,9 +130,15 @@ public class ModConfig {
     public boolean speed_horizontal_position_left = true;
     public int speed_colour = 0xc7bf81;
     public List<String> speed_items = List.of("oreganized:speedometer", "speedometer:speedometer");
+    public List<String> speed_blocks = List.of();
     public boolean compat_oreganized_speed = true;
+
+    // waila
     public boolean compat_jade = false;
     public List<String> compat_waila_items = List.of("minecraft:spyglass", "create:goggles");
+    public List<String> compat_waila_blocks = List.of();
+
+    // compat
     public boolean compat_map_atlases = false;
     public boolean compat_serene_seasons = true;
     //? if fabric {
@@ -141,9 +158,10 @@ public class ModConfig {
     public int wind_colour = 0x9c7934;
     public boolean compat_breezy = true;
     public List<String> wind_items = List.of("breezy:gust_gauge");
+    public List<String> wind_blocks = List.of();
     public boolean compat_dead_reckoning = true;
 
-	public static void load() {
+    public static void load() {
         if (!Files.exists(configPath())) {
             save();
             return;
