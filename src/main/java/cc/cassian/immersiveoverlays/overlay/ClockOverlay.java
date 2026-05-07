@@ -209,14 +209,12 @@ public class ClockOverlay {
             if (ModCompat.SERENE_SEASONS && ModConfig.get().compat_serene_seasons) {
                 season = SereneSeasonsCompat.getSeason(level, pos);
             }
-            //? if fabric {
             if (ModCompat.FABRIC_SEASONS && ModConfig.get().compat_fabric_seasons) {
                 season = FabricSeasonsCompat.getSeason(level);
             }
             if (ModCompat.SIMPLE_SEASONS && ModConfig.get().compat_simple_seasons) {
                 season = SimpleSeasonsCompat.getSeason(level);
             }
-            //?}
             //? if forge || neoforge {
             /*if (ModCompat.TERRAFIRMACRAFT && ModConfig.get().compat_tfc_seasons) {
                 var tfcCompat = TerrafirmacraftCompat.getSeason(level);

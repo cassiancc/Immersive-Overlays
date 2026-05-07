@@ -54,7 +54,7 @@ public class ImmersiveOverlaysForgeClient {
 
     //Integrate Cloth Config screen (if mod present) with Forge mod menu.
     public static void registerModsPage() {
-        ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> new ConfigScreenHandler.ConfigScreenFactory(ModConfigFactory::createScreen));
+        ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> new ConfigScreenHandler.ConfigScreenFactory((minecraft, parent)-> ModConfigFactory.create(parent)));
     }
 }
 *///?}

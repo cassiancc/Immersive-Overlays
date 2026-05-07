@@ -1,5 +1,6 @@
 package cc.cassian.immersiveoverlays.helpers;
 
+import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
@@ -18,7 +19,7 @@ public class ModHelpers {
 
     // Get the current value of a config field.
     @SuppressWarnings("unchecked")
-    public static <T> T fieldGet(Object instance, Field field) {
+    public static <T> T fieldGet(ModConfig instance, Field field) {
         try {
             return (T) field.get(instance);
         } catch (IllegalAccessException e) {
@@ -27,7 +28,7 @@ public class ModHelpers {
     }
 
     // Set a config field.
-    public static <T> Consumer<T> fieldSetter(Object instance, Field field) {
+    public static <T> Consumer<T> fieldSetter(ModConfig instance, Field field) {
         return t -> {
             try {
                 field.set(instance, t);

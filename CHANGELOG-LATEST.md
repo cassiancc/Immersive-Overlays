@@ -1,6 +1,5 @@
 ### Added
-- Support for [Trinkets (Updated)](https://modrinth.com/mod/trinkets-updated) by Patbox, an updated fork of Trinkets that supports Fabric and NeoForge.
-- Support for Traveler's Backpack on 26.1.
-
-### Fixed
-- NeoForge 26.1.1 support.
+- Each overlay's config now contains a list of blocks that will show overlays when nearby.
+- Support for configuring the mod with Yet Another Config Lib.
+- Support for 26.2 snapshots.
+- Support for Fabric Seasons when using Sinytra Connector.

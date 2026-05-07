@@ -11,11 +11,7 @@ public class ModMenuIntegration implements ModMenuApi {
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        //Display Cloth Config screen if mod present, else error.
-        if (ModCompat.CLOTH_CONFIG) return new ModConfigFactory();
-        else {
-            return parent -> null;
-        }
+        return ModConfigFactory::create;
     }
 }
 //?}

@@ -3,6 +3,7 @@ package cc.cassian.immersiveoverlays.overlay;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ClothConfigFactory;
+import cc.cassian.immersiveoverlays.config.ModConfigFactory;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 //? if >1.21 {
@@ -48,8 +49,8 @@ public class OverlayHelpers {
                     //RenderPipelines.GUI_TEXTURED,
                     ModClient.locate("background"), xPlacementWithOffset, yPlacementWithOffset, uWidth, tooltipSize);
             //?} else {
-            /*
-            int textureOffset = OverlayHelpers.getTextureOffsetFromSize(tooltipSize);
+            
+            /*int textureOffset = OverlayHelpers.getTextureOffsetFromSize(tooltipSize);
             final int endCapXPlacement = OverlayHelpers.getEndCapPlacement(windowWidth, fontWidth, leftAlign);
             final int endCapOffset = 197;
             OverlayHelpers.blit(guiGraphics, xPlacementWithOffset, yPlacementWithOffset, 0, textureOffset, uWidth, tooltipSize, 256, 256);
@@ -463,9 +464,9 @@ public class OverlayHelpers {
         if (ModClient.overlaySettings.isDown()) {
             Minecraft mc = Minecraft.getInstance();
             //? if >26.1 {
-            /*mc.gui.setScreen(ClothConfigFactory.create(mc.gui.screen()));
+            /*mc.gui.setScreen(ModConfigFactory.create(mc.gui.screen()));
             *///?} else {
-            mc.setScreen(ClothConfigFactory.create(mc.screen));
+            mc.setScreen(ModConfigFactory.create(mc.screen));
             //?}
         }
     }

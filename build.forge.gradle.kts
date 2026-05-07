@@ -191,33 +191,28 @@ legacyForge {
 dependencies {
 
     // Cloth Config
-    if (hasProperty("deps.cloth_version")) {
-        modImplementation("me.shedaniel.cloth:cloth-config-forge:${property("deps.cloth_version")}")
-    } else {
-        compileOnly("me.shedaniel.cloth:cloth-config-forge:11.0.136")
-    }
+    modImplementation("me.shedaniel.cloth:cloth-config-forge:${property("deps.cloth_version")}")
+
+    // YACL
+    modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")
 
     // Map Atlases
     modImplementation("curse.maven:map-atlases-forge-519759:${mod.dep("map_atlases")}")
-    if (stonecutter.eval(mcVersion, "=1.19.2")) {
-        modImplementation("maven.modrinth:moonlight:${mod.dep("moonlight")}-forge")
-    } else {
-        modImplementation("maven.modrinth:moonlight:forge_${mod.dep("moonlight")}")
-        modCompileOnly("io.wispforest:accessories-neoforge:${mod.dep("accessories")}")
-    }
+    modImplementation("maven.modrinth:moonlight:forge_${mod.dep("moonlight")}")
+    modCompileOnly("io.wispforest:accessories-neoforge:${mod.dep("accessories")}")
 
     // Xaero's Minimap
-    modImplementation("maven.modrinth:xaeros-minimap:${mod.dep("xaeros")}_Forge_${mod.dep("xaeros_mc")}")
-    modImplementation("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}_Forge_${mod.dep("xaeros_mc")}")
+    modCompileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros_minimap")}")
+    modCompileOnly("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}")
 
     compileOnly("maven.modrinth:terrafirmacraft:tzI7ngJN")
-    if (stonecutter.eval(mcVersion, "=1.20.1")) {
-        modImplementation("maven.modrinth:oreganized:${mod.dep("oreganized")}-forge")
-        modImplementation("maven.modrinth:blueprint:${mod.dep("blueprint")}")
-        modImplementation("curse.maven:legendary-survival-overhaul-840254:6834435")
-        modRuntimeOnly("maven.modrinth:terrafirmacraft:${mod.dep("tfc")}")
-        modRuntimeOnly("maven.modrinth:patchouli:8Qyw08ld")
-    }
+
+    modImplementation("maven.modrinth:oreganized:${mod.dep("oreganized")}-forge")
+    modImplementation("maven.modrinth:blueprint:${mod.dep("blueprint")}")
+    modImplementation("curse.maven:legendary-survival-overhaul-840254:6834435")
+    modRuntimeOnly("maven.modrinth:terrafirmacraft:${mod.dep("tfc")}")
+    modRuntimeOnly("maven.modrinth:patchouli:8Qyw08ld")
+
     modCompileOnly("top.theillusivec4.curios:curios-forge:${mod.dep("curios")}:api")
     modCompileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-forge")
 
@@ -231,22 +226,14 @@ dependencies {
 
     modCompileOnly("curse.maven:ecliptic-seasons-1118306:${mod.dep("ecliptic_seasons")}")
 
-    if (stonecutter.eval(mcVersion, ">1.19.2")) {
-        modCompileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
-    }
-    if (stonecutter.eval(mcVersion, ">1.20")) {
-        modCompileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-forge")
-    }
-    if (stonecutter.eval(mcVersion, ">1.20")) {
-        modCompileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+$minecraft")
-    }
+    modCompileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
+    modCompileOnly("maven.modrinth:serene-seasons:${mod.dep("serene_seasons")}-forge")
+    modCompileOnly("maven.modrinth:accessorify:${mod.dep("accessorify")}+$minecraft")
     modCompileOnly("dev.su5ed.sinytra.fabric-api:fabric-client-tags-api-v1:1.1.3+5d6761b877")
     modCompileOnly("dev.su5ed.sinytra.fabric-api:fabric-convention-tags-v1:1.5.6+fa3d1c0177")
-
-    if (stonecutter.eval(mcVersion, ">1.20")) {
-        modCompileOnly("maven.local:antique-atlas:2.12.0+1.20_mapped_srg_1.20.1")
-        modCompileOnly("dev.su5ed.sinytra:fabric-loader:2.7.11+0.16.5+1.20.1")
-    }
+    modCompileOnly("maven.local:antique-atlas:2.12.0+1.20_mapped_srg_1.20.1")
+    modCompileOnly("dev.su5ed.sinytra:fabric-loader:2.7.11+0.16.5+1.20.1")
+    modCompileOnly("maven.local:fabric-seasons:2.4.2-BETA+1.20_mapped_srg_1.20.1")
 
     modImplementation("maven.modrinth:breezy:${mod.dep("breezy")}")
     modImplementation("software.bernie.geckolib:geckolib-forge-${property("deps.minecraft")}:${property("deps.geckolib")}")

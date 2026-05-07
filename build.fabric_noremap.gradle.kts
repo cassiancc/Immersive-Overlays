@@ -166,6 +166,7 @@ repositories {
             }
         }
     }
+    mavenCentral()
 }
 
 dependencies {
@@ -176,12 +177,15 @@ dependencies {
 
     compileOnly("com.terraformersmc:modmenu:${property("deps.modmenu")}")
 
-    compileOnly("me.shedaniel.cloth:cloth-config-neoforge:19.0.147")
+    // Cloth
+    compileOnly("me.shedaniel.cloth:cloth-config-fabric:${property("deps.cloth")}")
+    // YACL
+    implementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-fabric")
     compileOnly("maven.modrinth:jade:${property("deps.jade")}")
 
     // Xaero's Minimap
-    compileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros")}_NeoForge_${mod.dep("xaeros_mc")}")
-    compileOnly("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}_NeoForge_${mod.dep("xaeros_mc")}")
+    compileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros_minimap")}")
+    compileOnly("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}")
 
     // Cold Sweat
     compileOnly("maven.modrinth:cold-sweat:${mod.dep("cold_sweat")}")

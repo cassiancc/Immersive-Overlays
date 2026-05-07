@@ -75,7 +75,7 @@ public class ModConfig {
     public List<String> clock_items = List.of("minecraft:clock");
     public List<String> clock_weather_items = List.of("caverns_and_chasms:barometer", "firmaciv:barometer");
     public List<String> clock_day_count_items = List.of();
-    public List<String> clock_blocks = List.of();
+    public List<String> clock_blocks = List.of("supplementaries:clock_block");
     public List<String> clock_weather_blocks = List.of();
     public List<String> clock_day_count_blocks = List.of();
 
@@ -122,7 +122,7 @@ public class ModConfig {
 
     // seasons
     public List<String> season_items = List.of("sereneseasons:calendar", "seasonsextras:season_calendar", "eclipticseasons:calendar");
-    public List<String> season_blocks = List.of();
+    public List<String> season_blocks = List.of("seasonsextras:season_calendar");
 
     //speed
     public boolean speed_enable = true;
@@ -141,10 +141,8 @@ public class ModConfig {
     // compat
     public boolean compat_map_atlases = false;
     public boolean compat_serene_seasons = true;
-    //? if fabric {
     public boolean compat_fabric_seasons = true;
     public boolean compat_simple_seasons = true;
-    //?}
     //? if forge || neoforge {
     /*public boolean compat_tfc_seasons = true;
     public boolean compat_ecliptic_seasons = true;
