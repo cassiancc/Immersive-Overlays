@@ -66,5 +66,47 @@ public class SophisticatedBackpacksCompat {
         }
         *///?}
     }
+
+
+    public static void readAnchorFromBackpack(ItemStack stack) {
+        //? if neoforge {
+        /*Optional<IBackpackWrapper> backpackWrapper = BackpackWrapper.fromExistingData(stack);
+        if (backpackWrapper.isPresent()) {
+            var inventory = backpackWrapper.get().getInventoryHandler();
+            //? if >1.21.9 {
+            /^inventory.getTrackedStacks().forEach(slot->OverlayHelpers.readAnchorItemOrContainer(slot.stack()));
+            ^///?} else {
+            for (int i =0; i < inventory.getSlots(); i++) {
+                OverlayHelpers.readAnchorItemOrContainer(inventory.getStackInSlot(i));
+            }
+            //?}
+        }
+    *///?}
+        //? if >1.21 && fabric && <26 {
+        Optional<IBackpackWrapper> backpackWrapper = BackpackWrapper.fromExistingData(stack);
+        if (backpackWrapper.isPresent()) {
+            InventoryHandler inventory = backpackWrapper.get().getInventoryHandler();
+            for (SingleSlotStorage<ItemVariant> slot : inventory.getSlots()) {
+                OverlayHelpers.readAnchorItemOrContainer(slot.getResource().toStack());
+            }
+        }
+        //?} else if fabric && <26 {
+    /*if (stack.getItem() instanceof BackpackItem) {
+        IBackpackWrapper backpackWrapper = new BackpackWrapper(stack);
+        InventoryHandler inventory = backpackWrapper.getInventoryHandler();
+        for (int i =0; i < inventory.getBaseSlotLimit(); i++) {
+            OverlayHelpers.readAnchorItemOrContainer(inventory.getStackInSlot(i));
+        }
+    }
+    *///?} else if forge {
+        /*if (stack.getItem() instanceof BackpackItem) {
+            IBackpackWrapper backpackWrapper = new BackpackWrapper(stack);
+            ItemStackHandler inventory = backpackWrapper.getInventoryHandler();
+            for (int i =0; i < inventory.getSlots(); i++) {
+                OverlayHelpers.readAnchorItemOrContainer(inventory.getStackInSlot(i));
+            }
+        }
+        *///?}
+    }
 }
 

@@ -11,12 +11,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.LodestoneTracker;
 //?} else {
 /*import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.world.item.CompassItem;
 *///?}
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.GlobalPos;
 import net.minecraft.client.gui.GuiGraphics;
 //? if >1.21.6 {
 /*import net.minecraft.client.renderer.RenderPipelines;
@@ -37,6 +40,7 @@ import java.util.stream.Stream;
 
 public class OverlayHelpers {
     public static boolean showWaila = false;
+    private static boolean hasSeenAnchorStack = false;
 
     public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int tooltipSize, boolean leftAlign) {
         if (ModConfig.get().render_background) {
@@ -173,6 +177,10 @@ public class OverlayHelpers {
             WindOverlay.showWind = true;
         if (ModLists.waila_items.contains(item))
             showWaila = true;
+        if (ModLists.compass_anchor_items.contains(item)){
+            readAnchor(itemStack);
+            hasSeenAnchorStack = true;
+        }
     }
 
     public static void checkPlayerForOverlays(Player player) {
@@ -180,6 +188,7 @@ public class OverlayHelpers {
             setOverlays(false);
             if (player == null)
                 return;
+            hasSeenAnchorStack = false;
             isImportantItemOrContainer(player.getOffhandItem());
             if (ModConfig.get().require_item_in_hand) {
                 isImportantItemOrContainer(player.getMainHandItem());
@@ -216,6 +225,9 @@ public class OverlayHelpers {
             }
         } else {
             setOverlays(true);
+            if (player == null || !ModConfig.get().compass_relative_pos)
+                return;
+            checkInventoryForAnchorStack(player.getInventory());
         }
     }
 
@@ -265,6 +277,7 @@ public class OverlayHelpers {
         SpeedOverlay.showSpeed = b;
         WindOverlay.showWind = b;
         showWaila = b;
+        CompassOverlay.anchor = b ? CompassOverlay.anchor : null;
     }
 
     public static void isImportantItemOrContainer(ItemStack stack) {
@@ -361,6 +374,41 @@ public class OverlayHelpers {
             if (isContainer(stack)) {
                 findImportantContainerContents(stack);
             }
+        }
+    }
+
+    private static void checkInventoryForAnchorStack(Inventory inventory){
+        for (ItemStack stack :
+            //? if <1.21.5 {
+                inventory.items
+            //?} else {
+            /*inventory.getNonEquipmentItems()
+             *///?}
+        ) {
+            tryReadAnchor(stack);
+            if (isContainer(stack))
+                findAnchorContainerContents(stack);
+        }
+    }
+
+    private static void findAnchorContainerContents(ItemStack container) {
+        List<ItemStack> list = getContainerContents(container).toList();
+        for (ItemStack itemStack : list) {
+            if (ModConfig.get().search_containers_for_containers) {
+                readAnchorItemOrContainer(itemStack);
+            } else {
+                tryReadAnchor(itemStack);
+            }
+        }
+    }
+
+    public static void readAnchorItemOrContainer(ItemStack stack) {
+        tryReadAnchor(stack);
+        if (isContainer(stack)) {
+            findAnchorContainerContents(stack);
+        }
+        if (ModCompat.SOPHISTICATED_BACKPACKS) {
+            SophisticatedBackpacksCompat.readAnchorFromBackpack(stack);
         }
     }
 
@@ -469,5 +517,47 @@ public class OverlayHelpers {
             mc.setScreen(ModConfigFactory.create(mc.screen));
             //?}
         }
+    }
+
+    public static void tryReadAnchor(ItemStack stack){
+        var item = stack.getItem();
+        if (!ModLists.compass_anchor_items.contains(item))
+            return;
+        readAnchor(stack);
+        hasSeenAnchorStack = true;
+    }
+
+
+    public static void readAnchor(ItemStack stack)
+    {
+        if (!ModConfig.get().compass_relative_pos) return;
+        if (hasSeenAnchorStack)
+            return;
+        Player player = Minecraft.getInstance().player;
+        if (player == null)
+            return;
+        //? if > 1.20.5 {
+        LodestoneTracker tracker = stack.get(DataComponents.LODESTONE_TRACKER);
+        if (tracker == null)
+            return;
+        if (!tracker.tracked())
+            return;
+        if (tracker.target().isEmpty())
+            return;
+        GlobalPos anchor = tracker.target().get();
+        if (player.level().dimension() != anchor.dimension())
+            return;
+        //?} else {
+        /*CompoundTag compoundtag = stack.getTag();
+        if (compoundtag == null) {
+            return;
+        }
+        GlobalPos anchor = CompassItem.getLodestonePosition(compoundtag);
+        if (anchor == null)
+            return;
+        if (player.level.dimension() != anchor.dimension())
+            return;
+        *///?}
+        CompassOverlay.anchor = anchor;
     }
 }
