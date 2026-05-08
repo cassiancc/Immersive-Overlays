@@ -59,7 +59,7 @@ public class ModConfig {
     public List<String> compass_x_items = List.of("minecraft:compass", "minecraft:recovery_compass", "spelunkery:magnetic_compass", "firmaciv:nav_clock", "firmaciv:firmaciv_compass");
     public List<String> compass_y_items = List.of("spelunkery:depth_gauge","caverns_and_chasms:depth_gauge","additionaladditions:depth_meter","supplementaries:altimeter","depthmeter:depthmeter");
     public List<String> compass_z_items = List.of("firmaciv:sextant");
-    public List<String> compass_anchor_items = List.of("minecraft:compass");
+    public List<String> compass_anchor_items = List.of("minecraft:compass", "minecraft:recovery_compass");
     public boolean compass_relative_pos = true;
     public List<String> compass_x_blocks = List.of();
     public List<String> compass_y_blocks  = List.of();
@@ -202,7 +202,6 @@ public class ModConfig {
         if (INSTANCE == null) INSTANCE = new ModConfig();
         return INSTANCE;
     }
-
 
     static Path configPath() {
         return Platform.INSTANCE.configPath().resolve(MOD_ID + ".json");

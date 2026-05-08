@@ -11,7 +11,6 @@ import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -19,42 +18,39 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class ImmersiveOverlaysForgeClient {
 
     public static void init() {
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        FMLJavaModLoadingContext context = FMLJavaModLoadingContext.get();
+        IEventBus eventBus = context.getModEventBus();
         // Load config.
         ModClient.init();
         //Register config screen.
-        registerModsPage();
+        registerModsPage(context);
         MinecraftForge.EVENT_BUS.addListener(ImmersiveOverlaysForgeClient::checkInventoryForOverlays);
         MinecraftForge.EVENT_BUS.addListener(ImmersiveOverlaysForgeClient::renderGameOverlayEvent);
         eventBus.addListener(ImmersiveOverlaysForgeClient::loadComplete);
         eventBus.addListener(ImmersiveOverlaysForgeClient::registerKeybinds);
     }
 
-
     public static void loadComplete(FMLClientSetupEvent event) {
         ModLists.loadLists();
     }
 
-
     public static void renderGameOverlayEvent(CustomizeGuiOverlayEvent.DebugText event) {
         ModClient.registerOverlays(event);
     }
-
 
     public static void registerKeybinds(RegisterKeyMappingsEvent event){
         event.register(ModClient.overlayToggle);
         event.register(ModClient.overlaySettings);
     }
 
-
     public static void checkInventoryForOverlays(TickEvent.ClientTickEvent event){
         OverlayHelpers.checkInventoryForOverlays(Minecraft.getInstance());
         OverlayHelpers.checkKeybind();
     }
 
-    //Integrate Cloth Config screen (if mod present) with Forge mod menu.
-    public static void registerModsPage() {
-        ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> new ConfigScreenHandler.ConfigScreenFactory((minecraft, parent)-> ModConfigFactory.create(parent)));
+    //Integrate Config screen (if mod present) with Forge mod menu.
+    public static void registerModsPage(FMLJavaModLoadingContext context) {
+        context.registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> new ConfigScreenHandler.ConfigScreenFactory((minecraft, parent)-> ModConfigFactory.create(parent)));
     }
 }
 *///?}

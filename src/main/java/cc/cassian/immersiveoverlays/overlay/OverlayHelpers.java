@@ -2,12 +2,11 @@ package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
-import cc.cassian.immersiveoverlays.config.ClothConfigFactory;
 import cc.cassian.immersiveoverlays.config.ModConfigFactory;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.config.ModConfig;
+import net.minecraft.world.item.Items;
 //? if >1.21 {
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.core.component.DataComponents;
@@ -36,6 +35,7 @@ import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class OverlayHelpers {
@@ -363,13 +363,7 @@ public class OverlayHelpers {
     }
 
     public static void checkInventoryForStack(Inventory inventory) {
-        for (ItemStack stack :
-            //? if <1.21.5 {
-             inventory.items
-            //?} else {
-            /*inventory.getNonEquipmentItems()
-            *///?}
-        ) {
+        for (ItemStack stack : items(inventory)) {
             isImportantItem(stack);
             if (isContainer(stack)) {
                 findImportantContainerContents(stack);
@@ -377,14 +371,17 @@ public class OverlayHelpers {
         }
     }
 
+    private static List<ItemStack> items(Inventory inventory) {
+        return
+        //? if <1.21.5 {
+        inventory.items;
+        //?} else {
+        /*inventory.getNonEquipmentItems();
+         *///?}
+    }
+
     private static void checkInventoryForAnchorStack(Inventory inventory){
-        for (ItemStack stack :
-            //? if <1.21.5 {
-                inventory.items
-            //?} else {
-            /*inventory.getNonEquipmentItems()
-             *///?}
-        ) {
+        for (ItemStack stack : items(inventory)) {
             tryReadAnchor(stack);
             if (isContainer(stack))
                 findAnchorContainerContents(stack);
@@ -413,13 +410,7 @@ public class OverlayHelpers {
     }
 
     public static @NotNull ItemStack checkInventoryForStack(Inventory inventory, Item item) {
-        for (ItemStack stack :
-            //? if <1.21.5 {
-             inventory.items
-            //?} else {
-            /*inventory.getNonEquipmentItems()
-            *///?}
-        ) {
+        for (ItemStack stack : items(inventory)) {
             if (stack.is(item)) return stack;
             else if (item != null && stack.is(item))
                 return stack;
@@ -465,7 +456,7 @@ public class OverlayHelpers {
     }
 
     /**
-     * Cannot be removed until 1.20.x gains nine-slicing or support is dropped.
+     * Cannot be removed until 1.20.1 gains nine-slicing or support is dropped.
 	 */
     @Deprecated
     public static void blit(GuiGraphics guiGraphics, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
@@ -519,34 +510,28 @@ public class OverlayHelpers {
         }
     }
 
-    public static void tryReadAnchor(ItemStack stack){
+    public static void tryReadAnchor(ItemStack stack) {
         var item = stack.getItem();
-        if (!ModLists.compass_anchor_items.contains(item))
-            return;
+        if (!ModLists.compass_anchor_items.contains(item)) return;
         readAnchor(stack);
         hasSeenAnchorStack = true;
     }
 
 
-    public static void readAnchor(ItemStack stack)
-    {
-        if (!ModConfig.get().compass_relative_pos) return;
-        if (hasSeenAnchorStack)
-            return;
+    public static void readAnchor(ItemStack stack) {
+        readLodestoneAnchor(stack);
+        readRecoveryCompassAnchor(stack);
+    }
+
+    private static void readLodestoneAnchor(ItemStack stack) {
+        if (!ModConfig.get().compass_relative_pos || hasSeenAnchorStack) return;
         Player player = Minecraft.getInstance().player;
-        if (player == null)
-            return;
+        if (player == null) return;
         //? if > 1.20.5 {
         LodestoneTracker tracker = stack.get(DataComponents.LODESTONE_TRACKER);
-        if (tracker == null)
-            return;
-        if (!tracker.tracked())
-            return;
-        if (tracker.target().isEmpty())
-            return;
+        if (tracker == null || !tracker.tracked() || tracker.target().isEmpty()) return;
         GlobalPos anchor = tracker.target().get();
-        if (player.level().dimension() != anchor.dimension())
-            return;
+        if (player.level().dimension() != anchor.dimension()) return;
         //?} else {
         /*CompoundTag compoundtag = stack.getTag();
         if (compoundtag == null) {
@@ -555,9 +540,18 @@ public class OverlayHelpers {
         GlobalPos anchor = CompassItem.getLodestonePosition(compoundtag);
         if (anchor == null)
             return;
-        if (player.level.dimension() != anchor.dimension())
+        if (player.level().dimension() != anchor.dimension())
             return;
         *///?}
         CompassOverlay.anchor = anchor;
+    }
+
+    private static void readRecoveryCompassAnchor(ItemStack stack) {
+        if (!ModConfig.get().compass_relative_pos) return;
+        var player = Minecraft.getInstance().player;
+        if (player == null || !stack.is(Items.RECOVERY_COMPASS)) return;
+        Optional<GlobalPos> anchor = player.getLastDeathLocation();
+        if (anchor.isEmpty() || player.level().dimension() != anchor.get().dimension()) return;
+        CompassOverlay.anchor = anchor.get();
     }
 }
