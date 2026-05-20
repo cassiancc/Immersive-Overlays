@@ -2,6 +2,7 @@ package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.config.ModConfig;
+import cc.cassian.immersiveoverlays.helpers.ModHelpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
@@ -126,7 +127,7 @@ public class BiomeOverlay {
         var path = biome.getPath();
         var namespace = biome.getNamespace();
         var key = "biome.%s.%s".formatted(namespace, path);
-        if (I18n.exists(key)) {
+        if (ModHelpers.exists(key)) {
             return I18n.get(key);
         } else return WordUtils.capitalize(path.replace("_"," "));
     }

@@ -1,6 +1,7 @@
 package cc.cassian.immersiveoverlays.helpers;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
+import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
@@ -43,8 +44,12 @@ public class ModHelpers {
      */
     public static Component fieldTooltip(Field field) {
         var key = "config.%s.%s.tooltip".formatted(MOD_ID, field.getName());
-        if (I18n.exists("config.%s.%s.tooltip".formatted(MOD_ID, field.getName())))
+        if (exists("config.%s.%s.tooltip".formatted(MOD_ID, field.getName())))
             return Component.translatable(key);
         else return Component.empty();
+    }
+
+    public static boolean exists(String formatted) {
+        return Language.getInstance().has(formatted);
     }
 }
