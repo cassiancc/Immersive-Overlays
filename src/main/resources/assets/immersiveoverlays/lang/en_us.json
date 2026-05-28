@@ -172,6 +172,7 @@
   "gui.immersiveoverlays.coordinates.x": "X: %s",
   "gui.immersiveoverlays.coordinates.y": "Y: %s",
   "gui.immersiveoverlays.coordinates.z": "Z: %s",
+  "gui.immersiveoverlays.temperature_percentage": "%s (%s%%)",
 
 
   "gui.c.season.early_spring": "Early Spring",

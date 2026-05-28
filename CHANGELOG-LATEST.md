@@ -1,2 +1,2 @@
-### Fixed
-- Traveler's Backpack on 26.1 NeoForge
+### Added
+- Support for Thermoo on 26.1+.

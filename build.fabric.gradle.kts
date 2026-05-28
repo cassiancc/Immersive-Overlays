@@ -1,7 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    id("net.fabricmc.fabric-loom-remap")
+    id("dev.kikugie.loom-back-compat")
     id("dev.kikugie.postprocess.jsonlang")
     id("me.modmuss50.mod-publish-plugin")
     id("maven-publish")
@@ -42,9 +42,6 @@ jsonlang {
 
 repositories {
     mavenLocal()
-    maven ( "https://maven.minecraftforge.net" ) {
-        name = "Minecraft Forge"
-    }
     maven {
         name = "shedaniel (Cloth Config)"
         url = uri("https://maven.shedaniel.me/")
@@ -158,33 +155,50 @@ repositories {
             }
         }
     }
+    maven {
+        name = "Nucleoid Maven (Trinkets)"
+        url = uri("https://maven.nucleoid.xyz")
+        content {
+            includeGroupAndSubgroups("eu.pb4")
+            includeGroupAndSubgroups("xyz.nucleoid")
+        }
+    }
+    mavenCentral()
 
 }
 
 dependencies {
     minecraft("com.mojang:minecraft:${property("deps.minecraft")}")
-    mappings(loom.layered {
-        officialMojangMappings()
-        if (hasProperty("deps.parchment"))
-            parchment("org.parchmentmc.data:parchment-${property("deps.parchment")}@zip")
-    })
+    loomx.applyMojangMappings()
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
     implementation("folk.sisby:kaleido-config:${property("deps.kaleido")}")
-    modImplementation("maven.modrinth:mcqoy:k8u6AZVM")
+    if (stonecutter.eval(mcVersion, ">26")) {
+        modImplementation("maven.modrinth:mcqoy:0.4.1+fabric-26.1")
+    } else {
+        modImplementation("maven.modrinth:mcqoy:k8u6AZVM")
+    }
 
     // Cloth Config
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${property("deps.cloth_version")}")
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${property("deps.cloth")}")
     // YACL
     modApi("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")
     // Mod Menu
-    modApi("com.terraformersmc:modmenu:${property("deps.modmenu_version")}")
+    modApi("com.terraformersmc:modmenu:${property("deps.modmenu")}")
     // Map Atlases
-    modCompileOnly("maven.modrinth:map-atlases:${mod.dep("map_atlases")}")
+    if (stonecutter.eval(mcVersion, ">26")) {
+        compileOnly("curse.maven:map-atlases-forge-519759:${mod.dep("map_atlases")}")
+    } else if (stonecutter.eval(mcVersion, "<1.21.4")) {
+        modCompileOnly("maven.modrinth:map-atlases:${mod.dep("map_atlases")}")
+    }
     // Accesories
     if (hasProperty("deps.accessories")) {
         modCompileOnly("io.wispforest:accessories-fabric:${mod.dep("accessories")}")
+    } else {
+        compileOnly("io.wispforest:accessories-neoforge:1.4.3-beta+1.21.10") {
+            isTransitive = false
+        }
     }
     // Tough as Nails
     modCompileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
@@ -214,13 +228,18 @@ dependencies {
     modCompileOnly("maven.modrinth:xaeros-world-map:${mod.dep("xaeros_world_map")}")
 
     // Thermoo
-    modCompileOnly("maven.modrinth:thermoo:${property("deps.thermoo")}")
-    modLocalRuntime("maven.modrinth:thermoo:${property("deps.thermoo")}")
+
+    if (hasProperty("deps.thermoo")) {
+        modCompileOnly("maven.modrinth:thermoo:${mod.dep("thermoo")}")
+        modLocalRuntime("maven.modrinth:thermoo:${mod.dep("thermoo")}")
+    } else {
+        modCompileOnly("maven.modrinth:thermoo:10.0.0-beta.4")
+    }
 
     // Cardinal Components
-    if (hasProperty("deps.cardinal_components")) {
-        modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-entity:${mod.dep("cardinal_components")}")
-        modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-base:${mod.dep("cardinal_components")}")
+    if (hasProperty("deps.cca") && stonecutter.eval(mcVersion, ">1.21")) {
+        modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-entity:${mod.dep("cca")}")
+        modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-base:${mod.dep("cca")}")
     }
     else if (stonecutter.eval(mcVersion, ">1.21")) {
         modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.2")
@@ -231,10 +250,10 @@ dependencies {
     }
 
     // Trinkets
-    if (stonecutter.eval(mcVersion, "<1.21.4")) {
+    if (stonecutter.eval(mcVersion, "=26.1")) {
+        implementation("eu.pb4:trinkets:${mod.dep("trinkets")}")
+    } else if (stonecutter.eval(mcVersion, "<1.21.4")) {
         modCompileOnly("dev.emi:trinkets:${mod.dep("trinkets")}")
-    } else {
-        modCompileOnly("eu.pb4.fork:trinkets:${mod.dep("trinkets")}")
     }
 
     // Antique Atlases
@@ -307,17 +326,22 @@ tasks {
         exclude("**/neoforge.mods.toml", "**/mods.toml")
     }
 
+
     register<Copy>("buildAndCollect") {
         group = "build"
-        from(remapJar.map { it.archiveFile })
+        from(loomx.modJar.map { it.archiveFile })
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
         dependsOn("build")
     }
+
+
 }
 
 java {
     withSourcesJar()
-    val javaCompat = if (stonecutter.eval(stonecutter.current.version, ">=1.21")) {
+    val javaCompat = if (stonecutter.eval(stonecutter.current.version, ">26")) {
+        JavaVersion.VERSION_25
+    } else if (stonecutter.eval(stonecutter.current.version, ">=1.21")) {
         JavaVersion.VERSION_21
     } else {
         JavaVersion.VERSION_17
@@ -334,8 +358,8 @@ val additionalVersions: List<String> = additionalVersionsStr
     ?: emptyList()
 
 publishMods {
-    file = tasks.remapJar.map { it.archiveFile.get() }
-    additionalFiles.from(tasks.remapSourcesJar.map { it.archiveFile.get() })
+    file = loomx.modJar.map { it.archiveFile.get() }
+    additionalFiles.from(loomx.modSourcesJar.map { it.archiveFile.get() })
 
     // one of BETA, ALPHA, STABLE
     type = STABLE

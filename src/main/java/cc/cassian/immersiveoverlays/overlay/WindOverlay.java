@@ -56,7 +56,7 @@ public class WindOverlay {
     }
 
     public static WindPair getWind(LocalPlayer player) {
-        Component direction = Component.translatable("UNSET");
+        Component direction = Component.literal("No Wind");
         String sprite = "unknown";
         //? forge {
         /*if (ModCompat.BREEZY && ModConfig.get().compat_breezy) {

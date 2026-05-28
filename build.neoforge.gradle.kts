@@ -152,7 +152,11 @@ repositories {
 }
 
 neoForge {
-    version = property("deps.neoforge") as String
+    enable {
+        version = property("deps.neoforge") as String
+        // Disable recompilation for performance reasons
+        isDisableRecompilation = true
+    }
     validateAccessTransformers = true
 
     if (hasProperty("deps.parchment")) parchment {
