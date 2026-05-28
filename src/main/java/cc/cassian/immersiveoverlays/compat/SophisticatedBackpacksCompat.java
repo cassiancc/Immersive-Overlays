@@ -3,106 +3,110 @@ package cc.cassian.immersiveoverlays.compat;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 
 //? if neoforge {
-/*import net.neoforged.neoforge.items.ItemStackHandler;
-import net.p3pp3rf1y.sophisticatedbackpacks.backpack.wrapper.BackpackWrapper;
-import net.p3pp3rf1y.sophisticatedbackpacks.backpack.wrapper.IBackpackWrapper;
-*///?} else if fabric && <26 {
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleSlotStorage;
-import net.p3pp3rf1y.sophisticatedbackpacks.backpack.BackpackItem;
-import net.p3pp3rf1y.sophisticatedbackpacks.backpack.wrapper.BackpackWrapper;
-import net.p3pp3rf1y.sophisticatedbackpacks.backpack.wrapper.IBackpackWrapper;
+/*import net.p3pp3rf1y.sophisticatedbackpacks.backpack.wrapper.BackpackWrapper;
 import net.p3pp3rf1y.sophisticatedcore.inventory.InventoryHandler;
-//?} else if forge {
-/*import net.minecraftforge.items.ItemStackHandler;
+import net.p3pp3rf1y.sophisticatedcore.inventory.ItemStackKey;
+*///?} else if fabric {
 import net.p3pp3rf1y.sophisticatedbackpacks.backpack.BackpackItem;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleSlotStorage;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.p3pp3rf1y.sophisticatedbackpacks.backpack.wrapper.BackpackWrapper;
-import net.p3pp3rf1y.sophisticatedbackpacks.backpack.wrapper.IBackpackWrapper;
+//?} else if forge {
+/*import net.p3pp3rf1y.sophisticatedbackpacks.backpack.BackpackItem;
+import net.p3pp3rf1y.sophisticatedbackpacks.backpack.wrapper.BackpackWrapper;
 *///?}
-import net.minecraft.world.entity.player.Player;
+import net.p3pp3rf1y.sophisticatedcore.inventory.InventoryHandler;
+
 import net.minecraft.world.item.ItemStack;
-import java.util.Optional;
+import java.util.List;
 import java.util.Set;
 
 public class SophisticatedBackpacksCompat {
 
     public static void checkBackpackContents(ItemStack stack) {
-    //? if neoforge {
-        /*Optional<IBackpackWrapper> backpackWrapper = BackpackWrapper.fromExistingData(stack);
-        if (backpackWrapper.isPresent()) {
-            var inventory = backpackWrapper.get().getInventoryHandler();
-            //? if >1.21.9 {
-            /^inventory.getTrackedStacks().forEach(slot->OverlayHelpers.isImportantItemOrContainer(slot.stack()));
-            ^///?} else {
-            for (int i =0; i < inventory.getSlots(); i++) {
-                OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
+        //? if >1.21 {
+        BackpackWrapper.fromExistingData(stack).ifPresent(backpackWrapper -> {
+            var inventory = backpackWrapper.getInventoryHandler();
+            //? fabric || (neoforge && >1.21.9) {
+            for (var slot : getSlots(inventory)) {
+                OverlayHelpers.isImportantItemOrContainer(getStack(slot));
             }
-            //?}
-        }
-    *///?}
-    //? if >1.21 && fabric && <26 {
-    Optional<IBackpackWrapper> backpackWrapper = BackpackWrapper.fromExistingData(stack);
-    if (backpackWrapper.isPresent()) {
-        InventoryHandler inventory = backpackWrapper.get().getInventoryHandler();
-        for (SingleSlotStorage<ItemVariant> slot : inventory.getSlots()) {
-            OverlayHelpers.isImportantItemOrContainer(slot.getResource().toStack());
-        }
-    }
-    //?} else if fabric && <26 {
-    /*if (stack.getItem() instanceof BackpackItem) {
-        IBackpackWrapper backpackWrapper = new BackpackWrapper(stack);
-        InventoryHandler inventory = backpackWrapper.getInventoryHandler();
-        for (int i =0; i < inventory.getBaseSlotLimit(); i++) {
-            OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
-        }
-    }
-    *///?} else if forge {
+            //?} else {
+            /*for (int i = 0; i < inventory.getSlots(); i++) {
+                OverlayHelpers.isImportantItemOrContainer(getStack(inventory, i));
+            }
+            *///?}
+        });
+        //?} else if =1.20.1 {
         /*if (stack.getItem() instanceof BackpackItem) {
-            IBackpackWrapper backpackWrapper = new BackpackWrapper(stack);
-            ItemStackHandler inventory = backpackWrapper.getInventoryHandler();
-            for (int i =0; i < inventory.getSlots(); i++) {
+            var backpackWrapper = new BackpackWrapper(stack);
+            var inventory = backpackWrapper.getInventoryHandler();
+            for (int i = 0; i < getSlots(inventory); i++) {
                 OverlayHelpers.isImportantItemOrContainer(inventory.getStackInSlot(i));
             }
         }
         *///?}
     }
 
+    //? fabric && >1.21 && <26 {
+    private static ItemStack getStack(SingleSlotStorage<ItemVariant> slot) {
+        return slot.getResource().toStack();
+    }
+    private static List<SingleSlotStorage<ItemVariant>> getSlots(InventoryHandler inventory) {
+        return inventory.getSlots();
+    }
+    //?} else if neoforge && >1.21.9 {
+    /*private static ItemStack getStack(ItemStackKey slot) {
+        return slot.stack();
+    }
+    private static Set<ItemStackKey> getSlots(InventoryHandler inventory) {
+        return inventory.getTrackedStacks();
+    }
+    *///?} else if neoforge {
+    /*private static int getSlots(InventoryHandler inventory) {
+        return inventory.getSlots();
+    }
+    private static ItemStack getStack(InventoryHandler inventory, int i) {
+        return inventory.getStackInSlot(i);
+    }
+    *///?} else if fabric && =1.20.1 {
+    /*private static int getSlots(InventoryHandler inventory) {
+        return inventory.getBaseSlotLimit();
+    }
+    *///?} else if forge && =1.20.1 {
+    /*private static int getSlots(InventoryHandler inventory) {
+        return inventory.getSlots();
+    }
+    *///?} else {
+    /*private static ItemStack getStack(Object slot) {
+        return ItemStack.EMPTY;
+    }
+    private static List<Object> getSlots(InventoryHandler inventory) {
+        return List.of();
+    }
+    *///?}
+
+
 
     public static void readAnchorFromBackpack(ItemStack stack) {
-        //? if neoforge {
-        /*Optional<IBackpackWrapper> backpackWrapper = BackpackWrapper.fromExistingData(stack);
-        if (backpackWrapper.isPresent()) {
-            var inventory = backpackWrapper.get().getInventoryHandler();
-            //? if >1.21.9 {
-            /^inventory.getTrackedStacks().forEach(slot->OverlayHelpers.readAnchorItemOrContainer(slot.stack()));
-            ^///?} else {
-            for (int i =0; i < inventory.getSlots(); i++) {
-                OverlayHelpers.readAnchorItemOrContainer(inventory.getStackInSlot(i));
+        //? if >1.21 {
+        BackpackWrapper.fromExistingData(stack).ifPresent(backpackWrapper -> {
+            var inventory = backpackWrapper.getInventoryHandler();
+            //? fabric || (neoforge && >1.21.9) {
+            for (var slot : getSlots(inventory)) {
+                OverlayHelpers.readAnchorItemOrContainer(getStack(slot));
             }
-            //?}
-        }
-    *///?}
-        //? if >1.21 && fabric && <26 {
-        Optional<IBackpackWrapper> backpackWrapper = BackpackWrapper.fromExistingData(stack);
-        if (backpackWrapper.isPresent()) {
-            InventoryHandler inventory = backpackWrapper.get().getInventoryHandler();
-            for (SingleSlotStorage<ItemVariant> slot : inventory.getSlots()) {
-                OverlayHelpers.readAnchorItemOrContainer(slot.getResource().toStack());
+            //?} else {
+            /*for (int i = 0; i < inventory.getSlots(); i++) {
+                OverlayHelpers.readAnchorItemOrContainer(getStack(inventory, i));
             }
-        }
-        //?} else if fabric && <26 {
-    /*if (stack.getItem() instanceof BackpackItem) {
-        IBackpackWrapper backpackWrapper = new BackpackWrapper(stack);
-        InventoryHandler inventory = backpackWrapper.getInventoryHandler();
-        for (int i =0; i < inventory.getBaseSlotLimit(); i++) {
-            OverlayHelpers.readAnchorItemOrContainer(inventory.getStackInSlot(i));
-        }
-    }
-    *///?} else if forge {
+            *///?}
+        });
+        //?} else {
         /*if (stack.getItem() instanceof BackpackItem) {
-            IBackpackWrapper backpackWrapper = new BackpackWrapper(stack);
-            ItemStackHandler inventory = backpackWrapper.getInventoryHandler();
-            for (int i =0; i < inventory.getSlots(); i++) {
+            var backpackWrapper = new BackpackWrapper(stack);
+            var inventory = backpackWrapper.getInventoryHandler();
+            for (int i = 0; i < getSlots(inventory); i++) {
                 OverlayHelpers.readAnchorItemOrContainer(inventory.getStackInSlot(i));
             }
         }

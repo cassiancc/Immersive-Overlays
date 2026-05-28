@@ -215,8 +215,14 @@ dependencies {
     modCompileOnly("maven.modrinth:simple-seasons:${mod.dep("simple_seasons")}")
 
     // Sophisticated Backpacks
-    modCompileOnly("maven.modrinth:9jxwkYQL:${mod.dep("sophisticated_core")}")
-    modCompileOnly("maven.modrinth:ouNrBQtq:${mod.dep("sophisticated_backpacks")}")
+    if (stonecutter.eval(mcVersion, ">26")) {
+        compileOnly("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
+        compileOnly("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
+    } else if (stonecutter.eval(mcVersion, "<1.21.4")) {
+        modCompileOnly("maven.modrinth:9jxwkYQL:${mod.dep("sophisticated_core")}")
+        modCompileOnly("maven.modrinth:ouNrBQtq:${mod.dep("sophisticated_backpacks")}")
+    }
+
     modCompileOnly("io.github.fabricators_of_create.Porting-Lib:transfer:2.3.9+1.20.1")
 
     // Jade
