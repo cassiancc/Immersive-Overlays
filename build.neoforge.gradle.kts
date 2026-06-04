@@ -353,6 +353,8 @@ publishMods {
             minecraftVersions.add(property("deps.minecraft") as String)
         }
         minecraftVersions.addAll(additionalVersions)
+        client = true
+        server = false
     }
 }
 

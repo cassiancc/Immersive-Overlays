@@ -28,7 +28,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import static cc.cassian.immersiveoverlays.ModClient.MOD_ID;
 
 @Mod(value = MOD_ID, dist = Dist.CLIENT)
-@EventBusSubscriber(modid = MOD_ID)
+@EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
 public class ImmersiveOverlaysNeoForgeClient {
 
     public ImmersiveOverlaysNeoForgeClient(IEventBus eventBus, ModContainer modContainer) {
@@ -65,7 +65,8 @@ public class ImmersiveOverlaysNeoForgeClient {
 
     //Integrate Cloth Config screen (if mod present) with NeoForge mod menu.
     public static void registerModsPage() {
-        if (ModCompat.CLOTH_CONFIG || ModCompat.YET_ANOTHER_CONFIG_LIB) ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, ()-> (container, parent) -> ModConfigFactory.create(parent));
+        if (ModCompat.CLOTH_CONFIG || ModCompat.YET_ANOTHER_CONFIG_LIB)
+            ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, ()-> (container, parent) -> ModConfigFactory.create(parent));
     }
 }
 
