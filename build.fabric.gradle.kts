@@ -256,7 +256,7 @@ dependencies {
     }
 
     // Trinkets
-    if (stonecutter.eval(mcVersion, "=26.1")) {
+    if (stonecutter.eval(mcVersion, ">26")) {
         implementation("eu.pb4:trinkets:${mod.dep("trinkets")}")
     } else if (stonecutter.eval(mcVersion, "<1.21.4")) {
         modCompileOnly("dev.emi:trinkets:${mod.dep("trinkets")}")
