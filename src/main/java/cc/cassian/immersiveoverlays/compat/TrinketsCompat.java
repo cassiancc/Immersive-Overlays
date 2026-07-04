@@ -4,6 +4,7 @@ import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 //? if fabric && <26 {
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketsApi;
+import net.minecraft.world.item.ItemStack;
 //?}
 //? if >26 {
 /*import eu.pb4.trinkets.api.TrinketSlotAccess;
@@ -16,17 +17,15 @@ import net.minecraft.world.entity.player.Player;
 
 public class TrinketsCompat {
     public static void checkForImportantAccessories(Player player) {
-        //? if fabric && <26 {
+        //? if >26 {
+        /*TrinketsApi.getAttachment(player).allEquipped(false).stream().map(TrinketSlotAccess::get).forEach(OverlayHelpers::isImportantItemOrContainer);
+        *///?} else if fabric {
         var capability = TrinketsApi.getTrinketComponent(player);
         if (capability.isPresent()) {
-            for (Tuple<SlotReference, ItemStack> slotReferenceItemStackTuple : capability.get().getAllEquipped()) {
-                OverlayHelpers.isImportantItemOrContainer(slotReferenceItemStackTuple.getB());
+            for (Tuple<SlotReference, ItemStack> tuple : capability.get().getAllEquipped()) {
+                OverlayHelpers.isImportantItemOrContainer(tuple.getB());
             }
         }
-        //?} else if =26.1 {
-        /*TrinketsApi.getAttachment(player).getAllEquipped().stream().map(Tuple::getB).forEach(OverlayHelpers::isImportantItemOrContainer);
-        *///?} else {
-        /*TrinketsApi.getAttachment(player).allEquipped(false).stream().map(TrinketSlotAccess::get).forEach(OverlayHelpers::isImportantItemOrContainer);
-        *///?}
+        //?}
     }
 }

@@ -191,10 +191,10 @@ legacyForge {
 dependencies {
 
     // Cloth Config
-    modImplementation("me.shedaniel.cloth:cloth-config-forge:${property("deps.cloth_version")}")
+    modImplementation("me.shedaniel.cloth:cloth-config-forge:${mod.dep("cloth_version")}")
 
     // YACL
-    modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")
+    modImplementation("dev.isxander:yet-another-config-lib:${mod.dep("yacl")}")
 
     // Map Atlases
     modImplementation("curse.maven:map-atlases-forge-519759:${mod.dep("map_atlases")}")
@@ -213,6 +213,7 @@ dependencies {
     modRuntimeOnly("maven.modrinth:terrafirmacraft:${mod.dep("tfc")}")
     modRuntimeOnly("maven.modrinth:patchouli:8Qyw08ld")
 
+    modImplementation("io.github.swackyy:ohmega-forge:${mod.dep("ohmega")}-mc${property("deps.minecraft")}")
     modCompileOnly("top.theillusivec4.curios:curios-forge:${mod.dep("curios")}:api")
     modCompileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-forge")
 
@@ -236,7 +237,7 @@ dependencies {
     modCompileOnly("maven.local:fabric-seasons:2.4.2-BETA+1.20_mapped_srg_1.20.1")
 
     modImplementation("maven.modrinth:breezy:${mod.dep("breezy")}")
-    modImplementation("software.bernie.geckolib:geckolib-forge-${property("deps.minecraft")}:${property("deps.geckolib")}")
+    modImplementation("software.bernie.geckolib:geckolib-forge-${property("deps.minecraft")}:${mod.dep("geckolib")}")
     implementation("com.eliotlash.mclib:mclib:20")
 
     modImplementation("maven.modrinth:player-locator-plus-reforged:1.0.1")

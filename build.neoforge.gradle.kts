@@ -241,7 +241,8 @@ dependencies {
 
     compileOnly("io.wispforest:accessories-neoforge:${mod.dep("accessories")}")
     compileOnly("top.theillusivec4.curios:curios-neoforge:${mod.dep("curios")}:api")
-    if (stonecutter.eval(mcVersion, "=26.1")) {
+    compileOnly("io.github.swackyy:ohmega-neoforge:${property("deps.ohmega")}-mc${property("deps.minecraft")}")
+    if (stonecutter.eval(mcVersion, ">26")) {
         implementation("eu.pb4:trinkets:${mod.dep("trinkets")}")
     }
     compileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-neoforge")

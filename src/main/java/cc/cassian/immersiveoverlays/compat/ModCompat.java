@@ -9,6 +9,11 @@ public class ModCompat {
      */
     public static final boolean ACCESSORIES = Platform.INSTANCE.isLoaded("accessories");
     /**
+     * Breezy - used for Wind Direction Overlays.
+     * Forge
+     */
+    public static boolean BREEZY = Platform.INSTANCE.isLoaded("breezy");
+    /**
      * Cloth Config - used for mod configuration.
      * Multiplatform
      */
@@ -48,6 +53,11 @@ public class ModCompat {
      * Multiplatform
      */
     public static final boolean MAP_ATLASES = Platform.INSTANCE.isLoaded("map_atlases");
+    /**
+     * Ohmega - used for detecting overlays in accessory slots.
+     * Multiplatform
+     */
+    public static boolean OHMEGA = Platform.INSTANCE.isLoaded("ohmega");
     /**
      * Oreganized - used for Temperature and Speed Overlays.
      * Forge/NeoForge
@@ -101,12 +111,6 @@ public class ModCompat {
      * Multiplatform
      */
     public static final boolean YET_ANOTHER_CONFIG_LIB = Platform.INSTANCE.isLoaded("yet_another_config_lib_v3");
-
-    /**
-     * Breezy - used for Wind Direction Overlays.
-     * Forge
-     */
-    public static boolean BREEZY = Platform.INSTANCE.isLoaded("breezy");
 
     /**
 	 * Backpacked

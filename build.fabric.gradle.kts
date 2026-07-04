@@ -181,11 +181,11 @@ dependencies {
     }
 
     // Cloth Config
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${property("deps.cloth")}")
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${mod.dep("cloth")}")
     // YACL
-    modApi("dev.isxander:yet-another-config-lib:${property("deps.yacl")}")
+    modApi("dev.isxander:yet-another-config-lib:${mod.dep("yacl")}")
     // Mod Menu
-    modApi("com.terraformersmc:modmenu:${property("deps.modmenu")}")
+    modApi("com.terraformersmc:modmenu:${mod.dep("modmenu")}")
     // Map Atlases
     if (stonecutter.eval(mcVersion, ">26")) {
         compileOnly("curse.maven:map-atlases-forge-519759:${mod.dep("map_atlases")}")
@@ -226,8 +226,8 @@ dependencies {
     modCompileOnly("io.github.fabricators_of_create.Porting-Lib:transfer:2.3.9+1.20.1")
 
     // Jade
-    modCompileOnly("maven.modrinth:jade:${property("deps.jade")}")
-    modLocalRuntime("maven.modrinth:jade:${property("deps.jade")}")
+    modCompileOnly("maven.modrinth:jade:${mod.dep("jade")}")
+    modLocalRuntime("maven.modrinth:jade:${mod.dep("jade")}")
 
     // Xaero's Minimap
     modCompileOnly("maven.modrinth:xaeros-minimap:${mod.dep("xaeros_minimap")}")
@@ -250,7 +250,7 @@ dependencies {
     else if (stonecutter.eval(mcVersion, ">1.21")) {
         modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.2")
         modCompileOnly("org.ladysnake.cardinal-components-api:cardinal-components-base:6.1.2")
-    } else {
+    } else if (stonecutter.eval(mcVersion, "<1.21")) {
         modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.3")
         modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.3")
     }
@@ -261,6 +261,10 @@ dependencies {
     } else if (stonecutter.eval(mcVersion, "<1.21.4")) {
         modCompileOnly("dev.emi:trinkets:${mod.dep("trinkets")}")
     }
+
+    // Ohmega
+    modImplementation("io.github.swackyy:ohmega-fabric:${mod.dep("ohmega")}-mc${property("deps.minecraft")}")
+    modApi("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${mod.dep("forge_config_api_port")}")
 
     // Antique Atlases
     if (hasProperty("deps.antique_atlas")) {
@@ -320,12 +324,14 @@ stonecutter {
     }
 }
 
+/*
 fabricApi {
     configureDataGeneration() {
         outputDirectory = file("$rootDir/src/main/generated")
         client = true
     }
 }
+*/
 
 tasks {
     processResources {
