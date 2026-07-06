@@ -1,33 +1,18 @@
 package cc.cassian.immersiveoverlays.compat;
 
-import cc.cassian.immersiveoverlays.Platform;
+import cc.cassian.mru.Platform;
 
 public class ModCompat {
-    /**
-     * Accessories - used for detecting overlays in accessory slots.
-     * Multiplatform
-     */
-    public static final boolean ACCESSORIES = Platform.INSTANCE.isLoaded("accessories");
     /**
      * Breezy - used for Wind Direction Overlays.
      * Forge
      */
     public static boolean BREEZY = Platform.INSTANCE.isLoaded("breezy");
     /**
-     * Cloth Config - used for mod configuration.
-     * Multiplatform
-     */
-    public static final boolean CLOTH_CONFIG = Platform.INSTANCE.isLoaded("cloth-config") || Platform.INSTANCE.isLoaded("cloth_config");
-    /**
      * Cold Sweat - used for Temperature Overlays.
      * Forge/NeoForge
      */
     public static final boolean COLD_SWEAT = Platform.INSTANCE.isLoaded("cold_sweat");
-    /**
-     * Curios - used for detecting overlays in accessory slots.
-     * Forge/NeoForge
-     */
-    public static final boolean CURIOS = Platform.INSTANCE.isLoaded("curios");
     /**
      * Ecliptic Seasons - used for Season Overlays.
      * Forge/NeoForge
@@ -54,11 +39,6 @@ public class ModCompat {
      */
     public static final boolean MAP_ATLASES = Platform.INSTANCE.isLoaded("map_atlases");
     /**
-     * Ohmega - used for detecting overlays in accessory slots.
-     * Multiplatform
-     */
-    public static boolean OHMEGA = Platform.INSTANCE.isLoaded("ohmega");
-    /**
      * Oreganized - used for Temperature and Speed Overlays.
      * Forge/NeoForge
      */
@@ -73,10 +53,6 @@ public class ModCompat {
      */
     public static final boolean SIMPLE_SEASONS = Platform.INSTANCE.isLoaded("simple-seasons");
     /**
-     * Sophisticated Backpacks - used for detecting overlays in backpack slots.
-     */
-    public static final boolean SOPHISTICATED_BACKPACKS = Platform.INSTANCE.isLoaded("sophisticatedbackpacks");
-    /**
      * TerraFirmaCraft - used for Season Overlays.
      * Forge/NeoForge
      */
@@ -90,31 +66,4 @@ public class ModCompat {
      * Tough as Nails - used for Temperature Overlays.
      */
     public static final boolean TOUGH_AS_NAILS = Platform.INSTANCE.isLoaded("toughasnails");
-    /**
-     * Traveler's Backpacks - used for detecting overlays in backpack slots.
-     */
-    public static final boolean TRAVELERS_BACKPACK = Platform.INSTANCE.isLoaded("travelersbackpack");
-    /**
-     * Trinkets - used for detecting overlays in accessory slots.
-     * Fabric
-     */
-    public static final boolean TRINKETS = Platform.INSTANCE.isLoaded("trinkets");
-
-    /**
-     * Trinkets (Updated) - used for detecting overlays in accessory slots.
-     * Multiplatform
-     */
-    public static final boolean TRINKETS_UPDATED = Platform.INSTANCE.isLoaded("trinkets_updated");
-
-    /**
-     * Yet Another Config Lib - ingame configuration.
-     * Multiplatform
-     */
-    public static final boolean YET_ANOTHER_CONFIG_LIB = Platform.INSTANCE.isLoaded("yet_another_config_lib_v3");
-
-    /**
-	 * Backpacked
-     * Multiplatform
-	 */
-	public static boolean BACKPACKED = Platform.INSTANCE.isLoaded("backpacked");
 }

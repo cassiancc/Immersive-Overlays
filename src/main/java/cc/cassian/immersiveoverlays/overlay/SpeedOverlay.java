@@ -1,5 +1,6 @@
 package cc.cassian.immersiveoverlays.overlay;
 
+import cc.cassian.mru.client.util.HudUtils;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.compat.OreganizedCompat;
@@ -46,24 +47,24 @@ public class SpeedOverlay {
         // render background
         OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().speed_horizontal_position_left);
         // render text
-        OverlayHelpers.drawString(guiGraphics, mc.font, speedText, xPlacement-xOffset+10, textYPlacement, ModConfig.get().speed_colour);
+        HudUtils.drawString(guiGraphics, mc.font, speedText, xPlacement-xOffset+10, textYPlacement, ModConfig.get().speed_colour);
         var spriteX = xPlacement-4;
         var spriteY = textYPlacement+10;
         var fast = ModClient.locate("textures/gui/sprites/fast.png");
         var slow = ModClient.locate("textures/gui/sprites/slow.png");
         ResourceLocation sprite;
         if (speed>=0.05) sprite = fast; else sprite = slow;
-        OverlayHelpers.blitSprite(guiGraphics, sprite, spriteX, spriteY, 7);
+        HudUtils.blitSprite(guiGraphics, sprite, spriteX, spriteY, 7);
         if (speed>=0.08) sprite = fast; else sprite = slow;
-        OverlayHelpers.blitSprite(guiGraphics, sprite, spriteX+7, spriteY, 7);
+        HudUtils.blitSprite(guiGraphics, sprite, spriteX+7, spriteY, 7);
         if (speed>=0.14) sprite = fast; else sprite = slow;
-        OverlayHelpers.blitSprite(guiGraphics, sprite, spriteX+14, spriteY, 7);
+        HudUtils.blitSprite(guiGraphics, sprite, spriteX+14, spriteY, 7);
         if (speed>=0.28) sprite = fast; else sprite = slow;
-        OverlayHelpers.blitSprite(guiGraphics, sprite, spriteX+21, spriteY, 7);
+        HudUtils.blitSprite(guiGraphics, sprite, spriteX+21, spriteY, 7);
         if (speed>0.56) sprite = fast; else sprite = slow;
-        OverlayHelpers.blitSprite(guiGraphics, sprite, spriteX+28, spriteY, 7);
+        HudUtils.blitSprite(guiGraphics, sprite, spriteX+28, spriteY, 7);
         if (speed>1) sprite = fast; else sprite = slow;
-        OverlayHelpers.blitSprite(guiGraphics, sprite, spriteX+35, spriteY, 7);
+        HudUtils.blitSprite(guiGraphics, sprite, spriteX+35, spriteY, 7);
     }
 
     public static double getSpeed(LocalPlayer player) {

@@ -2,6 +2,7 @@ package cc.cassian.immersiveoverlays.mixin;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
+import cc.cassian.mru.util.ItemContainerUtils;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -38,7 +39,7 @@ public class IMapCollectionImplMixin {
     private static void mixin(ItemStack stack, Level level, CallbackInfoReturnable<MapCollection> cir) {
         if (ModConfig.get().compat_map_atlases) {
             if (OverlayHelpers.isContainer(stack)) {
-                List<ItemStack> contents = OverlayHelpers.getContainerContents(stack).toList();
+                List<ItemStack> contents = ItemContainerUtils.getContainerContents(stack).toList();
                 for (ItemStack content : contents) {
                     if (content.is(MapAtlasesMod.MAP_ATLAS.get())) {
                         cir.setReturnValue(MapAtlasItem.getMaps(content, level));
@@ -52,7 +53,7 @@ public class IMapCollectionImplMixin {
     private static void mixin(ItemStack stack, Level level, CallbackInfoReturnable<IMapCollection> cir) {
         if (ModConfig.get().compat_map_atlases) {
             if (OverlayHelpers.isContainer(stack)) {
-                List<ItemStack> contents = OverlayHelpers.getContainerContents(stack).toList();
+                List<ItemStack> contents = ItemContainerUtils.getContainerContents(stack).toList();
                 for (ItemStack content : contents) {
                     if (content.is(MapAtlasesMod.MAP_ATLAS.get())) {
                         Optional<IMapCollectionImpl> resolve = content.getCapability(CapStuff.ATLAS_CAP_TOKEN, null).resolve();
@@ -82,7 +83,7 @@ public class IMapCollectionImplMixin {
         if (ModConfig.get().compat_map_atlases) {
             if (provider instanceof ItemStack stack) {
                 if (OverlayHelpers.isContainer(stack)) {
-                    List<ItemStack> contents = OverlayHelpers.getContainerContents(stack).toList();
+                    List<ItemStack> contents = ItemContainerUtils.getContainerContents(stack).toList();
                     for (ItemStack content : contents) {
                         if (content.is(MapAtlasesMod.MAP_ATLAS.get())) {
                             return content;

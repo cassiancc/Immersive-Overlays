@@ -173,6 +173,9 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
+    modImplementation("cc.cassian.mru:mru-fabric:${mod.dep("mru")}+${property("deps.minecraft")}")
+    include("cc.cassian.mru:mru-neoforge:${mod.dep("mru")}+${property("deps.minecraft")}")
+
     implementation("folk.sisby:kaleido-config:${property("deps.kaleido")}")
     if (stonecutter.eval(mcVersion, ">26")) {
         modImplementation("maven.modrinth:mcqoy:0.4.1+fabric-26.1")
@@ -192,13 +195,9 @@ dependencies {
     } else if (stonecutter.eval(mcVersion, "<1.21.4")) {
         modCompileOnly("maven.modrinth:map-atlases:${mod.dep("map_atlases")}")
     }
-    // Accesories
+    // Accessories
     if (hasProperty("deps.accessories")) {
         modCompileOnly("io.wispforest:accessories-fabric:${mod.dep("accessories")}")
-    } else {
-        compileOnly("io.wispforest:accessories-neoforge:1.4.3-beta+1.21.10") {
-            isTransitive = false
-        }
     }
     // Tough as Nails
     modCompileOnly("maven.modrinth:tough-as-nails:${mod.dep("tough_as_nails")}")
@@ -215,10 +214,7 @@ dependencies {
     modCompileOnly("maven.modrinth:simple-seasons:${mod.dep("simple_seasons")}")
 
     // Sophisticated Backpacks
-    if (stonecutter.eval(mcVersion, ">26")) {
-        compileOnly("maven.modrinth:sophisticated-core:${mod.dep("sophisticated_core")}")
-        compileOnly("maven.modrinth:sophisticated-backpacks:${mod.dep("sophisticated_backpacks")}")
-    } else if (stonecutter.eval(mcVersion, "<1.21.4")) {
+    if (stonecutter.eval(mcVersion, "<1.21.4")) {
         modCompileOnly("maven.modrinth:9jxwkYQL:${mod.dep("sophisticated_core")}")
         modCompileOnly("maven.modrinth:ouNrBQtq:${mod.dep("sophisticated_backpacks")}")
     }
@@ -262,8 +258,6 @@ dependencies {
         modCompileOnly("dev.emi:trinkets:${mod.dep("trinkets")}")
     }
 
-    // Ohmega
-    modImplementation("io.github.swackyy:ohmega-fabric:${mod.dep("ohmega")}-mc${property("deps.minecraft")}")
     modApi("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${mod.dep("forge_config_api_port")}")
 
     // Antique Atlases

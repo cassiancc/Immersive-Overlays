@@ -4,11 +4,11 @@ package cc.cassian.immersiveoverlays.neoforge;
 
 /*import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.Platform;
-import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.config.ModConfigFactory;
 import cc.cassian.immersiveoverlays.overlay.*;
+import cc.cassian.mru.compat.ModCompat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
@@ -61,7 +61,6 @@ public class ImmersiveOverlaysNeoForgeClient {
         //? if >1.21.8
         //event.registerCategory(ModClient.CATEGORY);
     }
-
 
     //Integrate Cloth Config screen (if mod present) with NeoForge mod menu.
     public static void registerModsPage() {

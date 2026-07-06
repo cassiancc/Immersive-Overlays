@@ -1,5 +1,6 @@
 package cc.cassian.immersiveoverlays.overlay;
 
+import cc.cassian.mru.client.util.HudUtils;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.Platform;
 import cc.cassian.immersiveoverlays.compat.*;
@@ -50,7 +51,7 @@ public class TemperatureOverlay {
         // render background
         OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().temperature_horizontal_position_left);
         // render text
-        OverlayHelpers.drawString(guiGraphics, mc.font, temperature.component(), xPlacement-xOffset+iconOffset, textYPlacement, temperature.color());
+        HudUtils.drawString(guiGraphics, mc.font, temperature.component(), xPlacement-xOffset+iconOffset, textYPlacement, temperature.color());
         // render sprite
         if (showTemperature && ModConfig.get().temperature_icons) {
             OverlayHelpers.blitSprite(guiGraphics, temperature.texture(), xPlacement-xOffset-1, textYPlacement-3);
@@ -61,7 +62,7 @@ public class TemperatureOverlay {
         if (ModCompat.TOUGH_AS_NAILS && ModConfig.get().compat_tough_as_nails_temperature) {
             if (ToughAsNailsCompat.isTemperatureEnabled()) {
                 if (Platform.showDevInfo()) {
-                    OverlayHelpers.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Using Tough as Nails for Temperature!"), 0, 0, -1);
+                    HudUtils.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Using Tough as Nails for Temperature!"), 0, 0, -1);
                 }
                 String temperature = ToughAsNailsCompat.getAmbientTemperature(player);
                 var sprite = switch (temperature) {
@@ -77,7 +78,7 @@ public class TemperatureOverlay {
         //? if forge || neoforge {
         /*if (ModCompat.COLD_SWEAT && ModConfig.get().compat_cold_sweat_temperature) {
             if (Platform.showDevInfo()) {
-                OverlayHelpers.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Using Cold Sweat for Temperature!"), 0, 0, -1);
+                HudUtils.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Using Cold Sweat for Temperature!"), 0, 0, -1);
             }
             return ColdSweatCompat.getTemperaturePair(player);
         }
@@ -85,7 +86,7 @@ public class TemperatureOverlay {
         //? if forge || neoforge {
         /*if (ModCompat.LEGENDARY_SURVIVAL_OVERHAUL && ModConfig.get().compat_legendary_survival_overhaul_temperature) {
             if (Platform.showDevInfo()) {
-                OverlayHelpers.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Using Legendary Survival Overhaul for Temperature!"), 0, 0, -1);
+                HudUtils.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Using Legendary Survival Overhaul for Temperature!"), 0, 0, -1);
             }
             TemperaturePair temperaturePair = LegendarySurvivalOverhaulCompat.getTemperaturePair(player);
             if (temperaturePair != null)
@@ -95,7 +96,7 @@ public class TemperatureOverlay {
         //? if fabric || 1.21.1 {
         if (ModCompat.THERMOO && ModConfig.get().compat_thermoo_temperature) {
             if (Platform.showDevInfo()) {
-                OverlayHelpers.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Using Thermoo for Temperature!"), 0, 0, -1);
+				HudUtils.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Using Thermoo for Temperature!"), 0, 0, -1);
             }
             TemperaturePair temperaturePair = ThermooCompat.getTemperaturePair(player);
             if (temperaturePair != null)
@@ -106,7 +107,7 @@ public class TemperatureOverlay {
         /*if (ModCompat.OREGANIZED && ModConfig.get().compat_oreganized_temperature) {
             int temperature =  OreganizedCompat.getAmbientTemperatureFromThermometer(player);
             if (Platform.showDevInfo()) {
-                OverlayHelpers.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Oreganized: " + temperature), 0, 0, -1);
+                HudUtils.drawString(guiGraphics, Minecraft.getInstance().font, Component.literal("Oreganized: " + temperature), 0, 0, -1);
             }
             return new TemperaturePair(Component.translatable("tooltip.oreganized.heat_"+temperature), OreganizedCompat.getTemperatureColourFromThermometer(temperature), "heat_"+temperature);
         }

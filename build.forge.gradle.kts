@@ -189,6 +189,8 @@ legacyForge {
 
 
 dependencies {
+    modImplementation("cc.cassian.mru:mru-forge:${mod.dep("mru")}+${property("deps.minecraft")}")
+    jarJar("cc.cassian.mru:mru-neoforge:${mod.dep("mru")}+${property("deps.minecraft")}")
 
     // Cloth Config
     modImplementation("me.shedaniel.cloth:cloth-config-forge:${mod.dep("cloth_version")}")
@@ -213,7 +215,6 @@ dependencies {
     modRuntimeOnly("maven.modrinth:terrafirmacraft:${mod.dep("tfc")}")
     modRuntimeOnly("maven.modrinth:patchouli:8Qyw08ld")
 
-    modImplementation("io.github.swackyy:ohmega-forge:${mod.dep("ohmega")}-mc${property("deps.minecraft")}")
     modCompileOnly("top.theillusivec4.curios:curios-forge:${mod.dep("curios")}:api")
     modCompileOnly("maven.modrinth:travelersbackpack:${mod.dep("travelers_backpack")}-forge")
 

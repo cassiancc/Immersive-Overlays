@@ -1,11 +1,11 @@
 package cc.cassian.immersiveoverlays.mixin;
 
+import cc.cassian.mru.util.ItemContainerUtils;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 //? if 1.20.1 || 1.21.1 {
 import folk.sisby.antique_atlas.AntiqueAtlas;
-import static cc.cassian.immersiveoverlays.overlay.OverlayHelpers.getContainerContents;
+import static cc.cassian.mru.util.ItemContainerUtils.getContainerContents;
 import static cc.cassian.immersiveoverlays.overlay.OverlayHelpers.isContainer;
 import static folk.sisby.antique_atlas.AntiqueAtlas.getHandheldAtlas;
 import static folk.sisby.antique_atlas.AntiqueAtlas.isHandheldAtlas;
@@ -37,13 +37,7 @@ public abstract class AntiqueAtlasMixin {
     private static void allowMapInBundles(Player player, CallbackInfoReturnable<Boolean> cir) {
         if (ModConfig.get().compat_antique_atlas && ModConfig.get().search_containers) {
             var inventory = player.getInventory();
-            for (ItemStack stack :
-                //? if <1.21.5 {
-                    inventory.items
-                //?} else {
-                /*inventory.getNonEquipmentItems()
-                 *///?}
-            ) {
+            for (ItemStack stack : ItemContainerUtils.items(inventory)) {
                 if (isHandheldAtlas(stack))
                     cir.setReturnValue(true);
                 else if (isContainer(stack)) {

@@ -9,10 +9,8 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.ResourceLocation;
 //? neoforge {
 /*import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
-import cc.cassian.immersiveoverlays.neoforge.NeoforgePlatformImpl;
 *///?} else forge {
-/*import cc.cassian.immersiveoverlays.forge.ForgePlatformImpl;
-import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
+/*import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
 *///?}
 
 import org.apache.logging.log4j.LogManager;
@@ -55,17 +53,14 @@ public class ModClient {
             //? forge
             //CustomizeGuiOverlayEvent.DebugText event
     ) {
-        //? neoforge
-        //NeoforgePlatformImpl.guiLayersEvent = event;
-        //? forge
-        //ForgePlatformImpl.guiLayersEvent = event;
-
-        Platform.INSTANCE.registerOverlay(ModClient.locate("biome"), BiomeOverlay::renderGameOverlayEvent);
-        Platform.INSTANCE.registerOverlay(ModClient.locate("clock"), ClockOverlay::renderGameOverlayEvent);
-        Platform.INSTANCE.registerOverlay(ModClient.locate("compass"), CompassOverlay::renderGameOverlayEvent);
-        Platform.INSTANCE.registerOverlay(ModClient.locate("speed"), SpeedOverlay::renderGameOverlayEvent);
-        Platform.INSTANCE.registerOverlay(ModClient.locate("temperature"), TemperatureOverlay::renderGameOverlayEvent);
-        Platform.INSTANCE.registerOverlay(ModClient.locate("wind"), WindOverlay::renderGameOverlayEvent);
+        //? fabric
+        Object event = null;
+        Platform.registerOverlay(ModClient.locate("biome"), BiomeOverlay::renderGameOverlayEvent, event);
+        Platform.registerOverlay(ModClient.locate("clock"), ClockOverlay::renderGameOverlayEvent, event);
+        Platform.registerOverlay(ModClient.locate("compass"), CompassOverlay::renderGameOverlayEvent, event);
+        Platform.registerOverlay(ModClient.locate("speed"), SpeedOverlay::renderGameOverlayEvent, event);
+        Platform.registerOverlay(ModClient.locate("temperature"), TemperatureOverlay::renderGameOverlayEvent, event);
+        Platform.registerOverlay(ModClient.locate("wind"), WindOverlay::renderGameOverlayEvent, event);
     }
 
     public static ResourceLocation locate(String s) {

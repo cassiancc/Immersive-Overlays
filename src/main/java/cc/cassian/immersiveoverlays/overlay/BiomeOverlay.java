@@ -1,5 +1,7 @@
 package cc.cassian.immersiveoverlays.overlay;
 
+import cc.cassian.mru.client.util.HudUtils;
+import cc.cassian.mru.util.CommonUtils;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModHelpers;
@@ -77,9 +79,9 @@ public class BiomeOverlay {
         // render text
         if (showBiome) {
             OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().biome_horizontal_position_left);
-            OverlayHelpers.drawString(guiGraphics, mc.font, biomeText, xPlacement-xOffset+iconXOffset, textYPlacement, getTextColour(biome));
+            HudUtils.drawString(guiGraphics, mc.font, biomeText, xPlacement-xOffset+iconXOffset, textYPlacement, getTextColour(biome));
             if (ModConfig.get().biome_icons && !sprite.equals(UNDEFINED)) {
-                OverlayHelpers.blitSprite(guiGraphics, sprite, xPlacement-xOffset-1, textYPlacement-4);
+                HudUtils.blitSprite(guiGraphics, sprite, xPlacement-xOffset-1, textYPlacement-4);
 			}
         }
     }
@@ -127,7 +129,7 @@ public class BiomeOverlay {
         var path = biome.getPath();
         var namespace = biome.getNamespace();
         var key = "biome.%s.%s".formatted(namespace, path);
-        if (ModHelpers.exists(key)) {
+        if (CommonUtils.exists(key)) {
             return I18n.get(key);
         } else return WordUtils.capitalize(path.replace("_"," "));
     }

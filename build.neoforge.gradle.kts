@@ -205,6 +205,8 @@ tasks {
 }
 
 dependencies {
+    implementation("cc.cassian.mru:mru-neoforge:${mod.dep("mru")}+${property("deps.minecraft")}")
+    jarJar("cc.cassian.mru:mru-neoforge:${mod.dep("mru")}+${property("deps.minecraft")}")
 
     // Cloth Config
     if (hasProperty("deps.cloth_version")) {
@@ -241,7 +243,6 @@ dependencies {
 
     compileOnly("io.wispforest:accessories-neoforge:${mod.dep("accessories")}")
     compileOnly("top.theillusivec4.curios:curios-neoforge:${mod.dep("curios")}:api")
-    compileOnly("io.github.swackyy:ohmega-neoforge:${property("deps.ohmega")}-mc${property("deps.minecraft")}")
     if (stonecutter.eval(mcVersion, ">26")) {
         implementation("eu.pb4:trinkets:${mod.dep("trinkets")}")
     }

@@ -1,5 +1,6 @@
 package cc.cassian.immersiveoverlays.overlay;
 
+import cc.cassian.mru.client.util.HudUtils;
 import cc.cassian.immersiveoverlays.ModClient;
 //? forge {
 /*import cc.cassian.immersiveoverlays.compat.BreezyCompat;
@@ -48,7 +49,7 @@ public class WindOverlay {
         // render background
         OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().wind_horizontal_position_left);
         // render text
-        OverlayHelpers.drawString(guiGraphics, mc.font, wind.direction, xPlacement-xOffset+iconOffset, textYPlacement, ModConfig.get().wind_colour);
+        HudUtils.drawString(guiGraphics, mc.font, wind.direction, xPlacement-xOffset+iconOffset, textYPlacement, ModConfig.get().wind_colour);
         // render sprite
         if (showWind && ModConfig.get().wind_icons) {
             OverlayHelpers.blitSprite(guiGraphics, wind.texture(), xPlacement-xOffset-1, textYPlacement-3);

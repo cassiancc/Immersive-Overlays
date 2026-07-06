@@ -1,6 +1,7 @@
 package cc.cassian.immersiveoverlays.overlay;
 
 
+import cc.cassian.mru.client.util.HudUtils;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -142,12 +143,12 @@ public class CompassOverlay {
         OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().compass_horizontal_position_left);
         if (showBiomeIcon) {
             var sprite = getBiomeSprite(getId(getBiome(mc.player)), true);
-            OverlayHelpers.blit(guiGraphics, sprite, xPlacement-xOffset-1, yPlacement+iconYOffset, 0, 0, 16, 16, 16, 16);
+            HudUtils.blit(guiGraphics, sprite, xPlacement-xOffset-1, yPlacement+iconYOffset, 0, 0, 16, 16, 16, 16);
             xOffset -= 16;
         }
         // render text
         for (Component text : lines) {
-            OverlayHelpers.drawString(guiGraphics, mc.font, text, xPlacement-xOffset, yPlacement, ModConfig.get().compass_text_colour);
+            HudUtils.drawString(guiGraphics, mc.font, text, xPlacement-xOffset, yPlacement, ModConfig.get().compass_text_colour);
             yPlacement += mc.font.lineHeight;
         }
     }

@@ -1,14 +1,13 @@
 package cc.cassian.immersiveoverlays.overlay;
 
 import cc.cassian.immersiveoverlays.ModClient;
-import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfigFactory;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.config.ModConfig;
+import cc.cassian.mru.client.util.HudUtils;
+import cc.cassian.mru.util.ItemContainerUtils;
 import net.minecraft.world.item.Items;
 //? if >1.21 {
-import net.minecraft.world.item.component.BundleContents;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.LodestoneTracker;
 //?} else {
@@ -16,17 +15,12 @@ import net.minecraft.world.item.component.LodestoneTracker;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.item.CompassItem;
 *///?}
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.client.gui.GuiGraphics;
 //? if >1.21.6 {
 /*import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.util.ARGB;
-import net.minecraft.world.entity.EquipmentSlot;
 *///?}
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -42,6 +36,7 @@ public class OverlayHelpers {
     public static boolean showWaila = false;
     private static boolean hasSeenAnchorStack = false;
 
+    @SuppressWarnings("unused")
     public static void renderBackground(GuiGraphics guiGraphics, int windowWidth, int fontWidth, int xPlacement, int xOffset, int yPlacement, int tooltipSize, boolean leftAlign) {
         if (ModConfig.get().render_background) {
             final int yPlacementWithOffset = yPlacement-4;
@@ -83,7 +78,7 @@ public class OverlayHelpers {
     *///?}
 
     public static void checkInventoryForOverlays(Minecraft minecraft){
-        if ((ModConfig.get().compass_enable || ModConfig.get().clock_enable || ModConfig.get().biome_enable || ModConfig.get().temperature_enable)  && minecraft.level != null) {
+        if ((ModConfig.get().compass_enable || ModConfig.get().clock_enable || ModConfig.get().biome_enable || ModConfig.get().temperature_enable || ModConfig.get().wind_enable) && minecraft.level != null) {
             OverlayHelpers.checkPlayerForOverlays(minecraft.player);
         }
     }
@@ -118,35 +113,7 @@ public class OverlayHelpers {
     }
 
     public static boolean shouldCancelRender(Minecraft mc) {
-        //? if >26.1 {
-        /*if (mc.gui.hud.isHidden())
-        *///?} else {
-        if (mc.options.hideGui)
-        //?}
-            return true;
-        if (!ModConfig.get().enabled) return true;
-        if (ModConfig.get().hide_from_debug) {
-            return
-            //? if >1.21.10 {
-            /*mc.debugEntries.isOverlayVisible();
-            *///?} else if >1.21 {
-            mc.getDebugOverlay().showDebugScreen();
-             //?} else {
-            /*mc.options.renderDebug;
-            *///?}
-        }
-        return false;
-    }
-
-    private static void findImportantContainerContents(ItemStack container) {
-        List<ItemStack> list = getContainerContents(container).toList();
-        for (ItemStack itemStack : list) {
-            if (ModConfig.get().search_containers_for_containers) {
-                isImportantItemOrContainer(itemStack);
-            } else {
-                isImportantItem(itemStack);
-            }
-        }
+        return HudUtils.shouldCancelRender(mc, ModConfig.get().enabled, ModConfig.get().hide_from_debug);
     }
 
     private static void isImportantItem(ItemStack itemStack) {
@@ -184,43 +151,17 @@ public class OverlayHelpers {
     }
 
     public static void checkPlayerForOverlays(Player player) {
+        boolean searchContainersForContainers = ModConfig.get().search_containers_for_containers;
         if (ModConfig.get().require_item) {
             setOverlays(false);
             if (player == null)
                 return;
             hasSeenAnchorStack = false;
-            isImportantItemOrContainer(player.getOffhandItem());
+            ItemContainerUtils.isImportantItemOrContainer(player.getOffhandItem(), OverlayHelpers::isImportantItem, searchContainersForContainers);
             if (ModConfig.get().require_item_in_hand) {
-                isImportantItemOrContainer(player.getMainHandItem());
+                ItemContainerUtils.isImportantItemOrContainer(player.getMainHandItem(), OverlayHelpers::isImportantItem, searchContainersForContainers);
             } else {
-                //? if <1.21.5 {
-                player.getArmorSlots().forEach((OverlayHelpers::isImportantItemOrContainer));
-                //?} else {
-                /*for (EquipmentSlot value : EquipmentSlot.values()) {
-                    isImportantItemOrContainer(player.getItemBySlot(value));
-                }
-                *///?}
-                if (ModCompat.ACCESSORIES)
-                    AccessoriesCompat.checkForImportantAccessories(player);
-                if (ModCompat.OHMEGA)
-                    OhmegaCompat.checkForImportantAccessories(player);
-                //? if forge || neoforge {
-                /*if (ModCompat.CURIOS)
-                    CuriosCompat.checkForImportantAccessories(player);
-                *///?}
-                //? if fabric && <26 {
-                if (ModCompat.TRINKETS)
-                    TrinketsCompat.checkForImportantAccessories(player);
-                //?}
-                //? if >26 {
-                /*if (ModCompat.TRINKETS_UPDATED)
-                    TrinketsCompat.checkForImportantAccessories(player);
-                *///?}
-                if (ModCompat.TRAVELERS_BACKPACK)
-                    TravelersBackpackCompat.checkForImportantAccessories(player);
-                if (ModCompat.BACKPACKED)
-                    BackpackedCompat.checkForImportantAccessories(player);
-                checkInventoryForStack(player.getInventory());
+                ItemContainerUtils.checkPlayerForImportantItems(player, OverlayHelpers::isImportantItem, ModConfig.get().search_containers, searchContainersForContainers);
             }
             if (ModConfig.get().allow_blocks && !ModLists.important_blocks.isEmpty()) {
                 checkSurroundingsForOverlays(player);
@@ -229,8 +170,8 @@ public class OverlayHelpers {
             setOverlays(true);
             if (player == null || !ModConfig.get().compass_relative_pos)
                 return;
-            checkInventoryForAnchorStack(player.getInventory());
         }
+        ItemContainerUtils.checkPlayerForImportantItems(player, OverlayHelpers::tryReadAnchor, ModConfig.get().search_containers, searchContainersForContainers);
     }
 
     public static void checkSurroundingsForOverlays(Player player) {
@@ -282,81 +223,10 @@ public class OverlayHelpers {
         CompassOverlay.anchor = b ? CompassOverlay.anchor : null;
     }
 
-    public static void isImportantItemOrContainer(ItemStack stack) {
-        isImportantItem(stack);
-        if (isContainer(stack)) {
-            findImportantContainerContents(stack);
-        }
-        if (ModCompat.SOPHISTICATED_BACKPACKS) {
-            SophisticatedBackpacksCompat.checkBackpackContents(stack);
-        }
-    }
-
-    public static Stream<ItemStack> getContainerContents(ItemStack stack) {
-        if (!isContainer(stack)) return Stream.empty();
-        //? if >1.20.5 {
-        var components = stack.getComponents();
-        if (components.has(DataComponents.BUNDLE_CONTENTS)) {
-            BundleContents bundleContents = components.get(DataComponents.BUNDLE_CONTENTS);
-            if (bundleContents != null)
-                return bundleContents.itemCopyStream();
-        }
-        else if (components.has(DataComponents.CONTAINER)) {
-            ItemContainerContents containerContents = components.get(DataComponents.CONTAINER);
-            if (containerContents != null) {
-                //? >26 {
-				/*return containerContents.allItemsCopyStream();
-                *///?} else {
-                return containerContents.stream();
-                //?}
-			}
-        }
-        //?} else {
-        /*CompoundTag compoundtag = stack.getTag();
-        if (compoundtag == null) {
-            return Stream.empty();
-        } else {
-            if (compoundtag.contains("Items")) {
-                ListTag listtag = compoundtag.getList("Items", 10);
-                return listtag.stream().map(CompoundTag.class::cast).map(ItemStack::of);
-            }
-            else if (compoundtag.contains("BlockEntityTag")) {
-                var compound = compoundtag.getCompound("BlockEntityTag");
-                ListTag listtag = compound.getList("Items", 10);
-                return listtag.stream().map(CompoundTag.class::cast).map(ItemStack::of);
-            }
-        }
-        *///?}
-        return Stream.empty();
-    }
 
     public static boolean isContainer(ItemStack stack) {
         if (!ModConfig.get().search_containers) return false;
-        if (stack.isEmpty()) return false;
-        //? if >1.20.5 {
-        var components = stack.getComponents();
-        if (components.has(DataComponents.BUNDLE_CONTENTS)) {
-            return true;
-        }
-        else if (components.has(DataComponents.CONTAINER)) {
-            return true;
-        }
-        //?} else {
-        /*CompoundTag compoundtag = stack.getTag();
-        if (compoundtag == null) {
-            return false;
-        } else {
-            if (compoundtag.contains("Items")) {
-                return true;
-            }
-            else if (compoundtag.contains("BlockEntityTag")) {
-                if (compoundtag.getCompound("BlockEntityTag").contains("Items")) {
-                    return true;
-                }
-            }
-        }
-        *///?}
-        return true;
+        return ItemContainerUtils.isContainer(stack);
     }
 
     public static boolean checkInventoryForItem(Inventory inventory, Item item, boolean value) {
@@ -364,67 +234,8 @@ public class OverlayHelpers {
         else return checkInventoryForStack(inventory, item) != ItemStack.EMPTY;
     }
 
-    public static void checkInventoryForStack(Inventory inventory) {
-        for (ItemStack stack : items(inventory)) {
-            isImportantItem(stack);
-            if (isContainer(stack)) {
-                findImportantContainerContents(stack);
-            }
-        }
-    }
-
-    private static List<ItemStack> items(Inventory inventory) {
-        return
-        //? if <1.21.5 {
-        inventory.items;
-        //?} else {
-        /*inventory.getNonEquipmentItems();
-         *///?}
-    }
-
-    private static void checkInventoryForAnchorStack(Inventory inventory){
-        for (ItemStack stack : items(inventory)) {
-            tryReadAnchor(stack);
-            if (isContainer(stack))
-                findAnchorContainerContents(stack);
-        }
-    }
-
-    private static void findAnchorContainerContents(ItemStack container) {
-        List<ItemStack> list = getContainerContents(container).toList();
-        for (ItemStack itemStack : list) {
-            if (ModConfig.get().search_containers_for_containers) {
-                readAnchorItemOrContainer(itemStack);
-            } else {
-                tryReadAnchor(itemStack);
-            }
-        }
-    }
-
-    public static void readAnchorItemOrContainer(ItemStack stack) {
-        tryReadAnchor(stack);
-        if (isContainer(stack)) {
-            findAnchorContainerContents(stack);
-        }
-        if (ModCompat.SOPHISTICATED_BACKPACKS) {
-            SophisticatedBackpacksCompat.readAnchorFromBackpack(stack);
-        }
-    }
-
     public static @NotNull ItemStack checkInventoryForStack(Inventory inventory, Item item) {
-        for (ItemStack stack : items(inventory)) {
-            if (stack.is(item)) return stack;
-            else if (item != null && stack.is(item))
-                return stack;
-            else if (isContainer(stack)) {
-                List<ItemStack> contents = getContainerContents(stack).toList();
-                for (ItemStack content : contents) {
-                    if (item != null && content.is(item))
-                        return content;
-                }
-            }
-        }
-        return ItemStack.EMPTY;
+        return ItemContainerUtils.checkInventoryForStack(inventory, item);
     }
 
     public static int getPlacement(int windowWidth, int fontWidth, boolean leftAlign) {
@@ -445,50 +256,16 @@ public class OverlayHelpers {
     }
     *///?}
 
-    public static void drawString(GuiGraphics guiGraphics, Font font, Component text, int x, int y, Integer color) {
-        //? if >1.21.6
-        //color = ARGB.opaque(color);
-        guiGraphics.drawString(font, text, x, y, color);
-    }
-
-    public static void drawString(GuiGraphics guiGraphics, Font font, String text, int x, int y, Integer color) {
-        //? if >1.21.6
-        //color = ARGB.opaque(color);
-        guiGraphics.drawString(font, text, x, y, color);
-    }
-
     /**
      * Cannot be removed until 1.20.1 gains nine-slicing or support is dropped.
 	 */
     @Deprecated
     public static void blit(GuiGraphics guiGraphics, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
-        OverlayHelpers.blit(guiGraphics, ModClient.locate("textures/gui/overlay.png"), x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
-    }
-
-    public static void blit(GuiGraphics guiGraphics, ResourceLocation texture, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
-        //? if >1.21.5 {
-        /*guiGraphics.blit(RenderPipelines.GUI_TEXTURED, texture,
-        *///?} else {
-        guiGraphics.blit(texture,
-        //?}
-            x, y,
-            //? if <1.21.2
-            0, //z
-            uOffset,
-            vOffset, uWidth, vHeight,
-            textureWidth, textureHeight);
+        HudUtils.blit(guiGraphics, ModClient.locate("textures/gui/overlay.png"), x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
     public static void blitSprite(GuiGraphics guiGraphics, String texture, int x, int y) {
-        blitSprite(guiGraphics, ModClient.locate("textures/gui/sprites/%s.png".formatted(texture)), x, y);
-    }
-
-    public static void blitSprite(GuiGraphics guiGraphics, ResourceLocation texture, int x, int y) {
-        blitSprite(guiGraphics, texture, x, y, 16);
-    }
-
-    public static void blitSprite(GuiGraphics guiGraphics, ResourceLocation texture, int x, int y, int size) {
-        blit(guiGraphics, texture, x, y, 0, 0, size, size, size, size);
+        HudUtils.blitSprite(guiGraphics, ModClient.locate("textures/gui/sprites/%s.png".formatted(texture)), x, y);
     }
 
     static boolean hasBeenToggled = false;
@@ -503,12 +280,7 @@ public class OverlayHelpers {
             hasBeenToggled = false;
         }
         if (ModClient.overlaySettings.isDown()) {
-            Minecraft mc = Minecraft.getInstance();
-            //? if >26.1 {
-            /*mc.gui.setScreen(ModConfigFactory.create(mc.gui.screen()));
-            *///?} else {
-            mc.setScreen(ModConfigFactory.create(mc.screen));
-            //?}
+            HudUtils.setScreen(ModConfigFactory::create);
         }
     }
 

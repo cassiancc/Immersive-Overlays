@@ -11,6 +11,8 @@ import com.momosoftworks.coldsweat.config.spec.ClientSettingsConfig;
 
 public class ColdSweatCompat {
 
+    @SuppressWarnings("unused")
+    // Used on Forge when Cold Sweat is present.
     public static TemperatureOverlay.TemperaturePair getTemperaturePair(LocalPlayer player) {
         long temperature = Math.round(getAmbientTemperature(player));
         double comparableTemperature;

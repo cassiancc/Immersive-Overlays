@@ -1,5 +1,6 @@
 package cc.cassian.immersiveoverlays.overlay;
 
+import cc.cassian.mru.client.util.HudUtils;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfig;
@@ -107,7 +108,7 @@ public class ClockOverlay {
         OverlayHelpers.renderBackground(guiGraphics, windowWidth, fontWidth, xPlacement, xOffset, yPlacement, tooltipSize, ModConfig.get().clock_horizontal_position_left);
         if (showFirstLine) {
             // render text
-            OverlayHelpers.drawString(guiGraphics, mc.font, time, xPlacement-xOffset+iconXOffset, textYPlacement, ModConfig.get().clock_text_colour);
+            HudUtils.drawString(guiGraphics, mc.font, time, xPlacement-xOffset+iconXOffset, textYPlacement, ModConfig.get().clock_text_colour);
         }
         if (showWeather) {
             OverlayHelpers.blitSprite(guiGraphics, getWeather(mc.player), xPlacement-xOffset-1, iconYPlacement-1);
@@ -117,10 +118,10 @@ public class ClockOverlay {
             if (showFirstLine) {
                 seasonTextYPlacement+=15;
             }
-            OverlayHelpers.drawString(guiGraphics, mc.font, seasonText, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, ModConfig.get().clock_text_colour);
+            HudUtils.drawString(guiGraphics, mc.font, seasonText, xPlacement-xOffset+iconXOffset, seasonTextYPlacement, ModConfig.get().clock_text_colour);
             assert seasonString != null;
             var sprite = getSprite(seasonString.toLowerCase(Locale.ROOT));
-            OverlayHelpers.blitSprite(guiGraphics, sprite, xPlacement-xOffset-1, seasonTextYPlacement-4);
+            HudUtils.blitSprite(guiGraphics, sprite, xPlacement-xOffset-1, seasonTextYPlacement-4);
         }
     }
 

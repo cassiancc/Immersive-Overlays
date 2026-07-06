@@ -1,41 +1,38 @@
 package cc.cassian.immersiveoverlays;
 
-//? fabric {
-import cc.cassian.immersiveoverlays.fabric.FabricPlatformImpl;
-//?}
+//? fabric
+import cc.cassian.mru.client.util.ClientVersionedUtil;
+import cc.cassian.mru.client.util.Overlay;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import java.io.File;
-import java.nio.file.Path;
 //? neoforge {
-/*import cc.cassian.immersiveoverlays.neoforge.NeoforgePlatformImpl;
+/*import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+ *///?} else forge {
+/*import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
 *///?}
-//? forge
-//import cc.cassian.immersiveoverlays.forge.ForgePlatformImpl;
-
-public interface Platform {
-
-    //? fabric {
-    Platform INSTANCE = new FabricPlatformImpl();
-    //?}
-    //? neoforge {
-    /*Platform INSTANCE = new NeoforgePlatformImpl();
-    *///?}
-    //? forge {
-    /*Platform INSTANCE = new ForgePlatformImpl();
-     *///?}
 
 
-    boolean isLoaded(String modid);
-    boolean isLoadingLoaded(String mod);
-    String loader();
-    Path configPath();
-    void registerOverlay(ResourceLocation id, Overlay overlay);
+public class Platform {
 
-	boolean isDeveloperEnvironment();
+	public static void registerOverlay(ResourceLocation id, Overlay overlay
+	                                   //? neoforge
+	                                   //,RegisterGuiLayersEvent event
+	                                   //? forge
+		   //, CustomizeGuiOverlayEvent.DebugText event
+									   //? fabric
+									   ,Object event
+			) {
+		//? fabric {
+		ClientVersionedUtil.registerOverlay(id, overlay);
+		//?} else if neoforge {
+		/*event.registerAboveAll(id, overlay::render);
+		*///?} else if forge {
+		/*overlay.render(event.getGuiGraphics(), event.getPartialTick());
+		*///?}
 
-    @SuppressWarnings("false")
-    static boolean showDevInfo() {
-        return ModClient.DEBUG && Platform.INSTANCE.isDeveloperEnvironment();
+	}
+
+	@SuppressWarnings("false")
+    public static boolean showDevInfo() {
+        return ModClient.DEBUG && cc.cassian.mru.Platform.INSTANCE.isDeveloperEnvironment();
     }
 }

@@ -1,7 +1,6 @@
 package cc.cassian.immersiveoverlays.config;
 
-
-import cc.cassian.immersiveoverlays.compat.ModCompat;
+import cc.cassian.mru.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ClothConfigFactory;
 //? if fabric
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
