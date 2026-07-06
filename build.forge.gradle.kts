@@ -190,7 +190,7 @@ legacyForge {
 
 dependencies {
     modImplementation("cc.cassian.mru:mru-forge:${mod.dep("mru")}+${property("deps.minecraft")}")
-    jarJar("cc.cassian.mru:mru-neoforge:${mod.dep("mru")}+${property("deps.minecraft")}")
+    jarJar("cc.cassian.mru:mru-forge:${mod.dep("mru")}+${property("deps.minecraft")}")
 
     // Cloth Config
     modImplementation("me.shedaniel.cloth:cloth-config-forge:${mod.dep("cloth_version")}")

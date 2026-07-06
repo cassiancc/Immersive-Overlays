@@ -174,7 +174,7 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
     modImplementation("cc.cassian.mru:mru-fabric:${mod.dep("mru")}+${property("deps.minecraft")}")
-    include("cc.cassian.mru:mru-neoforge:${mod.dep("mru")}+${property("deps.minecraft")}")
+    include("cc.cassian.mru:mru-fabric:${mod.dep("mru")}+${property("deps.minecraft")}")
 
     implementation("folk.sisby:kaleido-config:${property("deps.kaleido")}")
     if (stonecutter.eval(mcVersion, ">26")) {
