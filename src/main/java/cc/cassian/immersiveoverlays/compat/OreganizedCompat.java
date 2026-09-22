@@ -1,10 +1,15 @@
 package cc.cassian.immersiveoverlays.compat;
 
 import net.minecraft.client.player.LocalPlayer;
-//? if (forge) || (neoforge && =1.21.1) {
+//? if (forge) {
 /*import galena.oreganized.client.tooltips.ClientThermometerTooltip;
 import galena.oreganized.content.item.ThermometerItem;
 import galena.oreganized.world.IMotionHolder;
+*///?}
+//? if (neoforge && =1.21.1) {
+/*import galena.oreganized.plumbum.client.tooltip.ClientThermometerTooltip;
+import galena.oreganized.plumbum.world.item.ThermometerItem;
+import galena.oreganized.electrum.accessor.IMotionHolder;
 *///?}
 
 public class OreganizedCompat {
