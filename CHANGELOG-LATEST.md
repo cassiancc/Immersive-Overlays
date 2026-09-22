@@ -1,2 +1,2 @@
 ### Fixed
-- Enhanced Celestials 2 support in 26.x.
+- Oreganized 5.3.0 support (thanks @PossibleTrngl!)
