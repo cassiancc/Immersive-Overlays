@@ -90,8 +90,8 @@ public class BiomeOverlay {
     public static ResourceLocation getBiomeSprite(ResourceLocation biome, boolean allowRedirect) {
         var manager = Minecraft.getInstance().getResourceManager();
         var path = "textures/immersiveoverlays/" + biome.getPath();
-        var key = ModClient.locate(biome.getNamespace(), "%s.png".formatted(path));
-        var redirect = ModClient.locate(biome.getNamespace(), "%s.txt".formatted(path));
+        var key = CommonUtils.id(biome.getNamespace(), "%s.png".formatted(path));
+        var redirect = CommonUtils.id(biome.getNamespace(), "%s.txt".formatted(path));
         if (manager.getResource(key).isPresent())
             return key;
         else {
@@ -112,8 +112,7 @@ public class BiomeOverlay {
     }
 
     public static ResourceLocation getId(Holder<Biome> biome) {
-        //~ if >1.21.10 'location'-> 'identifier'
-        return biome.unwrapKey().orElse(Biomes.THE_VOID).location();
+        return biome.unwrapKey().orElse(Biomes.THE_VOID).mru$identifier();
     }
 
     public static String formatBiome(ResourceLocation biome) {

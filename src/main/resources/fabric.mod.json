@@ -43,7 +43,7 @@
     "fabricloader": ">=0.15.7",
     "minecraft": "${minecraft}",
     "fabric-api": "*",
-    "mru": ">=1.0.33"
+    "mru": ">=1.0.40"
   },
   "recommends": {
     "cloth-config": "*",

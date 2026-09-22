@@ -4,6 +4,7 @@ package cc.cassian.immersiveoverlays;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 
 import cc.cassian.immersiveoverlays.overlay.*;
+import cc.cassian.mru.util.CommonUtils;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.ResourceLocation;
@@ -65,15 +66,7 @@ public class ModClient {
         Platform.registerOverlay(ModClient.locate("wind"), WindOverlay::renderGameOverlayEvent, event);
     }
 
-    public static ResourceLocation locate(String s) {
-        return locate(MOD_ID, s);
-    }
-
-    public static ResourceLocation locate(String namespace, String path) {
-        //? if >1.21 {
-        return ResourceLocation.fromNamespaceAndPath(namespace, path);
-         //?} else {
-        /*return new ResourceLocation(namespace, path);
-        *///?}
+    public static ResourceLocation locate(String path) {
+        return CommonUtils.id(MOD_ID, path);
     }
 }

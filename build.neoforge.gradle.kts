@@ -214,6 +214,7 @@ tasks {
 dependencies {
     implementation("cc.cassian.mru:mru-neoforge:${mod.dep("mru")}+${property("deps.minecraft")}")
     jarJar("cc.cassian.mru:mru-neoforge:${mod.dep("mru")}+${property("deps.minecraft")}")
+    interfaceInjectionData("cc.cassian.mru:mru-neoforge:${mod.dep("mru")}+${property("deps.minecraft")}")
 
     // Cloth Config
     if (hasProperty("deps.cloth_version")) {

@@ -18,7 +18,7 @@ public class EnhancedCelestials1Compat {
 			var worldData = worldDataOptional.get();
 			Optional<ResourceKey<LunarEvent>> lunarEventResourceKey = worldData.currentLunarEventHolder().unwrapKey();
 			if (lunarEventResourceKey.isEmpty()) return null;
-			ResourceLocation location = lunarEventResourceKey.orElseThrow().location();
+			ResourceLocation location = lunarEventResourceKey.orElseThrow().mru$identifier();
 			var path = location.getPath();
 			if (!path.equals("default")) {
 				LunarEvent lunarEvent = worldData.currentLunarEvent();
