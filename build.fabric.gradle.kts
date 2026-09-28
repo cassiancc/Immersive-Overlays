@@ -170,6 +170,13 @@ repositories {
             includeGroupAndSubgroups("dev.corgitaco")
         }
     }
+    maven {
+        name = "Cassian's Maven"
+        url = uri("https://maven.cassian.cc")
+        content {
+            includeGroupAndSubgroups("cc.cassian")
+        }
+    }
     mavenCentral()
 
 }
