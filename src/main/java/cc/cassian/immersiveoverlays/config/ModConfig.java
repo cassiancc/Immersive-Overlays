@@ -147,7 +147,9 @@ public class ModConfig {
     public boolean compat_simple_seasons = true;
     //? if forge || neoforge {
     /*public boolean compat_tfc_seasons = true;
-    public boolean compat_ecliptic_seasons = true;
+    *///?}
+    //? if forge || neoforge || (fabric && >26) {
+    /*public boolean compat_ecliptic_seasons = true;
     *///?}
 
     // wind

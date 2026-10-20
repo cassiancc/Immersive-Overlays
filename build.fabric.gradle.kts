@@ -220,7 +220,7 @@ dependencies {
     // Fabric Seasons
     if (hasProperty("deps.fabric_seasons")) {
         modCompileOnly("maven.modrinth:fabric-seasons:${mod.dep("fabric_seasons")}")
-        modLocalRuntime("maven.modrinth:fabric-seasons:${mod.dep("fabric_seasons")}")
+//        modLocalRuntime("maven.modrinth:fabric-seasons:${mod.dep("fabric_seasons")}")
     } else {
         modCompileOnly("maven.modrinth:fabric-seasons:2.4.2-BETA+1.21")
     }
@@ -347,6 +347,11 @@ dependencies {
     modCompileOnly("maven.modrinth:bplb:v1.1.1")
     modCompileOnly("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
 //    modLocalRuntime("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
+    if (hasProperty("deps.ecliptic_seasons")) {
+        modCompileOnly("maven.modrinth:ecliptic-seasons-fabricated:${mod.dep("ecliptic_seasons")}")
+        modLocalRuntime("maven.modrinth:ecliptic-seasons-fabricated:${mod.dep("ecliptic_seasons")}")
+
+    }
 
     // Mixin Constraints - embedded
     implementation("com.moulberry:mixinconstraints:1.0.9")

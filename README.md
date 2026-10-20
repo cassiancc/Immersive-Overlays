@@ -105,4 +105,6 @@ Textures for Clifftree biome overlays by [Kelpiesaurus](https://modrinth.com/use
 
 Textures for Bloom biome overlays by [sierra_wx](https://modrinth.com/user/sierra_wx))
 
+Textures for Alex's Caves, Better End, Better Nether, Oh The Biomes We've Gone, and The Bumblezone biome overlays by rainbowmechanism.
+
 This repository contains remapped copies of [Antique Atlas 4](https://modrinth.com/mod/antique-atlas-4), as the Fabric version cannot be remapped by ModDevGradle.
