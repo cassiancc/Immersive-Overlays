@@ -1,8 +1,8 @@
 package cc.cassian.immersiveoverlays;
 
 //? fabric
-import cc.cassian.mru.client.util.ClientVersionedUtil;
-import cc.cassian.mru.client.util.Overlay;
+import cc.cassian.asphodel.client.fabric.ClientVersionedUtil;
+import cc.cassian.asphodel.client.util.Overlay;
 import net.minecraft.resources.ResourceLocation;
 //? neoforge {
 /*import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
@@ -34,6 +34,6 @@ public class Platform {
 
 	@SuppressWarnings("false")
     public static boolean showDevInfo() {
-        return ModClient.DEBUG && cc.cassian.mru.Platform.INSTANCE.isDeveloperEnvironment();
+        return ModClient.DEBUG && cc.cassian.asphodel.Platform.INSTANCE.isDeveloperEnvironment();
     }
 }

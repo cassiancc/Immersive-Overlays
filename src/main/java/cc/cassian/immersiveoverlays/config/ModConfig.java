@@ -1,6 +1,6 @@
 package cc.cassian.immersiveoverlays.config;
 
-import cc.cassian.mru.Platform;
+import cc.cassian.asphodel.Platform;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import com.google.gson.FieldNamingPolicy;

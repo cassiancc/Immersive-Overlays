@@ -4,8 +4,8 @@ import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.config.ModConfigFactory;
 import cc.cassian.immersiveoverlays.helpers.ModLists;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-import cc.cassian.mru.client.util.HudUtils;
-import cc.cassian.mru.util.ItemContainerUtils;
+import cc.cassian.asphodel.client.util.HudUtils;
+import cc.cassian.asphodel.util.ItemContainerUtils;
 import net.minecraft.world.item.Items;
 //? if >1.21 {
 import net.minecraft.core.component.DataComponents;

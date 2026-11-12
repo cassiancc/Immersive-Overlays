@@ -2,7 +2,7 @@ package cc.cassian.immersiveoverlays.mixin;
 
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.overlay.OverlayHelpers;
-import cc.cassian.mru.util.ItemContainerUtils;
+import cc.cassian.asphodel.util.ItemContainerUtils;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;

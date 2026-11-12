@@ -1,7 +1,7 @@
 package cc.cassian.immersiveoverlays.overlay;
 
-import cc.cassian.mru.client.util.HudUtils;
-import cc.cassian.mru.util.CommonUtils;
+import cc.cassian.asphodel.client.util.HudUtils;
+import cc.cassian.asphodel.util.CommonUtils;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModHelpers;
@@ -112,7 +112,7 @@ public class BiomeOverlay {
     }
 
     public static ResourceLocation getId(Holder<Biome> biome) {
-        return biome.unwrapKey().orElse(Biomes.THE_VOID).mru$identifier();
+        return biome.unwrapKey().orElse(Biomes.THE_VOID).asphodel$identifier();
     }
 
     public static String formatBiome(ResourceLocation biome) {

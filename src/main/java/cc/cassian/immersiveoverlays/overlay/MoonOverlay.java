@@ -6,7 +6,7 @@ import cc.cassian.immersiveoverlays.compat.EnhancedCelestials1Compat;
 import cc.cassian.immersiveoverlays.compat.LunarCompat;
 import cc.cassian.immersiveoverlays.compat.ModCompat;
 import cc.cassian.immersiveoverlays.config.ModConfig;
-import cc.cassian.mru.client.util.HudUtils;
+import cc.cassian.asphodel.client.util.HudUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;

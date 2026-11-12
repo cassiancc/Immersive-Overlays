@@ -41,7 +41,6 @@ jsonlang {
 }
 
 repositories {
-    mavenLocal()
     maven {
         name = "shedaniel (Cloth Config)"
         url = uri("https://maven.shedaniel.me/")
@@ -178,6 +177,7 @@ repositories {
         }
     }
     mavenCentral()
+    mavenLocal()
 
 }
 
@@ -187,8 +187,8 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
-    modImplementation("cc.cassian.mru:mru-fabric:${mod.dep("mru")}+${property("deps.minecraft")}")
-    include("cc.cassian.mru:mru-fabric:${mod.dep("mru")}+${property("deps.minecraft")}")
+    modImplementation("cc.cassian.asphodel:asphodel-api-fabric:${mod.dep("asphodel_api")}+${property("deps.minecraft")}")
+    include("cc.cassian.asphodel:asphodel-api-fabric:${mod.dep("asphodel_api")}+${property("deps.minecraft")}")
 
     implementation("folk.sisby:kaleido-config:${property("deps.kaleido")}")
     if (stonecutter.eval(mcVersion, ">26")) {
@@ -349,8 +349,7 @@ dependencies {
 //    modLocalRuntime("maven.modrinth:player-locator-plus:${mod.dep("player_locator_plus")}")
     if (hasProperty("deps.ecliptic_seasons")) {
         modCompileOnly("maven.modrinth:ecliptic-seasons-fabricated:${mod.dep("ecliptic_seasons")}")
-        modLocalRuntime("maven.modrinth:ecliptic-seasons-fabricated:${mod.dep("ecliptic_seasons")}")
-
+//        modLocalRuntime("maven.modrinth:ecliptic-seasons-fabricated:${mod.dep("ecliptic_seasons")}")
     }
 
     // Mixin Constraints - embedded
@@ -442,7 +441,7 @@ publishMods {
         minecraftVersions.addAll(additionalVersions)
         requires("fabric-api")
         optional("cloth-config")
-        embeds("mru")
+        embeds("asphodel-api")
     }
 
     curseforge {
@@ -451,7 +450,7 @@ publishMods {
         minecraftVersions.add(property("deps.minecraft") as String)
         minecraftVersions.addAll(additionalVersions)
         requires("fabric-api")
-        embeds("mru")
+        embeds("asphodel-api")
         client = true
         server = false
     }

@@ -1,6 +1,6 @@
 package cc.cassian.immersiveoverlays.overlay;
 
-import cc.cassian.mru.client.util.HudUtils;
+import cc.cassian.asphodel.client.util.HudUtils;
 import cc.cassian.immersiveoverlays.ModClient;
 //? forge {
 /*import cc.cassian.immersiveoverlays.compat.BreezyCompat;

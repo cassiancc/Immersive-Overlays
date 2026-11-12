@@ -163,6 +163,7 @@ repositories {
     }
     flatDir { dirs("libs") }
     mavenCentral()
+    mavenLocal()
 }
 
 neoForge {
@@ -219,9 +220,9 @@ tasks {
 }
 
 dependencies {
-    implementation("cc.cassian.mru:mru-neoforge:${mod.dep("mru")}+${property("deps.minecraft")}")
-    jarJar("cc.cassian.mru:mru-neoforge:${mod.dep("mru")}+${property("deps.minecraft")}")
-    interfaceInjectionData("cc.cassian.mru:mru-neoforge:${mod.dep("mru")}+${property("deps.minecraft")}")
+    implementation("cc.cassian.asphodel:asphodel-api-neoforge:${mod.dep("asphodel_api")}+${property("deps.minecraft")}")
+    jarJar("cc.cassian.asphodel:asphodel-api-neoforge:${mod.dep("asphodel_api")}+${property("deps.minecraft")}")
+    interfaceInjectionData("cc.cassian.asphodel:asphodel-api-neoforge:${mod.dep("asphodel_api")}+${property("deps.minecraft")}")
 
     // Cloth Config
     if (hasProperty("deps.cloth_version")) {
@@ -378,7 +379,7 @@ publishMods {
         accessToken = env.MODRINTH_API_KEY.orNull()
         minecraftVersions.add(property("deps.minecraft") as String)
         minecraftVersions.addAll(additionalVersions)
-        embeds("mru")
+        embeds("asphodel-api")
         optional("cloth-config")
     }
 
@@ -393,7 +394,7 @@ publishMods {
         minecraftVersions.addAll(additionalVersions)
         client = true
         server = false
-        embeds("mru")
+        embeds("asphodel-api")
     }
 }
 

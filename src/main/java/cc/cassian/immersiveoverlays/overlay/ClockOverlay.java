@@ -1,7 +1,7 @@
 package cc.cassian.immersiveoverlays.overlay;
 
-import cc.cassian.mru.client.util.ClientUtil;
-import cc.cassian.mru.client.util.HudUtils;
+import cc.cassian.asphodel.client.util.ClientUtil;
+import cc.cassian.asphodel.client.util.HudUtils;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.compat.*;
 import cc.cassian.immersiveoverlays.config.ModConfig;

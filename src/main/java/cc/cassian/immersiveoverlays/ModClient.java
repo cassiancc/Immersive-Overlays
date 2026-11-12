@@ -4,7 +4,7 @@ package cc.cassian.immersiveoverlays;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 
 import cc.cassian.immersiveoverlays.overlay.*;
-import cc.cassian.mru.util.CommonUtils;
+import cc.cassian.asphodel.util.CommonUtils;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.ResourceLocation;

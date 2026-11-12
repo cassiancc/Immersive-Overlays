@@ -17,7 +17,7 @@ public class EnhancedCelestials2Compat {
 			var worldData = worldDataOptional.get();
 			Optional<ResourceKey<LunarEvent>> lunarEventResourceKey = worldData.currentLunarEventHolder().unwrapKey();
 			if (lunarEventResourceKey.isEmpty()) return null;
-			ResourceLocation location = lunarEventResourceKey.orElseThrow().mru$identifier();
+			ResourceLocation location = lunarEventResourceKey.orElseThrow().asphodel$identifier();
 			var path = location.getPath();
 			if (!path.equals("default")) {
 				return new MoonOverlay.MoonPhase(path, MoonOverlay.MoonPhase.getText(location), worldData.currentLunarEvent().getNameColor().map(TextColor::getValue).orElse(MoonOverlay.MoonPhase.defaultColour()));

@@ -1,6 +1,6 @@
 package cc.cassian.immersiveoverlays.helpers;
 
-import cc.cassian.mru.util.CommonUtils;
+import cc.cassian.asphodel.util.CommonUtils;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;

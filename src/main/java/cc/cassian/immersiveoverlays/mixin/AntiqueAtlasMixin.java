@@ -1,11 +1,11 @@
 package cc.cassian.immersiveoverlays.mixin;
 
-import cc.cassian.mru.util.ItemContainerUtils;
+import cc.cassian.asphodel.util.ItemContainerUtils;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import com.moulberry.mixinconstraints.annotations.IfModLoaded;
 //? if 1.20.1 || 1.21.1 {
 import folk.sisby.antique_atlas.AntiqueAtlas;
-import static cc.cassian.mru.util.ItemContainerUtils.getContainerContents;
+import static cc.cassian.asphodel.util.ItemContainerUtils.getContainerContents;
 import static cc.cassian.immersiveoverlays.overlay.OverlayHelpers.isContainer;
 import static folk.sisby.antique_atlas.AntiqueAtlas.getHandheldAtlas;
 import static folk.sisby.antique_atlas.AntiqueAtlas.isHandheldAtlas;

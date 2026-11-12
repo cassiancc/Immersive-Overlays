@@ -170,6 +170,7 @@ repositories {
         }
     }
     flatDir { dirs("libs") }
+    mavenLocal()
 }
 
 legacyForge {
@@ -203,9 +204,9 @@ legacyForge {
 
 
 dependencies {
-    modImplementation("cc.cassian.mru:mru-forge:${mod.dep("mru")}+${property("deps.minecraft")}")
-    jarJar("cc.cassian.mru:mru-forge:${mod.dep("mru")}+${property("deps.minecraft")}")
-    interfaceInjectionData("cc.cassian.mru:mru-forge:${mod.dep("mru")}+${property("deps.minecraft")}")
+    modImplementation("cc.cassian.asphodel:asphodel-api-forge:${mod.dep("asphodel_api")}+${property("deps.minecraft")}")
+    jarJar("cc.cassian.asphodel:asphodel-api-forge:${mod.dep("asphodel_api")}+${property("deps.minecraft")}")
+    interfaceInjectionData("cc.cassian.asphodel:asphodel-api-forge:${mod.dep("asphodel_api")}+${property("deps.minecraft")}")
 
     // Cloth Config
     modImplementation("me.shedaniel.cloth:cloth-config-forge:${mod.dep("cloth_version")}")
@@ -264,9 +265,9 @@ dependencies {
     modImplementation("curse.maven:framework-549225:${mod.dep("framework")}")
 
     modCompileOnly("maven.modrinth:enhanced-celestials:${mod.dep("enhanced_celestials")}")
-    modImplementation("maven.modrinth:enhanced-celestials-2-core:${mod.dep("enhanced_celestials_2")}")
-    modImplementation("maven.modrinth:corgilib:${mod.dep("corgilib")}")
-    modImplementation("maven.modrinth:data-anchor:${mod.dep("data_anchor")}")
+    modCompileOnly("maven.modrinth:enhanced-celestials-2-core:${mod.dep("enhanced_celestials_2")}")
+    modCompileOnly("maven.modrinth:corgilib:${mod.dep("corgilib")}")
+    modCompileOnly("maven.modrinth:data-anchor:${mod.dep("data_anchor")}")
 //    implementation("dev.corgitaco:TimeCore-forge:1.0.0-b")
     modCompileOnly("maven.modrinth:lunar:${mod.dep("lunar")}")
 
@@ -359,7 +360,7 @@ publishMods {
         accessToken = env.MODRINTH_API_KEY.orNull()
         minecraftVersions.add(stonecutter.current.version)
         minecraftVersions.addAll(additionalVersions)
-        embeds("mru")
+        embeds("asphodel-api")
         optional("cloth-config")
     }
 
@@ -368,7 +369,7 @@ publishMods {
         accessToken = env.CURSEFORGE_API_KEY.orNull()
         minecraftVersions.add(stonecutter.current.version)
         minecraftVersions.addAll(additionalVersions)
-        embeds("mru")
+        embeds("asphodel-api")
         client = true
         server = false
     }

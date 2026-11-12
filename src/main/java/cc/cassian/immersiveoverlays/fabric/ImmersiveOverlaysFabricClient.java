@@ -2,7 +2,7 @@ package cc.cassian.immersiveoverlays.fabric;
 
 //? if fabric {
 
-import cc.cassian.mru.client.util.ClientVersionedUtil;
+import cc.cassian.asphodel.client.fabric.ClientVersionedUtil;
 import cc.cassian.immersiveoverlays.ModClient;
 import cc.cassian.immersiveoverlays.config.ModConfig;
 import cc.cassian.immersiveoverlays.helpers.ModLists;

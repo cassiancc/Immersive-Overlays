@@ -1,6 +1,6 @@
 package cc.cassian.immersiveoverlays.compat;
 
-import cc.cassian.mru.Platform;
+import cc.cassian.asphodel.Platform;
 
 public class ModCompat {
     /**
